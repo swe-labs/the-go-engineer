@@ -150,7 +150,7 @@ For the example project, the calculation is:
 
 - **Starting implementation immediately.** Without requirements analysis, you build the wrong thing. Spend the first 20% of your budget reading and planning.
 - **Over-investing in edge cases.** A perfect solution for an obscure edge case at the expense of core functionality signals poor prioritization. Cover the happy path first, then add edge cases if time permits.
-- **Skipping tests.** Many reviewers weight testing at 30-40% of the score. A submission with no tests is almost an automatic rejection. Write at least one table-driven test per public function.
+- **Skipping tests.** Reviewers routinely treat missing tests as a red flag — a submission with no tests suggests the candidate does not value verification. Write at least one table-driven test per public function.
 - **Neglecting the README.** If the reviewer cannot build and run your project in under two minutes, they will not evaluate your code. Include clear setup, run, and test instructions.
 - **Over-engineering.** Using channels, goroutines, or dependency injection when a simple function suffices adds complexity without benefit. Write the simplest correct solution first.
 - **Ignoring error messages.** Compiler warnings, `go vet` failures, or `go fmt` issues before submission suggest carelessness. Run all three before packaging.

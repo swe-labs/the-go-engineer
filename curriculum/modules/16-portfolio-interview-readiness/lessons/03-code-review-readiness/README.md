@@ -84,6 +84,25 @@ const (
 	Maintainability
 )
 
+func (c ReviewCategory) String() string {
+	switch c {
+	case Correctness:
+		return "Correctness"
+	case Style:
+		return "Style"
+	case Performance:
+		return "Performance"
+	case Security:
+		return "Security"
+	case Reliability:
+		return "Reliability"
+	case Maintainability:
+		return "Maintainability"
+	default:
+		return "Unknown"
+	}
+}
+
 type Check struct {
 	Category    ReviewCategory
 	Description string
@@ -115,70 +134,52 @@ func RunCodeReview(content string) ReviewResult {
 	rr := NewReviewResult("reviewed.go", content)
 
 	hasErrorHandling := strings.Contains(content, "if err != nil")
-	rr.AddCheck(Correctness, "Error handling: checks returned errors", hasErrorHandling,
-		map[bool]string{true: "uses if err != nil pattern", false: "missing error handling"}[hasErrorHandling])
+	rr.AddCheck(Correctness, "Error handling: checks returned errors", hasErrorHandling, map[bool]string{true: "uses if err != nil pattern", false: "missing error handling"}[hasErrorHandling])
 
-	hasContext := strings.Contains(content, "context.Background()") ||
-		strings.Contains(content, "context.WithCancel") ||
-		strings.Contains(content, "context.WithTimeout") ||
-		strings.Contains(content, "context.Context")
-	rr.AddCheck(Correctness, "Context usage: proper context propagation", hasContext,
-		map[bool]string{true: "context detected", false: "no context usage"}[hasContext])
+	hasContext := strings.Contains(content, "context.Background()") || strings.Contains(content, "context.WithCancel") || strings.Contains(content, "context.WithTimeout") || strings.Contains(content, "context.Context")
+	rr.AddCheck(Correctness, "Context usage: proper context propagation", hasContext, map[bool]string{true: "context detected", false: "no context usage"}[hasContext])
 
 	hasMutex := strings.Contains(content, "sync.Mutex") || strings.Contains(content, "sync.RWMutex")
 	hasChan := strings.Contains(content, "chan") || strings.Contains(content, "make(chan")
 	if hasMutex || hasChan {
-		rr.AddCheck(Correctness, "Concurrency safety: synchronization used", true,
-			"uses mutex or channels for concurrency")
+		rr.AddCheck(Correctness, "Concurrency safety: synchronization used", true, "uses mutex or channels for concurrency")
 	} else {
-		rr.AddCheck(Correctness, "Concurrency safety: synchronization used", true,
-			"no concurrent access detected")
+		rr.AddCheck(Correctness, "Concurrency safety: synchronization used", true, "no concurrent access detected")
 	}
 
 	gofmt := regexp.MustCompile(`\t`).MatchString(content)
-	rr.AddCheck(Style, "Formatting: uses tabs for indentation", gofmt,
-		map[bool]string{true: "tabs detected", false: "no tabs found, may use spaces"}[gofmt])
+	rr.AddCheck(Style, "Formatting: uses tabs for indentation", gofmt, map[bool]string{true: "tabs detected", false: "no tabs found, may use spaces"}[gofmt])
 
 	hasExported := regexp.MustCompile(`^func [A-Z]`).MatchString(content)
-	rr.AddCheck(Style, "Naming: exported functions use PascalCase", hasExported,
-		map[bool]string{true: "exported functions follow convention", false: "no exported functions or naming issue"}[hasExported])
+	rr.AddCheck(Style, "Naming: exported functions use PascalCase", hasExported, map[bool]string{true: "exported functions follow convention", false: "no exported functions or naming issue"}[hasExported])
 
 	hasGoRoutine := strings.Contains(content, "go ")
 	if hasGoRoutine {
 		hasWG := strings.Contains(content, "sync.WaitGroup")
-		rr.AddCheck(Reliability, "Goroutine lifecycles: goroutines have synchronization", hasWG,
-			map[bool]string{true: "uses WaitGroup for goroutine coordination",
-				false: "goroutines without WaitGroup may leak"}[hasWG])
+		rr.AddCheck(Reliability, "Goroutine lifecycle: goroutines have synchronization", hasWG, map[bool]string{true: "uses WaitGroup for goroutine coordination", false: "goroutines without WaitGroup may leak"}[hasWG])
 	} else {
-		rr.AddCheck(Reliability, "Goroutine lifecycles: goroutines have synchronization", true,
-			"no goroutines to manage")
+		rr.AddCheck(Reliability, "Goroutine lifecycle: goroutines have synchronization", true, "no goroutines to manage")
 	}
 
-	hasInputValidation := strings.Contains(content, "len(") &&
-		(strings.Contains(content, "== 0") || strings.Contains(content, "< 0"))
-	rr.AddCheck(Security, "Input validation: validates inputs before use", hasInputValidation,
-		map[bool]string{true: "input length validation detected", false: "no input validation detected"}[hasInputValidation])
+	hasInputValidation := strings.Contains(content, "len(") && (strings.Contains(content, "== 0") || strings.Contains(content, "< 0"))
+	rr.AddCheck(Security, "Input validation: validates inputs before use", hasInputValidation, map[bool]string{true: "input length validation detected", false: "no input validation detected"}[hasInputValidation])
 
 	hasSQL := strings.Contains(content, "sql.DB") || strings.Contains(content, "database/sql")
 	if hasSQL {
-		hasParamQuery := strings.Contains(content, "$1") || (strings.Contains(content, "?") && strings.Contains(content, "Query"))
-		rr.AddCheck(Security, "SQL injection: uses parameterized queries", hasParamQuery,
-			map[bool]string{true: "parameterized queries detected", false: "possible string concatenation in SQL"}[hasParamQuery])
+		hasParamQuery := strings.Contains(content, "$1") || strings.Contains(content, "?") && strings.Contains(content, "Query")
+		rr.AddCheck(Security, "SQL injection: uses parameterized queries", hasParamQuery, map[bool]string{true: "parameterized queries detected", false: "possible string concatenation in SQL"}[hasParamQuery])
 	}
 
 	hasAlloc := strings.Contains(content, "make(") || strings.Contains(content, "new(")
 	if hasAlloc {
 		hasCap := regexp.MustCompile(`make\(\[?[a-zA-Z]`).MatchString(content)
-		rr.AddCheck(Performance, "Allocation: pre-allocates slices/maps with capacity", hasCap,
-			map[bool]string{true: "pre-allocation detected", false: "no pre-allocation, may cause reallocation"}[hasCap])
+		rr.AddCheck(Performance, "Allocation: pre-allocates slices/maps with capacity", hasCap, map[bool]string{true: "pre-allocation detected", false: "no pre-allocation, may cause reallocation"}[hasCap])
 	} else {
-		rr.AddCheck(Performance, "Allocation: pre-allocates slices/maps with capacity", true,
-			"no allocations to optimize")
+		rr.AddCheck(Performance, "Allocation: pre-allocates slices/maps with capacity", true, "no allocations to optimize")
 	}
 
 	hasDefer := strings.Contains(content, "defer ")
-	rr.AddCheck(Maintainability, "Resource cleanup: uses defer for cleanup", hasDefer,
-		map[bool]string{true: "defer usage detected", false: "no defer usage, resources may not be released"}[hasDefer])
+	rr.AddCheck(Maintainability, "Resource cleanup: uses defer for cleanup", hasDefer, map[bool]string{true: "defer usage detected", false: "no defer usage, resources may not be released"}[hasDefer])
 
 	return rr
 }
@@ -199,14 +200,16 @@ func (rr ReviewResult) Summary() string {
 
 func main() {
 	code := `package main
+
 import (
 	"context"
+	"fmt"
 	"sync"
 )
 
 type Server struct {
-	mu    sync.Mutex
-	items map[string]string
+	mu     sync.Mutex
+	items  map[string]string
 }
 
 func NewServer() *Server {
@@ -232,7 +235,8 @@ func main() {
 		return
 	}
 	fmt.Println(val)
-}`
+}
+`
 	result := RunCodeReview(code)
 	fmt.Println(result.Summary())
 }

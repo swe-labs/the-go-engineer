@@ -187,7 +187,7 @@ func (rs ResumeScore) CategoryBreakdown() map[string]int {
 
 func (rs ResumeScore) Summary() string {
 	var b strings.Builder
-	b.WriteString("Resume Keyword Analysis\n")
+	b.WriteString(fmt.Sprintf("Resume Keyword Analysis\n"))
 	b.WriteString(fmt.Sprintf("Matched: %d/%d keywords\n", len(rs.Results), rs.MaxScore))
 	b.WriteString(fmt.Sprintf("Total matches: %d\n\n", rs.TotalScore))
 

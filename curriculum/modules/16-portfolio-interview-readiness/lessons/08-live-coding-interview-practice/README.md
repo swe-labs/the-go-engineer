@@ -146,8 +146,7 @@ func ParseProblem(text string) Problem {
 		if strings.HasPrefix(strings.ToLower(trimmed), "example") {
 			p.Examples = append(p.Examples, trimmed)
 		}
-		if strings.HasPrefix(strings.ToLower(trimmed), "constraint") ||
-			strings.HasPrefix(strings.ToLower(trimmed), "constraints") {
+		if strings.HasPrefix(strings.ToLower(trimmed), "constraint") || strings.HasPrefix(strings.ToLower(trimmed), "constraints") {
 			p.Constraints = append(p.Constraints, trimmed)
 		}
 	}
@@ -167,6 +166,7 @@ func NewTestCaseGenerator() *TestCaseGenerator {
 
 func (g *TestCaseGenerator) GenerateSimpleCases(p Problem) []TestCase {
 	cases := []TestCase{}
+
 	desc := strings.ToLower(p.Description)
 
 	if strings.Contains(desc, "reverse") || strings.Contains(desc, "palindrome") {
@@ -203,7 +203,7 @@ func (g *TestCaseGenerator) GenerateSimpleCases(p Problem) []TestCase {
 		)
 	}
 
-	if strings.Contains(desc, "fizz") || strings.Contains(desc, "fizzbuzz") {
+	if strings.Contains(desc, "fizz") || strings.Contains(desc, "buzz") || strings.Contains(desc, "fizzbuzz") {
 		cases = append(cases,
 			TestCase{Input: "n=1", Expected: "1"},
 			TestCase{Input: "n=3", Expected: "Fizz"},

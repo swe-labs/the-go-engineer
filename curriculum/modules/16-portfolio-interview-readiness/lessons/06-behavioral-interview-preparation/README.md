@@ -112,19 +112,13 @@ func (s STARElement) String() string {
 func (s STARElement) Keywords() []string {
 	switch s {
 	case Situation:
-		return []string{"situation", "context", "background", "was working", "was part of",
-			"environment", "scenario", "when"}
+		return []string{"situation", "context", "background", "was working", "was part of", "environment", "scenario", "when"}
 	case Task:
-		return []string{"task", "goal", "objective", "needed to", "had to",
-			"was responsible for", "challenge", "problem", "assignment"}
+		return []string{"task", "goal", "objective", "needed to", "had to", "was responsible for", "challenge", "problem", "assignment"}
 	case Action:
-		return []string{"implemented", "designed", "built", "created", "developed",
-			"led", "architected", "optimized", "refactored", "introduced",
-			"migrated", "automated", "wrote", "configured"}
+		return []string{"implemented", "designed", "built", "created", "developed", "led", "architected", "optimized", "refactored", "introduced", "migrated", "automated", "wrote", "configured"}
 	case Result:
-		return []string{"result", "outcome", "improved", "reduced", "increased",
-			"saved", "achieved", "delivered", "shipped", "launched",
-			"completed", "won", "earned", "recognized"}
+		return []string{"result", "outcome", "improved", "reduced", "increased", "saved", "achieved", "delivered", "shipped", "launched", "completed", "won", "earned", "recognized"}
 	}
 	return nil
 }
@@ -136,17 +130,18 @@ type STARCheck struct {
 }
 
 type STARResult struct {
-	Text      string
-	Checks    []STARCheck
-	Score     int
-	MaxScore  int
+	Text     string
+	Checks   []STARCheck
+	Score    int
+	MaxScore int
 }
 
 func AnalyzeSTAR(response string) STARResult {
 	result := STARResult{Text: response, MaxScore: 4}
 	lower := strings.ToLower(response)
 
-	for _, el := range []STARElement{Situation, Task, Action, Result} {
+	elements := []STARElement{Situation, Task, Action, Result}
+	for _, el := range elements {
 		check := STARCheck{Element: el}
 		for _, kw := range el.Keywords() {
 			if strings.Contains(lower, kw) {

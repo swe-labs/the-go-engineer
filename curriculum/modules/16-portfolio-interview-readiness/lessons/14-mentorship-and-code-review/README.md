@@ -57,7 +57,7 @@ The Go project's code review culture is captured in the "Code Review Comments" g
 - **Use `gofmt`.** If the code isn't formatted, the first comment should be "Run `gofmt -s` on this file."
 - **Avoid package-level state.** If you see `var db *sql.DB` at the package level, suggest dependency injection.
 
-Go's toolchain supports code review automation: `golangci-lint` catches 80% of common issues automatically, reducing the manual review burden so reviewers can focus on architecture and design.
+Go's toolchain supports code review automation: `golangci-lint` catches a large share of mechanical issues (formatting, unused code, common bug patterns) automatically, freeing reviewers to focus on architecture and design.
 
 ## Go example
 
@@ -86,8 +86,8 @@ type ReviewAnalysis struct {
 	CriticalCount   int
 	SuggestionCount int
 	QuestionCount   int
-	Sentiment       string
-	Actionable      int
+	Sentiment       string // "positive", "balanced", "negative"
+	Actionable      int    // 1-10, how actionable the feedback is
 }
 
 func AnalyzeReview(r Review) ReviewAnalysis {
@@ -95,10 +95,14 @@ func AnalyzeReview(r Review) ReviewAnalysis {
 	for _, c := range r.Comments {
 		a.TotalComments++
 		switch c.Category {
-		case "positive":   a.PositiveCount++
-		case "critical":   a.CriticalCount++
-		case "suggestion": a.SuggestionCount++
-		case "question":   a.QuestionCount++
+		case "positive":
+			a.PositiveCount++
+		case "critical":
+			a.CriticalCount++
+		case "suggestion":
+			a.SuggestionCount++
+		case "question":
+			a.QuestionCount++
 		}
 	}
 	a.Sentiment = computeSentiment(a)
@@ -107,33 +111,40 @@ func AnalyzeReview(r Review) ReviewAnalysis {
 }
 
 func computeSentiment(a ReviewAnalysis) string {
-	if a.TotalComments == 0 { return "neutral" }
+	if a.TotalComments == 0 {
+		return "neutral"
+	}
 	pos := float64(a.PositiveCount) / float64(a.TotalComments)
 	crit := float64(a.CriticalCount) / float64(a.TotalComments)
 	switch {
-	case pos > 0.5:  return "positive"
-	case crit > 0.4: return "negative"
-	default:         return "balanced"
+	case pos > 0.5:
+		return "positive"
+	case crit > 0.4:
+		return "negative"
+	default:
+		return "balanced"
 	}
 }
 
 func computeActionability(comments []ReviewComment) int {
-	if len(comments) == 0 { return 0 }
+	if len(comments) == 0 {
+		return 0
+	}
 	actionable := 0
 	for _, c := range comments {
 		words := strings.Fields(c.Text)
 		for _, w := range words {
 			lower := strings.ToLower(w)
-			if lower == "consider" || lower == "suggest" || lower == "recommend" ||
-				lower == "try" || lower == "change" || lower == "rename" ||
-				lower == "move" || lower == "add" || lower == "remove" || lower == "extract" {
+			if lower == "consider" || lower == "suggest" || lower == "recommend" || lower == "try" || lower == "change" || lower == "rename" || lower == "move" || lower == "add" || lower == "remove" || lower == "extract" {
 				actionable++
 				break
 			}
 		}
 	}
 	score := (actionable * 10) / max(len(comments), 1)
-	if score > 10 { score = 10 }
+	if score > 10 {
+		score = 10
+	}
 	return score
 }
 
@@ -148,18 +159,23 @@ func GenerateFeedback(a ReviewAnalysis) string {
 	b.WriteString(fmt.Sprintf("  Question:    %d\n", a.QuestionCount))
 	b.WriteString(fmt.Sprintf("Actionability: %d/10\n", a.Actionable))
 	if a.Actionable < 4 {
-		b.WriteString("  Tip: Add more specific suggestions.\n")
+		b.WriteString("  Tip: Add more specific suggestions. Instead of 'this is wrong', say 'consider using sync.Mutex here'.\n")
 	}
 	if a.CriticalCount > a.PositiveCount {
-		b.WriteString("  Tip: Balance critical feedback with positive observations.\n")
+		b.WriteString("  Tip: Balance critical feedback with positive observations. Start with what works.\n")
 	}
 	if a.Sentiment == "negative" {
-		b.WriteString("  Warning: This review may feel harsh.\n")
+		b.WriteString("  Warning: This review may feel harsh. Consider softening the tone while keeping the substance.\n")
 	}
 	return b.String()
 }
 
-func max(a, b int) int { if a > b { return a }; return b }
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
 
 func main() {
 	review := Review{

@@ -76,24 +76,17 @@ import (
 
 type Skill struct {
 	Name     string
-	Category string
-	Current  int
-	Desired  int
-	Priority string
+	Category string // "language", "tooling", "testing", "architecture", "soft", "devops"
+	Current  int    // 1-10
+	Desired  int    // 1-10
+	Priority string // "high", "medium", "low"
 }
 
 type CareerPlan struct {
 	Name   string
-	Role   string
-	Track  string
+	Role   string // "junior", "mid", "senior", "staff", "principal"
+	Track  string // "ic" or "management"
 	Skills []Skill
-}
-
-type SkillGap struct {
-	Skill     Skill
-	Gap       int
-	Urgency   string
-	Resources []string
 }
 
 type GapAnalysis struct {
@@ -104,14 +97,27 @@ type GapAnalysis struct {
 	PriorityAreas []string
 }
 
+type SkillGap struct {
+	Skill     Skill
+	Gap       int
+	Urgency   string
+	Resources []string
+}
+
 func AnalyzeGaps(plan CareerPlan) GapAnalysis {
 	ga := GapAnalysis{Plan: plan}
 	totalCurrent := 0
 	totalDesired := 0
 	for _, s := range plan.Skills {
 		gap := s.Desired - s.Current
-		if gap < 0 { gap = 0 }
-		sg := SkillGap{Skill: s, Gap: gap, Urgency: computeUrgency(gap, s.Priority)}
+		if gap < 0 {
+			gap = 0
+		}
+		sg := SkillGap{
+			Skill:   s,
+			Gap:     gap,
+			Urgency: computeUrgency(gap, s.Priority),
+		}
 		sg.Resources = suggestResources(sg)
 		ga.Gaps = append(ga.Gaps, sg)
 		totalCurrent += s.Current
@@ -131,32 +137,40 @@ func AnalyzeGaps(plan CareerPlan) GapAnalysis {
 
 func computeUrgency(gap int, priority string) string {
 	switch {
-	case gap >= 5 && priority == "high": return "critical"
-	case gap >= 3: return "high"
-	case gap >= 1: return "medium"
-	default: return "none"
+	case gap >= 5 && priority == "high":
+		return "critical"
+	case gap >= 3:
+		return "high"
+	case gap >= 1:
+		return "medium"
+	default:
+		return "none"
 	}
 }
 
 func suggestResources(gap SkillGap) []string {
-	resources := map[string][]string{
+	resourceMap := map[string][]string{
 		"language":     {"Effective Go", "Go by Example", "Go Standard Library docs"},
 		"tooling":      {"Go Tooling in Action (blog)", "golangci-lint docs", "Go Modules wiki"},
 		"testing":      {"Go Test: Testing Techniques (talk)", "table-driven tests guide", "testing/slogans"},
-		"architecture": {"Designing Data-Intensive Applications", "System Design Interview", "Go with Domain-Driven Design"},
+		"architecture": {"Designing Data-Intensive Applications", "System Design Interview (book)", "Go with Domain-Driven Design"},
 		"soft":         {"Crucial Conversations", "The Manager's Path", "Radical Candor"},
 		"devops":       {"Docker Deep Dive", "Kubernetes in Action", "Terraform: Up and Running"},
 	}
-	base := resources[gap.Skill.Category]
-	if base == nil { base = []string{"Online courses", "Community mentorship", "Conference talks"} }
+	base := resourceMap[gap.Skill.Category]
+	if base == nil {
+		base = []string{"General online courses", "Community mentorship", "Conference talks"}
+	}
 	return base
 }
 
 func GenerateRoadmap(ga GapAnalysis) string {
-	roadmap := fmt.Sprintf("Career Roadmap for %s\n", ga.Plan.Name)
-	roadmap += fmt.Sprintf("Target: %s %s\n\n", ga.Plan.Track, ga.Plan.Role)
+	plan := ga.Plan
+	roadmap := fmt.Sprintf("Career Roadmap for %s\n", plan.Name)
+	roadmap += fmt.Sprintf("Target: %s %s\n\n", plan.Track, plan.Role)
 	roadmap += fmt.Sprintf("Overall Readiness: %.0f%%\n", ga.ReadinessPct)
 	roadmap += fmt.Sprintf("Total Skill Gap: %d points\n\n", ga.TotalGap)
+
 	roadmap += "Priority Improvement Areas:\n"
 	for _, area := range ga.PriorityAreas {
 		roadmap += fmt.Sprintf("  - %s\n", area)
@@ -165,20 +179,35 @@ func GenerateRoadmap(ga GapAnalysis) string {
 	roadmap += fmt.Sprintf("%-30s %-10s %-10s %-10s %-10s\n", "Skill", "Current", "Desired", "Gap", "Urgency")
 	roadmap += fmt.Sprintf("%s\n", "------"+repeat("-", 70))
 	for _, g := range ga.Gaps {
-		roadmap += fmt.Sprintf("%-30s %-10d %-10d %-10d %-10s\n", g.Skill.Name, g.Skill.Current, g.Skill.Desired, g.Gap, g.Urgency)
+		roadmap += fmt.Sprintf("%-30s %-10d %-10d %-10d %-10s\n",
+			g.Skill.Name, g.Skill.Current, g.Skill.Desired, g.Gap, g.Urgency)
 	}
+
 	roadmap += "\nRecommended Resources:\n"
 	for _, g := range ga.Gaps {
 		if g.Gap > 0 {
 			roadmap += fmt.Sprintf("  %s:\n", g.Skill.Name)
-			for _, r := range g.Resources { roadmap += fmt.Sprintf("    - %s\n", r) }
+			for _, r := range g.Resources {
+				roadmap += fmt.Sprintf("    - %s\n", r)
+			}
 		}
 	}
-	roadmap += "\nSuggested Timeline:\n  0-3 months: Address critical gaps\n  3-6 months: Close high-urgency gaps\n  6-12 months: Improve medium-urgency gaps\n"
+
+	roadmap += "\nSuggested Timeline:\n"
+	roadmap += "  0-3 months: Address critical gaps\n"
+	roadmap += "  3-6 months: Close high-urgency gaps\n"
+	roadmap += "  6-12 months: Improve medium-urgency gaps\n"
+
 	return roadmap
 }
 
-func repeat(s string, n int) string { r := ""; for i := 0; i < n; i++ { r += s }; return r }
+func repeat(s string, n int) string {
+	result := ""
+	for i := 0; i < n; i++ {
+		result += s
+	}
+	return result
+}
 
 func main() {
 	plan := CareerPlan{
@@ -195,6 +224,7 @@ func main() {
 			{Name: "gRPC & protobuf", Category: "architecture", Current: 3, Desired: 6, Priority: "medium"},
 		},
 	}
+
 	ga := AnalyzeGaps(plan)
 	fmt.Print(GenerateRoadmap(ga))
 }

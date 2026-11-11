@@ -66,25 +66,27 @@ import (
 )
 
 type TalkProposal struct {
-	Title           string
-	Abstract        string
-	Category        string
-	DurationMin     int
-	HasDemo         bool
-	HasSlides       bool
-	TargetAudience  string
+	Title          string
+	Abstract       string
+	Category       string // "beginner", "intermediate", "advanced"
+	DurationMin    int    // 20, 30, 45, or 60
+	HasDemo        bool
+	HasSlides      bool
+	TargetAudience string
 }
 
 type ProposalScore struct {
 	Proposal      TalkProposal
-	Abstract      int
-	Relevance     int
-	Novelty       int
-	Structure     int
-	Actionability int
-	Total         int
+	Abstract      int // 1-10
+	Relevance     int // 1-10
+	Novelty       int // 1-10
+	Structure     int // 1-10
+	Actionability int // 1-10
+	Total         int // weighted sum
 	Feedback      []string
 }
+
+var scoreNames = []string{"Abstract", "Relevance", "Novelty", "Structure", "Actionability"}
 
 func EvaluateProposal(p TalkProposal) ProposalScore {
 	s := ProposalScore{Proposal: p}
@@ -99,11 +101,15 @@ func EvaluateProposal(p TalkProposal) ProposalScore {
 }
 
 func scoreAbstract(abstract string) int {
-	words := len(strings.Fields(abstract))
+	words := strings.Fields(abstract)
+	wordCount := len(words)
 	switch {
-	case words < 50: return 3
-	case words > 300: return 5
-	default: return 8
+	case wordCount < 50:
+		return 3
+	case wordCount > 300:
+		return 5
+	default:
+		return 8
 	}
 }
 
@@ -111,42 +117,98 @@ func scoreRelevance(p TalkProposal) int {
 	keywords := []string{"go", "golang", "concurrency", "performance", "testing", "api", "microservice", "cloud", "kubernetes", "observability"}
 	count := 0
 	lower := strings.ToLower(p.Abstract + " " + p.Title)
-	for _, kw := range keywords { if strings.Contains(lower, kw) { count++ } }
-	switch { case count >= 4: return 9; case count >= 2: return 6; default: return 3 }
+	for _, kw := range keywords {
+		if strings.Contains(lower, kw) {
+			count++
+		}
+	}
+	switch {
+	case count >= 4:
+		return 9
+	case count >= 2:
+		return 6
+	default:
+		return 3
+	}
 }
 
 func scoreNovelty(p TalkProposal) int {
-	words := []string{"new", "novel", "real-world", "lessons", "case study", "deep dive", "under the hood", "internals", "unexpected", "surprising"}
+	noveltyWords := []string{"new", "novel", "real-world", "lessons", "case study", "deep dive", "under the hood", "internals", "unexpected", "surprising"}
 	count := 0
 	lower := strings.ToLower(p.Abstract + " " + p.Title)
-	for _, w := range words { if strings.Contains(lower, w) { count++ } }
-	switch { case count >= 3: return 9; case count >= 1: return 6; default: return 3 }
+	for _, w := range noveltyWords {
+		if strings.Contains(lower, w) {
+			count++
+		}
+	}
+	switch {
+	case count >= 3:
+		return 9
+	case count >= 1:
+		return 6
+	default:
+		return 3
+	}
 }
 
 func scoreStructure(p TalkProposal) int {
-	words := []string{"first", "second", "then", "finally", "part", "section", "step", "walk through", "overview", "agenda", "learn"}
+	structureWords := []string{"first", "second", "then", "finally", "part", "section", "step", "walk through", "overview", "agenda", "learn"}
 	count := 0
 	lower := strings.ToLower(p.Abstract)
-	for _, w := range words { if strings.Contains(lower, w) { count++ } }
-	switch { case count >= 4: return 9; case count >= 2: return 6; default: return 4 }
+	for _, w := range structureWords {
+		if strings.Contains(lower, w) {
+			count++
+		}
+	}
+	switch {
+	case count >= 4:
+		return 9
+	case count >= 2:
+		return 6
+	default:
+		return 4
+	}
 }
 
 func scoreActionability(p TalkProposal) int {
-	words := []string{"you will learn", "takeaway", "practical", "implement", "code", "example", "template", "pattern", "strategy", "guide"}
+	actionWords := []string{"you will learn", "takeaway", "practical", "implement", "code", "example", "template", "pattern", "strategy", "guide"}
 	count := 0
 	lower := strings.ToLower(p.Abstract)
-	for _, w := range words { if strings.Contains(lower, w) { count++ } }
-	switch { case count >= 3: return 9; case count >= 1: return 6; default: return 3 }
+	for _, w := range actionWords {
+		if strings.Contains(lower, w) {
+			count++
+		}
+	}
+	switch {
+	case count >= 3:
+		return 9
+	case count >= 1:
+		return 6
+	default:
+		return 3
+	}
 }
 
 func generateFeedback(s ProposalScore) []string {
 	var fb []string
-	if s.Abstract < 6 { fb = append(fb, "Abstract is too short or too long. Aim for 100-250 words.") }
-	if s.Novelty < 6 { fb = append(fb, "Emphasize what makes this talk unique.") }
-	if s.Structure < 6 { fb = append(fb, "Add structural signposts: 'First X, then Y, finally Z.'") }
-	if s.Actionability < 6 { fb = append(fb, "Include concrete takeaways.") }
-	if s.Total < 50 { fb = append(fb, "Overall score is low. Consider revising.") }
-	if s.Proposal.DurationMin < 30 && s.Proposal.HasDemo { fb = append(fb, "Demo may be too long for a short slot.") }
+	if s.Abstract < 6 {
+		fb = append(fb, "Abstract is too short or too long. Aim for 100-250 words.")
+	}
+	if s.Novelty < 6 {
+		fb = append(fb, "Emphasize what makes this talk unique. Use words like 'real-world', 'lessons learned', or 'case study'.")
+	}
+	if s.Structure < 6 {
+		fb = append(fb, "Add structural signposts: 'First we'll cover X, then Y, finally Z.'")
+	}
+	if s.Actionability < 6 {
+		fb = append(fb, "Include concrete takeaways. Tell the audience what they will learn or build.")
+	}
+	if s.Total < 50 {
+		fb = append(fb, "Overall score is low. Consider revising the abstract to be more specific and actionable.")
+	}
+	if s.Proposal.DurationMin < 30 && s.Proposal.HasDemo {
+		fb = append(fb, "Demo may be too long for a short talk slot. Consider a pre-recorded demo or trimmed walkthrough.")
+	}
 	return fb
 }
 
@@ -154,9 +216,6 @@ func (s ProposalScore) Summary() string {
 	var b strings.Builder
 	b.WriteString(fmt.Sprintf("Proposal: %s\n", s.Proposal.Title))
 	b.WriteString(fmt.Sprintf("Total Score: %d/100\n", s.Total))
-	for _, name := range []string{"Abstract", "Relevance", "Novelty", "Structure", "Actionability"} {
-		// output handled in main
-	}
 	b.WriteString(fmt.Sprintf("  Abstract:       %d/10\n", s.Abstract))
 	b.WriteString(fmt.Sprintf("  Relevance:      %d/10\n", s.Relevance))
 	b.WriteString(fmt.Sprintf("  Novelty:        %d/10\n", s.Novelty))
@@ -164,22 +223,24 @@ func (s ProposalScore) Summary() string {
 	b.WriteString(fmt.Sprintf("  Actionability:  %d/10\n", s.Actionability))
 	if len(s.Feedback) > 0 {
 		b.WriteString("  Feedback:\n")
-		for _, f := range s.Feedback { b.WriteString(fmt.Sprintf("    - %s\n", f)) }
+		for _, f := range s.Feedback {
+			b.WriteString(fmt.Sprintf("    - %s\n", f))
+		}
 	}
 	return b.String()
 }
 
 func main() {
-	p := TalkProposal{
-		Title:       "Building Observability into Go Microservices",
-		Abstract:    "This talk covers real-world lessons from implementing distributed tracing, structured logging, and metrics in Go microservices at scale. First, we'll examine the three pillars of observability and how Go's standard library supports each. Then, we'll walk through instrumenting an HTTP service with OpenTelemetry. Finally, we'll discuss common pitfalls and patterns for production-grade observability. You will learn concrete strategies for adding observability to existing Go services without major rewrites.",
-		Category:    "intermediate",
-		DurationMin: 45,
-		HasDemo:     true,
-		HasSlides:   true,
+	proposal := TalkProposal{
+		Title:          "Building Observability into Go Microservices",
+		Abstract:       "This talk covers real-world lessons from implementing distributed tracing, structured logging, and metrics in Go microservices at scale. First, we'll examine the three pillars of observability and how Go's standard library supports each. Then, we'll walk through instrumenting an HTTP service with OpenTelemetry, including context propagation and span attributes. Finally, we'll discuss common pitfalls and patterns for production-grade observability. You will learn concrete strategies for adding observability to existing Go services without major rewrites.",
+		Category:       "intermediate",
+		DurationMin:    45,
+		HasDemo:        true,
+		HasSlides:      true,
 		TargetAudience: "Go developers building or maintaining microservices",
 	}
-	score := EvaluateProposal(p)
+	score := EvaluateProposal(proposal)
 	fmt.Print(score.Summary())
 }
 ```
@@ -205,7 +266,7 @@ For the example proposal: abstract (8), relevance (9), novelty (9), structure (9
 - **Submitting the same proposal to every conference.** Each conference has a different audience. GopherCon wants depth. FOSDEM wants community-focused talks. A local meetup wants tutorials. Tailor the abstract and emphasis to the venue.
 - **Writing the abstract like a blog post title.** "An Introduction to Go" tells the committee nothing. "How We Migrated 2 Million Lines of Python to Go Without Downtime" tells them everything. Be specific.
 - **Overloading the talk with content.** A 30-minute talk can cover exactly one concept, one example, and one takeaway. Trying to cover more results in surface-level coverage of everything and deep coverage of nothing.
-- **Skipping the demo run-through.** Live demos fail 80% of the time without practice. Run the demo 10 times. Record it. Have a screenshot or recording backup for every step that could fail.
+- **Skipping the demo run-through.** Live demos are the most fragile part of any talk — network issues, typos, and environment drift all surface under stage pressure. Run the demo end-to-end several times. Record it. Keep a screenshot or recording backup for every step that could fail.
 - **Reading from slides.** Slides are visual aids, not scripts. The audience can read faster than you can speak. Slides should show diagrams, code, or key terms — your voice provides the narrative.
 
 ## Debugging walkthrough
