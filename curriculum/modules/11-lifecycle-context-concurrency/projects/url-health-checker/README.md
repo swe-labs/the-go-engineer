@@ -10,7 +10,7 @@ Distributed microservice architectures require continuous synthetic monitoring t
 
 ## Prerequisites
 
-Complete all Module 11 lessons (01–28) on goroutines, channel fan-out/fan-in patterns, `context.Context` cancellation/timeouts, and thread-safe data structures with `sync.RWMutex`.
+Complete all Module 11 lessons (01–29) on goroutines, channel fan-out/fan-in patterns, `context.Context` cancellation/timeouts, and thread-safe data structures with `sync.RWMutex`.
 
 ## Available concepts
 
@@ -94,4 +94,4 @@ PASS
 
 ## NEXT UP
 
-[Concurrent Downloader](../concurrent-downloader/README.md)
+[Observability Retrofit](../../../12-observability-diagnostics/projects/observability-retrofit/README.md)

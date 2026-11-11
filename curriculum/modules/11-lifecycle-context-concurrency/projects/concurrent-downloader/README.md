@@ -10,7 +10,7 @@ Network I/O is inherently prone to transient failures: flaky connections, rate l
 
 ## Prerequisites
 
-Complete all Module 11 lessons (01–28) on goroutines, channels, synchronization with `sync.WaitGroup`, atomic operations with `sync/atomic`, and context timeouts with `context.WithTimeout`.
+Complete all Module 11 lessons (01–29) on goroutines, channels, synchronization with `sync.WaitGroup`, atomic operations with `sync/atomic`, and context timeouts with `context.WithTimeout`.
 
 ## Available concepts
 
@@ -102,4 +102,4 @@ PASS
 
 ## NEXT UP
 
-[Module 12: Observability & Profiling](../../../12-observability-diagnostics/README.md)
+[URL Health Checker](../url-health-checker/README.md)

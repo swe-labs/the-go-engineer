@@ -10,7 +10,7 @@ Every production system tracks time: request logs, cache TTLs, retry backoff, se
 
 ## Mental model
 
-Think of `time.Time` as a struct with two internal clocks: a wall clock for calendar operations (year/month/day, timezone) and a monotonic clock for measuring elapsed time. The monotonic component is subtracted when you call `time.Since` or `time.Until`, so duration measurements remain accurate even if the system clock jumps due to NTP adjustments.
+Think of `time.Time` as a struct with two internal clocks: a wall clock for calendar operations (year/month/day, timezone) and a monotonic clock for measuring elapsed time. When *both* operands carry a monotonic reading (i.e. both came from `time.Now()`), `time.Since` and `time.Until` subtract the monotonic components, so duration measurements remain accurate even if the system clock jumps due to NTP adjustments. A `time.Time` built by `time.Parse` or `time.Date` has no monotonic reading, so subtraction falls back to wall-clock arithmetic.
 
 ## Visual model
 
@@ -97,7 +97,7 @@ func main() {
 2. `now.Unix()` extracts the integer seconds since epoch (no allocation).
 3. `now.Format(time.RFC3339)` walks through the format string, mapping each token (`2006`, `01`, `02`, `T`, `15`, `04`, `05`, `Z07:00`) to the corresponding field of now.
 4. `time.Parse(layout, "2026-06-01")` does the reverse: reads the string left to right, extracts year/month/day from positions matching the layout, and returns a `time.Time` with zero hours/minutes/seconds in UTC.
-5. `time.Since(then)` subtracts the monotonic components of `then` from `now`, yielding a `time.Duration`. This is accurate even if the wall clock was adjusted between `then` and `now`.
+5. `time.Since(then)` yields a `time.Duration`. Note: `then` was built by `time.Date`, which carries **no** monotonic reading, so this particular subtraction falls back to wall-clock arithmetic (see the debugging walkthrough below). Monotonic-accurate measurement requires both endpoints from `time.Now()`.
 
 ## Common mistakes
 
@@ -143,7 +143,7 @@ func retry(attempts int) {
 fmt.Println(start.String()) // includes "m=+0.000000000"
 ```
 
-If `start` was obtained via `time.Date(...)` (no monotonic clock), then `time.Since(start)` does not use monotonic subtraction — it falls back to wall-clock subtraction. If the system clock was adjusted backward after `retry` was called, `time.Since` can produce a large negative value, and the comparison `> 5*time.Second` evaluates true.
+If `start` was obtained via `time.Date(...)` (no monotonic clock), then `time.Since(start)` does not use monotonic subtraction — it falls back to wall-clock subtraction. A wall-clock jump forward (for example, NTP correcting a clock that was running slow) makes `time.Since` return a large positive value, and the comparison `> 5*time.Second` fires the timeout immediately even though almost no real time has passed. (A backward jump produces the opposite failure: the loop never times out.)
 
 **Root cause**: `time.Date` does not attach a monotonic reading. `time.Since` on a non-monotonic time falls back to unreliable wall-clock arithmetic.
 

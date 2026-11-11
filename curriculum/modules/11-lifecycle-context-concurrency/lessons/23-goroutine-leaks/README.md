@@ -6,7 +6,7 @@ Identify why goroutines leak, detect leaks using runtime metrics and profiling, 
 
 ## Why this matters
 
-A goroutine leak is a permanent memory leak: the goroutine's stack (initially 2 KB, growing to megabytes after usage) is never freed, and any objects the goroutine references cannot be garbage collected. Leaked goroutines accumulate under load and cause out-of-memory crashes. According to postmortems from Uber, Docker, and Lyft, goroutine leaks are the most common cause of memory exhaustion in Go microservices after plain heap allocation.
+A goroutine leak is a permanent memory leak: the goroutine's stack (initially 2 KB, growing to megabytes after usage) is never freed, and any objects the goroutine references cannot be garbage collected. Leaked goroutines accumulate under load and cause out-of-memory crashes. Engineering teams including Uber have published detailed accounts of goroutine leaks as a recurring source of memory exhaustion in Go microservices (their 2018 postmortem traced a leak to a channel receive that never completed). The pattern is common enough that leak detection belongs in every service's toolbox.
 
 ## Mental model
 
@@ -48,7 +48,7 @@ Detection techniques:
 
 ## Under the hood
 
-The Go runtime scheduler uses an M:P:G model. A leaked goroutine in `_Gwaiting` state is removed from its P's run queue and stored in a global list. The GC must still scan the goroutine's stack during every GC cycle to find roots, so leaked goroutines increase GC CPU usage even when they are "idle". The goroutine's stack starts at 2 KB and grows as needed; a leaked goroutine that has processed work may hold a multi-megabyte stack. The `allgs` slice is never compacted — it grows monotonically.
+The Go runtime scheduler uses an M:P:G model. A leaked goroutine in `_Gwaiting` state is removed from its P's run queue and stored in a global list. The GC must still scan the goroutine's stack during every GC cycle to find roots, so leaked goroutines increase GC CPU usage even when they are "idle". The goroutine's stack starts at 2 KB and grows as needed; a leaked goroutine that has processed work may hold a multi-megabyte stack. The runtime's `allgs` slice grows with the peak goroutine count; exited goroutines are marked dead but the slice only grows, so the runtime footprint keeps a memory of the peak.
 
 ## How Go uses it
 
@@ -66,7 +66,8 @@ import (
 )
 
 func leakyWorker(done chan bool) {
-	<-done // blocks forever if nothing sends
+	// Blocks forever waiting on a channel that never sends
+	<-done
 }
 
 func safeWorker(ctx context.Context) {
@@ -81,19 +82,17 @@ func safeWorker(ctx context.Context) {
 }
 
 func main() {
-	// This goroutine leaks: nothing ever sends on done
 	done := make(chan bool)
 	go leakyWorker(done)
 	fmt.Println("Leaky worker started (will leak)")
 
-	// This goroutine exits cleanly via context
 	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
 	defer cancel()
 	go safeWorker(ctx)
 
 	time.Sleep(100 * time.Millisecond)
 	fmt.Println("Safe worker exited via context cancellation")
-	fmt.Println("Tip: use runtime.NumGoroutine() to detect leaks")
+	fmt.Println("\nTip: use `runtime.NumGoroutine()` to detect leaks in tests")
 }
 ```
 

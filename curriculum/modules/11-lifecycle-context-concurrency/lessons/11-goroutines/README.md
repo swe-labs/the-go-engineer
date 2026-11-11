@@ -54,7 +54,7 @@ Goroutines are not OS threads:
 
 | Property | OS thread | Goroutine |
 |---|---|---|
-| Initial stack | ~1 MB | ~2 KB (grows as needed) |
+| Initial stack | ~1-8 MB (platform-dependent) | ~2 KB (grows as needed) |
 | Create/teardown | Expensive (syscall) | Cheap (userspace) |
 | Scheduling | Kernel | Go runtime (M:N scheduler) |
 | Context switch | ~1 µs | ~100 ns |

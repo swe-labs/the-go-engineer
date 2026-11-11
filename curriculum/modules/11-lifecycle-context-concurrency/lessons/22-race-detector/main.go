@@ -43,6 +43,22 @@ func main() {
 
 	fmt.Printf("Safe counter: %d (expected %d)\n", safe.Value(), n)
 
-	fmt.Println("\nRun this file with: go run -race .")
-	fmt.Println("Run tests with: go test -race .")
+	// Deliberate data race: 100 goroutines mutate SharedCounter.value with no
+	// lock. Without -race this may still print 1000 (races are intermittent);
+	// with `go run -race .` the detector reports the read-write race and the
+	// program exits with status 66. That report is the demonstration.
+	racyWG := sync.WaitGroup{}
+	racyWG.Add(n)
+	for i := 0; i < n; i++ {
+		go func() {
+			defer racyWG.Done()
+			racyAdd(safe, 1)
+		}()
+	}
+	racyWG.Wait()
+	fmt.Printf("Racy counter (racyAdd, no lock): %d\n", safe.Value())
+
+	fmt.Println("\nRun without -race: the racy counter may silently print a wrong value.")
+	fmt.Println("Run with: go run -race . - the detector prints the race report and exits with status 66.")
+	fmt.Println("Run tests with: go test -race . (the tests themselves are race-free).")
 }

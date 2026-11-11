@@ -85,10 +85,7 @@ func worker(ctx context.Context, id int, jobs <-chan Job, results chan<- Result)
 				return
 			}
 			time.Sleep(job.Delay)
-			results <- Result{
-				JobID:  job.ID,
-				Output: fmt.Sprintf("worker %d processed job %d", id, job.ID),
-			}
+			results <- Result{JobID: job.ID, Output: fmt.Sprintf("worker %d processed job %d", id, job.ID)}
 		}
 	}
 }

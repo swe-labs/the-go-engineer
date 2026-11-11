@@ -113,13 +113,13 @@ func main() {
   - Why: The argument is in nanoseconds, so `5000` = 5 microseconds.
   - Fix: Write `5000 * time.Millisecond` or `5 * time.Second`.
 
-- Mistake: Using `int64` directly for duration math.
-  - Why: Loses type safety — adding `int64` to `time.Time` compiles without error but produces garbage.
-  - Fix: Always use `time.Duration` constants and convert with `time.Duration(n) * time.Second`.
+- Mistake: Mixing bare `int64` into duration expressions.
+  - Why: `time.Duration` is an int64 under the hood, so `time.Second + 500` compiles — and silently adds 500 *nanoseconds*, not 500 milliseconds. (`time.Time` has no arithmetic operators, so `time + int64` at least fails to compile.)
+  - Fix: Always pair numbers with explicit unit constants: `500 * time.Millisecond`.
 
-- Mistake: Dividing durations for ratios.
-  - Why: Integer division truncates: `10*time.Second / 3` = `3s`, losing `1/3` of a second.
-  - Fix: Use `d.Seconds()` to get float64 before division.
+- Mistake: Dividing durations when the remainder matters.
+  - Why: Duration division truncates at nanosecond granularity: `10*time.Second / 3` = `3.333333333s` (the final third of a nanosecond is dropped). Truncation is harmless at this scale, but for ratio computations where precision compounds, compute in float64 via `d.Seconds()`.
+  - Fix: `seconds := d.Seconds() / 3`.
 
 - Mistake: Passing a negative duration to `Sleep`.
   - Why: `time.Sleep` returns immediately for negative durations, which can cause busy loops.
@@ -139,12 +139,12 @@ func rateLimit(events int, per time.Duration) {
 }
 ```
 
-**Symptom**: When called with `rateLimit(100, 1*time.Second)`, the function completes instantly — no events are printed with delays.
+**Symptom**: When called with `rateLimit(100, 1000)`, the function completes instantly — all 100 events flood out with no perceptible delay.
 
 **Investigation**: Add a print of `interval`:
 
 ```go
-fmt.Println("interval:", interval)  // interval: 10ms
+fmt.Println("interval:", interval)  // interval: 10ns — 1000 nanoseconds divided by 100 events
 ```
 
 That looks correct. But then check the caller — maybe it passes `int64` without conversion:

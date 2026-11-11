@@ -46,8 +46,8 @@ A `time.Ticker` uses the same runtime timer heap as `time.Timer`. The difference
 
 ## How Go uses it
 
-- `net/http`: HTTP/2 ping frames use tickers to measure connection idle time.
-- `runtime/metrics`: The runtime emits GC and goroutine metrics on a periodic ticker.
+- `net/http`: HTTP/2 connection health checks send periodic ping frames on runtime timers.
+- Prometheus client libraries: metric pushers and exporters scrape on tickers.
 - Kubernetes client-go: Informer reflectors use tickers for resync periods.
 - `database/sql`: Connection pool health checks use tickers to evict stale connections.
 - Monitoring agents: Metrics exporters (Prometheus, OpenTelemetry) use tickers for collection intervals.
@@ -94,8 +94,8 @@ If any iteration's processing took >200ms, the runtime would skip the next tick 
 ## Common mistakes
 
 - Mistake: Using `time.Tick(d)` without a way to stop the ticker.
-  - Why: `time.Tick` returns a channel but hides the `*time.Ticker`. The ticker leaks and runs forever, consuming heap space.
-  - Fix: Use `time.NewTicker` and call `Stop` when done.
+  - Why: `time.Tick` returns a channel but hides the `*time.Ticker`, so you cannot call `Stop`. Before Go 1.23 this leaked permanently; on Go 1.23+ an unreferenced ticker becomes garbage-collectible — but the collection is best-effort, and any goroutine still ranging over the channel keeps it alive.
+  - Fix: Use `time.NewTicker` and call `Stop` when done (or on Go 1.23+, rely on GC only for truly fire-and-forget tickers).
 
 - Mistake: Assuming ticks are evenly spaced regardless of receiver speed.
   - Why: If the receiver takes longer than the tick interval, the ticker drops ticks. The interval between received ticks may vary.
