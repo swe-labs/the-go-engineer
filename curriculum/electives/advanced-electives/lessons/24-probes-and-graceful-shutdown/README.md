@@ -78,8 +78,8 @@ The sequence in the example:
 1. `Shutdown(ctx)` sets `ready` to false, so `/readyz` returns 503.
 2. `srv.Shutdown(ctx)` closes the listener and stops accepting new connections.
 3. The runtime waits for active handlers to return.
-4. `inflight.Wait()` is a second guard that proves every tracked request finished.
-5. If `ctx` expires first, `Shutdown` returns `context.DeadlineExceeded` and the process should exit rather than hang.
+4. A watcher goroutine runs `inflight.Wait()` while a `select` races it against the same `ctx` — the second guard honors the same deadline as the HTTP shutdown.
+5. If `ctx` expires first, `Shutdown` returns the context error (or a drain-deadline error if the wait itself timed out) and the process should exit rather than hang.
 
 ## Go example
 
@@ -88,6 +88,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"net"
@@ -159,14 +160,31 @@ func (s *Server) Addr() string {
 }
 
 // Shutdown marks the server not ready, stops accepting new connections, and
-// waits for in-flight requests to finish or ctx to expire.
+// waits for in-flight requests to finish or ctx to expire. If the deadline
+// passes with handlers still running, the returned error reports it.
 func (s *Server) Shutdown(ctx context.Context) error {
 	s.ready.Store(false)
 	if s.srv == nil {
 		return nil
 	}
 	err := s.srv.Shutdown(ctx)
-	s.inflight.Wait()
+
+	// srv.Shutdown returns as soon as ctx expires, even with handlers still
+	// running, so the in-flight wait must honor the same deadline. The
+	// watcher goroutine outlives this call only when a handler ignored the
+	// deadline; the kubelet's SIGKILL at the grace period is the backstop.
+	waitDone := make(chan struct{})
+	go func() {
+		s.inflight.Wait()
+		close(waitDone)
+	}()
+	select {
+	case <-waitDone:
+	case <-ctx.Done():
+		if err == nil {
+			err = errors.New("drain deadline expired with handlers still in flight")
+		}
+	}
 	return err
 }
 
@@ -284,7 +302,7 @@ Predict before you run: during the 100 ms window after `Shutdown` starts and bef
 4. The test calls `Shutdown(ctx)` in a goroutine. `Shutdown` sets `ready=false`, so `/readyz` now returns `503 draining`.
 5. `srv.Shutdown` closes the listener and waits for the `/work` handler to return.
 6. The test waits 100 ms and asserts that `Shutdown` has not returned. If it returned, the process could exit while the response is still being written.
-7. The test closes `release`. The handler writes `200`, the connection becomes idle, `srv.Shutdown` returns, and `inflight.Wait()` returns.
+7. The test closes `release`. The handler writes `200`, the connection becomes idle, `srv.Shutdown` returns, the watcher's `inflight.Wait()` completes, and the `select` takes the `waitDone` branch.
 8. The request goroutine receives the response and `Shutdown` returns `nil`.
 
 ## Runtime evidence

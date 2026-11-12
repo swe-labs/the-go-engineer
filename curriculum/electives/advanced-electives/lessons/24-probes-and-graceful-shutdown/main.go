@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"net"
@@ -73,14 +74,31 @@ func (s *Server) Addr() string {
 }
 
 // Shutdown marks the server not ready, stops accepting new connections, and
-// waits for in-flight requests to finish or ctx to expire.
+// waits for in-flight requests to finish or ctx to expire. If the deadline
+// passes with handlers still running, the returned error reports it.
 func (s *Server) Shutdown(ctx context.Context) error {
 	s.ready.Store(false)
 	if s.srv == nil {
 		return nil
 	}
 	err := s.srv.Shutdown(ctx)
-	s.inflight.Wait()
+
+	// srv.Shutdown returns as soon as ctx expires, even with handlers still
+	// running, so the in-flight wait must honor the same deadline. The
+	// watcher goroutine outlives this call only when a handler ignored the
+	// deadline; the kubelet's SIGKILL at the grace period is the backstop.
+	waitDone := make(chan struct{})
+	go func() {
+		s.inflight.Wait()
+		close(waitDone)
+	}()
+	select {
+	case <-waitDone:
+	case <-ctx.Done():
+		if err == nil {
+			err = errors.New("drain deadline expired with handlers still in flight")
+		}
+	}
 	return err
 }
 
