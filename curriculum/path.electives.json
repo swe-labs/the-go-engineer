@@ -3726,7 +3726,7 @@
         "test_path": ""
       },
       "id": "elective-21",
-      "learning_objective": "Explain desired state and the reconciliation loop in your own words, and choose between a single host, a managed platform, Kubernetes, and serverless using explicit criteria.",
+      "learning_objective": "By the end of this lesson, you will be able to explain desired state and the reconciliation loop in your own words, and choose between a single host, a managed platform, Kubernetes, and serverless using explicit criteria.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-22"
@@ -3888,7 +3888,7 @@
         "test_path": ""
       },
       "id": "elective-22",
-      "learning_objective": "Model a stateless Go service as a Deployment behind a Service and an Ingress, and trace the path of a request from the client to the container process.",
+      "learning_objective": "By the end of this lesson, you will be able to model a stateless Go service as a Deployment behind a Service and an Ingress, and trace the path of a request from the client to the container process.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-23"
@@ -4058,7 +4058,7 @@
         "test_path": "electives/advanced-electives/lessons/23-config-and-security-context/main_test.go"
       },
       "id": "elective-23",
-      "learning_objective": "Inject configuration and secrets into a Go service with ConfigMaps and Secrets, load them with a fail-fast validator, and constrain the container with a non-root, read-only security context.",
+      "learning_objective": "By the end of this lesson, you will be able to inject configuration and secrets into a Go service with ConfigMaps and Secrets, load them with a fail-fast validator, and constrain the container with a non-root, read-only security context.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-24"
@@ -4229,7 +4229,7 @@
         "test_path": "electives/advanced-electives/lessons/24-probes-and-graceful-shutdown/main_test.go"
       },
       "id": "elective-24",
-      "learning_objective": "Implement startup, readiness, and liveness probes with correct timing, and drain in-flight HTTP requests on SIGTERM within the termination grace period without returning errors to clients.",
+      "learning_objective": "By the end of this lesson, you will be able to implement startup, readiness, and liveness probes with correct timing, and drain in-flight HTTP requests on `SIGTERM` within the termination grace period without returning errors to clients.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-25"
@@ -4400,7 +4400,7 @@
         "test_path": "electives/advanced-electives/lessons/25-resources-and-go-runtime/main_test.go"
       },
       "id": "elective-25",
-      "learning_objective": "Set container CPU and memory requests and limits, relate them to GOMAXPROCS, GOMEMLIMIT, and garbage-collection behavior, and diagnose CPU throttling and OOM kills from measured signals.",
+      "learning_objective": "By the end of this lesson, you will be able to set container CPU and memory requests and limits, relate them to `GOMAXPROCS`, `GOMEMLIMIT`, and garbage-collection behavior, and diagnose CPU throttling and OOM kills from measured signals.",
       "module_id": "module-17",
       "next_item_ids": [
         "elective-26"
@@ -4563,7 +4563,7 @@
         "test_path": "electives/advanced-electives/lessons/26-rollouts-and-troubleshooting/main_test.go"
       },
       "id": "elective-26",
-      "learning_objective": "Perform a zero-downtime rolling update, verify it, roll back, protect availability during a node drain, and diagnose a stalled rollout.",
+      "learning_objective": "By the end of this lesson, you will be able to perform a zero-downtime rolling update, verify which revision is serving traffic, roll back safely, protect availability during a node drain with a PodDisruptionBudget, and diagnose a stalled rollout from cluster events.",
       "module_id": "module-17",
       "next_item_ids": [],
       "order": 26,

@@ -58,8 +58,8 @@ type ServiceRouter struct {
 func NewServiceRouter() *ServiceRouter {
 	return &ServiceRouter{
 		routes: map[string]string{
-			"/api/v1/users":  "monolith",
-			"/api/v1/orders": "monolith",
+			"/api/v1/users":   "monolith",
+			"/api/v1/orders":  "monolith",
 			"/api/v1/billing": "extracted-billing-svc", // Strangled domain
 		},
 	}

@@ -107,6 +107,8 @@ func ComputeBudget(containerLimitBytes int64, gcPercent int) (Budget, error) {
 	return b, nil
 }
 
+// parseGCPercent reads the GOGC environment value. An empty value keeps the Go
+// default of 100.
 func parseGCPercent(raw string) (int, error) {
 	if raw == "" {
 		return 100, nil

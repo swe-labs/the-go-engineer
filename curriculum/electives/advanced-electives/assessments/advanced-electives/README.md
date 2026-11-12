@@ -63,3 +63,7 @@ Provide a working repository, captured `go test -race ./...` and benchmark outpu
 # Run all advanced elective test suites
 go test -v ./curriculum/electives/advanced-electives/...
 ```
+
+## NEXT UP
+
+[Module 18: Flagship Opslane](../../../../modules/18-flagship-opslane/README.md)

@@ -105,6 +105,7 @@ const (
 	defaultDrainWindow = 10 * time.Second
 )
 
+// Server owns the readiness state and the HTTP listener.
 type Server struct {
 	ready    atomic.Bool
 	inflight sync.WaitGroup
@@ -113,6 +114,8 @@ type Server struct {
 	ln       net.Listener
 }
 
+// NewServer returns a server that is ready. If work is nil, /work sleeps
+// briefly and returns 200.
 func NewServer(work http.HandlerFunc) *Server {
 	s := &Server{work: work}
 	if s.work == nil {
@@ -125,10 +128,13 @@ func NewServer(work http.HandlerFunc) *Server {
 	return s
 }
 
+// Ready reports whether the server should receive traffic.
 func (s *Server) Ready() bool { return s.ready.Load() }
 
+// NotReady removes the server from rotation without stopping it.
 func (s *Server) NotReady() { s.ready.Store(false) }
 
+// Start listens on addr and serves in the background.
 func (s *Server) Start(addr string) error {
 	ln, err := net.Listen("tcp", addr)
 	if err != nil {
@@ -144,6 +150,7 @@ func (s *Server) Start(addr string) error {
 	return nil
 }
 
+// Addr returns the bound address. It is only valid after Start.
 func (s *Server) Addr() string {
 	if s.ln == nil {
 		return ""
@@ -151,6 +158,8 @@ func (s *Server) Addr() string {
 	return s.ln.Addr().String()
 }
 
+// Shutdown marks the server not ready, stops accepting new connections, and
+// waits for in-flight requests to finish or ctx to expire.
 func (s *Server) Shutdown(ctx context.Context) error {
 	s.ready.Store(false)
 	if s.srv == nil {
@@ -180,6 +189,8 @@ func (s *Server) routes() http.Handler {
 	return s.track(mux)
 }
 
+// track counts in-flight requests so the shutdown path can assert that all
+// work finished.
 func (s *Server) track(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		s.inflight.Add(1)

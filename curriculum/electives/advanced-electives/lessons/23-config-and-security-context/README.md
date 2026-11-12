@@ -117,6 +117,9 @@ func LoadConfig(getenv func(string) string, readFile func(string) ([]byte, error
 	}
 	c.MaxConns = n
 
+	// A Secret mounted as a file is read at startup. The Deployment supplies the
+	// path, so the same binary works whether the value comes from an environment
+	// variable or a projected volume.
 	path := getenv("APP_DATABASE_URL_FILE")
 	if path == "" {
 		return Config{}, errors.New("APP_DATABASE_URL_FILE is required")
