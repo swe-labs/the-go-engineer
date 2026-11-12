@@ -93,3 +93,7 @@ go test -bench=. -benchmem ./...
 # 3. Verify static analysis
 go vet ./...
 ```
+
+## NEXT UP
+
+[Advanced Electives Assessment](../../assessments/advanced-electives/README.md)

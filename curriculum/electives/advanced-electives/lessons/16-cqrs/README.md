@@ -76,9 +76,9 @@ type OrderView struct {
 
 // CQRSOrderService demonstrates separation of commands and queries.
 type CQRSOrderService struct {
-	mu     sync.RWMutex
-	store  map[string]int       // Write model
-	views  map[string]OrderView // Read model projection
+	mu    sync.RWMutex
+	store map[string]int       // Write model
+	views map[string]OrderView // Read model projection
 }
 
 func NewCQRSOrderService() *CQRSOrderService {
