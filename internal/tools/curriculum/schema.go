@@ -183,19 +183,19 @@ func validateSchema() {
 
 	// Verify inventory counts against expected.json (single source of truth)
 	if len(core.Items) != exp.Inventory.CoreItems {
-		errorf("path.core.json: expected %d core items, got %d", exp.Inventory.CoreItems, len(core.Items))
+		errorf("core path: expected %d core items, got %d", exp.Inventory.CoreItems, len(core.Items))
 		ok = false
 	}
 	if len(core.Modules) != exp.Inventory.CoreModules {
-		errorf("path.core.json: expected %d core modules, got %d", exp.Inventory.CoreModules, len(core.Modules))
+		errorf("core path index: expected %d core modules, got %d", exp.Inventory.CoreModules, len(core.Modules))
 		ok = false
 	}
 	if len(electives.Items) != exp.Inventory.ElectiveItems {
-		errorf("path.electives.json: expected %d elective items, got %d", exp.Inventory.ElectiveItems, len(electives.Items))
+		errorf("electives: expected %d elective items, got %d", exp.Inventory.ElectiveItems, len(electives.Items))
 		ok = false
 	}
 	if len(electives.Modules) != exp.Inventory.ElectiveModules {
-		errorf("path.electives.json: expected %d elective modules, got %d", exp.Inventory.ElectiveModules, len(electives.Modules))
+		errorf("electives index: expected %d elective modules, got %d", exp.Inventory.ElectiveModules, len(electives.Modules))
 		ok = false
 	}
 	if total := len(core.Items) + len(electives.Items); total != exp.Inventory.TotalItems {
@@ -230,7 +230,7 @@ func validateSchema() {
 		ok = false
 	}
 	if len(projects.Projects) != exp.Inventory.Projects {
-		errorf("projects.json: expected %d projects, got %d", exp.Inventory.Projects, len(projects.Projects))
+		errorf("module manifests: expected %d projects, got %d", exp.Inventory.Projects, len(projects.Projects))
 		ok = false
 	}
 	var conceptsBundle struct {
@@ -522,7 +522,7 @@ func validateSchema() {
 		assessments.Assessments = append(assessments.Assessments, mm.Assessments...)
 	}
 	if len(assessments.Assessments) != exp.Inventory.Assessments {
-		errorf("assessments.json: expected %d assessments, got %d", exp.Inventory.Assessments, len(assessments.Assessments))
+		errorf("module manifests: expected %d assessments, got %d", exp.Inventory.Assessments, len(assessments.Assessments))
 		ok = false
 	}
 	assessIDs := make(map[string]bool)

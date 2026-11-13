@@ -364,7 +364,6 @@ type Proof struct {
 type ReadmeContract struct {
 	ContractID        string `json:"contract_id"`
 	DocumentationMode string `json:"documentation_mode"`
-	Required          bool   `json:"required"`
 }
 
 type ContentContract struct {
@@ -444,7 +443,6 @@ type ElectiveBundle = PathBundle
 type Project struct {
 	ID    string `json:"id"`
 	Title string `json:"title"`
-	Order int    `json:"order"`
 }
 
 type ProjectsBundle struct {
@@ -454,22 +452,8 @@ type ProjectsBundle struct {
 type Assessment struct {
 	ID    string `json:"id"`
 	Title string `json:"title"`
-	Order int    `json:"order"`
 }
 
 type AssessmentsBundle struct {
 	Assessments []Assessment `json:"assessments"`
-}
-
-type CrossrefEntry struct {
-	FromID   string `json:"from_id"`
-	TargetID string `json:"target_id"`
-	Relation string `json:"relation"`
-	Label    string `json:"label,omitempty"`
-}
-
-type CrossrefBundle struct {
-	Crossrefs struct {
-		References []CrossrefEntry `json:"references"`
-	} `json:"crossrefs"`
 }

@@ -107,7 +107,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -126,7 +125,7 @@
         "core-12-12"
       ],
       "title": "Module 12 Assessment — Observability and Diagnostics",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "criteria": [
@@ -412,7 +411,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/lessons/01-why-observability-exists/assets",
@@ -447,8 +445,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "why-observability-exists",
       "source_legacy_ids": [],
@@ -594,7 +591,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/lessons/02-structured-logging-with-slog/assets",
@@ -629,8 +625,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "structured-logging-with-slog",
       "source_legacy_ids": [
@@ -788,7 +783,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/lessons/03-request-scoped-logging/assets",
@@ -823,8 +817,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "request-scoped-logging",
       "source_legacy_ids": [],
@@ -974,7 +967,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/lessons/04-correlation-ids/assets",
@@ -1009,8 +1001,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "correlation-ids",
       "source_legacy_ids": [],
@@ -1174,7 +1165,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/lessons/05-pii-redaction/assets",
@@ -1209,8 +1199,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "pii-redaction",
       "source_legacy_ids": [],
@@ -1354,7 +1343,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/lessons/06-metrics/assets",
@@ -1389,8 +1377,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "metrics",
       "source_legacy_ids": [],
@@ -1541,7 +1528,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/lessons/07-prometheus/assets",
@@ -1576,8 +1562,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "prometheus",
       "source_legacy_ids": [],
@@ -1720,7 +1705,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/lessons/08-tracing/assets",
@@ -1755,8 +1739,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "tracing",
       "source_legacy_ids": [],
@@ -1907,7 +1890,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/lessons/09-opentelemetry/assets",
@@ -1942,8 +1924,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "opentelemetry",
       "source_legacy_ids": [],
@@ -2084,7 +2065,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/lessons/10-alerting-mindset/assets",
@@ -2119,8 +2099,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "alerting-mindset",
       "source_legacy_ids": [],
@@ -2269,7 +2248,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/lessons/11-incident-debugging/assets",
@@ -2304,8 +2282,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "incident-debugging",
       "source_legacy_ids": [],
@@ -2462,7 +2439,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/lessons/12-reliability-review/assets",
@@ -2497,8 +2473,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "reliability-review",
       "source_legacy_ids": [],
@@ -2584,7 +2559,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/projects/observability-retrofit/assets",
@@ -2608,8 +2582,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "observability-retrofit",
       "source_legacy_ids": [],
@@ -2642,7 +2615,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/projects/pii-redactor/assets",
@@ -2666,8 +2638,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "pii-redactor",
       "source_legacy_ids": [],
@@ -2700,7 +2671,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/assessments/checkpoint/assets",
@@ -2720,8 +2690,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -2754,7 +2723,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/assessments/observability-retrofit/assets",
@@ -2774,8 +2742,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "observability-retrofit",
       "source_legacy_ids": [],
@@ -2808,7 +2775,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/12-observability-diagnostics/assessments/pii-redactor/assets",
@@ -2828,8 +2794,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "pii-redactor",
       "source_legacy_ids": [],
@@ -2870,7 +2835,6 @@
       "documentation_mode": "project",
       "id": "project-pii-redactor",
       "module_id": "module-12",
-      "order": 19,
       "placement_anchor_item_id": "core-12-12",
       "portfolio": {
         "architecture_defense_required": false,
@@ -2894,7 +2858,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "structured logging",
         "distributed tracing"
@@ -3075,7 +3038,6 @@
       "documentation_mode": "project",
       "id": "project-observability-retrofit",
       "module_id": "module-12",
-      "order": 20,
       "placement_anchor_item_id": "core-12-12",
       "portfolio": {
         "architecture_defense_required": false,
@@ -3099,7 +3061,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "structured logging",
         "distributed tracing"

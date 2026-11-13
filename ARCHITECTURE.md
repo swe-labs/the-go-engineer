@@ -12,8 +12,8 @@ All authoritative curriculum metadata is defined in modular JSON manifests under
 
 | Manifest | Purpose |
 |---|---|
-| [`curriculum/path.core.json`](./curriculum/path.core.json) | Canonical 18-module progression, instructional units, and prerequisites |
-| [`curriculum/path.electives.json`](./curriculum/path.electives.json) | Advanced electives catalog, prerequisites, and learning outcomes |
+| [`curriculum/path.core.json`](./curriculum/path.core.json) | Canonical 18-module progression registry (ordering, prerequisites, entry/terminal item ids) |
+| [`curriculum/path.electives.json`](./curriculum/path.electives.json) | Electives module registry (ordering, prerequisites, entry/terminal ids); catalog items in `curriculum/electives/advanced-electives/manifest.json` |
 | `curriculum/modules/*/manifest.json` | Per-module items, folded project records, assessment suites, and embedded crossrefs |
 | [`curriculum/concepts.json`](./curriculum/concepts.json) | Conceptual ownership, mental models, and reinforcement map |
 | [`curriculum/failures.json`](./curriculum/failures.json) | Explicit failure mode taxonomy and defensive patterns |

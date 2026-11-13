@@ -138,7 +138,7 @@ To prevent cognitive overload and avoid artificial padding, the remaining 11 hea
 - `## Portfolio Artifact` — Deliverables, architecture notes, and defense rubrics (required for capstones).
 
 ### 3. Subtype Profiles
-Subtypes declared in `curriculum/path.core.json` and `curriculum/path.electives.json`:
+Subtypes declared per item in `curriculum/modules/*/manifest.json` (electives: `curriculum/electives/advanced-electives/manifest.json`):
 - `orientation` — Course navigation, learning strategy, mental models, portfolio proof. Mandates `Core idea` / `Visual model`. Omits `Under the hood`, `Go example`, `Step-by-step execution`, `Debugging walkthrough`, `Production notes`, `Performance implications`, `Practice task`, `Tests / verification`. Contains zero Go code blocks.
 - `concept` — Deep language semantics, types, and memory mechanics. Mandates `Under the hood`, `Go example`, `Step-by-step execution`, `Performance implications`, `Practice task`.
 - `testing` — Table-driven tests, mocks. Mandates `Go example`, `Step-by-step execution`, `Practice task`, `Tests / verification`.

@@ -2,7 +2,7 @@
 
 This document visualizes the canonical v3 learner journey from foundational concepts to production systems engineering on `release/v3`.
 
-Module progression and item metadata are formally specified in [`curriculum/path.core.json`](../curriculum/path.core.json) and [ARCHITECTURE.md](../ARCHITECTURE.md).
+Module progression is formally specified in the [`curriculum/path.core.json`](../curriculum/path.core.json) index, item metadata in the per-module [`curriculum/modules/*/manifest.json`](../curriculum/modules/07-cli-files-json-config/manifest.json) files, and [ARCHITECTURE.md](../ARCHITECTURE.md).
 
 ## Phase Progression
 

@@ -106,7 +106,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -137,7 +136,7 @@
         "core-03-24"
       ],
       "title": "Module 03 Assessment — Programming Fundamentals with Go",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "criteria": [
@@ -411,7 +410,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/01-values-and-expressions/assets",
@@ -446,8 +444,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "values-and-expressions",
       "source_legacy_ids": [],
@@ -587,7 +584,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/02-variables/assets",
@@ -622,8 +618,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "variables",
       "source_legacy_ids": [
@@ -765,7 +760,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/03-types/assets",
@@ -800,8 +794,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "types",
       "source_legacy_ids": [],
@@ -941,7 +934,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/04-zero-values/assets",
@@ -976,8 +968,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "zero-values",
       "source_legacy_ids": [],
@@ -1117,7 +1108,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/05-type-conversions/assets",
@@ -1152,8 +1142,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "type-conversions",
       "source_legacy_ids": [],
@@ -1293,7 +1282,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/06-constants/assets",
@@ -1328,8 +1316,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "constants",
       "source_legacy_ids": [
@@ -1471,7 +1458,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/07-iota/assets",
@@ -1506,8 +1492,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "iota",
       "source_legacy_ids": [
@@ -1649,7 +1634,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/08-boolean-logic/assets",
@@ -1684,8 +1668,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "boolean-logic",
       "source_legacy_ids": [],
@@ -1825,7 +1808,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/09-if-and-else/assets",
@@ -1860,8 +1842,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "if-and-else",
       "source_legacy_ids": [
@@ -2003,7 +1984,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/10-switch/assets",
@@ -2038,8 +2018,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "switch",
       "source_legacy_ids": [
@@ -2181,7 +2160,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/11-loops/assets",
@@ -2216,8 +2194,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "loops",
       "source_legacy_ids": [],
@@ -2357,7 +2334,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/12-range/assets",
@@ -2392,8 +2368,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "range",
       "source_legacy_ids": [],
@@ -2533,7 +2508,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/13-arrays/assets",
@@ -2568,8 +2542,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "arrays",
       "source_legacy_ids": [
@@ -2711,7 +2684,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/14-slices/assets",
@@ -2746,8 +2718,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "slices",
       "source_legacy_ids": [
@@ -2889,7 +2860,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/15-slice-length-and-capacity/assets",
@@ -2924,8 +2894,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "slice-length-and-capacity",
       "source_legacy_ids": [],
@@ -3065,7 +3034,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/16-slice-sharing-and-aliasing/assets",
@@ -3100,8 +3068,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "slice-sharing-and-aliasing",
       "source_legacy_ids": [],
@@ -3241,7 +3208,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/17-maps/assets",
@@ -3276,8 +3242,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "maps",
       "source_legacy_ids": [
@@ -3419,7 +3384,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/18-comma-ok-idiom/assets",
@@ -3454,8 +3418,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "comma-ok-idiom",
       "source_legacy_ids": [],
@@ -3595,7 +3558,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/19-strings/assets",
@@ -3630,8 +3592,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "strings",
       "source_legacy_ids": [],
@@ -3771,7 +3732,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/20-bytes/assets",
@@ -3806,8 +3766,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "bytes",
       "source_legacy_ids": [],
@@ -3947,7 +3906,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/21-runes-and-unicode/assets",
@@ -3982,8 +3940,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "runes-and-unicode",
       "source_legacy_ids": [],
@@ -4130,7 +4087,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/22-pointers-as-addresses/assets",
@@ -4165,8 +4121,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "pointers-as-addresses",
       "source_legacy_ids": [
@@ -4321,7 +4276,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/lessons/23-beginner-pointer-mistakes/assets",
@@ -4356,8 +4310,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "beginner-pointer-mistakes",
       "source_legacy_ids": [],
@@ -4500,8 +4453,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "algorithmic-problem-solving",
       "source_legacy_ids": [],
@@ -4587,7 +4539,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/projects/contact-directory/assets",
@@ -4611,8 +4562,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "contact-directory",
       "source_legacy_ids": [],
@@ -4645,7 +4595,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/projects/pricing-checkout/assets",
@@ -4669,8 +4618,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "pricing-checkout",
       "source_legacy_ids": [],
@@ -4703,7 +4651,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/assessments/checkpoint/assets",
@@ -4723,8 +4670,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -4757,7 +4703,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/assessments/contact-directory/assets",
@@ -4777,8 +4722,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "contact-directory",
       "source_legacy_ids": [],
@@ -4811,7 +4755,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/03-programming-fundamentals/assessments/pricing-checkout/assets",
@@ -4831,8 +4774,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "pricing-checkout",
       "source_legacy_ids": [],
@@ -4873,7 +4815,6 @@
       "documentation_mode": "project",
       "id": "project-pricing-checkout",
       "module_id": "module-03",
-      "order": 3,
       "placement_anchor_item_id": "core-03-23",
       "portfolio": {
         "architecture_defense_required": false,
@@ -4897,7 +4838,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "slice header",
         "pointer semantics",
@@ -5097,7 +5037,6 @@
       "documentation_mode": "project",
       "id": "project-contact-directory",
       "module_id": "module-03",
-      "order": 4,
       "placement_anchor_item_id": "core-03-23",
       "portfolio": {
         "architecture_defense_required": false,
@@ -5121,7 +5060,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "slice header",
         "pointer semantics",

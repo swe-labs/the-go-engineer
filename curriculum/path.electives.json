@@ -78,15 +78,13 @@
     ]
   },
   "repository_structure": [
-    "electives/advanced-electives",
+    "curriculum/electives/advanced-electives/manifest.json",
     "curriculum/path.core.json",
     "curriculum/path.electives.json",
-    "curriculum/projects.json",
-    "curriculum/assessments.json",
-    "curriculum/crossrefs.json",
     "docs/",
-    "scripts/",
-    "internal/tools/curriculum/"
+    "electives/advanced-electives",
+    "internal/tools/curriculum/",
+    "scripts/"
   ],
   "schema_version": "3.1.0",
   "status": "stable"

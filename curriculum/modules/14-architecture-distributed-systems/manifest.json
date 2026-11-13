@@ -106,7 +106,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -130,7 +129,7 @@
         "core-14-17"
       ],
       "title": "Module 14 Assessment — Architecture and Distributed Systems",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "criteria": [
@@ -257,7 +256,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/01-why-architecture-exists/assets",
@@ -292,8 +290,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "why-architecture-exists",
       "source_legacy_ids": [],
@@ -389,7 +386,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/02-package-boundaries/assets",
@@ -424,8 +420,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "package-boundaries",
       "source_legacy_ids": [],
@@ -521,7 +516,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/03-service-layer/assets",
@@ -556,8 +550,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "service-layer",
       "source_legacy_ids": [],
@@ -657,7 +650,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/04-repository-pattern-deep-dive/assets",
@@ -692,8 +684,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "repository-pattern-deep-dive",
       "source_legacy_ids": [],
@@ -791,7 +782,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/05-modular-monolith/assets",
@@ -826,8 +816,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "modular-monolith",
       "source_legacy_ids": [],
@@ -926,7 +915,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/06-hexagonal-architecture/assets",
@@ -961,8 +949,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "hexagonal-architecture",
       "source_legacy_ids": [],
@@ -1062,7 +1049,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/07-domain-modeling/assets",
@@ -1097,8 +1083,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "domain-modeling",
       "source_legacy_ids": [],
@@ -1195,7 +1180,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/08-invariants/assets",
@@ -1230,8 +1214,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "invariants",
       "source_legacy_ids": [],
@@ -1332,7 +1315,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/09-event-driven-basics/assets",
@@ -1367,8 +1349,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "event-driven-basics",
       "source_legacy_ids": [],
@@ -1515,7 +1496,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/10-queues/assets",
@@ -1550,8 +1530,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "queues",
       "source_legacy_ids": [],
@@ -1691,7 +1670,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/11-retries-and-idempotent-consumers/assets",
@@ -1726,8 +1704,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "retries-and-idempotent-consumers",
       "source_legacy_ids": [],
@@ -1883,7 +1860,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/12-payment-workflow-design/assets",
@@ -1918,8 +1894,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "payment-workflow-design",
       "source_legacy_ids": [],
@@ -2063,7 +2038,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/13-multi-tenancy-architecture/assets",
@@ -2098,8 +2072,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "multi-tenancy-architecture",
       "source_legacy_ids": [],
@@ -2243,7 +2216,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/14-caching-architecture/assets",
@@ -2278,8 +2250,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "caching-architecture",
       "source_legacy_ids": [],
@@ -2418,7 +2389,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/15-when-to-split-services/assets",
@@ -2453,8 +2423,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "when-to-split-services",
       "source_legacy_ids": [],
@@ -2599,7 +2568,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/16-microservices-as-a-tradeoff-not-a-default/assets",
@@ -2634,8 +2602,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "microservices-as-a-tradeoff-not-a-default",
       "source_legacy_ids": [],
@@ -2781,7 +2748,6 @@
         ]
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/lessons/17-architecture-decision-records/assets",
@@ -2816,8 +2782,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "architecture-decision-records",
       "source_legacy_ids": [],
@@ -2904,7 +2869,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/projects/modular-refactor-review/assets",
@@ -2928,8 +2892,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "modular-refactor-review",
       "source_legacy_ids": [],
@@ -2962,7 +2925,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/assessments/checkpoint/assets",
@@ -2982,8 +2944,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -3016,7 +2977,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/14-architecture-distributed-systems/assessments/modular-refactor-review/assets",
@@ -3036,8 +2996,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "modular-refactor-review",
       "source_legacy_ids": [],
@@ -3078,7 +3037,6 @@
       "documentation_mode": "project",
       "id": "project-modular-refactor-review",
       "module_id": "module-14",
-      "order": 22,
       "placement_anchor_item_id": "core-14-17",
       "portfolio": {
         "architecture_defense_required": true,
@@ -3102,7 +3060,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "repository pattern",
         "hexagonal architecture"

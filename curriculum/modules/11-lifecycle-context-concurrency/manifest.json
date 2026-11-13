@@ -106,7 +106,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -142,7 +141,7 @@
         "core-11-29"
       ],
       "title": "Module 11 Assessment — Lifecycle, Context, and Concurrency",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "criteria": [
@@ -530,7 +529,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/01-time-basics/assets",
@@ -565,8 +563,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "time-basics",
       "source_legacy_ids": [
@@ -715,7 +712,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/02-durations/assets",
@@ -750,8 +746,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "durations",
       "source_legacy_ids": [],
@@ -904,7 +899,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/03-timers/assets",
@@ -939,8 +933,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "timers",
       "source_legacy_ids": [
@@ -1089,7 +1082,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/04-tickers/assets",
@@ -1124,8 +1116,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "tickers",
       "source_legacy_ids": [],
@@ -1278,7 +1269,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/05-context-basics/assets",
@@ -1313,8 +1303,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "context-basics",
       "source_legacy_ids": [
@@ -1463,7 +1452,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/06-cancellation/assets",
@@ -1498,8 +1486,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "cancellation",
       "source_legacy_ids": [
@@ -1667,7 +1654,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/07-timeouts/assets",
@@ -1702,8 +1688,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "timeouts",
       "source_legacy_ids": [
@@ -1852,7 +1837,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/08-deadlines/assets",
@@ -1887,8 +1871,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "deadlines",
       "source_legacy_ids": [],
@@ -2041,7 +2024,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/09-context-values-with-caveats/assets",
@@ -2076,8 +2058,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "context-values-with-caveats",
       "source_legacy_ids": [],
@@ -2224,7 +2205,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/10-why-concurrency-exists/assets",
@@ -2259,8 +2239,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "why-concurrency-exists",
       "source_legacy_ids": [],
@@ -2414,7 +2393,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/11-goroutines/assets",
@@ -2449,8 +2427,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "goroutines",
       "source_legacy_ids": [
@@ -2605,7 +2582,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/12-waitgroups/assets",
@@ -2640,8 +2616,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "waitgroups",
       "source_legacy_ids": [
@@ -2797,7 +2772,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/13-channels/assets",
@@ -2832,8 +2806,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "channels",
       "source_legacy_ids": [
@@ -2983,7 +2956,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/14-buffered-channels/assets",
@@ -3018,8 +2990,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "buffered-channels",
       "source_legacy_ids": [
@@ -3175,7 +3146,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/15-closing-channels/assets",
@@ -3210,8 +3180,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "closing-channels",
       "source_legacy_ids": [
@@ -3361,7 +3330,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/16-channel-ownership/assets",
@@ -3396,8 +3364,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "channel-ownership",
       "source_legacy_ids": [],
@@ -3554,7 +3521,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/17-backpressure/assets",
@@ -3589,8 +3555,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "backpressure",
       "source_legacy_ids": [],
@@ -3738,7 +3703,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/18-pipelines/assets",
@@ -3773,8 +3737,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "pipelines",
       "source_legacy_ids": [],
@@ -3928,7 +3891,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/19-mutex-and-rwmutex/assets",
@@ -3963,8 +3925,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "mutex-and-rwmutex",
       "source_legacy_ids": [
@@ -4121,7 +4082,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/20-atomics-with-caution/assets",
@@ -4156,8 +4116,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "atomics-with-caution",
       "source_legacy_ids": [],
@@ -4311,7 +4270,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/21-race-conditions/assets",
@@ -4346,8 +4304,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "race-conditions",
       "source_legacy_ids": [
@@ -4497,7 +4454,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/22-race-detector/assets",
@@ -4532,8 +4488,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "race-detector",
       "source_legacy_ids": [],
@@ -4687,7 +4642,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/23-goroutine-leaks/assets",
@@ -4722,8 +4676,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "goroutine-leaks",
       "source_legacy_ids": [
@@ -4875,7 +4828,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/24-deadlocks/assets",
@@ -4910,8 +4862,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "deadlocks",
       "source_legacy_ids": [
@@ -5067,7 +5018,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/25-errgroup/assets",
@@ -5102,8 +5052,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "errgroup",
       "source_legacy_ids": [],
@@ -5251,7 +5200,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/26-bounded-worker-pools/assets",
@@ -5286,8 +5234,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "bounded-worker-pools",
       "source_legacy_ids": [],
@@ -5441,7 +5388,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/27-retries-and-backoff/assets",
@@ -5476,8 +5422,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "retries-and-backoff",
       "source_legacy_ids": [],
@@ -5632,7 +5577,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/28-idempotency-keys/assets",
@@ -5667,8 +5611,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "idempotency-keys",
       "source_legacy_ids": [],
@@ -5772,7 +5715,6 @@
         "related": []
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/lessons/29-sync-once/assets",
@@ -5807,8 +5749,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "sync-once",
       "source_legacy_ids": [],
@@ -5894,7 +5835,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/projects/bounded-worker-pool/assets",
@@ -5918,8 +5858,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "bounded-worker-pool",
       "source_legacy_ids": [],
@@ -5952,7 +5891,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/projects/concurrent-downloader/assets",
@@ -5976,8 +5914,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "concurrent-downloader",
       "source_legacy_ids": [],
@@ -6010,7 +5947,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/projects/url-health-checker/assets",
@@ -6034,8 +5970,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "url-health-checker",
       "source_legacy_ids": [],
@@ -6068,7 +6003,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/assessments/bounded-worker-pool/assets",
@@ -6088,8 +6022,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "bounded-worker-pool",
       "source_legacy_ids": [],
@@ -6122,7 +6055,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/assessments/checkpoint/assets",
@@ -6142,8 +6074,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -6176,7 +6107,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/assessments/concurrent-downloader/assets",
@@ -6196,8 +6126,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "concurrent-downloader",
       "source_legacy_ids": [],
@@ -6230,7 +6159,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/11-lifecycle-context-concurrency/assessments/url-health-checker/assets",
@@ -6250,8 +6178,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "url-health-checker",
       "source_legacy_ids": [],
@@ -6292,7 +6219,6 @@
       "documentation_mode": "project",
       "id": "project-concurrent-downloader",
       "module_id": "module-11",
-      "order": 18,
       "placement_anchor_item_id": "core-11-28",
       "portfolio": {
         "architecture_defense_required": false,
@@ -6316,7 +6242,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "goroutine",
         "channel",
@@ -6529,7 +6454,6 @@
       "documentation_mode": "project",
       "id": "project-url-health-checker",
       "module_id": "module-11",
-      "order": 17,
       "placement_anchor_item_id": "core-11-28",
       "portfolio": {
         "architecture_defense_required": false,
@@ -6553,7 +6477,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "goroutine",
         "channel",
@@ -6766,7 +6689,6 @@
       "documentation_mode": "project",
       "id": "project-bounded-worker-pool",
       "module_id": "module-11",
-      "order": 16,
       "placement_anchor_item_id": "core-11-28",
       "portfolio": {
         "architecture_defense_required": false,
@@ -6790,7 +6712,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "goroutine",
         "channel",

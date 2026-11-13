@@ -131,7 +131,7 @@ func validatePhysicalArtifacts() {
 
 // validateAssessmentArtifacts verifies that all assessments declared in
 // assessments.json and Opslane milestones possess verified physical evaluation artifacts.
-// assessmentRecord is the subset of assessments.json needed to locate the
+// assessmentRecord is the subset of the folded assessment records needed to locate the
 // physical artifacts for one assessment. suite/artifact_dir are explicit data,
 // so the validator never hardcodes a slug or guesses a directory.
 type assessmentRecord struct {
@@ -215,7 +215,7 @@ func validateAssessmentArtifacts() {
 			ok = false
 		}
 
-		// Full suites are declared in assessments.json (module checkpoints plus
+		// Full suites are declared in the per-module manifests (module checkpoints plus
 		// the project reviews that carry questions/rubric/answer-key files).
 		if a.Suite == "full" {
 			for _, rf := range []string{"questions.md", "rubric.md", "answer-key.md"} {

@@ -104,7 +104,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -121,7 +120,7 @@
         "core-00-10"
       ],
       "title": "Module 00 Assessment — Orientation",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "automated_checks": [
@@ -220,7 +219,6 @@
       "module_id": "module-00",
       "passing_score": 80,
       "purpose": "Evaluate the Course Setup Verification project submission.",
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing gaps and writing a correction note.",
       "status": "ready",
       "target_ids": [
@@ -284,7 +282,6 @@
         ]
       },
       "difficulty": "orientation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/00-orientation/lessons/01-how-to-use-this-repository/assets",
@@ -319,8 +316,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "how-to-use-this-repository",
       "source_legacy_ids": [],
@@ -452,7 +448,6 @@
         ]
       },
       "difficulty": "orientation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -487,8 +482,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "what-zero-magic-means",
       "source_legacy_ids": [],
@@ -620,7 +614,6 @@
         ]
       },
       "difficulty": "orientation",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "",
@@ -655,8 +648,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "how-lessons-exercises-projects-and-checkpoints-work",
       "source_legacy_ids": [],
@@ -788,7 +780,6 @@
         ]
       },
       "difficulty": "orientation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -823,8 +814,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "how-to-run-code-in-this-repository",
       "source_legacy_ids": [],
@@ -956,7 +946,6 @@
         ]
       },
       "difficulty": "orientation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -991,8 +980,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "how-starter-folders-work",
       "source_legacy_ids": [],
@@ -1130,7 +1118,6 @@
         ]
       },
       "difficulty": "orientation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1165,8 +1152,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "how-assessments-work",
       "source_legacy_ids": [],
@@ -1304,7 +1290,6 @@
         ]
       },
       "difficulty": "orientation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1339,8 +1324,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "how-to-ask-good-debugging-questions",
       "source_legacy_ids": [],
@@ -1478,7 +1462,6 @@
         ]
       },
       "difficulty": "orientation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1513,8 +1496,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "what-job-ready-means",
       "source_legacy_ids": [],
@@ -1652,7 +1634,6 @@
         ]
       },
       "difficulty": "orientation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1687,8 +1668,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "how-to-use-the-roadmap",
       "source_legacy_ids": [],
@@ -1839,7 +1819,6 @@
         ]
       },
       "difficulty": "orientation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1874,8 +1853,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "how-to-build-a-portfolio-from-this-curriculum",
       "source_legacy_ids": [],
@@ -1957,7 +1935,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "",
@@ -1977,8 +1954,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "course-setup-verification",
       "source_legacy_ids": [],
@@ -2011,7 +1987,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "",
@@ -2031,8 +2006,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -2065,7 +2039,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "",
@@ -2085,8 +2058,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "course-setup",
       "source_legacy_ids": [],
@@ -2133,7 +2105,6 @@
       "prerequisites": [
         "core-00-10"
       ],
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "zero-magic learning",
         "repository navigation",
@@ -2192,7 +2163,9 @@
       ],
       "title": "Course Setup Verification",
       "type": "mini-project",
-      "verification": "Manual review: ensure Git version, configured identity, editor confirmation, and workspace directory are present."
+      "verification": {
+        "run_command": "Manual review: ensure Git version, configured identity, editor confirmation, and workspace directory are present."
+      }
     }
   ],
   "schema_version": "3.1.0",

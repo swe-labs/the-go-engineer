@@ -556,8 +556,8 @@ func validateCognitiveLoad() {
 				ok = false
 				continue
 			}
-			clStr, ok := cl.(string)
-			if !ok || (clStr != "low" && clStr != "moderate" && clStr != "high") {
+			clStr, clOK := cl.(string)
+			if !clOK || (clStr != "low" && clStr != "moderate" && clStr != "high") {
 				errorf("%s: cognitive_load must be 'low', 'moderate', or 'high', got %v", id, cl)
 				ok = false
 			}
@@ -566,7 +566,7 @@ func validateCognitiveLoad() {
 			if !hasRBA {
 				errorf("%s: missing recommended_break_after", id)
 				ok = false
-			} else if _, ok := rba.(bool); !ok {
+			} else if _, rbaOK := rba.(bool); !rbaOK {
 				errorf("%s: recommended_break_after must be bool", id)
 				ok = false
 			}
@@ -575,7 +575,7 @@ func validateCognitiveLoad() {
 			if !hasCFHC {
 				errorf("%s: missing contains_foundational_hard_concepts", id)
 				ok = false
-			} else if _, ok := cfhc.(bool); !ok {
+			} else if _, cfhcOK := cfhc.(bool); !cfhcOK {
 				errorf("%s: contains_foundational_hard_concepts must be bool", id)
 				ok = false
 			}
@@ -585,8 +585,8 @@ func validateCognitiveLoad() {
 				errorf("%s: missing pacing field", id)
 				ok = false
 			} else {
-				pStr, ok := p.(string)
-				if !ok || (pStr != "gentle" && pStr != "moderate" && pStr != "steady") {
+				pStr, pOK := p.(string)
+				if !pOK || (pStr != "gentle" && pStr != "moderate" && pStr != "steady") {
 					errorf("%s: pacing must be 'gentle', 'moderate', or 'steady', got %v", id, p)
 					ok = false
 				}
@@ -594,7 +594,7 @@ func validateCognitiveLoad() {
 
 			// Check consistency: high load should have break_after
 			if clStr == "high" {
-				if rba, ok := mm["recommended_break_after"].(bool); ok && !rba {
+				if rba, rbaOK := mm["recommended_break_after"].(bool); rbaOK && !rba {
 					warnf("%s: high cognitive_load should typically have recommended_break_after=true", id)
 				}
 			}
@@ -685,10 +685,15 @@ func validateFailureEngineering() {
 	allItems = append(allItems, electives.Items...)
 
 	// Modules with required failure coverage (from failures.json)
-	coverageModules := map[string]bool{
-		"module-08": true, "module-09": true, "module-10": true,
-		"module-11": true, "module-12": true, "module-14": true,
-		"module-15": true, "module-18": true,
+	// Required coverage comes from failures.json (single source), already
+	// shape-validated by validate-operational-failures.
+	var failBundle struct {
+		RequiredCoverage map[string][]string `json:"required_coverage"`
+	}
+	readJSON("failures.json", &failBundle)
+	coverageModules := make(map[string]bool)
+	for modID := range failBundle.RequiredCoverage {
+		coverageModules[modID] = true
 	}
 
 	for _, item := range allItems {

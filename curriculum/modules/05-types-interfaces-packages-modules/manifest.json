@@ -106,7 +106,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -137,7 +136,7 @@
         "core-05-24"
       ],
       "title": "Module 05 Assessment — Types, Interfaces, Packages, and Modules",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "criteria": [
@@ -411,7 +410,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/01-structs/assets",
@@ -446,8 +444,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "structs",
       "source_legacy_ids": [
@@ -594,7 +591,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/02-methods/assets",
@@ -629,8 +625,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "methods",
       "source_legacy_ids": [
@@ -777,7 +772,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/03-pointer-receivers/assets",
@@ -812,8 +806,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "pointer-receivers",
       "source_legacy_ids": [],
@@ -958,7 +951,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/04-value-receivers/assets",
@@ -993,8 +985,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "value-receivers",
       "source_legacy_ids": [],
@@ -1139,7 +1130,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/05-receiver-sets/assets",
@@ -1174,8 +1164,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "receiver-sets",
       "source_legacy_ids": [],
@@ -1319,7 +1308,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/06-composition/assets",
@@ -1354,8 +1342,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "composition",
       "source_legacy_ids": [
@@ -1502,7 +1489,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/07-embedding/assets",
@@ -1537,8 +1523,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "embedding",
       "source_legacy_ids": [
@@ -1685,7 +1670,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/08-interfaces/assets",
@@ -1720,8 +1704,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "interfaces",
       "source_legacy_ids": [
@@ -1856,7 +1839,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/09-small-interfaces/assets",
@@ -1891,8 +1873,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "small-interfaces",
       "source_legacy_ids": [],
@@ -2037,7 +2018,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/10-interface-embedding/assets",
@@ -2072,8 +2052,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "interface-embedding",
       "source_legacy_ids": [],
@@ -2218,7 +2197,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/11-stringer/assets",
@@ -2253,8 +2231,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "stringer",
       "source_legacy_ids": [
@@ -2401,7 +2378,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/12-type-assertions/assets",
@@ -2436,8 +2412,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "type-assertions",
       "source_legacy_ids": [],
@@ -2582,7 +2557,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/13-type-switches/assets",
@@ -2617,8 +2591,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "type-switches",
       "source_legacy_ids": [],
@@ -2763,7 +2736,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/14-nil-interfaces/assets",
@@ -2798,8 +2770,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "nil-interfaces",
       "source_legacy_ids": [],
@@ -2940,7 +2911,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/15-package-names/assets",
@@ -2975,8 +2945,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "package-names",
       "source_legacy_ids": [
@@ -3123,7 +3092,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/16-export-rules/assets",
@@ -3158,8 +3126,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "export-rules",
       "source_legacy_ids": [
@@ -3306,7 +3273,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/labs/17-project-layout/assets",
@@ -3341,8 +3307,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "project-layout",
       "source_legacy_ids": [
@@ -3490,7 +3455,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/18-modules/assets",
@@ -3525,8 +3489,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "modules",
       "source_legacy_ids": [
@@ -3673,7 +3636,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/19-go-mod/assets",
@@ -3708,8 +3670,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "go-mod",
       "source_legacy_ids": [],
@@ -3854,7 +3815,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/20-go-sum/assets",
@@ -3889,8 +3849,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "go-sum",
       "source_legacy_ids": [],
@@ -4035,7 +3994,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/21-dependency-management/assets",
@@ -4070,8 +4028,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "dependency-management",
       "source_legacy_ids": [
@@ -4218,7 +4175,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/22-workspaces/assets",
@@ -4253,8 +4209,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "workspaces",
       "source_legacy_ids": [],
@@ -4406,7 +4361,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/lessons/23-documentation-comments/assets",
@@ -4441,8 +4395,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "documentation-comments",
       "source_legacy_ids": [],
@@ -4589,8 +4542,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "generics-fundamentals",
       "source_legacy_ids": [],
@@ -4676,7 +4628,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/projects/bank-account/assets",
@@ -4700,8 +4651,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "bank-account",
       "source_legacy_ids": [],
@@ -4734,7 +4684,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/projects/payroll-processor/assets",
@@ -4758,8 +4707,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "payroll-processor",
       "source_legacy_ids": [],
@@ -4792,7 +4740,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/assessments/bank-account/assets",
@@ -4812,8 +4759,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "bank-account",
       "source_legacy_ids": [],
@@ -4846,7 +4792,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/assessments/checkpoint/assets",
@@ -4866,8 +4811,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -4900,7 +4844,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/05-types-interfaces-packages-modules/assessments/payroll-processor/assets",
@@ -4920,8 +4863,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "payroll-processor",
       "source_legacy_ids": [],
@@ -4962,7 +4904,6 @@
       "documentation_mode": "project",
       "id": "project-bank-account",
       "module_id": "module-05",
-      "order": 6,
       "placement_anchor_item_id": "core-05-23",
       "portfolio": {
         "architecture_defense_required": false,
@@ -4986,7 +4927,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "interface semantics",
         "nil interface",
@@ -5187,7 +5127,6 @@
       "documentation_mode": "project",
       "id": "project-payroll-processor",
       "module_id": "module-05",
-      "order": 7,
       "placement_anchor_item_id": "core-05-23",
       "portfolio": {
         "architecture_defense_required": false,
@@ -5211,7 +5150,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "interface semantics",
         "nil interface",

@@ -106,7 +106,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -131,7 +130,7 @@
         "core-04-18"
       ],
       "title": "Module 04 Assessment — Functions, Errors, and Data Semantics",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "criteria": [
@@ -303,7 +302,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/01-function-basics/assets",
@@ -338,8 +336,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "function-basics",
       "source_legacy_ids": [
@@ -479,7 +476,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/02-parameters/assets",
@@ -514,8 +510,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "parameters",
       "source_legacy_ids": [],
@@ -651,7 +646,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/03-return-values/assets",
@@ -686,8 +680,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "return-values",
       "source_legacy_ids": [],
@@ -823,7 +816,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/04-multiple-return-values/assets",
@@ -858,8 +850,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "multiple-return-values",
       "source_legacy_ids": [],
@@ -996,7 +987,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/05-scope/assets",
@@ -1031,8 +1021,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "scope",
       "source_legacy_ids": [],
@@ -1169,7 +1158,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/06-call-stack-mental-model/assets",
@@ -1204,8 +1192,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "call-stack-mental-model",
       "source_legacy_ids": [],
@@ -1344,7 +1331,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/07-passing-by-value/assets",
@@ -1379,8 +1365,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "passing-by-value",
       "source_legacy_ids": [],
@@ -1518,7 +1503,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/08-pointer-and-value-mutation-behavior/assets",
@@ -1553,8 +1537,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "pointer-and-value-mutation-behavior",
       "source_legacy_ids": [],
@@ -1694,7 +1677,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/09-errors-as-values/assets",
@@ -1729,8 +1711,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "errors-as-values",
       "source_legacy_ids": [
@@ -1862,7 +1843,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/10-error-wrapping/assets",
@@ -1897,8 +1877,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "error-wrapping",
       "source_legacy_ids": [],
@@ -2035,7 +2014,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/11-errors-is/assets",
@@ -2070,8 +2048,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "errors-is",
       "source_legacy_ids": [],
@@ -2209,7 +2186,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/12-errors-as/assets",
@@ -2244,8 +2220,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "errors-as",
       "source_legacy_ids": [],
@@ -2383,7 +2358,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/13-validation/assets",
@@ -2418,8 +2392,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "validation",
       "source_legacy_ids": [
@@ -2560,7 +2533,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/14-orchestration/assets",
@@ -2595,8 +2567,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "orchestration",
       "source_legacy_ids": [],
@@ -2736,7 +2707,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/15-defer-mechanics/assets",
@@ -2771,8 +2741,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "defer-mechanics",
       "source_legacy_ids": [],
@@ -2912,7 +2881,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/16-defer-for-cleanup/assets",
@@ -2947,8 +2915,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "defer-for-cleanup",
       "source_legacy_ids": [],
@@ -3088,7 +3055,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/17-panic-and-recover/assets",
@@ -3123,8 +3089,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "panic-and-recover",
       "source_legacy_ids": [],
@@ -3263,7 +3228,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/lessons/18-custom-error-types/assets",
@@ -3298,8 +3262,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "custom-error-types",
       "source_legacy_ids": [],
@@ -3388,7 +3351,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/projects/order-summary-refactor/assets",
@@ -3412,8 +3374,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "order-summary-refactor",
       "source_legacy_ids": [],
@@ -3446,7 +3407,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/assessments/checkpoint/assets",
@@ -3466,8 +3426,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -3500,7 +3459,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/04-functions-errors-data-semantics/assessments/order-summary-refactor/assets",
@@ -3520,8 +3478,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "order-summary-refactor",
       "source_legacy_ids": [],
@@ -3562,7 +3519,6 @@
       "documentation_mode": "project",
       "id": "project-order-summary-refactor",
       "module_id": "module-04",
-      "order": 5,
       "placement_anchor_item_id": "core-04-18",
       "portfolio": {
         "architecture_defense_required": false,
@@ -3586,7 +3542,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "memory aliasing",
         "errors as values",

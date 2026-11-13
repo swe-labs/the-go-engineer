@@ -172,6 +172,13 @@ func writeCurriculumFixture(t *testing.T) string {
         "test_command": "go test ./..."
       },
       "zero_magic": {
+        "failure_modes": [
+          {
+            "cause": "Fixture failure mode cause.",
+            "fix": "Fixture failure mode fix.",
+            "scenario": "Fixture failure mode scenario."
+          }
+        ],
         "beginner_mistakes": ["Assuming the fixture is production data."],
         "how_go_uses_it": "The fixture uses ordinary Go syntax.",
         "mental_model": "The fixture is a small, complete example.",
@@ -296,8 +303,16 @@ func writeCurriculumFixture(t *testing.T) string {
 }
 `,
 		"failures.json": fixtureHeader("operational_failure_taxonomy") + `,
-  "failure_categories": [],
-  "required_coverage": {}
+  "failure_categories": [
+    {
+      "category": "fixture_failures",
+      "description": "Failure modes exercised by the fixture.",
+      "modules": ["module-00"]
+    }
+  ],
+  "required_coverage": {
+    "module-00": ["fixture_failures"]
+  }
 }
 `,
 		"readme.contracts.json": `{
@@ -698,7 +713,7 @@ var failureMutations = map[string]func(*testing.T, string){
 		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"title": "Alpha lesson",`, `"title": "",`)
 	},
 	"validate-graph": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"target_id": "core-00-01",`, `"target_id": "core-99-99",`)
+		replaceFixture(t, dir, "path.core.json", `"entry_item_ids": ["core-00-01"]`, `"entry_item_ids": ["core-99-99"]`)
 	},
 	"validate-lessons": func(t *testing.T, dir string) {
 		replaceFixture(t, dir, "modules/00-alpha/lessons/01-alpha/README.md", "## NEXT UP", "## Next steps")
@@ -738,12 +753,26 @@ var failureMutations = map[string]func(*testing.T, string){
 		replaceFixture(t, dir, "failures.json", `"document_type": "operational_failure_taxonomy"`, `"document_type": "other"`)
 	},
 	"validate-failure-engineering": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `      "learning_objective": "Explain the fixture concept.",
-      "module_id": "module-00",`, `      "learning_objective": "Explain the fixture concept.",
-      "module_id": "module-08",`)
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"failure_modes": [
+          {
+            "cause": "Fixture failure mode cause.",
+            "fix": "Fixture failure mode fix.",
+            "scenario": "Fixture failure mode scenario."
+          }
+        ],`, `"failure_modes": [],`)
 	},
+
 	"validate-zero-magic": func(t *testing.T, dir string) {
 		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"zero_magic_status": "reviewed"`, `"zero_magic_status": "golden"`)
+		// promoting to golden pulls the item into the golden spec audit, which
+		// requires failure coverage the promoted item no longer has
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"failure_modes": [
+          {
+            "cause": "Fixture failure mode cause.",
+            "fix": "Fixture failure mode fix.",
+            "scenario": "Fixture failure mode scenario."
+          }
+        ],`, `"failure_modes": [],`)
 	},
 	"validate-physical-artifacts": func(t *testing.T, dir string) {
 		removeFixture(t, dir, "modules/00-alpha/lessons/01-alpha/README.md")

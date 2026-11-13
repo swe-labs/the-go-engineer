@@ -106,7 +106,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -121,7 +120,7 @@
         "core-13-08"
       ],
       "title": "Module 13 Assessment — Performance and Memory Engineering",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "automated_checks": [
@@ -220,7 +219,6 @@
       "module_id": "module-13",
       "passing_score": 80,
       "purpose": "Evaluate the Performance Analysis Lab project submission.",
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing gaps and writing a correction note.",
       "status": "ready",
       "target_ids": [
@@ -354,7 +352,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/lessons/01-pprof/assets",
@@ -389,8 +386,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "pprof",
       "source_legacy_ids": [],
@@ -488,7 +484,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/lessons/02-cpu-profiling/assets",
@@ -523,8 +518,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "cpu-profiling",
       "source_legacy_ids": [
@@ -628,7 +622,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/lessons/03-memory-profiling/assets",
@@ -663,8 +656,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "memory-profiling",
       "source_legacy_ids": [
@@ -765,7 +757,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/lessons/04-benchmarks/assets",
@@ -800,8 +791,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "benchmarks",
       "source_legacy_ids": [],
@@ -899,7 +889,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/lessons/05-escape-analysis/assets",
@@ -934,8 +923,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "escape-analysis",
       "source_legacy_ids": [
@@ -1037,7 +1025,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/lessons/06-memory-layout/assets",
@@ -1072,8 +1059,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "memory-layout",
       "source_legacy_ids": [],
@@ -1177,7 +1163,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/lessons/07-caching-basics/assets",
@@ -1212,8 +1197,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "caching-basics",
       "source_legacy_ids": [],
@@ -1315,7 +1299,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/lessons/08-cache-invalidation/assets",
@@ -1350,8 +1333,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "cache-invalidation",
       "source_legacy_ids": [],
@@ -1438,7 +1420,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/projects/performance-analysis-lab/assets",
@@ -1461,8 +1442,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "performance-analysis-lab",
       "source_legacy_ids": [],
@@ -1495,7 +1475,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/projects/profile-and-fix-lab/assets",
@@ -1519,8 +1498,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "profile-and-fix-lab",
       "source_legacy_ids": [],
@@ -1553,7 +1531,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/assessments/checkpoint/assets",
@@ -1573,8 +1550,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -1607,7 +1583,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/assessments/performance-analysis-lab/assets",
@@ -1627,8 +1602,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "performance-analysis-lab",
       "source_legacy_ids": [],
@@ -1661,7 +1635,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/13-performance-memory-engineering/assessments/profile-and-fix-lab/assets",
@@ -1681,8 +1654,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "profile-and-fix-lab",
       "source_legacy_ids": [],
@@ -1723,7 +1695,6 @@
       "documentation_mode": "project",
       "id": "project-profile-and-fix-lab",
       "module_id": "module-13",
-      "order": 21,
       "placement_anchor_item_id": "core-13-08",
       "portfolio": {
         "architecture_defense_required": false,
@@ -1747,7 +1718,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "CPU profiling",
         "heap allocation optimization",
@@ -1937,7 +1907,6 @@
         "core-13-01",
         "core-13-04"
       ],
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "CPU and heap profiling",
         "escape analysis and stack allocation",
@@ -1997,7 +1966,9 @@
       ],
       "title": "Performance Analysis Lab",
       "type": "mini-project",
-      "verification": "Automated: before/after benchmark comparison. Manual review: flame graph analysis and optimization report."
+      "verification": {
+        "run_command": "Automated: before/after benchmark comparison. Manual review: flame graph analysis and optimization report."
+      }
     }
   ],
   "schema_version": "3.1.0",

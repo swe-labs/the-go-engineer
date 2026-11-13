@@ -104,7 +104,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -323,7 +322,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/01-portfolio-strategy/assets",
@@ -358,8 +356,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "portfolio-strategy",
       "source_legacy_ids": [],
@@ -513,7 +510,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/02-project-selection-and-scoping/assets",
@@ -548,8 +544,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "project-selection-and-scoping",
       "source_legacy_ids": [],
@@ -703,7 +698,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/03-code-review-readiness/assets",
@@ -738,8 +732,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "code-review-readiness",
       "source_legacy_ids": [],
@@ -887,7 +880,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/04-technical-writing-for-engineers/assets",
@@ -922,8 +914,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "technical-writing-for-engineers",
       "source_legacy_ids": [],
@@ -1077,7 +1068,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/05-resume-and-linkedin-optimization/assets",
@@ -1112,8 +1102,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "resume-and-linkedin-optimization",
       "source_legacy_ids": [],
@@ -1255,7 +1244,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/06-behavioral-interview-preparation/assets",
@@ -1290,8 +1278,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "behavioral-interview-preparation",
       "source_legacy_ids": [],
@@ -1439,7 +1426,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/07-system-design-interview-basics/assets",
@@ -1474,8 +1460,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "system-design-interview-basics",
       "source_legacy_ids": [],
@@ -1617,7 +1602,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/08-live-coding-interview-practice/assets",
@@ -1652,8 +1636,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "live-coding-interview-practice",
       "source_legacy_ids": [],
@@ -1801,7 +1784,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/09-take-home-project-strategy/assets",
@@ -1836,8 +1818,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "take-home-project-strategy",
       "source_legacy_ids": [],
@@ -1979,7 +1960,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/10-negotiation-fundamentals/assets",
@@ -2014,8 +1994,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "negotiation-fundamentals",
       "source_legacy_ids": [],
@@ -2163,7 +2142,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/11-open-source-contribution/assets",
@@ -2198,8 +2176,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "open-source-contribution",
       "source_legacy_ids": [],
@@ -2341,7 +2318,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/12-technical-blog-writing/assets",
@@ -2376,8 +2352,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "technical-blog-writing",
       "source_legacy_ids": [],
@@ -2525,7 +2500,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/13-conference-talk-preparation/assets",
@@ -2560,8 +2534,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "conference-talk-preparation",
       "source_legacy_ids": [],
@@ -2703,7 +2676,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/14-mentorship-and-code-review/assets",
@@ -2738,8 +2710,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "mentorship-and-code-review",
       "source_legacy_ids": [],
@@ -2894,7 +2865,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/lessons/15-career-roadmap/assets",
@@ -2927,8 +2897,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "career-roadmap",
       "source_legacy_ids": [],
@@ -3014,7 +2983,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/projects/portfolio-review-pack/assets",
@@ -3038,8 +3006,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "portfolio-review-pack",
       "source_legacy_ids": [],
@@ -3072,7 +3039,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/assessments/checkpoint/assets",
@@ -3092,8 +3058,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -3126,7 +3091,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/16-portfolio-interview-readiness/assessments/portfolio-review-pack/assets",
@@ -3146,8 +3110,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "portfolio-review-pack",
       "source_legacy_ids": [],
@@ -3188,7 +3151,6 @@
       "documentation_mode": "project",
       "id": "project-portfolio-review-pack",
       "module_id": "module-16",
-      "order": 24,
       "placement_anchor_item_id": "core-16-15",
       "portfolio": {
         "architecture_defense_required": false,
@@ -3212,7 +3174,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "portfolio strategy",
         "technical writing",

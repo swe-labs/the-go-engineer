@@ -107,7 +107,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -290,7 +289,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/assets",
@@ -325,8 +323,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-foundation-and-configuration",
       "source_legacy_ids": [],
@@ -455,7 +452,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/02-opslane-database-and-models/assets",
@@ -490,8 +486,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-database-and-models",
       "source_legacy_ids": [],
@@ -620,7 +615,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/03-opslane-authentication/assets",
@@ -655,8 +649,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-authentication",
       "source_legacy_ids": [],
@@ -787,7 +780,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/04-opslane-authorization/assets",
@@ -822,8 +814,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-authorization",
       "source_legacy_ids": [],
@@ -953,7 +944,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/assets",
@@ -988,8 +978,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-tenant-isolation",
       "source_legacy_ids": [],
@@ -1131,7 +1120,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/assets",
@@ -1166,8 +1154,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-http-api-layer",
       "source_legacy_ids": [],
@@ -1303,7 +1290,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/07-opslane-order-processing/assets",
@@ -1338,8 +1324,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-order-processing",
       "source_legacy_ids": [],
@@ -1489,7 +1474,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/assets",
@@ -1524,8 +1508,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-payment-pipeline",
       "source_legacy_ids": [],
@@ -1662,7 +1645,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/09-opslane-event-bus/assets",
@@ -1697,8 +1679,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-event-bus",
       "source_legacy_ids": [],
@@ -1834,7 +1815,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/10-opslane-worker-pools/assets",
@@ -1869,8 +1849,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-worker-pools",
       "source_legacy_ids": [],
@@ -2005,7 +1984,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/11-opslane-caching-layer/assets",
@@ -2040,8 +2018,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-caching-layer",
       "source_legacy_ids": [],
@@ -2178,7 +2155,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/12-opslane-observability/assets",
@@ -2213,8 +2189,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-observability",
       "source_legacy_ids": [],
@@ -2351,7 +2326,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/assets",
@@ -2386,8 +2360,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-graceful-shutdown",
       "source_legacy_ids": [],
@@ -2533,7 +2506,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/14-opslane-deployment/assets",
@@ -2568,8 +2540,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-deployment",
       "source_legacy_ids": [],
@@ -2705,7 +2676,6 @@
         ]
       },
       "difficulty": "flagship",
-      "documentation_mode": "flagship-checkpoint",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/projects/15-opslane-portfolio-defense/assets",
@@ -2738,8 +2708,7 @@
       },
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "flagship-checkpoint",
-        "required": true
+        "documentation_mode": "flagship-checkpoint"
       },
       "slug": "opslane-portfolio-defense",
       "source_legacy_ids": [],
@@ -2825,7 +2794,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/projects/15-opslane-portfolio-defense/assets",
@@ -2845,8 +2813,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "15-opslane-portfolio-defense",
       "source_legacy_ids": [],
@@ -2880,7 +2847,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/projects/opslane-flagship/assets",
@@ -2904,8 +2870,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "opslane-flagship",
       "source_legacy_ids": [],
@@ -2938,7 +2903,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/01-opslane-foundation-and-configuration/assets",
@@ -2958,8 +2922,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "01-opslane-foundation-and-configuration",
       "source_legacy_ids": [],
@@ -2992,7 +2955,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/02-opslane-database-and-models/assets",
@@ -3012,8 +2974,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "02-opslane-database-and-models",
       "source_legacy_ids": [],
@@ -3046,7 +3007,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/03-opslane-authentication/assets",
@@ -3066,8 +3026,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "03-opslane-authentication",
       "source_legacy_ids": [],
@@ -3100,7 +3059,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/04-opslane-authorization/assets",
@@ -3120,8 +3078,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "04-opslane-authorization",
       "source_legacy_ids": [],
@@ -3154,7 +3111,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/05-opslane-tenant-isolation/assets",
@@ -3174,8 +3130,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "05-opslane-tenant-isolation",
       "source_legacy_ids": [],
@@ -3208,7 +3163,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/06-opslane-http-api-layer/assets",
@@ -3228,8 +3182,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "06-opslane-http-api-layer",
       "source_legacy_ids": [],
@@ -3262,7 +3215,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/07-opslane-order-processing/assets",
@@ -3282,8 +3234,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "07-opslane-order-processing",
       "source_legacy_ids": [],
@@ -3316,7 +3267,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/08-opslane-payment-pipeline/assets",
@@ -3336,8 +3286,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "08-opslane-payment-pipeline",
       "source_legacy_ids": [],
@@ -3370,7 +3319,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/09-opslane-event-bus/assets",
@@ -3390,8 +3338,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "09-opslane-event-bus",
       "source_legacy_ids": [],
@@ -3424,7 +3371,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/10-opslane-worker-pools/assets",
@@ -3444,8 +3390,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "10-opslane-worker-pools",
       "source_legacy_ids": [],
@@ -3478,7 +3423,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/11-opslane-caching-layer/assets",
@@ -3498,8 +3442,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "11-opslane-caching-layer",
       "source_legacy_ids": [],
@@ -3532,7 +3475,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/12-opslane-observability/assets",
@@ -3552,8 +3494,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "12-opslane-observability",
       "source_legacy_ids": [],
@@ -3586,7 +3527,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/13-opslane-graceful-shutdown/assets",
@@ -3606,8 +3546,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "13-opslane-graceful-shutdown",
       "source_legacy_ids": [],
@@ -3640,7 +3579,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/14-opslane-deployment/assets",
@@ -3660,8 +3598,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "flagship-checkpoint.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "14-opslane-deployment",
       "source_legacy_ids": [],
@@ -3694,7 +3631,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/checkpoint/assets",
@@ -3714,8 +3650,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -3748,7 +3683,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/18-flagship-opslane/assessments/opslane/assets",
@@ -3768,8 +3702,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "opslane",
       "source_legacy_ids": [],
@@ -3810,7 +3743,6 @@
       "documentation_mode": "flagship",
       "id": "project-opslane",
       "module_id": "module-18",
-      "order": 25,
       "placement_anchor_item_id": "opslane-15",
       "portfolio": {
         "architecture_defense_required": true,
@@ -3834,7 +3766,6 @@
         "documentation_mode": "flagship",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "context cancellation",
         "graceful shutdown",

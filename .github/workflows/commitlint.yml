@@ -36,7 +36,7 @@ jobs:
               if (!pattern.test(msg)) {
                 core.error(`Invalid commit message: ${commit.sha.slice(0, 7)} — ${msg}`);
                 core.info(`Expected: [TYPE] short description`);
-                core.info(`Allowed types: FEAT | FIX | DOCS | TEST | CHORE | REFACTOR | SECURITY | RELEASE`);
+                core.info(`Allowed types: FEAT | FIX | DOCS | TEST | CHORE | REFACTOR | PERF | STYLE | TOOLING | CURRICULUM | SECURITY | RELEASE`);
                 failed = true;
               }
             }

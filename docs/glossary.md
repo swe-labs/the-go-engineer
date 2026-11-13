@@ -1,7 +1,7 @@
 # Glossary
 
 - **Proof Surface**: A runnable or checkable artifact that verifies a claim (tests, validator output, CI checks, scripts).
-- **Curriculum Registry**: The machine-readable course map in `curriculum.v2.json`.
+- **Curriculum Registry**: The machine-readable course map — the `curriculum/path.core.json` module-registry index plus the per-module `curriculum/modules/*/manifest.json` files.
 - **Architecture Lock**: Contract that public root sections stay fixed unless maintainers explicitly approve architecture work.
 - **Teaching Stub**: Intentional simplified implementation that demonstrates concepts but is not fully production-grade.
 - **Production-Shaped**: Code that reflects real system boundaries and operational concerns, even when intentionally scoped.
