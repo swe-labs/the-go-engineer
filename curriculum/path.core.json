@@ -62715,7 +62715,7 @@
         "test_path": "modules/18-flagship-opslane/assessments/14-opslane-deployment/main_test.go"
       },
       "id": "opslane-14",
-      "learning_objective": "Containerize the production system with multi-stage Dockerfiles, Docker Compose, and automated GitHub Actions CI/CD workflows.",
+      "learning_objective": "Configure cloud-native deployment health probes and container orchestration contracts with sub-50ms execution bounds.",
       "module_id": "module-18",
       "next_item_ids": [
         "opslane-15"
@@ -62988,7 +62988,7 @@
         "mental_model": "The portfolio defense is the capstone presentation \u00e2\u20ac\u201d like a thesis defense in academia, it proves not just that you built something, but that you understand why you built it that way and can reason about alternatives.",
         "performance_implications": [
           "A well-prepared portfolio defense can make the difference between an offer and rejection.",
-          "Spending 5 hours preparing reduces interview anxiety by ~50%.",
+          "Preparation and mock defenses significantly reduce interview anxiety.",
           "Practice with peers provides the most improvement per hour invested."
         ],
         "problem_solved": "how learners prepare for portfolio review interviews by understanding the architecture, reasoning about trade-offs, and articulating design decisions. The portfolio defense prepares learners to present Opslane effectively in technical interviews, demonstrating architectural thinking and engineering judgment.",

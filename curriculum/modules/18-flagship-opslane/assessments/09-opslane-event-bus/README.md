@@ -38,15 +38,14 @@ Publisher (OrderService)
 
 Under the hood:
 1. `b.subscribers` maps topic strings to slices of `Subscription`.
-2. To avoid holding locks during slow handler execution, `Publish` takes a read lock, shallow-copies the active subscriber slices (`append([]Subscription(nil), ...)`), and immediately unlocks `b.mu.RUnlock()`.
-3. Handlers run in isolated goroutines: `b.wg.Add(1)` tracks active execution. Each goroutine establishes a panic recovery boundary with `defer recover()`, preventing unhandled errors in third-party handlers from crashing the entire process.
+2. To avoid holding locks during slow handler execution, `Publish` takes a read lock, shallow-copies the active subscriber slices, increments `b.wg.Add(len(allSubs))` under lock to prevent shutdown races, and immediately releases `b.mu.RUnlock()`.
+3. Handlers run in isolated goroutines. Each goroutine establishes a panic recovery boundary with `defer recover()` and signals completion via `defer b.wg.Done()`, preventing unhandled errors in third-party handlers from crashing the entire process.
 4. `Close(ctx)` sets `b.closed = true`, spawns a waiter on `b.wg.Wait()`, and uses `select` to return cleanly when all handlers finish or return `ctx.Err()` if shutdown timeout expires.
 
 A representative excerpt from `main.go` (`EventBus.Publish`):
 
 ```go
 	for _, sub := range allSubs {
-		b.wg.Add(1)
 		go func(s Subscription) {
 			defer b.wg.Done()
 			defer func() {
@@ -75,11 +74,12 @@ go run ./curriculum/modules/18-flagship-opslane/assessments/09-opslane-event-bus
 1. **Event Abstraction (lines 11–33)**: Defines `Event` interface and `BaseEvent` struct providing `Type`, `TenantID`, `Payload`, and `OccurredAt`.
 2. **`EventBus` Struct (lines 42–55)**: Tracks subscribers map, subscriber ID generator, `sync.RWMutex`, `sync.WaitGroup`, and closed flag.
 3. **`Subscribe()` & `Unsubscribe()` (lines 58–90)**: Registers handlers returning an integer subscription ID; filters and removes subscriptions cleanly under write lock.
-4. **`Publish()` (lines 93–120)**:
+4. **`Publish()` (lines 93–122)**:
    - Evaluates closed state.
    - Copies topic-specific and wildcard (`"*"`) subscribers.
-   - Dispatches each handler in a goroutine with `wg.Add(1)` and deferred `recover()`.
-5. **`Close()` (lines 123–140)**: Rejects future publishes, waits for in-flight tasks via `wg.Wait()`, and respects context timeout.
+   - Registers in-flight handlers in `wg` under read lock to prevent concurrent `Close()` races.
+   - Dispatches each handler in a goroutine with deferred `recover()` and `wg.Done()`.
+5. **`Close()` (lines 125–142)**: Rejects future publishes, waits for in-flight tasks via `wg.Wait()`, and respects context timeout.
 
 ## Try It
 

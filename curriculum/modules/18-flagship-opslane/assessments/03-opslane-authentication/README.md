@@ -10,7 +10,7 @@ Implement enterprise-grade authentication for Opslane, integrating salted crypto
 
 ## Mental Model
 
-Authentication verifies *who* the caller is before allowing access to tenant resources. In Opslane, authentication combines slow, adaptive one-way hashing for credentials at rest (`bcrypt` with configurable work factor) and fast, stateless digital signatures for API requests (`HMAC-SHA256` signed JWTs). When a user presents credentials to `AuthService.Login()`, the server verifies the password against the stored hash in constant time, issues a short-lived access token carrying tenant and user identity claims, and generates a cryptographically random refresh token for session lifecycle management.
+Authentication verifies *who* the caller is before allowing access to tenant resources. In Opslane, authentication combines slow, adaptive one-way hashing for credentials at rest (`bcrypt` with configurable work factor) and fast, stateless digital signatures for API requests (`HMAC-SHA256` signed JWTs). When a user presents credentials to `AuthService.Login()`, the server verifies the password against the stored hash using an adaptive work factor resistant to timing side-channels, issues a short-lived access token carrying tenant and user identity claims, and generates a cryptographically random refresh token for session lifecycle management.
 
 ## Visual Model
 

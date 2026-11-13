@@ -113,3 +113,41 @@ func TestDeployment_LivenessFast(t *testing.T) {
 		t.Fatalf("expected 200 OK from liveness probe, got %d", rr.Code)
 	}
 }
+
+func TestDeployment_ReadinessTimeoutAbortsGracefully(t *testing.T) {
+	// A checker that simulates 500ms delay must abort via context deadline (50ms)
+	checkers := []HealthChecker{
+		&GenericDependencyChecker{ComponentName: "slow_downstream", SimulateDelay: 500 * time.Millisecond},
+	}
+
+	service := NewDeploymentHealthService(checkers)
+	router := service.Routes()
+
+	req := httptest.NewRequest(http.MethodGet, "/health/ready", nil)
+	rr := httptest.NewRecorder()
+
+	start := time.Now()
+	router.ServeHTTP(rr, req)
+	elapsed := time.Since(start)
+
+	// Must abort quickly (around 50ms deadline, definitely well below 500ms)
+	if elapsed > 150*time.Millisecond {
+		t.Fatalf("expected probe to abort on context deadline, but took %v", elapsed)
+	}
+
+	if rr.Code != http.StatusServiceUnavailable {
+		t.Fatalf("expected 503 Service Unavailable on timeout, got %d", rr.Code)
+	}
+
+	var report ReadinessReport
+	if err := json.NewDecoder(rr.Body).Decode(&report); err != nil {
+		t.Fatalf("failed to decode report: %v", err)
+	}
+
+	if report.Status != "DEGRADED" {
+		t.Errorf("expected status 'DEGRADED', got %q", report.Status)
+	}
+	if len(report.Components) != 1 || report.Components[0].Healthy {
+		t.Errorf("expected component to report unhealthy on deadline timeout: %+v", report.Components)
+	}
+}

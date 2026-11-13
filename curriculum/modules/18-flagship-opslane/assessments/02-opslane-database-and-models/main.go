@@ -154,6 +154,9 @@ var SchemaMigrations = []Migration{
 // Database Connection & Pooling
 
 func ConnectDatabase(dsn string) (*sql.DB, error) {
+	if dsn == ":memory:" {
+		dsn = "file::memory:?cache=shared&_pragma=foreign_keys(1)"
+	}
 	db, err := sql.Open("sqlite", dsn)
 	if err != nil {
 		return nil, fmt.Errorf("failed to open database: %w", err)

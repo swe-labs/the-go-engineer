@@ -73,6 +73,7 @@ func (req *CreateOrderRequest) Validate() []FieldError {
 type APIServer struct {
 	mu     sync.RWMutex
 	orders map[string]*OrderDTO
+	nextID uint64
 }
 
 func NewAPIServer() *APIServer {
@@ -130,7 +131,8 @@ func (s *APIServer) handleCreateOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	s.mu.Lock()
-	id := fmt.Sprintf("ord-%d", len(s.orders)+1)
+	s.nextID++
+	id := fmt.Sprintf("ord-%d", s.nextID)
 	order := &OrderDTO{
 		ID:        id,
 		Title:     strings.TrimSpace(req.Title),

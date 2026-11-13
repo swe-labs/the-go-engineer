@@ -2,16 +2,25 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"sync/atomic"
 	"testing"
 	"time"
 )
 
+var testDBCounter atomic.Uint64
+
+func uniqueTestDSN(t *testing.T) string {
+	return fmt.Sprintf("file:test_%d?mode=memory&cache=shared&_pragma=foreign_keys(1)", testDBCounter.Add(1))
+}
+
 func setupTestDB(t *testing.T) *OrderRepository {
 	t.Helper()
-	db, err := ConnectDatabase(":memory:")
+	db, err := ConnectDatabase(uniqueTestDSN(t))
 	if err != nil {
 		t.Fatalf("failed to open in-memory db: %v", err)
 	}
+	t.Cleanup(func() { _ = db.Close() })
 
 	if err := RunMigrations(db, SchemaMigrations); err != nil {
 		t.Fatalf("failed to run migrations: %v", err)
@@ -32,7 +41,7 @@ func setupTestDB(t *testing.T) *OrderRepository {
 }
 
 func TestMigrations_RunAndIdempotency(t *testing.T) {
-	db, err := ConnectDatabase(":memory:")
+	db, err := ConnectDatabase(uniqueTestDSN(t))
 	if err != nil {
 		t.Fatalf("failed to connect: %v", err)
 	}
@@ -116,5 +125,28 @@ func TestOrderRepository_TenantIsolation(t *testing.T) {
 	}
 	if unauthorized != nil {
 		t.Fatalf("SECURITY VIOLATION: Cross-tenant data leak! Expected nil, got: %+v", unauthorized)
+	}
+}
+
+func TestOrderRepository_ForeignKeyEnforcement(t *testing.T) {
+	repo := setupTestDB(t)
+	ctx := context.Background()
+	now := time.Now().UTC()
+
+	// Attempting to insert an order referencing a non-existent tenant/user must fail FK constraint
+	orphanOrder := &Order{
+		ID:          "ord-orphan-999",
+		TenantID:    "nonexistent-tenant",
+		UserID:      "nonexistent-user",
+		TotalAmount: 100.0,
+		Currency:    "USD",
+		Status:      "PENDING",
+		CreatedAt:   now,
+		UpdatedAt:   now,
+	}
+
+	err := repo.Create(ctx, orphanOrder)
+	if err == nil {
+		t.Fatalf("expected foreign key constraint violation inserting orphan order, got nil")
 	}
 }

@@ -75,14 +75,14 @@ go run ./curriculum/modules/18-flagship-opslane/assessments/06-opslane-http-api-
 
 1. **API Envelopes (lines 18–33)**: Defines `APIResponse` and `APIErrorEnvelope` with field-level `FieldError` tracking.
 2. **DTO & Validation (lines 36–70)**: `CreateOrderRequest.Validate()` inspects string length, positive amounts, and currency whitelisting (`USD`, `EUR`, `GBP`).
-3. **`APIServer` & Router (lines 73–94)**: In-memory order map protected by `sync.RWMutex`, wired to Go 1.22+ ServeMux patterns.
-4. **`requestIDMiddleware` (lines 96–107)**: Checks for `X-Request-ID`; generates 8-byte hex string from `crypto/rand` if absent; sets response header.
-5. **Handlers (lines 109–202)**:
+3. **`APIServer` & Router (lines 73–95)**: In-memory order map protected by `sync.RWMutex` with monotonic sequence generation, wired to Go 1.22+ ServeMux patterns.
+4. **`requestIDMiddleware` (lines 97–108)**: Checks for `X-Request-ID`; generates 8-byte hex string from `crypto/rand` if absent; sets response header.
+5. **Handlers (lines 110–205)**:
    - `handleCreateOrder`: Enforces 1MB limit, decodes without unknown fields, validates, and stores order with mutex protection.
    - `handleGetOrder`: Reads `r.PathValue("id")`; returns 404 or 200 with data envelope.
    - `handleListOrders`: Supports `?limit=` query parameter; defaults to 10 orders.
    - `handleDeleteOrder`: Deletes order; returns 204 No Content.
-6. **Response Helpers (lines 204–220)**: `respondJSON` and `respondError` ensure standard envelope formatting and content headers.
+6. **Response Helpers (lines 207–223)**: `respondJSON` and `respondError` ensure standard envelope formatting and content headers.
 
 ## Try It
 
