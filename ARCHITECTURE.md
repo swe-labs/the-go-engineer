@@ -22,7 +22,6 @@ All authoritative curriculum metadata is defined in modular JSON manifests under
 | [`curriculum/readme.contracts.json`](./curriculum/readme.contracts.json) | Mandatory pedagogical contract structure for instructional READMEs |
 | [`curriculum/schema.v3.json`](./curriculum/schema.v3.json) | Structural JSON schema and validation definitions for all v3 manifests |
 | [`curriculum/workspace.json`](./curriculum/workspace.json) | Canonical workspace and validation configuration |
-| [`curriculum/legacy/curriculum.v2.json`](./curriculum/legacy/curriculum.v2.json) | Frozen legacy v2 import archive |
 
 ## Core Module Map
 
