@@ -50,7 +50,7 @@ type AuthServer struct {
 	mu           sync.RWMutex
 	users        map[string]*User
 	sessions     map[string]*Session
-	loginTokens  map[string]time.Time
+	loginTokens  map[string]issuedLoginToken
 	tenantConfig TenantConfig
 	staticFS     fs.FS
 }
@@ -60,7 +60,7 @@ func NewAuthServer(staticFS fs.FS) *AuthServer {
 	s := &AuthServer{
 		users:       make(map[string]*User),
 		sessions:    make(map[string]*Session),
-		loginTokens: make(map[string]time.Time),
+		loginTokens: make(map[string]issuedLoginToken),
 		tenantConfig: TenantConfig{
 			Name:            "Acme Cloud Infrastructure",
 			StrictIsolation: true,
@@ -195,35 +195,69 @@ func (s *AuthServer) validateCSRF(r *http.Request, session *Session) bool {
 // loginTokenTTL bounds how long an issued login-form token stays valid.
 const loginTokenTTL = 5 * time.Minute
 
-// issueLoginToken registers a fresh single-use synchronizer token for the
-// login form. Tokens live server-side rather than in a browser-wide cookie
-// so two tabs each hold their own valid token instead of clobbering one
-// shared value.
-func (s *AuthServer) issueLoginToken() string {
+// anonymousLoginCookie identifies the browser across the unauthenticated
+// login flow so issued synchronizer tokens are bound to the browser that
+// requested them — the classic login-CSRF defense. Two tabs of the same
+// browser share the cookie, so both tabs' tokens stay valid.
+const anonymousLoginCookie = "login_anon"
+
+// issuedLoginToken couples a form token to the anonymous browser identity
+// it was issued for.
+type issuedLoginToken struct {
+	anonID    string
+	expiresAt time.Time
+}
+
+// issueLoginToken registers a fresh single-use synchronizer token bound to
+// the anonymous browser identity. Tokens live server-side (never embedded in
+// the cookie itself) so a token captured by an attacker is useless without
+// the victim's matching anonymous cookie.
+func (s *AuthServer) issueLoginToken(w http.ResponseWriter, r *http.Request) string {
+	anonID := ""
+	if c, err := r.Cookie(anonymousLoginCookie); err == nil && c.Value != "" {
+		anonID = c.Value
+	} else {
+		anonID = generateRandomToken(16)
+	}
+	// Re-set on every view so the cookie outlives long-lived tabs.
+	http.SetCookie(w, &http.Cookie{
+		Name:     anonymousLoginCookie,
+		Value:    anonID,
+		Path:     "/",
+		HttpOnly: true,
+		SameSite: http.SameSiteLaxMode,
+		MaxAge:   86400,
+	})
+
 	token := generateRandomToken(16)
 	now := time.Now()
 
 	s.mu.Lock()
-	for t, exp := range s.loginTokens {
-		if now.After(exp) {
+	for t, issued := range s.loginTokens {
+		if now.After(issued.expiresAt) {
 			delete(s.loginTokens, t)
 		}
 	}
-	s.loginTokens[token] = now.Add(loginTokenTTL)
+	s.loginTokens[token] = issuedLoginToken{anonID: anonID, expiresAt: now.Add(loginTokenTTL)}
 	s.mu.Unlock()
 
 	return token
 }
 
 // consumeLoginToken validates and burns a login-form token (single-use).
-func (s *AuthServer) consumeLoginToken(token string) bool {
+// The token must have been issued for the anonymous identity presented by
+// the calling browser; a token captured from a different browser is refused.
+func (s *AuthServer) consumeLoginToken(token, anonID string) bool {
 	if token == "" {
 		return false
 	}
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	exp, ok := s.loginTokens[token]
-	if !ok || time.Now().After(exp) {
+	issued, ok := s.loginTokens[token]
+	if !ok || time.Now().After(issued.expiresAt) {
+		return false
+	}
+	if subtle.ConstantTimeCompare([]byte(issued.anonID), []byte(anonID)) != 1 {
 		return false
 	}
 	delete(s.loginTokens, token)
@@ -238,15 +272,16 @@ func (s *AuthServer) handleLoginView(w http.ResponseWriter, r *http.Request) {
 	}
 
 	flash := r.URL.Query().Get("error")
-	csrf := s.issueLoginToken()
+	csrf := s.issueLoginToken(w, r)
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	_ = components.Login(flash, csrf).Render(r.Context(), w)
 }
 
 // handleLoginSubmit processes credential verification. The login form is
-// CSRF-protected with a server-side single-use synchronizer token issued by
-// handleLoginView; the submitted token must exist and be unexpired.
+// CSRF-protected with a single-use synchronizer token bound to the calling
+// browser's anonymous identity (issued by handleLoginView); the submitted
+// token must exist, be unexpired, and match that identity.
 func (s *AuthServer) handleLoginSubmit(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -254,7 +289,11 @@ func (s *AuthServer) handleLoginSubmit(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 1. CSRF verification for the unauthenticated login form
-	if !s.consumeLoginToken(r.FormValue("csrf_token")) {
+	anonID := ""
+	if c, err := r.Cookie(anonymousLoginCookie); err == nil {
+		anonID = c.Value
+	}
+	if !s.consumeLoginToken(r.FormValue("csrf_token"), anonID) {
 		http.Redirect(w, r, "/login?error=Login+session+expired%2C+please+retry", http.StatusSeeOther)
 		return
 	}

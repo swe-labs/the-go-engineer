@@ -15,8 +15,9 @@ func setupTestAuthServer(t *testing.T) *AuthServer {
 }
 
 // loginAs performs the full CSRF-protected login flow: it fetches /login to
-// obtain a server-side single-use synchronizer token, then submits the
-// credentials and returns the auth_session cookie.
+// obtain the anonymous browser identity cookie and the single-use
+// synchronizer token bound to it, then submits the credentials and returns
+// the auth_session cookie.
 func loginAs(t *testing.T, server *AuthServer, email, password string) *http.Cookie {
 	t.Helper()
 
@@ -28,6 +29,16 @@ func loginAs(t *testing.T, server *AuthServer, email, password string) *http.Coo
 	if m == nil {
 		t.Fatalf("expected hidden csrf_token field in rendered login form")
 	}
+	var anon *http.Cookie
+	for _, c := range rrView.Result().Cookies() {
+		if c.Name == "login_anon" {
+			anon = c
+			break
+		}
+	}
+	if anon == nil {
+		t.Fatalf("expected anonymous login identity cookie from GET /login")
+	}
 
 	form := url.Values{
 		"email":      {email},
@@ -36,6 +47,7 @@ func loginAs(t *testing.T, server *AuthServer, email, password string) *http.Coo
 	}
 	reqLogin := httptest.NewRequest(http.MethodPost, "/auth/login", strings.NewReader(form.Encode()))
 	reqLogin.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	reqLogin.AddCookie(anon)
 	rrLogin := httptest.NewRecorder()
 	server.Handler().ServeHTTP(rrLogin, reqLogin)
 
@@ -67,6 +79,77 @@ func TestAuthServer_UnauthenticatedRedirect(t *testing.T) {
 	if loc != "/login" {
 		t.Errorf("expected redirect to /login, got %q", loc)
 	}
+}
+
+func TestAuthServer_LoginCSRFTokenBinding(t *testing.T) {
+	// Login CSRF defense: a synchronizer token is bound to the anonymous
+	// browser identity that requested it. An attacker who fetches their own
+	// token cannot submit a cross-site login form carrying that token to a
+	// victim — the victim's anonymous identity will not match.
+	server := setupTestAuthServer(t)
+
+	// Attacker fetches their own login view: token bound to THEIR identity.
+	reqA := httptest.NewRequest(http.MethodGet, "/login", nil)
+	rrA := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rrA, reqA)
+	tokenA := regexp.MustCompile(`name="csrf_token" value="([^"]+)"`).FindStringSubmatch(rrA.Body.String())
+	if tokenA == nil {
+		t.Fatalf("expected hidden csrf_token field in attacker's login form")
+	}
+	var anonA *http.Cookie
+	for _, c := range rrA.Result().Cookies() {
+		if c.Name == "login_anon" {
+			anonA = c
+			break
+		}
+	}
+	if anonA == nil {
+		t.Fatalf("expected anonymous login identity cookie for attacker")
+	}
+
+	// Cross-site submission: attacker's token, victim's anonymous identity.
+	victimAnon := &http.Cookie{Name: "login_anon", Value: "victim-browser-identity"}
+	crossForm := url.Values{
+		"email":      {"alice@acme.corp"},
+		"password":   {"opslane123"},
+		"csrf_token": {tokenA[1]},
+	}
+	reqCross := httptest.NewRequest(http.MethodPost, "/auth/login", strings.NewReader(crossForm.Encode()))
+	reqCross.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	reqCross.AddCookie(victimAnon)
+	rrCross := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rrCross, reqCross)
+
+	if rrCross.Code != http.StatusSeeOther {
+		t.Fatalf("expected 303 rejection redirect for cross-browser token, got %d", rrCross.Code)
+	}
+	for _, c := range rrCross.Result().Cookies() {
+		if c.Name == "auth_session" && c.Value != "" {
+			t.Fatalf("SECURITY VIOLATION: session issued for cross-browser token (login CSRF)")
+		}
+	}
+
+	// The attacker's own browser submits the same token -> login succeeds.
+	ownForm := url.Values{
+		"email":      {"alice@acme.corp"},
+		"password":   {"opslane123"},
+		"csrf_token": {tokenA[1]},
+	}
+	reqOwn := httptest.NewRequest(http.MethodPost, "/auth/login", strings.NewReader(ownForm.Encode()))
+	reqOwn.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	reqOwn.AddCookie(anonA)
+	rrOwn := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rrOwn, reqOwn)
+
+	if rrOwn.Code != http.StatusSeeOther {
+		t.Fatalf("expected same-browser login to succeed, got %d", rrOwn.Code)
+	}
+	for _, c := range rrOwn.Result().Cookies() {
+		if c.Name == "auth_session" && c.Value != "" {
+			return // session issued for the legitimate browser
+		}
+	}
+	t.Fatalf("expected auth_session cookie for same-browser login")
 }
 
 func TestAuthServer_LoginFlow(t *testing.T) {
@@ -101,6 +184,16 @@ func TestAuthServer_LoginFlow(t *testing.T) {
 	if m == nil {
 		t.Fatalf("expected hidden csrf_token field in rendered login form")
 	}
+	var anonCookie *http.Cookie
+	for _, c := range rrView.Result().Cookies() {
+		if c.Name == "login_anon" {
+			anonCookie = c
+			break
+		}
+	}
+	if anonCookie == nil {
+		t.Fatalf("expected anonymous login identity cookie from GET /login")
+	}
 
 	badForm := url.Values{
 		"email":      {"alice@acme.corp"},
@@ -109,6 +202,7 @@ func TestAuthServer_LoginFlow(t *testing.T) {
 	}
 	reqBad := httptest.NewRequest(http.MethodPost, "/auth/login", strings.NewReader(badForm.Encode()))
 	reqBad.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	reqBad.AddCookie(anonCookie)
 	rrBad := httptest.NewRecorder()
 	server.Handler().ServeHTTP(rrBad, reqBad)
 
