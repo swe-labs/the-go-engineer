@@ -186,6 +186,7 @@ type WorkerPool struct {
 	workerCount   int
 	taskQueue     chan *Task
 	tasksMu       sync.RWMutex
+	enqueueMu     sync.Mutex
 	tasks         map[int]*Task
 	cancelFuncs   map[int]context.CancelFunc
 	nextID        int
@@ -342,6 +343,14 @@ func (wp *WorkerPool) broadcastMetrics() {
 }
 
 func (wp *WorkerPool) Enqueue(taskType string, duration time.Duration) *Task {
+	// enqueueMu serializes ID assignment WITH the channel send: two
+	// overlapping callers cannot assign a lower ID and then lose the race to
+	// send, which would let a later task execute first on a single worker.
+	// It is deliberately separate from tasksMu — workers take tasksMu to
+	// record state transitions, so a blocked send here (bounded queue full)
+	// never blocks them: the queue drains and every sender proceeds.
+	wp.enqueueMu.Lock()
+
 	wp.tasksMu.Lock()
 	task := &Task{
 		ID:          wp.nextID,
@@ -354,16 +363,14 @@ func (wp *WorkerPool) Enqueue(taskType string, duration time.Duration) *Task {
 	}
 	wp.tasks[wp.nextID] = task
 	wp.nextID++
-	// Snapshot under the lock: a worker may receive the task and mutate its
+	// Snapshot under tasksMu: a worker may receive the task and mutate its
 	// status fields as soon as the channel send below unblocks it.
 	taskCopy := *task
 	wp.tasksMu.Unlock()
 
-	// The channel send happens outside tasksMu on purpose: if the bounded
-	// queue is full, this call blocks until a worker drains a slot. Holding
-	// tasksMu across the send would block every worker that needs the mutex
-	// to record a state transition — a self-deadlock.
 	wp.taskQueue <- task
+
+	wp.enqueueMu.Unlock()
 
 	wp.broadcastLog(fmt.Sprintf("[Queue] Enqueued new job #%d (%s, target: %s)", task.ID, task.Type, task.DurationStr))
 

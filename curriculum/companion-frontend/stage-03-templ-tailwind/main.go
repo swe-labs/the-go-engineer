@@ -50,6 +50,7 @@ type AuthServer struct {
 	mu           sync.RWMutex
 	users        map[string]*User
 	sessions     map[string]*Session
+	loginTokens  map[string]time.Time
 	tenantConfig TenantConfig
 	staticFS     fs.FS
 }
@@ -57,8 +58,9 @@ type AuthServer struct {
 // NewAuthServer initializes the authentication and tenant management service.
 func NewAuthServer(staticFS fs.FS) *AuthServer {
 	s := &AuthServer{
-		users:    make(map[string]*User),
-		sessions: make(map[string]*Session),
+		users:       make(map[string]*User),
+		sessions:    make(map[string]*Session),
+		loginTokens: make(map[string]time.Time),
 		tenantConfig: TenantConfig{
 			Name:            "Acme Cloud Infrastructure",
 			StrictIsolation: true,
@@ -190,6 +192,44 @@ func (s *AuthServer) validateCSRF(r *http.Request, session *Session) bool {
 	return subtle.ConstantTimeCompare([]byte(token), []byte(session.CSRFToken)) == 1
 }
 
+// loginTokenTTL bounds how long an issued login-form token stays valid.
+const loginTokenTTL = 5 * time.Minute
+
+// issueLoginToken registers a fresh single-use synchronizer token for the
+// login form. Tokens live server-side rather than in a browser-wide cookie
+// so two tabs each hold their own valid token instead of clobbering one
+// shared value.
+func (s *AuthServer) issueLoginToken() string {
+	token := generateRandomToken(16)
+	now := time.Now()
+
+	s.mu.Lock()
+	for t, exp := range s.loginTokens {
+		if now.After(exp) {
+			delete(s.loginTokens, t)
+		}
+	}
+	s.loginTokens[token] = now.Add(loginTokenTTL)
+	s.mu.Unlock()
+
+	return token
+}
+
+// consumeLoginToken validates and burns a login-form token (single-use).
+func (s *AuthServer) consumeLoginToken(token string) bool {
+	if token == "" {
+		return false
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	exp, ok := s.loginTokens[token]
+	if !ok || time.Now().After(exp) {
+		return false
+	}
+	delete(s.loginTokens, token)
+	return true
+}
+
 // handleLoginView displays the sign-in form.
 func (s *AuthServer) handleLoginView(w http.ResponseWriter, r *http.Request) {
 	if s.getSession(r) != nil {
@@ -198,25 +238,15 @@ func (s *AuthServer) handleLoginView(w http.ResponseWriter, r *http.Request) {
 	}
 
 	flash := r.URL.Query().Get("error")
-	csrf := generateRandomToken(16)
-
-	// Set temporary CSRF cookie for unauthenticated login form
-	http.SetCookie(w, &http.Cookie{
-		Name:     "login_csrf",
-		Value:    csrf,
-		Path:     "/",
-		HttpOnly: true,
-		SameSite: http.SameSiteLaxMode,
-		MaxAge:   300,
-	})
+	csrf := s.issueLoginToken()
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	_ = components.Login(flash, csrf).Render(r.Context(), w)
 }
 
-// handleLoginSubmit processes credential verification. The login form itself
-// is CSRF-protected with the synchronizer token issued by handleLoginView:
-// the hidden csrf_token field must match the login_csrf cookie value.
+// handleLoginSubmit processes credential verification. The login form is
+// CSRF-protected with a server-side single-use synchronizer token issued by
+// handleLoginView; the submitted token must exist and be unexpired.
 func (s *AuthServer) handleLoginSubmit(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -224,10 +254,7 @@ func (s *AuthServer) handleLoginSubmit(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 1. CSRF verification for the unauthenticated login form
-	formToken := r.FormValue("csrf_token")
-	cookie, err := r.Cookie("login_csrf")
-	if err != nil || formToken == "" ||
-		subtle.ConstantTimeCompare([]byte(formToken), []byte(cookie.Value)) != 1 {
+	if !s.consumeLoginToken(r.FormValue("csrf_token")) {
 		http.Redirect(w, r, "/login?error=Login+session+expired%2C+please+retry", http.StatusSeeOther)
 		return
 	}
@@ -273,16 +300,6 @@ func (s *AuthServer) handleLoginSubmit(w http.ResponseWriter, r *http.Request) {
 		HttpOnly: true,
 		SameSite: http.SameSiteLaxMode,
 		Expires:  time.Now().Add(24 * time.Hour),
-	})
-
-	// The login CSRF token is single-use: clear it so a replayed form cannot
-	// mint additional sessions.
-	http.SetCookie(w, &http.Cookie{
-		Name:     "login_csrf",
-		Value:    "",
-		Path:     "/",
-		HttpOnly: true,
-		MaxAge:   -1,
 	})
 
 	http.Redirect(w, r, "/profile", http.StatusSeeOther)
