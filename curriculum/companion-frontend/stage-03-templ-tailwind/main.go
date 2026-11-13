@@ -195,6 +195,12 @@ func (s *AuthServer) validateCSRF(r *http.Request, session *Session) bool {
 // loginTokenTTL bounds how long an issued login-form token stays valid.
 const loginTokenTTL = 5 * time.Minute
 
+// maxLoginTokens caps the server-side token store. Under a GET /login
+// flood the store saturates at this size and each new issuance evicts the
+// soonest-expiring entry, so memory and the per-issuance prune scan stay
+// bounded instead of growing with request volume.
+const maxLoginTokens = 1024
+
 // anonymousLoginCookie identifies the browser across the unauthenticated
 // login flow so issued synchronizer tokens are bound to the browser that
 // requested them — the classic login-CSRF defense. Two tabs of the same
@@ -211,7 +217,9 @@ type issuedLoginToken struct {
 // issueLoginToken registers a fresh single-use synchronizer token bound to
 // the anonymous browser identity. Tokens live server-side (never embedded in
 // the cookie itself) so a token captured by an attacker is useless without
-// the victim's matching anonymous cookie.
+// the victim's matching anonymous cookie. Expired entries are pruned on
+// every issuance and the store is hard-capped, so a request flood cannot
+// grow it without bound.
 func (s *AuthServer) issueLoginToken(w http.ResponseWriter, r *http.Request) string {
 	anonID := ""
 	if c, err := r.Cookie(anonymousLoginCookie); err == nil && c.Value != "" {
@@ -237,6 +245,20 @@ func (s *AuthServer) issueLoginToken(w http.ResponseWriter, r *http.Request) str
 		if now.After(issued.expiresAt) {
 			delete(s.loginTokens, t)
 		}
+	}
+	if len(s.loginTokens) >= maxLoginTokens {
+		// Evict the soonest-expiring entry: it is the least valuable live
+		// token (closest to natural death), and under a flood those are
+		// typically the attacker's own earlier requests, not a freshly
+		// issued legitimate token.
+		victim := ""
+		var earliest time.Time
+		for t, issued := range s.loginTokens {
+			if victim == "" || issued.expiresAt.Before(earliest) {
+				victim, earliest = t, issued.expiresAt
+			}
+		}
+		delete(s.loginTokens, victim)
 	}
 	s.loginTokens[token] = issuedLoginToken{anonID: anonID, expiresAt: now.Add(loginTokenTTL)}
 	s.mu.Unlock()
