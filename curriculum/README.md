@@ -8,7 +8,7 @@
 
 **Decision:** Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.
 
-- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON manifests: `curriculum/path.core.json`, `curriculum/path.electives.json`, `curriculum/projects.json`, `curriculum/assessments.json`, `curriculum/crossrefs.json`, `curriculum/concepts.json`, and `curriculum/failures.json`.
+- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON manifests: the `curriculum/path.core.json` and `curriculum/path.electives.json` indexes, the per-module manifest.json files beside each module README (items, projects, assessments, and embedded crossrefs), `curriculum/concepts.json`, and `curriculum/failures.json`.
 - **Physical Curriculum Delivery:** Physical lesson READMEs, runnable examples, test suites, and exercises are organized canonically under `curriculum/modules/` and `curriculum/electives/`.
 - **Core Scope:** The core curriculum is dedicated to production Go backend engineering (systems, networking, persistence, concurrency, observability, architecture, and deployment). Modern server-driven full-stack frontend engineering is delivered via the companion path (semantic HTML, CSS, JavaScript, and progressive enhancement with Go templates/templ/HTMX/Tailwind/Datastar).
 - **Capstone & Learning Path Flow:** Flagship Opslane (Module 18) directly requires the complete backend engineering and deployment runbook foundation of Module 15 (`core-15-19`). Module 16 (Portfolio and Interview Readiness) packages the production artifacts produced by Opslane for senior-level engineering interviews. Module 17 (Advanced Electives) provides independent specialization tracks in Generics, gRPC, and distributed systems.
@@ -124,7 +124,6 @@ curriculum/
   PILOT_TESTING_PROTOCOL.md
   concepts.json
   contributor-authoring-guide.md
-  crossrefs.json
   expected.json
   failures.json
   path.core.json
@@ -826,7 +825,7 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 
 # Cross-References
 
-Total cross-references: **2086**
+Total cross-references: **2228**
 
 > **Gating vs. lineage:** Hard progression gates are the `prerequisites` arrays in
 > `path.core.json` and `path.electives.json`. `builds_on` records the broader,
@@ -846,14 +845,14 @@ Total cross-references: **2086**
 
 | Relation      | Count | Description |
 | ------------- | ----- | ----------- |
-| related       | 944   | Bidirectional conceptual links between related lessons |
-| builds_on     | 584   | Directional pedagogical lineage (acyclic; not the hard gate) |
-| reinforced_in | 512   | Practical application links to projects and labs |
+| related       | 1014   | Bidirectional conceptual links between related lessons |
+| builds_on     | 630   | Directional pedagogical lineage (acyclic; not the hard gate) |
+| reinforced_in | 538   | Practical application links to projects and labs |
 | preview_only  | 46    | Early mental-model previews developed fully later |
 
 ### Authoritative Quality Gates
 
-- `validate-schema`: 9 canonical JSON manifests valid against Schema 3.1.0
+- `validate-schema`: 8 canonical JSON manifests valid against Schema 3.1.0
 - `validate-graph`: Strict DAG acyclicity across all item dependencies
 - `validate-lessons`: Zero machine role comments or unmotivated markers
 - `validate-prerequisite-closure`: Strict pedagogical progression across module boundaries

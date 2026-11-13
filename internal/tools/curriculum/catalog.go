@@ -64,8 +64,6 @@ func generateCatalog() (string, error) {
 		assessBundle.Assessments = append(assessBundle.Assessments, mm.Assessments...)
 	}
 
-	var crossrefs CrossrefBundle
-	readJSON("crossrefs.json", &crossrefs)
 
 	var concepts catalogConceptsBundle
 	readJSON("concepts.json", &concepts)
@@ -96,7 +94,7 @@ func generateCatalog() (string, error) {
 	// Architecture Decision
 	add("## Architecture Decision\n")
 	add("**Decision:** Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.\n")
-	add("- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON manifests: `curriculum/path.core.json`, `curriculum/path.electives.json`, `curriculum/projects.json`, `curriculum/assessments.json`, `curriculum/crossrefs.json`, `curriculum/concepts.json`, and `curriculum/failures.json`.")
+	add("- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON manifests: the `curriculum/path.core.json` and `curriculum/path.electives.json` indexes, the per-module manifest.json files beside each module README (items, projects, assessments, and embedded crossrefs), `curriculum/concepts.json`, and `curriculum/failures.json`.")
 	add("- **Physical Curriculum Delivery:** Physical lesson READMEs, runnable examples, test suites, and exercises are organized canonically under `curriculum/modules/` and `curriculum/electives/`.")
 	add("- **Core Scope:** The core curriculum is dedicated to production Go backend engineering (systems, networking, persistence, concurrency, observability, architecture, and deployment). Modern server-driven full-stack frontend engineering is delivered via the companion path (semantic HTML, CSS, JavaScript, and progressive enhancement with Go templates/templ/HTMX/Tailwind/Datastar).")
 	add("- **Capstone & Learning Path Flow:** Flagship Opslane (Module 18) directly requires the complete backend engineering and deployment runbook foundation of Module 15 (`core-15-19`). Module 16 (Portfolio and Interview Readiness) packages the production artifacts produced by Opslane for senior-level engineering interviews. Module 17 (Advanced Electives) provides independent specialization tracks in Generics, gRPC, and distributed systems.\n")
@@ -562,7 +560,26 @@ func generateCatalog() (string, error) {
 	add("\n---\n")
 	add("# Cross-References\n")
 
-	refs := crossrefs.Crossrefs.References
+	// Relation distribution comes from the embedded per-item crossrefs —
+	// the single source since the central registry was removed.
+	var refs []struct{ Relation string }
+	for _, item := range append(append([]Item{}, core.Items...), electives.Items...) {
+		if item.CrossRefs == nil {
+			continue
+		}
+		for range item.CrossRefs.BuildsOn {
+			refs = append(refs, struct{ Relation string }{"builds_on"})
+		}
+		for range item.CrossRefs.PreviewOnly {
+			refs = append(refs, struct{ Relation string }{"preview_only"})
+		}
+		for range item.CrossRefs.Related {
+			refs = append(refs, struct{ Relation string }{"related"})
+		}
+		for range item.CrossRefs.ReinforcedIn {
+			refs = append(refs, struct{ Relation string }{"reinforced_in"})
+		}
+	}
 	relDist := make(map[string]int)
 	for _, r := range refs {
 		relDist[r.Relation]++

@@ -180,8 +180,6 @@ func validateSchema() {
 		readJSON(mf, &mm)
 		projects.Projects = append(projects.Projects, mm.Projects...)
 	}
-	var crossrefs CrossrefBundle
-	readJSON("crossrefs.json", &crossrefs)
 
 	// Verify inventory counts against expected.json (single source of truth)
 	if len(core.Items) != exp.Inventory.CoreItems {

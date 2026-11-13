@@ -801,9 +801,6 @@ func validateCrossrefs() {
 	core := loadCoreBundle()
 	electives := loadElectiveBundle()
 
-	var crossrefs CrossrefBundle
-	readJSON("crossrefs.json", &crossrefs)
-
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
 	allItems = append(allItems, electives.Items...)
@@ -823,19 +820,8 @@ func validateCrossrefs() {
 		}
 	}
 
-	// 1. Check all crossrefs.json references resolve
-	for _, ref := range crossrefs.Crossrefs.References {
-		if _, exists := itemMap[ref.FromID]; !exists && !projectIDs[ref.FromID] {
-			errorf("crossrefs.json: from_id '%s' does not exist", ref.FromID)
-			ok = false
-		}
-		if _, exists := itemMap[ref.TargetID]; !exists && !projectIDs[ref.TargetID] {
-			errorf("crossrefs.json: target_id '%s' does not exist", ref.TargetID)
-			ok = false
-		}
-	}
-
-	// 2. Check item-level crossrefs resolve
+	// 1. Check item-level crossrefs resolve (embedded data is the single
+	// source since the central crossrefs.json registry was removed)
 	moduleOrder := make(map[string]int)
 	for _, m := range core.Modules {
 		moduleOrder[m.ID] = m.Number
@@ -869,57 +855,6 @@ func validateCrossrefs() {
 				if targetModNum <= itemModNum {
 					errorf("%s: preview_only target '%s' is in module %s (order %d), not in a future module (item at order %d)",
 						item.ID, ref.TargetID, targetItem.ModuleID, targetModNum, itemModNum)
-					ok = false
-				}
-			}
-		}
-	}
-
-	// 4. Reconcile core item-embedded crossrefs with the central registry.
-	// crossrefs.json is authoritative for core items. Electives carry their
-	// crossrefs only in path.electives.json, so they are checked for target
-	// existence above but are not part of the central registry.
-	electiveIDs := make(map[string]bool)
-	for _, item := range electives.Items {
-		electiveIDs[item.ID] = true
-	}
-	central := make(map[string]map[string]map[string]bool)
-	for _, ref := range crossrefs.Crossrefs.References {
-		if itemMap[ref.FromID] == nil {
-			continue // project-origin references are not embedded in Item objects
-		}
-		if central[ref.FromID] == nil {
-			central[ref.FromID] = make(map[string]map[string]bool)
-		}
-		if central[ref.FromID][ref.Relation] == nil {
-			central[ref.FromID][ref.Relation] = make(map[string]bool)
-		}
-		central[ref.FromID][ref.Relation][ref.TargetID] = true
-	}
-	relations := []string{"builds_on", "preview_only", "related", "reinforced_in"}
-	for _, item := range allItems {
-		if electiveIDs[item.ID] || item.CrossRefs == nil {
-			continue
-		}
-		embedded := map[string][]CrossrefRef{
-			"builds_on":     item.CrossRefs.BuildsOn,
-			"preview_only":  item.CrossRefs.PreviewOnly,
-			"related":       item.CrossRefs.Related,
-			"reinforced_in": item.CrossRefs.ReinforcedIn,
-		}
-		for _, relation := range relations {
-			centralTargets := central[item.ID][relation]
-			embeddedTargets := make(map[string]bool)
-			for _, ref := range embedded[relation] {
-				embeddedTargets[ref.TargetID] = true
-				if !centralTargets[ref.TargetID] {
-					errorf("%s: crossrefs.%s target '%s' is missing from crossrefs.json", item.ID, relation, ref.TargetID)
-					ok = false
-				}
-			}
-			for targetID := range centralTargets {
-				if !embeddedTargets[targetID] {
-					errorf("%s: crossrefs.%s target '%s' is missing from the item manifest", item.ID, relation, targetID)
 					ok = false
 				}
 			}

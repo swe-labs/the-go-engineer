@@ -187,7 +187,14 @@ func writeCurriculumFixture(t *testing.T) string {
       "crossrefs": {
         "builds_on": [],
         "preview_only": [],
-        "related": [],
+        "related": [
+          {
+            "target_id": "core-00-01",
+            "label": "alpha lesson",
+            "reason": "same-module lineage",
+            "required": false
+          }
+        ],
         "reinforced_in": []
       },
       "difficulty": "beginner",
@@ -275,12 +282,6 @@ func writeCurriculumFixture(t *testing.T) string {
 		"path.electives.json": fixtureHeader("elective_path") + `,
   "modules": [],
   "items": []
-}
-`,
-		"crossrefs.json": fixtureHeader("crossrefs") + `,
-  "crossrefs": {
-    "references": []
-  }
 }
 `,
 		"concepts.json": fixtureHeader("concept_ownership_registry") + `,
@@ -697,8 +698,7 @@ var failureMutations = map[string]func(*testing.T, string){
 		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"title": "Alpha lesson",`, `"title": "",`)
 	},
 	"validate-graph": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "crossrefs.json", `"references": []`,
-			`"references": [{"from_id": "core-00-01", "target_id": "core-99-99", "relation": "related"}]`)
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"target_id": "core-00-01",`, `"target_id": "core-99-99",`)
 	},
 	"validate-lessons": func(t *testing.T, dir string) {
 		replaceFixture(t, dir, "modules/00-alpha/lessons/01-alpha/README.md", "## NEXT UP", "## Next steps")
@@ -726,8 +726,7 @@ var failureMutations = map[string]func(*testing.T, string){
 		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"tags": ["alpha", "concept"],`, `"tags": ["alpha", "alpha"],`)
 	},
 	"validate-crossrefs": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "crossrefs.json", `"references": []`,
-			`"references": [{"from_id": "core-00-01", "target_id": "core-99-99", "relation": "related"}]`)
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"target_id": "core-00-01",`, `"target_id": "core-99-99",`)
 	},
 	"validate-concept-ownership": func(t *testing.T, dir string) {
 		replaceFixture(t, dir, "concepts.json", `"canonical_owner": "core-00-01"`, `"canonical_owner": "core-99-99"`)
