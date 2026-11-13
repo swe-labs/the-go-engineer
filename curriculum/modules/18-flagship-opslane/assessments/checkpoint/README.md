@@ -127,3 +127,11 @@ Submit your answers to the 10 questions in `questions.md` demonstrating mastery 
 ## Retake policy
 
 If you score below the passing threshold, revisit the lessons covering the rubric dimensions where you lost points, redo the missed items, and resubmit with a one-paragraph explanation of what you corrected and why.
+
+## NEXT UP
+
+Proceed to the live capstone defense and career portfolio packaging:
+
+- [Milestone 15: Opslane Portfolio Defense](../../projects/15-opslane-portfolio-defense/README.md)
+- [Module 16: Portfolio and Interview Readiness](../../../16-portfolio-interview-readiness/README.md)
+- [Module 17: Advanced Electives](../../../../electives/advanced-electives/README.md)

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -125,4 +126,32 @@ func TestEventBus_Unsubscribe(t *testing.T) {
 	}
 
 	_ = bus.Close(context.Background())
+}
+
+func TestEventBus_ConcurrentPublishAndClose(t *testing.T) {
+	bus := NewEventBus()
+	bus.Subscribe("telemetry.event", func(ctx context.Context, e Event) error {
+		time.Sleep(time.Millisecond)
+		return nil
+	})
+
+	var wg sync.WaitGroup
+	wg.Add(10)
+	for i := 0; i < 10; i++ {
+		go func() {
+			defer wg.Done()
+			for j := 0; j < 50; j++ {
+				bus.Publish(context.Background(), BaseEvent{EventType: "telemetry.event"})
+			}
+		}()
+	}
+
+	time.Sleep(5 * time.Millisecond)
+	shutdownCtx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+
+	if err := bus.Close(shutdownCtx); err != nil {
+		t.Fatalf("expected clean close under concurrent publish, got: %v", err)
+	}
+	wg.Wait()
 }

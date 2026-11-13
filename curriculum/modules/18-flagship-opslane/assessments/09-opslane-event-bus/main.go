@@ -100,12 +100,14 @@ func (b *EventBus) Publish(ctx context.Context, e Event) {
 	subs := append([]Subscription(nil), b.subscribers[e.Type()]...)
 	// Also invoke wildcard subscribers if any
 	wildcardSubs := append([]Subscription(nil), b.subscribers["*"]...)
-	b.mu.RUnlock()
-
 	allSubs := append(subs, wildcardSubs...)
 
+	if len(allSubs) > 0 {
+		b.wg.Add(len(allSubs))
+	}
+	b.mu.RUnlock()
+
 	for _, sub := range allSubs {
-		b.wg.Add(1)
 		go func(s Subscription) {
 			defer b.wg.Done()
 			defer func() {

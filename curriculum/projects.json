@@ -5227,7 +5227,7 @@
             "The main behavior matches the README requirements."
           ],
           "files_touched": [
-            "17-flagship-opslane"
+            "18-flagship-opslane"
           ],
           "id": "project-opslane-task-build",
           "instruction": "Build and deploy a full-stack application with Go backend, operations dashboard, automated CI/CD, observability stack, and production readiness.",
@@ -5241,7 +5241,7 @@
             "At least one edge case or failure path is checked."
           ],
           "files_touched": [
-            "17-flagship-opslane"
+            "18-flagship-opslane"
           ],
           "id": "project-opslane-task-test",
           "instruction": "Write comprehensive tests across all layers: unit, integration, and end-to-end tests for critical paths.",
@@ -5255,7 +5255,7 @@
             "A reviewer can run or inspect the project without guessing."
           ],
           "files_touched": [
-            "17-flagship-opslane"
+            "18-flagship-opslane"
           ],
           "id": "project-opslane-task-explain",
           "instruction": "Document the complete system architecture, deployment process, monitoring setup, and incident response plan.",
@@ -5275,8 +5275,8 @@
           "Check rubric."
         ],
         "mode": "mixed",
-        "run_command": "docker compose up --build",
-        "test_command": "go test -tags=integration -race ./..."
+        "run_command": "go run ./curriculum/modules/18-flagship-opslane/projects/opslane-flagship/_solution",
+        "test_command": "go test -v -race ./curriculum/modules/18-flagship-opslane/projects/opslane-flagship/_solution"
       }
     },
     {

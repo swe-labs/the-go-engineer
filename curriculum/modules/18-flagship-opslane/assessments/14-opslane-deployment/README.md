@@ -86,10 +86,10 @@ go run ./curriculum/modules/18-flagship-opslane/assessments/14-opslane-deploymen
 ## Code Walkthrough
 
 1. **Health Models (lines 12–25)**: Defines `ComponentHealth` (name, healthy flag, latency) and `ReadinessReport` (status, duration, component array).
-2. **`HealthChecker` & Generic Checker (lines 27–55)**: Interface defining `CheckHealth(ctx)`; generic checker supports error and latency simulation.
-3. **`DeploymentHealthService` (lines 58–73)**: Aggregates checkers and mounts `/health/live` and `/health/ready`.
-4. **`handleLiveness` (lines 75–80)**: Emits instantaneous HTTP 200 `{"status":"ALIVE"}`.
-5. **`handleReadiness` (lines 83–129)**:
+2. **`HealthChecker` & Generic Checker (lines 27–67)**: Interface defining `CheckHealth(ctx)`; generic checker supports error and latency simulation observing context cancellation.
+3. **`DeploymentHealthService` (lines 70–85)**: Aggregates checkers and mounts `/health/live` and `/health/ready`.
+4. **`handleLiveness` (lines 87–92)**: Emits instantaneous HTTP 200 `{"status":"ALIVE"}`.
+5. **`handleReadiness` (lines 95–141)**:
    - Sets 50ms context timeout.
    - Spawns concurrent check goroutines with `sync.WaitGroup`.
    - Gathers results; determines overall health status.

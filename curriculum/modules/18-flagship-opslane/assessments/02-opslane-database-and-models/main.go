@@ -6,6 +6,8 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"strings"
+	"sync/atomic"
 	"time"
 
 	_ "modernc.org/sqlite"
@@ -153,7 +155,49 @@ var SchemaMigrations = []Migration{
 
 // Database Connection & Pooling
 
+// memDBSeq disambiguates in-memory databases opened within the same clock
+// tick, where time.Now().UnixNano() alone can collide.
+var memDBSeq atomic.Uint64
+
+// ConnectDatabase opens a SQLite database with foreign-key enforcement
+// enabled, or fails fast. SQLite foreign_keys is a per-connection setting
+// that defaults to OFF, so the declared REFERENCES constraints only fire when
+// the pragma is applied on every pooled connection. The driver applies each
+// _pragma DSN parameter on every new connection — sorted lexicographically,
+// not in query order — so the DSN is normalized here:
+//
+//   - ":memory:" becomes a uniquely named shared-cache URI. A bare ":memory:"
+//     pool would drop the database when its last connection closes, and a
+//     fixed shared-cache name would silently couple independent callers to
+//     one shared database. A unique name keeps each call isolated while
+//     cache=shared keeps the database alive across the pool.
+//   - "file:" URIs get _pragma=foreign_keys(1) appended unconditionally.
+//   - Plain filesystem paths get ?_pragma=foreign_keys(1) appended; the
+//     driver splits the query off non-file: DSNs itself. A '?' inside the
+//     path itself is rejected — SQLite's file: URI grammar cannot carry such
+//     a filename — so the caller must pass a file: URI in that rare case.
+//
+// Because a caller-supplied pragma can still out-sort the appended value
+// (e.g. _pragma=foreign_keys=off sorts after _pragma=foreign_keys(1)),
+// ConnectDatabase verifies PRAGMA foreign_keys on the opened pool and
+// returns an error rather than handing back a pool with enforcement off.
 func ConnectDatabase(dsn string) (*sql.DB, error) {
+	switch {
+	case dsn == ":memory:":
+		dsn = fmt.Sprintf("file:mem%d_%d?mode=memory&cache=shared&_pragma=foreign_keys(1)", time.Now().UnixNano(), memDBSeq.Add(1))
+	case strings.HasPrefix(dsn, "file:"):
+		sep := "?"
+		if strings.Contains(dsn, "?") {
+			sep = "&"
+		}
+		dsn += sep + "_pragma=foreign_keys(1)"
+	default:
+		if strings.ContainsRune(dsn, '?') {
+			return nil, fmt.Errorf("cannot append pragmas to DSN containing '?': %q — pass a file: URI instead", dsn)
+		}
+		dsn += "?_pragma=foreign_keys(1)"
+	}
+
 	db, err := sql.Open("sqlite", dsn)
 	if err != nil {
 		return nil, fmt.Errorf("failed to open database: %w", err)
@@ -171,6 +215,19 @@ func ConnectDatabase(dsn string) (*sql.DB, error) {
 	if err := db.PingContext(ctx); err != nil {
 		_ = db.Close()
 		return nil, fmt.Errorf("database ping failed: %w", err)
+	}
+
+	// Fail fast instead of silently returning a pool without enforcement:
+	// every pooled connection receives the same DSN pragma sequence, so the
+	// state observed here holds across the pool.
+	var fk int
+	if err := db.QueryRowContext(ctx, "PRAGMA foreign_keys").Scan(&fk); err != nil {
+		_ = db.Close()
+		return nil, fmt.Errorf("failed to verify foreign key enforcement: %w", err)
+	}
+	if fk != 1 {
+		_ = db.Close()
+		return nil, fmt.Errorf("foreign key enforcement is not active on %s — a pragma in the DSN disabled it", dsn)
 	}
 
 	return db, nil

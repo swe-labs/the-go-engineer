@@ -43,7 +43,7 @@ Job Submissions (Submit(job))
 ## Machine View
 
 Under the hood:
-1. `p.jobs = make(chan Job, queueCap)` allocates a bounded ring buffer in memory. `Submit` attempts a non-blocking channel send unless the channel is full.
+1. `p.jobs = make(chan Job, queueCap)` allocates a bounded ring buffer in memory. `Submit` sends to `p.jobs`, applying blocking backpressure when the queue reaches capacity until a worker goroutine frees buffer space or the context cancels.
 2. `executeJob` tracks peak concurrency using a lock-free Compare-And-Swap (CAS) loop:
    ```go
    currentMax := p.maxConcurrencySeen.Load()

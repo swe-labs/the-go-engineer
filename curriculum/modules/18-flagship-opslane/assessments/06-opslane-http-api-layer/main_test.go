@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -157,5 +158,44 @@ func TestAPI_PayloadTooLarge(t *testing.T) {
 
 	if rr.Code != http.StatusRequestEntityTooLarge {
 		t.Fatalf("expected 413 Payload Too Large, got %d", rr.Code)
+	}
+}
+
+func TestAPI_CreateOrder_NoIDCollisionAfterDelete(t *testing.T) {
+	server := NewAPIServer()
+	router := server.Router()
+
+	create := func(title string) string {
+		payload := fmt.Sprintf(`{"title":"%s","amount":50.0,"currency":"USD"}`, title)
+		req := httptest.NewRequest(http.MethodPost, "/api/v1/orders", strings.NewReader(payload))
+		req.Header.Set("Content-Type", "application/json")
+		rr := httptest.NewRecorder()
+		router.ServeHTTP(rr, req)
+		if rr.Code != http.StatusCreated {
+			t.Fatalf("create failed: %d", rr.Code)
+		}
+		var resp struct {
+			Data OrderDTO `json:"data"`
+		}
+		_ = json.NewDecoder(rr.Body).Decode(&resp)
+		return resp.Data.ID
+	}
+
+	id1 := create("Order 1")
+	id2 := create("Order 2")
+
+	// Delete order 1
+	delReq := httptest.NewRequest(http.MethodDelete, "/api/v1/orders/"+id1, nil)
+	rrDel := httptest.NewRecorder()
+	router.ServeHTTP(rrDel, delReq)
+	if rrDel.Code != http.StatusNoContent {
+		t.Fatalf("delete failed: %d", rrDel.Code)
+	}
+
+	// Create order 3
+	id3 := create("Order 3")
+
+	if id3 == id1 || id3 == id2 {
+		t.Fatalf("COLLISION DETECTED: New order ID %s collided with previous IDs (%s, %s)", id3, id1, id2)
 	}
 }

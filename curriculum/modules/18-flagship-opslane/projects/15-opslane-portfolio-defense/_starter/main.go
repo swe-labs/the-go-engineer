@@ -53,43 +53,27 @@ func NewOpslaneSystemContract() *OpslaneSystemContract {
 }
 
 // VerifyTenantBoundary checks that tenant A cannot see tenant B's data.
-// TODO: Implement cross-tenant boundary verification and mark criteria["tenant_isolation"].Validated = true.
+// TODO: 1. Append resourceA to tenantA's dataset in c.tenantData.
+// TODO: 2. Verify that tenantB's dataset contains zero access to resourceA (return false on leak).
+// TODO: 3. Mark c.criteria["tenant_isolation"].Validated = true and return true.
 func (c *OpslaneSystemContract) VerifyTenantBoundary(tenantA, tenantB, resourceA string) bool {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
-	c.tenantData[tenantA] = append(c.tenantData[tenantA], resourceA)
-
-	// Verify tenantB has zero access
-	for _, res := range c.tenantData[tenantB] {
-		if res == resourceA {
-			return false
-		}
-	}
-
-	c.criteria["tenant_isolation"].Validated = true
-	return true
+	// TODO: Implement cross-tenant boundary verification and mark criteria["tenant_isolation"].Validated = true.
+	return false
 }
 
 // VerifyIdempotency simulates a payment execution protected by an idempotency key.
 // Returns (transactionID, wasCharged).
-// TODO: Implement idempotency deduplication returning previous tx ID on duplicate without charging.
+// TODO: 1. If idemKey exists in c.idemKeys, mark c.criteria["idempotency"].Validated = true and return (existingTxID, false).
+// TODO: 2. Otherwise, increment c.chargesRun, record new transaction ID in c.idemKeys, and return (newTxID, true).
 func (c *OpslaneSystemContract) VerifyIdempotency(idemKey string) (string, bool) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
-	// Duplicate check
-	if txID, exists := c.idemKeys[idemKey]; exists {
-		c.criteria["idempotency"].Validated = true
-		return txID, false
-	}
-
-	// First execution
-	chargeCount := c.chargesRun.Add(1)
-	txID := fmt.Sprintf("txn_live_%04d", chargeCount)
-	c.idemKeys[idemKey] = txID
-
-	return txID, true
+	// TODO: Implement idempotency deduplication returning previous tx ID on duplicate without charging.
+	return "", false
 }
 
 // AllCriteriaValidated returns true if all 5 defense pillars have been proven.

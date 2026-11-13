@@ -108,6 +108,7 @@ go test -v -race ./curriculum/modules/18-flagship-opslane/projects/opslane-flags
 
 ## NEXT UP
 
-Package and defend this reference implementation:
+Complete the final capstone presentation and defend your architectural decisions:
 
+- [Milestone 15: Opslane Portfolio Defense](../15-opslane-portfolio-defense/README.md)
 - [Module 16: Portfolio and Interview Readiness](../../../16-portfolio-interview-readiness/README.md)

@@ -37,19 +37,31 @@ type GenericDependencyChecker struct {
 
 func (c *GenericDependencyChecker) CheckHealth(ctx context.Context) ComponentHealth {
 	start := time.Now()
+	var delayErr error
 	if c.SimulateDelay > 0 {
-		time.Sleep(c.SimulateDelay)
+		timer := time.NewTimer(c.SimulateDelay)
+		defer timer.Stop()
+		select {
+		case <-ctx.Done():
+			delayErr = ctx.Err()
+		case <-timer.C:
+		}
 	}
 	latency := time.Since(start)
 
+	err := c.SimulateError
+	if err == nil && delayErr != nil {
+		err = delayErr
+	}
+
 	health := ComponentHealth{
 		Name:      c.ComponentName,
-		Healthy:   c.SimulateError == nil,
+		Healthy:   err == nil,
 		Latency:   latency,
 		LatencyMs: float64(latency.Microseconds()) / 1000.0,
 	}
-	if c.SimulateError != nil {
-		health.Error = c.SimulateError.Error()
+	if err != nil {
+		health.Error = err.Error()
 	}
 	return health
 }

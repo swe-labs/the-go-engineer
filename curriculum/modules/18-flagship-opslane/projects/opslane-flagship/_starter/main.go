@@ -298,192 +298,41 @@ var (
 	paymentSeq atomic.Uint64
 )
 
-// TODO: Implement CreateOrder with tenant isolation, validation, and metrics.
+// TODO: Implement CreateOrder with tenant isolation, validation, and metrics:
+// 1. Verify tenantID is non-empty (return ErrTenantMismatch if empty).
+// 2. Validate customer name and positive amountCents.
+// 3. Insert into database orders table with status StatusPending.
+// 4. Invalidate cache ("<tenantID>:orders:all") and submit background audit event.
 func (s *OpslaneServer) CreateOrder(ctx context.Context, tenantID, customer string, amountCents int64) (*Order, error) {
-	if tenantID == "" {
-		return nil, ErrTenantMismatch
-	}
-	if customer == "" || amountCents <= 0 {
-		return nil, errors.New("invalid order parameters: customer required and amount > 0")
-	}
-
-	now := time.Now().UTC()
-	seq := orderSeq.Add(1)
-	order := &Order{
-		ID:          fmt.Sprintf("ord_%d_%d", now.UnixNano(), seq),
-		TenantID:    tenantID,
-		Customer:    customer,
-		AmountCents: amountCents,
-		Status:      StatusPending,
-		CreatedAt:   now,
-		UpdatedAt:   now,
-	}
-
-	query := `INSERT INTO orders (id, tenant_id, customer, amount_cents, status, created_at, updated_at)
-	          VALUES (?, ?, ?, ?, ?, ?, ?)`
-	_, err := s.db.ExecContext(ctx, query, order.ID, order.TenantID, order.Customer, order.AmountCents, string(order.Status), order.CreatedAt, order.UpdatedAt)
-	if err != nil {
-		return nil, fmt.Errorf("insert order: %w", err)
-	}
-
-	s.metrics.OrdersCreated.Add(1)
-	s.cache.Invalidate(fmt.Sprintf("%s:orders:all", tenantID))
-
-	_ = s.pool.Submit(func(c context.Context) {
-		_, _ = s.db.Exec(`INSERT INTO audit_logs (tenant_id, action, entity_id, created_at) VALUES (?, ?, ?, ?)`,
-			tenantID, "order.created", order.ID, time.Now().UTC())
-	})
-
-	return order, nil
+	// TODO: Implement order creation workflow
+	return nil, errors.New("CreateOrder not implemented")
 }
 
-// TODO: Implement GetOrder with tenant boundary checks and singleflight cache lookup.
+// TODO: Implement GetOrder with tenant boundary checks and singleflight cache lookup:
+// 1. Check cache for tenantID:order:orderID.
+// 2. On miss, query database filtering strictly by id AND tenant_id.
+// 3. Return ErrNotFound if missing.
 func (s *OpslaneServer) GetOrder(ctx context.Context, tenantID, orderID string) (*Order, error) {
-	cacheKey := fmt.Sprintf("%s:order:%s", tenantID, orderID)
-	val, err := s.cache.GetOrCompute(cacheKey, 30*time.Second, func() (any, error) {
-		query := `SELECT id, tenant_id, customer, amount_cents, status, created_at, updated_at
-		          FROM orders WHERE id = ? AND tenant_id = ?`
-		row := s.db.QueryRowContext(ctx, query, orderID, tenantID)
-
-		var ord Order
-		var statusStr string
-		if err := row.Scan(&ord.ID, &ord.TenantID, &ord.Customer, &ord.AmountCents, &statusStr, &ord.CreatedAt, &ord.UpdatedAt); err != nil {
-			if errors.Is(err, sql.ErrNoRows) {
-				return nil, ErrNotFound
-			}
-			return nil, err
-		}
-		ord.Status = OrderStatus(statusStr)
-		return &ord, nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return val.(*Order), nil
+	// TODO: Implement tenant-scoped order retrieval
+	return nil, errors.New("GetOrder not implemented")
 }
 
-// TODO: Implement ListOrders filtering strictly by tenantID.
+// TODO: Implement ListOrders filtering strictly by tenantID:
+// 1. Query orders table WHERE tenant_id = ? ORDER BY created_at DESC.
+// 2. Scan and return slice of orders for this tenant.
 func (s *OpslaneServer) ListOrders(ctx context.Context, tenantID string) ([]*Order, error) {
-	cacheKey := fmt.Sprintf("%s:orders:all", tenantID)
-	val, err := s.cache.GetOrCompute(cacheKey, 15*time.Second, func() (any, error) {
-		query := `SELECT id, tenant_id, customer, amount_cents, status, created_at, updated_at
-		          FROM orders WHERE tenant_id = ? ORDER BY created_at DESC LIMIT 100`
-		rows, err := s.db.QueryContext(ctx, query, tenantID)
-		if err != nil {
-			return nil, err
-		}
-		defer rows.Close()
-
-		var results []*Order
-		for rows.Next() {
-			var ord Order
-			var statusStr string
-			if err := rows.Scan(&ord.ID, &ord.TenantID, &ord.Customer, &ord.AmountCents, &statusStr, &ord.CreatedAt, &ord.UpdatedAt); err != nil {
-				return nil, err
-			}
-			ord.Status = OrderStatus(statusStr)
-			results = append(results, &ord)
-		}
-		return results, rows.Err()
-	})
-	if err != nil {
-		return nil, err
-	}
-	return val.([]*Order), nil
+	// TODO: Implement tenant order listing
+	return nil, errors.New("ListOrders not implemented")
 }
 
-// TODO: Implement ProcessPayment with atomic transaction, idempotency key replay, and state transition.
+// TODO: Implement ProcessPayment with atomic transaction, idempotency key replay, and state transition:
+// 1. Verify idempotency key is non-empty.
+// 2. Check payments table for existing idempotency_key (return existing payment on match without charging).
+// 3. Execute in transaction: verify order status is PENDING, transition to COMPLETED, insert payment record.
+// 4. Invalidate cache and submit background fulfillment audit event.
 func (s *OpslaneServer) ProcessPayment(ctx context.Context, tenantID, orderID, idemKey string) (*Payment, error) {
-	if idemKey == "" {
-		return nil, errors.New("idempotency_key is required")
-	}
-
-	tx, err := s.db.BeginTx(ctx, &sql.TxOptions{Isolation: sql.LevelSerializable})
-	if err != nil {
-		return nil, fmt.Errorf("begin tx: %w", err)
-	}
-	defer tx.Rollback()
-
-	// 1. Check existing payment with idempotency key
-	var existing Payment
-	err = tx.QueryRowContext(ctx, `SELECT id, tenant_id, order_id, idempotency_key, amount_cents, status, created_at
-	                               FROM payments WHERE idempotency_key = ?`, idemKey).
-		Scan(&existing.ID, &existing.TenantID, &existing.OrderID, &existing.IdempotencyKey, &existing.AmountCents, &existing.Status, &existing.CreatedAt)
-
-	if err == nil {
-		if existing.TenantID != tenantID {
-			return nil, ErrTenantMismatch
-		}
-		return &existing, nil
-	} else if !errors.Is(err, sql.ErrNoRows) {
-		return nil, fmt.Errorf("query payment by idem key: %w", err)
-	}
-
-	// 2. Fetch order strictly within tenant boundary
-	var ord Order
-	var statusStr string
-	err = tx.QueryRowContext(ctx, `SELECT id, tenant_id, customer, amount_cents, status, created_at, updated_at
-	                               FROM orders WHERE id = ? AND tenant_id = ?`, orderID, tenantID).
-		Scan(&ord.ID, &ord.TenantID, &ord.Customer, &ord.AmountCents, &statusStr, &ord.CreatedAt, &ord.UpdatedAt)
-	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return nil, ErrNotFound
-		}
-		return nil, err
-	}
-	ord.Status = OrderStatus(statusStr)
-
-	if ord.Status == StatusCompleted {
-		return nil, errors.New("order is already completed")
-	}
-	if !isValidTransition(ord.Status, StatusProcessing) && ord.Status != StatusProcessing {
-		return nil, fmt.Errorf("%w: cannot process payment for status %s", ErrInvalidState, ord.Status)
-	}
-
-	// 3. Insert payment record
-	now := time.Now().UTC()
-	pSeq := paymentSeq.Add(1)
-	payment := &Payment{
-		ID:             fmt.Sprintf("pay_%d_%d", now.UnixNano(), pSeq),
-		TenantID:       tenantID,
-		OrderID:        orderID,
-		IdempotencyKey: idemKey,
-		AmountCents:    ord.AmountCents,
-		Status:         "SUCCESS",
-		CreatedAt:      now,
-	}
-
-	_, err = tx.ExecContext(ctx, `INSERT INTO payments (id, tenant_id, order_id, idempotency_key, amount_cents, status, created_at)
-	                             VALUES (?, ?, ?, ?, ?, ?, ?)`,
-		payment.ID, payment.TenantID, payment.OrderID, payment.IdempotencyKey, payment.AmountCents, payment.Status, payment.CreatedAt)
-	if err != nil {
-		s.metrics.PaymentsFailed.Add(1)
-		return nil, fmt.Errorf("insert payment: %w", err)
-	}
-
-	// 4. Update order status to COMPLETED
-	_, err = tx.ExecContext(ctx, `UPDATE orders SET status = ?, updated_at = ? WHERE id = ? AND tenant_id = ?`,
-		string(StatusCompleted), now, orderID, tenantID)
-	if err != nil {
-		s.metrics.PaymentsFailed.Add(1)
-		return nil, fmt.Errorf("update order status: %w", err)
-	}
-
-	if err := tx.Commit(); err != nil {
-		s.metrics.PaymentsFailed.Add(1)
-		return nil, fmt.Errorf("commit payment tx: %w", err)
-	}
-
-	s.metrics.PaymentsSuccess.Add(1)
-	s.cache.Invalidate(fmt.Sprintf("%s:order:%s", tenantID, orderID))
-	s.cache.Invalidate(fmt.Sprintf("%s:orders:all", tenantID))
-
-	_ = s.pool.Submit(func(c context.Context) {
-		_, _ = s.db.Exec(`INSERT INTO audit_logs (tenant_id, action, entity_id, created_at) VALUES (?, ?, ?, ?)`,
-			tenantID, "payment.completed", payment.ID, time.Now().UTC())
-	})
-
-	return payment, nil
+	// TODO: Implement idempotent payment execution
+	return nil, errors.New("ProcessPayment not implemented")
 }
 
 // TODO: Implement HTTP routing, RBAC, and middleware integration.

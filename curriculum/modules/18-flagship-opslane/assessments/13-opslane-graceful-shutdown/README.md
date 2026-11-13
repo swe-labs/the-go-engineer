@@ -88,13 +88,13 @@ go run ./curriculum/modules/18-flagship-opslane/assessments/13-opslane-graceful-
 ## Code Walkthrough
 
 1. **`ShutdownCoordinator` Struct (lines 17–23)**: Holds `http.Server`, atomic `shuttingDown` flag, worker channel, and synchronization primitives.
-2. **`healthMiddleware` (lines 43–52)**: If `shuttingDown.Load()` is true, returns HTTP 503 Service Unavailable and `Connection: close` header.
-3. **Test Routes (lines 54–64)**: `/ping` returns 200 immediately; `/slow-task` simulates a 50ms in-flight request.
-4. **`GracefulShutdown()` (lines 67–80)**:
+2. **`healthMiddleware` (lines 44–52)**: If `shuttingDown.Load()` is true, returns HTTP 503 Service Unavailable and `Connection: close` header.
+3. **Test Routes (lines 54–68)**: `/ping` returns 200 immediately; `/slow-task` simulates a 50ms in-flight request.
+4. **`GracefulShutdown()` (lines 71–84)**:
    - Sets `shuttingDown` flag.
    - Invokes `server.Shutdown(ctx)` to drain HTTP requests.
    - Closes background worker queue.
-5. **`main()` Signal Loop (lines 82–110)**: Starts server in a goroutine, waits on `SIGTERM`/`SIGINT`, and initiates `GracefulShutdown` with a 5-second timeout.
+5. **`main()` Signal Loop (lines 86–113)**: Starts server in a goroutine, waits on `SIGTERM`/`SIGINT`, and initiates `GracefulShutdown` with a 5-second timeout.
 
 ## Try It
 

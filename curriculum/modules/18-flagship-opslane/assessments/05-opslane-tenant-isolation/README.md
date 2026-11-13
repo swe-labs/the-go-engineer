@@ -42,7 +42,7 @@ In multi-tenant SaaS architectures, data leaks between corporate accounts repres
 
 Under the hood:
 1. `TenantFromContext` retrieves the unexported `tenantContextKey` from the active context. Missing or blank keys abort before executing database transactions.
-2. The table `tenant_orders` defines `PRIMARY KEY (tenant_id, id)`. This B-tree index layout clusters all rows belonging to a tenant together physically on disk, optimizing cache locality and range scans.
+2. The table `tenant_orders` defines `PRIMARY KEY (tenant_id, id)`. In relational databases, this composite index layout groups all index entries for a tenant contiguously within B-tree leaf nodes, optimizing cache locality and tenant range scans.
 3. Every mutating statement (`UPDATE`, `DELETE`) inspects `res.RowsAffected()`. If a caller attempts to update or delete an order with ID `"ord-1"` but their context specifies `tenant-beta` while the order belongs to `tenant-alpha`, `RowsAffected` evaluates to `0`, preventing unauthorized modification.
 
 A representative excerpt from `main.go` (`IsolatedStore.GetByID`):
