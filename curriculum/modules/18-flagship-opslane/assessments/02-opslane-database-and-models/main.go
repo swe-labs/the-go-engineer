@@ -171,10 +171,11 @@ var memDBSeq atomic.Uint64
 //     fixed shared-cache name would silently couple independent callers to
 //     one shared database. A unique name keeps each call isolated while
 //     cache=shared keeps the database alive across the pool.
-//   - "file:" URIs always end up with _pragma=foreign_keys(1): the parameter
-//     is appended when absent, and re-appended when a caller supplied a
-//     disabling form such as _pragma=foreign_keys(0) — the driver applies DSN
-//     pragmas in query order, so the appended (1) is the final state.
+//   - "file:" URIs always get _pragma=foreign_keys(1) appended
+//     unconditionally. The driver applies DSN pragma parameters in query
+//     order, so this trailing (1) is the final foreign_keys assignment even
+//     when the caller supplied disabling values or repeated pragma entries
+//     such as _pragma=foreign_keys(1)&_pragma=foreign_keys(0).
 //   - Plain filesystem paths are converted to file: URI form so the pragma
 //     parameter can ride along on every connection.
 func ConnectDatabase(dsn string) (*sql.DB, error) {
@@ -182,13 +183,14 @@ func ConnectDatabase(dsn string) (*sql.DB, error) {
 	case dsn == ":memory:":
 		dsn = fmt.Sprintf("file:mem%d_%d?mode=memory&cache=shared&_pragma=foreign_keys(1)", time.Now().UnixNano(), memDBSeq.Add(1))
 	case strings.HasPrefix(dsn, "file:"):
-		if !strings.Contains(dsn, "_pragma=foreign_keys(1)") {
-			sep := "?"
-			if strings.Contains(dsn, "?") {
-				sep = "&"
-			}
-			dsn += sep + "_pragma=foreign_keys(1)"
+		// Appended unconditionally: parsing or substring-matching previous
+		// pragma values cannot decide the final state when the parameter
+		// repeats, but "apply (1) last" always can.
+		sep := "?"
+		if strings.Contains(dsn, "?") {
+			sep = "&"
 		}
+		dsn += sep + "_pragma=foreign_keys(1)"
 	default:
 		dsn = "file:" + filepath.ToSlash(dsn) + "?_pragma=foreign_keys(1)"
 	}

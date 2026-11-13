@@ -218,3 +218,20 @@ func TestConnectDatabase_DisablingPragmaIsOverridden(t *testing.T) {
 		t.Fatalf("expected foreign key enforcement despite caller-supplied foreign_keys(0)")
 	}
 }
+
+func TestConnectDatabase_RepeatedPragmasEndEnabled(t *testing.T) {
+	// Even an ordered disabling tail like (1)&(0) loses: ConnectDatabase
+	// appends (1) unconditionally, and the driver applies pragmas in order.
+	db, err := ConnectDatabase("file:" + filepath.ToSlash(filepath.Join(t.TempDir(), "opslane_fk10.db")) + "?_pragma=foreign_keys(1)&_pragma=foreign_keys(0)")
+	if err != nil {
+		t.Fatalf("open db with repeated pragmas: %v", err)
+	}
+	defer db.Close()
+
+	if _, err := db.Exec("CREATE TABLE parent (id TEXT PRIMARY KEY); CREATE TABLE child (pid TEXT REFERENCES parent(id))"); err != nil {
+		t.Fatalf("create schema: %v", err)
+	}
+	if _, err := db.Exec("INSERT INTO child (pid) VALUES ('missing-parent')"); err == nil {
+		t.Fatalf("expected foreign key enforcement despite trailing foreign_keys(0)")
+	}
+}
