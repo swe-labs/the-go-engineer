@@ -106,7 +106,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -138,7 +137,7 @@
         "core-10-25"
       ],
       "title": "Module 10 Assessment — Authentication, Authorization, and Security",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "criteria": [
@@ -310,7 +309,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/01-threat-modeling/assets",
@@ -345,8 +343,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "threat-modeling",
       "source_legacy_ids": [
@@ -483,7 +480,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/02-trust-boundaries/assets",
@@ -518,8 +514,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "trust-boundaries",
       "source_legacy_ids": [],
@@ -660,7 +655,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/03-input-validation-for-security/assets",
@@ -695,8 +689,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "input-validation-for-security",
       "source_legacy_ids": [],
@@ -830,7 +823,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/04-authentication-vs-authorization/assets",
@@ -865,8 +857,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "authentication-vs-authorization",
       "source_legacy_ids": [],
@@ -1007,7 +998,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/05-password-hashing/assets",
@@ -1042,8 +1032,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "password-hashing",
       "source_legacy_ids": [
@@ -1180,7 +1169,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/06-sessions-and-cookies/assets",
@@ -1215,8 +1203,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "sessions-and-cookies",
       "source_legacy_ids": [],
@@ -1357,7 +1344,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/07-jwt-implementation/assets",
@@ -1392,8 +1378,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "jwt-implementation",
       "source_legacy_ids": [],
@@ -1528,7 +1513,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/08-jwt-risks/assets",
@@ -1563,8 +1547,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "jwt-risks",
       "source_legacy_ids": [],
@@ -1714,7 +1697,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/09-oauth2-and-oidc-overview/assets",
@@ -1749,8 +1731,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "oauth2-and-oidc-overview",
       "source_legacy_ids": [],
@@ -1889,7 +1870,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/10-api-keys/assets",
@@ -1924,8 +1904,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "api-keys",
       "source_legacy_ids": [],
@@ -2070,7 +2049,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/11-rbac/assets",
@@ -2105,8 +2083,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "rbac",
       "source_legacy_ids": [],
@@ -2245,7 +2222,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/12-abac-and-policy-checks/assets",
@@ -2280,8 +2256,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "abac-and-policy-checks",
       "source_legacy_ids": [],
@@ -2432,7 +2407,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/13-tenant-isolation-basics/assets",
@@ -2467,8 +2441,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "tenant-isolation-basics",
       "source_legacy_ids": [],
@@ -2606,7 +2579,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/14-sql-injection-prevention/assets",
@@ -2641,8 +2613,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "sql-injection-prevention",
       "source_legacy_ids": [
@@ -2788,7 +2759,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/15-xss/assets",
@@ -2823,8 +2793,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "xss",
       "source_legacy_ids": [
@@ -2963,7 +2932,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/16-csrf/assets",
@@ -2998,8 +2966,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "csrf",
       "source_legacy_ids": [
@@ -3145,7 +3112,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/17-cors/assets",
@@ -3180,8 +3146,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "cors",
       "source_legacy_ids": [],
@@ -3319,7 +3284,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/18-rate-limiting/assets",
@@ -3354,8 +3318,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "rate-limiting",
       "source_legacy_ids": [
@@ -3501,7 +3464,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/19-tls-and-https/assets",
@@ -3536,8 +3498,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "tls-and-https",
       "source_legacy_ids": [
@@ -3677,7 +3638,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/20-secrets-management/assets",
@@ -3712,8 +3672,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "secrets-management",
       "source_legacy_ids": [
@@ -3859,7 +3818,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/21-dependency-security/assets",
@@ -3894,8 +3852,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "dependency-security",
       "source_legacy_ids": [],
@@ -4034,7 +3991,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/22-govulncheck/assets",
@@ -4069,8 +4025,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "govulncheck",
       "source_legacy_ids": [],
@@ -4214,7 +4169,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/23-owasp-for-go-apis/assets",
@@ -4249,8 +4203,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "owasp-for-go-apis",
       "source_legacy_ids": [],
@@ -4390,7 +4343,6 @@
         ]
       },
       "difficulty": "intermediate",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/24-secure-logging/assets",
@@ -4425,8 +4377,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "secure-logging",
       "source_legacy_ids": [],
@@ -4532,7 +4483,6 @@
         "related": []
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/10-auth-security/lessons/25-refresh-tokens/assets",
@@ -4567,8 +4517,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "refresh-tokens",
       "source_legacy_ids": [],
@@ -4654,7 +4603,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/10-auth-security/projects/secure-authenticated-api/assets",
@@ -4678,8 +4626,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "secure-authenticated-api",
       "source_legacy_ids": [],
@@ -4712,7 +4659,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/10-auth-security/assessments/checkpoint/assets",
@@ -4732,8 +4678,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -4766,7 +4711,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/10-auth-security/assessments/secure-authenticated-api/assets",
@@ -4786,8 +4730,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "secure-authenticated-api",
       "source_legacy_ids": [],
@@ -4828,7 +4771,6 @@
       "documentation_mode": "project",
       "id": "project-secure-authenticated-api",
       "module_id": "module-10",
-      "order": 15,
       "placement_anchor_item_id": "core-10-24",
       "portfolio": {
         "architecture_defense_required": false,
@@ -4852,7 +4794,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "JWT",
         "RBAC",

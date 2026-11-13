@@ -107,7 +107,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "target_ids": [
@@ -139,7 +138,7 @@
         "elective-26"
       ],
       "title": "Module 17 Assessment — Electives and Advanced Engineering",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "automated_checks": [
@@ -238,7 +237,6 @@
       "module_id": "module-17",
       "passing_score": 80,
       "purpose": "Evaluate the Advanced Electives Capstone project submission.",
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing gaps and writing a correction note.",
       "status": "ready",
       "target_ids": [
@@ -417,7 +415,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/01-generics/assets",
@@ -452,8 +449,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "generics",
       "source_legacy_ids": [
@@ -588,7 +584,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/02-complex-generic-constraints/assets",
@@ -623,8 +618,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "complex-generic-constraints",
       "source_legacy_ids": [],
@@ -756,7 +750,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/03-generic-data-structures/assets",
@@ -791,8 +784,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "generic-data-structures",
       "source_legacy_ids": [],
@@ -924,7 +916,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/04-functional-options/assets",
@@ -959,8 +950,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "functional-options",
       "source_legacy_ids": [],
@@ -1095,7 +1085,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/05-method-values/assets",
@@ -1130,8 +1119,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "method-values",
       "source_legacy_ids": [],
@@ -1266,7 +1254,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/06-build-tags/assets",
@@ -1301,8 +1288,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "build-tags",
       "source_legacy_ids": [],
@@ -1437,7 +1423,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/07-go-generate/assets",
@@ -1472,8 +1457,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "go-generate",
       "source_legacy_ids": [],
@@ -1608,7 +1592,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/08-mockery/assets",
@@ -1643,8 +1626,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "mockery",
       "source_legacy_ids": [],
@@ -1779,7 +1761,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/09-protobuf/assets",
@@ -1814,8 +1795,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "protobuf",
       "source_legacy_ids": [],
@@ -1948,7 +1928,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/10-grpc-fundamentals/assets",
@@ -1983,8 +1962,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "grpc-fundamentals",
       "source_legacy_ids": [],
@@ -2118,7 +2096,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/11-grpc-streaming/assets",
@@ -2153,8 +2130,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "grpc-streaming",
       "source_legacy_ids": [],
@@ -2286,7 +2262,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/12-grpc-interceptors/assets",
@@ -2321,8 +2296,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "grpc-interceptors",
       "source_legacy_ids": [],
@@ -2454,7 +2428,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/13-rest-vs-grpc-tradeoffs/assets",
@@ -2489,8 +2462,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "rest-vs-grpc-tradeoffs",
       "source_legacy_ids": [],
@@ -2621,7 +2593,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/14-sync-map/assets",
@@ -2656,8 +2627,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "sync-map",
       "source_legacy_ids": [],
@@ -2791,7 +2761,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/15-sync-pool/assets",
@@ -2826,8 +2795,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "sync-pool",
       "source_legacy_ids": [],
@@ -2960,7 +2928,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/16-cqrs/assets",
@@ -2995,8 +2962,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "cqrs",
       "source_legacy_ids": [],
@@ -3131,7 +3097,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/17-feature-flags/assets",
@@ -3166,8 +3131,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "feature-flags",
       "source_legacy_ids": [],
@@ -3301,7 +3265,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/18-blue-green-deployments/assets",
@@ -3336,8 +3299,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "blue-green-deployments",
       "source_legacy_ids": [],
@@ -3472,7 +3434,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/19-microservice-splitting/assets",
@@ -3507,8 +3468,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "microservice-splitting",
       "source_legacy_ids": [],
@@ -3642,7 +3602,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "reference",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "electives/advanced-electives/lessons/20-deeper-distributed-systems/assets",
@@ -3677,8 +3636,7 @@
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
-        "documentation_mode": "reference",
-        "required": true
+        "documentation_mode": "reference"
       },
       "slug": "deeper-distributed-systems",
       "source_legacy_ids": [],
@@ -3800,7 +3758,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 40,
       "files": {
         "assets_dir": "",
@@ -3835,8 +3792,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "why-orchestration",
       "source_legacy_ids": [],
@@ -3952,7 +3908,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -3987,8 +3942,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "kubernetes-object-model",
       "source_legacy_ids": [],
@@ -4111,7 +4065,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 50,
       "files": {
         "assets_dir": "",
@@ -4146,8 +4099,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "config-and-security-context",
       "source_legacy_ids": [],
@@ -4271,7 +4223,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 55,
       "files": {
         "assets_dir": "",
@@ -4306,8 +4257,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "probes-and-graceful-shutdown",
       "source_legacy_ids": [],
@@ -4431,7 +4381,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 55,
       "files": {
         "assets_dir": "",
@@ -4466,8 +4415,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "resources-and-go-runtime",
       "source_legacy_ids": [],
@@ -4584,7 +4532,6 @@
         ]
       },
       "difficulty": "elective",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 55,
       "files": {
         "assets_dir": "",
@@ -4617,8 +4564,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "rollouts-and-troubleshooting",
       "source_legacy_ids": [],
@@ -4718,7 +4664,6 @@
       "prerequisites": [
         "core-16-15"
       ],
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "generic constraints",
         "grpc protocol",
@@ -4780,7 +4725,9 @@
       ],
       "title": "Advanced Electives Capstone",
       "type": "mini-project",
-      "verification": "Manual review of project implementation, tests, and technical write-up against elective module criteria."
+      "verification": {
+        "run_command": "Manual review of project implementation, tests, and technical write-up against elective module criteria."
+      }
     },
     {
       "assessment_id": "assessment-project-kubernetes-go-service",
@@ -4802,7 +4749,6 @@
       "prerequisites": [
         "core-15-19"
       ],
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "desired state and reconciliation",
         "readiness gate",
@@ -4869,7 +4815,9 @@
       ],
       "title": "Kubernetes Go Service Capstone",
       "type": "mini-project",
-      "verification": "Run the verification commands to confirm rollout status, the serving revision, the security context, resource settings, the PodDisruptionBudget, the rollback, and a node drain, then review the written defense against the rubric."
+      "verification": {
+        "run_command": "Run the verification commands to confirm rollout status, the serving revision, the security context, resource settings, the PodDisruptionBudget, the rollback, and a node drain, then review the written defense against the rubric."
+      }
     }
   ],
   "schema_version": "3.1.0",

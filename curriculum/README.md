@@ -767,25 +767,25 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 
 | ID | Title | Type | Passing Score |
 | -- | ----- | ---- | ------------- |
-| `assessment-module-00` | **Module 00 Assessment — Orientation** | project-review | 80% |
-| `assessment-module-01` | **Module 01 Assessment — Computers, Terminal, Git, and the Web** | project-review | 80% |
-| `assessment-module-02` | **Module 02 Assessment — Go Setup and Tooling** | project-review | 80% |
-| `assessment-module-03` | **Module 03 Assessment — Programming Fundamentals with Go** | project-review | 80% |
-| `assessment-module-04` | **Module 04 Assessment — Functions, Errors, and Data Semantics** | project-review | 80% |
-| `assessment-module-05` | **Module 05 Assessment — Types, Interfaces, Packages, and Modules** | project-review | 80% |
-| `assessment-module-06` | **Module 06 Assessment — Testing, Debugging, and Refactoring** | project-review | 80% |
-| `assessment-module-07` | **Module 07 Assessment — CLI, Files, JSON, and Configuration** | project-review | 80% |
-| `assessment-module-08` | **Module 08 Assessment — HTTP and REST APIs** | project-review | 80% |
-| `assessment-module-09` | **Module 09 Assessment — SQL and PostgreSQL Persistence** | project-review | 80% |
-| `assessment-module-10` | **Module 10 Assessment — Authentication, Authorization, and Security** | project-review | 80% |
-| `assessment-module-11` | **Module 11 Assessment — Lifecycle, Context, and Concurrency** | project-review | 80% |
-| `assessment-module-12` | **Module 12 Assessment — Observability and Diagnostics** | project-review | 80% |
-| `assessment-module-13` | **Module 13 Assessment — Performance and Memory Engineering** | project-review | 80% |
-| `assessment-module-14` | **Module 14 Assessment — Architecture and Distributed Systems** | project-review | 80% |
-| `assessment-module-15` | **Module 15 Assessment — Docker, CI/CD, and Deployment** | project-review | 80% |
+| `assessment-module-00` | **Module 00 Assessment — Orientation** | module-assessment | 80% |
+| `assessment-module-01` | **Module 01 Assessment — Computers, Terminal, Git, and the Web** | module-assessment | 80% |
+| `assessment-module-02` | **Module 02 Assessment — Go Setup and Tooling** | module-assessment | 80% |
+| `assessment-module-03` | **Module 03 Assessment — Programming Fundamentals with Go** | module-assessment | 80% |
+| `assessment-module-04` | **Module 04 Assessment — Functions, Errors, and Data Semantics** | module-assessment | 80% |
+| `assessment-module-05` | **Module 05 Assessment — Types, Interfaces, Packages, and Modules** | module-assessment | 80% |
+| `assessment-module-06` | **Module 06 Assessment — Testing, Debugging, and Refactoring** | module-assessment | 80% |
+| `assessment-module-07` | **Module 07 Assessment — CLI, Files, JSON, and Configuration** | module-assessment | 80% |
+| `assessment-module-08` | **Module 08 Assessment — HTTP and REST APIs** | module-assessment | 80% |
+| `assessment-module-09` | **Module 09 Assessment — SQL and PostgreSQL Persistence** | module-assessment | 80% |
+| `assessment-module-10` | **Module 10 Assessment — Authentication, Authorization, and Security** | module-assessment | 80% |
+| `assessment-module-11` | **Module 11 Assessment — Lifecycle, Context, and Concurrency** | module-assessment | 80% |
+| `assessment-module-12` | **Module 12 Assessment — Observability and Diagnostics** | module-assessment | 80% |
+| `assessment-module-13` | **Module 13 Assessment — Performance and Memory Engineering** | module-assessment | 80% |
+| `assessment-module-14` | **Module 14 Assessment — Architecture and Distributed Systems** | module-assessment | 80% |
+| `assessment-module-15` | **Module 15 Assessment — Docker, CI/CD, and Deployment** | module-assessment | 80% |
 | `assessment-module-16` | **Module 16 Assessment — Portfolio and Interview Readiness** | portfolio-review | 80% |
 | `assessment-module-18` | **Module 18 Assessment — Flagship Opslane** | capstone-defense | 80% |
-| `assessment-module-17` | **Module 17 Assessment — Electives and Advanced Engineering** | project-review | 80% |
+| `assessment-module-17` | **Module 17 Assessment — Electives and Advanced Engineering** | module-assessment | 80% |
 
 ### Project Assessments (29 Records)
 

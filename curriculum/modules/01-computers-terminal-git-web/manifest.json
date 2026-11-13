@@ -105,7 +105,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -127,7 +126,7 @@
         "core-01-15"
       ],
       "title": "Module 01 Assessment — Computers, Terminal, Git, and the Web",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "automated_checks": [
@@ -230,7 +229,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "target_ids": [
@@ -301,7 +299,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -336,8 +333,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "what-is-a-program",
       "source_legacy_ids": [
@@ -473,7 +469,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -508,8 +503,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "source-code-executable-and-process",
       "source_legacy_ids": [],
@@ -643,7 +637,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -678,8 +671,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "files-bytes-directories-and-paths",
       "source_legacy_ids": [],
@@ -813,7 +805,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -848,8 +839,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "terminal-basics",
       "source_legacy_ids": [],
@@ -983,7 +973,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1018,8 +1007,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "environment-variables",
       "source_legacy_ids": [],
@@ -1153,7 +1141,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1188,8 +1175,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "exit-codes",
       "source_legacy_ids": [],
@@ -1330,7 +1316,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1365,8 +1350,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "how-the-os-manages-processes",
       "source_legacy_ids": [
@@ -1515,7 +1499,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1550,8 +1533,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "memory-preview-stack-vs-heap",
       "source_legacy_ids": [
@@ -1687,7 +1669,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1722,8 +1703,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "git-mental-model",
       "source_legacy_ids": [],
@@ -1857,7 +1837,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1892,8 +1871,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "git-basics-status-add-commit",
       "source_legacy_ids": [],
@@ -2027,7 +2005,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -2062,8 +2039,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "branching-and-merging",
       "source_legacy_ids": [],
@@ -2197,7 +2173,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -2232,8 +2207,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "github-workflow",
       "source_legacy_ids": [],
@@ -2367,7 +2341,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -2402,8 +2375,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "pull-requests-and-code-review",
       "source_legacy_ids": [],
@@ -2537,7 +2509,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -2572,8 +2543,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "web-preview-client-server-dns-and-ports",
       "source_legacy_ids": [],
@@ -2720,7 +2690,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -2755,8 +2724,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "http-request-and-response-preview",
       "source_legacy_ids": [],
@@ -2840,7 +2808,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "",
@@ -2864,8 +2831,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "shell-git-lab",
       "source_legacy_ids": [],
@@ -2898,7 +2864,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "",
@@ -2918,8 +2883,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "shell-git-lab",
       "source_legacy_ids": [],
@@ -2959,7 +2923,6 @@
       "documentation_mode": "project",
       "id": "project-shell-git-lab",
       "module_id": "module-01",
-      "order": 1,
       "placement_anchor_item_id": "core-01-15",
       "portfolio": {
         "architecture_defense_required": false,
@@ -2983,7 +2946,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "process lifecycle",
         "stdin/stdout/stderr",

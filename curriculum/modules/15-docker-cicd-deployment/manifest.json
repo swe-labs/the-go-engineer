@@ -106,7 +106,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -132,7 +131,7 @@
         "core-15-19"
       ],
       "title": "Module 15 Assessment — Docker, CI/CD, and Deployment",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "criteria": [
@@ -259,7 +258,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/01-linux-processes/assets",
@@ -294,8 +292,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "linux-processes",
       "source_legacy_ids": [],
@@ -395,7 +392,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/02-signals/assets",
@@ -430,8 +426,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "signals",
       "source_legacy_ids": [],
@@ -536,7 +531,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/03-logs/assets",
@@ -571,8 +565,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "logs",
       "source_legacy_ids": [],
@@ -694,7 +687,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/04-file-permissions/assets",
@@ -729,8 +721,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "file-permissions",
       "source_legacy_ids": [],
@@ -858,7 +849,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/05-networking-basics/assets",
@@ -893,8 +883,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "networking-basics",
       "source_legacy_ids": [],
@@ -991,7 +980,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/06-docker-basics/assets",
@@ -1026,8 +1014,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "docker-basics",
       "source_legacy_ids": [
@@ -1169,7 +1156,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/07-docker-images-and-layers/assets",
@@ -1204,8 +1190,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "docker-images-and-layers",
       "source_legacy_ids": [],
@@ -1334,7 +1319,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/08-multi-stage-builds/assets",
@@ -1369,8 +1353,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "multi-stage-builds",
       "source_legacy_ids": [],
@@ -1467,7 +1450,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/09-docker-compose/assets",
@@ -1502,8 +1484,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "docker-compose",
       "source_legacy_ids": [
@@ -1602,7 +1583,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/10-container-health-checks/assets",
@@ -1637,8 +1617,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "container-health-checks",
       "source_legacy_ids": [],
@@ -1735,7 +1714,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/11-github-actions/assets",
@@ -1770,8 +1748,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "github-actions",
       "source_legacy_ids": [],
@@ -1868,7 +1845,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/12-ci-pipeline/assets",
@@ -1903,8 +1879,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "ci-pipeline",
       "source_legacy_ids": [
@@ -2003,7 +1978,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/13-release-artifacts/assets",
@@ -2038,8 +2012,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "release-artifacts",
       "source_legacy_ids": [],
@@ -2136,7 +2109,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/14-config-in-deployment/assets",
@@ -2171,8 +2143,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "config-in-deployment",
       "source_legacy_ids": [],
@@ -2269,7 +2240,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/15-secrets-in-deployment/assets",
@@ -2304,8 +2274,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "secrets-in-deployment",
       "source_legacy_ids": [],
@@ -2402,7 +2371,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/16-vulnerability-scanning/assets",
@@ -2437,8 +2405,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "vulnerability-scanning",
       "source_legacy_ids": [],
@@ -2535,7 +2502,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/17-one-deployment-target/assets",
@@ -2570,8 +2536,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "one-deployment-target",
       "source_legacy_ids": [],
@@ -2668,7 +2633,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/18-rollback-basics/assets",
@@ -2703,8 +2667,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "rollback-basics",
       "source_legacy_ids": [],
@@ -2808,7 +2771,6 @@
         "related": []
       },
       "difficulty": "advanced",
-      "documentation_mode": "explanation",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/lessons/19-deployment-runbook/assets",
@@ -2843,8 +2805,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "explanation",
-        "required": true
+        "documentation_mode": "explanation"
       },
       "slug": "deployment-runbook",
       "source_legacy_ids": [],
@@ -2930,7 +2891,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/projects/dockerized-service-with-ci-cd/assets",
@@ -2954,8 +2914,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "dockerized-service-with-ci-cd",
       "source_legacy_ids": [],
@@ -2988,7 +2947,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/assessments/checkpoint/assets",
@@ -3008,8 +2966,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -3042,7 +2999,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/15-docker-cicd-deployment/assessments/dockerized-service-cicd/assets",
@@ -3062,8 +3018,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "dockerized-service-cicd",
       "source_legacy_ids": [],
@@ -3104,7 +3059,6 @@
       "documentation_mode": "project",
       "id": "project-dockerized-service-cicd",
       "module_id": "module-15",
-      "order": 23,
       "placement_anchor_item_id": "core-15-19",
       "portfolio": {
         "architecture_defense_required": false,
@@ -3128,7 +3082,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "Docker multi-stage build",
         "CI pipeline"

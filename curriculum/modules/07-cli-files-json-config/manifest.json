@@ -106,7 +106,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -134,7 +133,7 @@
         "core-07-21"
       ],
       "title": "Module 07 Assessment — CLI, Files, JSON, and Configuration",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "criteria": [
@@ -516,7 +515,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/01-cli-args/assets",
@@ -551,8 +549,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "cli-args",
       "source_legacy_ids": [
@@ -702,7 +699,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/02-flags/assets",
@@ -737,8 +733,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "flags",
       "source_legacy_ids": [
@@ -888,7 +883,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/03-subcommands/assets",
@@ -923,8 +917,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "subcommands",
       "source_legacy_ids": [
@@ -1074,7 +1067,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/04-standard-input-and-standard-output/assets",
@@ -1109,8 +1101,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "standard-input-and-standard-output",
       "source_legacy_ids": [],
@@ -1258,7 +1249,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/05-io-reader/assets",
@@ -1293,8 +1283,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "io-reader",
       "source_legacy_ids": [],
@@ -1442,7 +1431,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/06-io-writer/assets",
@@ -1477,8 +1465,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "io-writer",
       "source_legacy_ids": [],
@@ -1626,7 +1613,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/07-files/assets",
@@ -1661,8 +1647,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "files",
       "source_legacy_ids": [
@@ -1812,7 +1797,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/08-paths/assets",
@@ -1847,8 +1831,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "paths",
       "source_legacy_ids": [
@@ -1998,7 +1981,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/09-directories/assets",
@@ -2033,8 +2015,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "directories",
       "source_legacy_ids": [
@@ -2184,7 +2165,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/10-temp-files/assets",
@@ -2219,8 +2199,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "temp-files",
       "source_legacy_ids": [],
@@ -2368,7 +2347,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/11-fs-fs/assets",
@@ -2403,8 +2381,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "fs-fs",
       "source_legacy_ids": [],
@@ -2552,7 +2529,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/12-json-marshal/assets",
@@ -2587,8 +2563,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "json-marshal",
       "source_legacy_ids": [
@@ -2738,7 +2713,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/13-json-unmarshal/assets",
@@ -2773,8 +2747,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "json-unmarshal",
       "source_legacy_ids": [
@@ -2924,7 +2897,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/14-json-encoder/assets",
@@ -2959,8 +2931,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "json-encoder",
       "source_legacy_ids": [],
@@ -3108,7 +3079,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/15-json-decoder/assets",
@@ -3143,8 +3113,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "json-decoder",
       "source_legacy_ids": [],
@@ -3292,7 +3261,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/16-config-files/assets",
@@ -3327,8 +3295,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "config-files",
       "source_legacy_ids": [],
@@ -3489,7 +3456,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/17-environment-variables-for-configuration/assets",
@@ -3524,8 +3490,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "environment-variables-for-configuration",
       "source_legacy_ids": [],
@@ -3673,7 +3638,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/18-config-validation/assets",
@@ -3708,8 +3672,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "config-validation",
       "source_legacy_ids": [],
@@ -3857,7 +3820,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/19-text-templates/assets",
@@ -3892,8 +3854,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "text-templates",
       "source_legacy_ids": [],
@@ -4054,7 +4015,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/20-base64-as-encoding-not-encryption/assets",
@@ -4089,8 +4049,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "base64-as-encoding-not-encryption",
       "source_legacy_ids": [],
@@ -4251,7 +4210,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/lessons/21-cli-testability/assets",
@@ -4286,8 +4244,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "cli-testability",
       "source_legacy_ids": [],
@@ -4373,7 +4330,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/projects/config-parser/assets",
@@ -4397,8 +4353,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "config-parser",
       "source_legacy_ids": [],
@@ -4431,7 +4386,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/projects/file-organizer/assets",
@@ -4455,8 +4409,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "file-organizer",
       "source_legacy_ids": [],
@@ -4489,7 +4442,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/projects/log-search/assets",
@@ -4513,8 +4465,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "log-search",
       "source_legacy_ids": [],
@@ -4547,7 +4498,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/assessments/checkpoint/assets",
@@ -4567,8 +4517,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -4601,7 +4550,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/assessments/config-parser/assets",
@@ -4621,8 +4569,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "config-parser",
       "source_legacy_ids": [],
@@ -4655,7 +4602,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/assessments/file-organizer/assets",
@@ -4675,8 +4621,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "file-organizer",
       "source_legacy_ids": [],
@@ -4709,7 +4654,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/07-cli-files-json-config/assessments/log-search/assets",
@@ -4729,8 +4673,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "log-search",
       "source_legacy_ids": [],
@@ -4771,7 +4714,6 @@
       "documentation_mode": "project",
       "id": "project-file-organizer",
       "module_id": "module-07",
-      "order": 10,
       "placement_anchor_item_id": "core-07-21",
       "portfolio": {
         "architecture_defense_required": false,
@@ -4795,7 +4737,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "file I/O",
         "JSON encoding/decoding"
@@ -4985,7 +4926,6 @@
       "documentation_mode": "project",
       "id": "project-log-search",
       "module_id": "module-07",
-      "order": 11,
       "placement_anchor_item_id": "core-07-21",
       "portfolio": {
         "architecture_defense_required": false,
@@ -5009,7 +4949,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "file I/O",
         "JSON encoding/decoding"
@@ -5199,7 +5138,6 @@
       "documentation_mode": "project",
       "id": "project-config-parser",
       "module_id": "module-07",
-      "order": 12,
       "placement_anchor_item_id": "core-07-21",
       "portfolio": {
         "architecture_defense_required": false,
@@ -5223,7 +5161,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "file I/O",
         "JSON encoding/decoding"

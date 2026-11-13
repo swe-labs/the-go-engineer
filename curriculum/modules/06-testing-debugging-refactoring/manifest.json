@@ -106,7 +106,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -134,7 +133,7 @@
         "core-06-21"
       ],
       "title": "Module 06 Assessment — Testing, Debugging, and Refactoring",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "criteria": [
@@ -408,7 +407,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/01-why-testing-exists/assets",
@@ -443,8 +441,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "why-testing-exists",
       "source_legacy_ids": [],
@@ -589,7 +586,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/02-unit-testing/assets",
@@ -624,8 +620,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "unit-testing",
       "source_legacy_ids": [
@@ -772,7 +767,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/03-table-driven-tests/assets",
@@ -807,8 +801,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "table-driven-tests",
       "source_legacy_ids": [
@@ -955,7 +948,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/04-subtests/assets",
@@ -990,8 +982,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "subtests",
       "source_legacy_ids": [],
@@ -1136,7 +1127,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/05-t-cleanup/assets",
@@ -1171,8 +1161,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "t-cleanup",
       "source_legacy_ids": [],
@@ -1317,7 +1306,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/06-test-fixtures/assets",
@@ -1352,8 +1340,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "test-fixtures",
       "source_legacy_ids": [],
@@ -1498,7 +1485,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/07-golden-files/assets",
@@ -1533,8 +1519,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "golden-files",
       "source_legacy_ids": [
@@ -1681,7 +1666,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/08-testable-design-with-io-writer/assets",
@@ -1716,8 +1700,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "testable-design-with-io-writer",
       "source_legacy_ids": [],
@@ -1862,7 +1845,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/09-fakes-before-mocks/assets",
@@ -1897,8 +1879,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "fakes-before-mocks",
       "source_legacy_ids": [],
@@ -2043,7 +2024,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/10-mocking-tradeoffs/assets",
@@ -2078,8 +2058,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "mocking-tradeoffs",
       "source_legacy_ids": [],
@@ -2224,7 +2203,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/11-debugging-mindset/assets",
@@ -2259,8 +2237,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "debugging-mindset",
       "source_legacy_ids": [],
@@ -2405,7 +2382,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/12-reading-stack-traces/assets",
@@ -2440,8 +2416,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "reading-stack-traces",
       "source_legacy_ids": [],
@@ -2586,7 +2561,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/13-debugging-panics/assets",
@@ -2621,8 +2595,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "debugging-panics",
       "source_legacy_ids": [],
@@ -2767,7 +2740,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/14-delve-basics/assets",
@@ -2802,8 +2774,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "delve-basics",
       "source_legacy_ids": [],
@@ -2948,7 +2919,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/15-breakpoints/assets",
@@ -2983,8 +2953,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "breakpoints",
       "source_legacy_ids": [],
@@ -3129,7 +3098,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/16-stepping-through-code/assets",
@@ -3164,8 +3132,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "stepping-through-code",
       "source_legacy_ids": [],
@@ -3310,7 +3277,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/17-inspecting-variables/assets",
@@ -3345,8 +3311,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "inspecting-variables",
       "source_legacy_ids": [],
@@ -3491,7 +3456,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/18-debugging-tests/assets",
@@ -3526,8 +3490,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "debugging-tests",
       "source_legacy_ids": [],
@@ -3685,7 +3648,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/19-refactoring-safely/assets",
@@ -3720,8 +3682,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "refactoring-safely",
       "source_legacy_ids": [],
@@ -3866,7 +3827,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/20-fuzz-testing/assets",
@@ -3901,8 +3861,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "fuzz-testing",
       "source_legacy_ids": [
@@ -4056,7 +4015,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/lessons/21-race-detector-preview/assets",
@@ -4091,8 +4049,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "race-detector-preview",
       "source_legacy_ids": [],
@@ -4181,7 +4138,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/projects/bug-hunt-pack/assets",
@@ -4205,8 +4161,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "bug-hunt-pack",
       "source_legacy_ids": [],
@@ -4239,7 +4194,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/projects/refactor-under-tests/assets",
@@ -4263,8 +4217,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "refactor-under-tests",
       "source_legacy_ids": [],
@@ -4297,7 +4250,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/assessments/bug-hunt-pack/assets",
@@ -4317,8 +4269,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "bug-hunt-pack",
       "source_legacy_ids": [],
@@ -4351,7 +4302,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/assessments/checkpoint/assets",
@@ -4371,8 +4321,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -4405,7 +4354,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/06-testing-debugging-refactoring/assessments/refactor-under-tests/assets",
@@ -4425,8 +4373,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "refactor-under-tests",
       "source_legacy_ids": [],
@@ -4467,7 +4414,6 @@
       "documentation_mode": "project",
       "id": "project-bug-hunt-pack",
       "module_id": "module-06",
-      "order": 8,
       "placement_anchor_item_id": "core-06-21",
       "portfolio": {
         "architecture_defense_required": false,
@@ -4491,7 +4437,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "go test",
         "test coverage",
@@ -4683,7 +4628,6 @@
       "documentation_mode": "project",
       "id": "project-refactor-under-tests",
       "module_id": "module-06",
-      "order": 9,
       "placement_anchor_item_id": "core-06-21",
       "portfolio": {
         "architecture_defense_required": false,
@@ -4707,7 +4651,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "go test",
         "test coverage",

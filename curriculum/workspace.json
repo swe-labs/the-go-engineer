@@ -1,38 +1,23 @@
 {
-  "schema_version": "3.1.0",
-  "document_type": "workspace_manifest",
   "curriculum_version": "3.0.0",
-  "last_updated": "2026-10-23",
-  "name": "The Go Engineer v3 — Curriculum Workspace",
-  "status": "stable",
-  "source_of_truth": [
-    "curriculum/path.core.json",
-    "curriculum/path.electives.json",
-    "curriculum/modules/*/manifest.json",
-    "curriculum/electives/advanced-electives/manifest.json",
-    "curriculum/concepts.json",
-    "curriculum/failures.json",
-    "curriculum/readme.contracts.json"
-  ],
+  "document_type": "workspace_manifest",
+  "files": {
+    "companion_frontend": "curriculum/companion-frontend/README.md",
+    "concepts": "curriculum/concepts.json",
+    "core_path": "curriculum/path.core.json (thin index)",
+    "electives": "curriculum/path.electives.json (thin index)",
+    "failures": "curriculum/failures.json",
+    "module_manifests": "curriculum/modules/*/manifest.json + curriculum/electives/advanced-electives/manifest.json",
+    "readme_contracts": "curriculum/readme.contracts.json",
+    "schema": "curriculum/schema.v3.json"
+  },
   "generated_files": [
     "curriculum/README.md"
   ],
+  "last_updated": "2026-10-23",
+  "name": "The Go Engineer v3 — Curriculum Workspace",
   "policy": {
-    "split_files_are_authoritative": true,
-    "full_bundle_is_required": false,
-    "full_bundle_purpose": "Debugging, export, review, and research convenience only.",
-    "do_not_edit_generated_full_bundle_by_hand": true
-  },
-  "files": {
-    "schema": "curriculum/schema.v3.json",
-    "core_path": "curriculum/path.core.json (thin index)",
-    "electives": "curriculum/path.electives.json (thin index)",
-    "crossrefs": "(deleted — crossrefs are embedded per item; central file removed in the split)",
-    "concepts": "curriculum/concepts.json",
-    "failures": "curriculum/failures.json",
-    "readme_contracts": "curriculum/readme.contracts.json",
-    "companion_frontend": "curriculum/companion-frontend/README.md",
-    "module_manifests": "curriculum/modules/*/manifest.json + curriculum/electives/advanced-electives/manifest.json"
+    "split_files_are_authoritative": true
   },
   "quality_gates": [
     "validate-schema",
@@ -62,9 +47,38 @@
     "validate-readme-contracts",
     "validate-anti-slop"
   ],
+  "schema_version": "3.1.0",
+  "schema_version_policy": {
+    "3.1.0_new_fields": {
+      "document_types": [
+        "concept_ownership_registry",
+        "operational_failure_taxonomy"
+      ],
+      "projects": [
+        "placement_anchor_item_id",
+        "prerequisite_item_ids",
+        "required_concepts",
+        "reinforcement_targets"
+      ]
+    },
+    "active_version": "3.1.0",
+    "legacy_version": "3.0.0",
+    "rule": "All new and edited files must use schema_version 3.1.0. Files at 3.0.0 are accepted for reads only. Validators must reject writing 3.1.0-only fields into 3.0.0 files."
+  },
+  "source_of_truth": [
+    "curriculum/path.core.json",
+    "curriculum/path.electives.json",
+    "curriculum/modules/*/manifest.json",
+    "curriculum/electives/advanced-electives/manifest.json",
+    "curriculum/concepts.json",
+    "curriculum/failures.json",
+    "curriculum/readme.contracts.json"
+  ],
+  "status": "stable",
   "validation_commands": {
     "validate_all": "go run ./internal/tools/curriculum validate-all",
     "validate_anchor_quotes": "go run ./internal/tools/curriculum validate-anchor-quotes",
+    "validate_anti_slop": "go run ./internal/tools/curriculum validate-anti-slop",
     "validate_assessment_artifacts": "go run ./internal/tools/curriculum validate-assessment-artifacts",
     "validate_assessment_completeness": "go run ./internal/tools/curriculum validate-assessment-completeness",
     "validate_cognitive_load": "go run ./internal/tools/curriculum validate-cognitive-load",
@@ -74,6 +88,7 @@
     "validate_diagram_palette": "go run ./internal/tools/curriculum validate-diagram-palette",
     "validate_failure_engineering": "go run ./internal/tools/curriculum validate-failure-engineering",
     "validate_graph": "go run ./internal/tools/curriculum validate-graph",
+    "validate_inline_paths": "go run ./internal/tools/curriculum validate-inline-paths",
     "validate_lessons": "go run ./internal/tools/curriculum validate-lessons",
     "validate_markdown_links": "go run ./internal/tools/curriculum validate-markdown-links",
     "validate_no_emojis": "go run ./internal/tools/curriculum validate-no-emojis",
@@ -89,22 +104,5 @@
     "validate_starter_parity": "go run ./internal/tools/curriculum validate-starter-parity",
     "validate_unique_tags": "go run ./internal/tools/curriculum validate-unique-tags",
     "validate_zero_magic": "go run ./internal/tools/curriculum validate-zero-magic"
-  },
-  "schema_version_policy": {
-    "active_version": "3.1.0",
-    "legacy_version": "3.0.0",
-    "rule": "All new and edited files must use schema_version 3.1.0. Files at 3.0.0 are accepted for reads only. Validators must reject writing 3.1.0-only fields into 3.0.0 files.",
-    "3.1.0_new_fields": {
-      "projects": [
-        "placement_anchor_item_id",
-        "prerequisite_item_ids",
-        "required_concepts",
-        "reinforcement_targets"
-      ],
-      "document_types": [
-        "concept_ownership_registry",
-        "operational_failure_taxonomy"
-      ]
-    }
   }
 }

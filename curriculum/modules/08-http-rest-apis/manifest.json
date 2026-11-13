@@ -106,7 +106,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -134,7 +133,7 @@
         "core-08-21"
       ],
       "title": "Module 08 Assessment — HTTP and REST APIs",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "criteria": [
@@ -313,7 +312,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/01-http-as-a-protocol/assets",
@@ -348,8 +346,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "http-as-a-protocol",
       "source_legacy_ids": [
@@ -487,7 +484,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/02-net-http-basics/assets",
@@ -522,8 +518,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "net-http-basics",
       "source_legacy_ids": [
@@ -674,7 +669,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/03-handler-lifecycle/assets",
@@ -709,8 +703,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "handler-lifecycle",
       "source_legacy_ids": [],
@@ -846,7 +839,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/04-routing/assets",
@@ -881,8 +873,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "routing",
       "source_legacy_ids": [],
@@ -1024,7 +1015,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/05-request-parsing/assets",
@@ -1059,8 +1049,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "request-parsing",
       "source_legacy_ids": [],
@@ -1196,7 +1185,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/06-input-validation/assets",
@@ -1231,8 +1219,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "input-validation",
       "source_legacy_ids": [],
@@ -1374,7 +1361,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/07-response-writing/assets",
@@ -1409,8 +1395,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "response-writing",
       "source_legacy_ids": [],
@@ -1546,7 +1531,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/08-api-error-shape/assets",
@@ -1581,8 +1565,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "api-error-shape",
       "source_legacy_ids": [],
@@ -1724,7 +1707,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/09-status-codes/assets",
@@ -1759,8 +1741,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "status-codes",
       "source_legacy_ids": [],
@@ -1896,7 +1877,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/10-middleware-pattern/assets",
@@ -1931,8 +1911,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "middleware-pattern",
       "source_legacy_ids": [
@@ -2076,7 +2055,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/11-error-middleware/assets",
@@ -2111,8 +2089,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "error-middleware",
       "source_legacy_ids": [],
@@ -2248,7 +2225,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/12-handler-testing-with-httptest/assets",
@@ -2283,8 +2259,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "handler-testing-with-httptest",
       "source_legacy_ids": [
@@ -2428,7 +2403,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/13-body-size-limits/assets",
@@ -2463,8 +2437,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "body-size-limits",
       "source_legacy_ids": [],
@@ -2619,7 +2592,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/14-server-timeouts/assets",
@@ -2654,8 +2626,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "server-timeouts",
       "source_legacy_ids": [],
@@ -2810,7 +2781,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/15-graceful-shutdown/assets",
@@ -2845,8 +2815,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "graceful-shutdown",
       "source_legacy_ids": [
@@ -2984,7 +2953,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/16-health-and-readiness-probes/assets",
@@ -3019,8 +2987,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "health-and-readiness-probes",
       "source_legacy_ids": [
@@ -3164,7 +3131,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/17-rest-design-principles/assets",
@@ -3199,8 +3165,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "rest-design-principles",
       "source_legacy_ids": [
@@ -3338,7 +3303,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/18-api-versioning/assets",
@@ -3373,8 +3337,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "api-versioning",
       "source_legacy_ids": [
@@ -3518,7 +3481,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/19-pagination-and-filtering/assets",
@@ -3553,8 +3515,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "pagination-and-filtering",
       "source_legacy_ids": [
@@ -3692,7 +3653,6 @@
         ]
       },
       "difficulty": "core",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/20-openapi-basics/assets",
@@ -3727,8 +3687,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "openapi-basics",
       "source_legacy_ids": [],
@@ -3832,7 +3791,6 @@
         "related": []
       },
       "difficulty": "intermediate",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/lessons/21-http-client/assets",
@@ -3867,8 +3825,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "http-client",
       "source_legacy_ids": [],
@@ -3954,7 +3911,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/projects/book-catalog-rest-api/assets",
@@ -3978,8 +3934,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "book-catalog-rest-api",
       "source_legacy_ids": [],
@@ -4012,7 +3967,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/assessments/book-catalog-rest-api/assets",
@@ -4032,8 +3986,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "book-catalog-rest-api",
       "source_legacy_ids": [],
@@ -4066,7 +4019,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/08-http-rest-apis/assessments/checkpoint/assets",
@@ -4086,8 +4038,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "checkpoint",
       "source_legacy_ids": [],
@@ -4128,7 +4079,6 @@
       "documentation_mode": "project",
       "id": "project-book-catalog-rest-api",
       "module_id": "module-08",
-      "order": 13,
       "placement_anchor_item_id": "core-08-20",
       "portfolio": {
         "architecture_defense_required": false,
@@ -4152,7 +4102,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "HTTP handler lifecycle",
         "HTTP timeouts",

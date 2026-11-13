@@ -516,7 +516,7 @@
       "number": 15,
       "order": 15,
       "pacing": "moderate",
-      "path": "modules/15-docker-cicd-deployment",
+      "path": "15-docker-cicd-deployment",
       "phase": "delivery",
       "portfolio_output": true,
       "prerequisites": [
@@ -625,14 +625,12 @@
     "15-docker-cicd-deployment",
     "16-portfolio-interview-readiness",
     "18-flagship-opslane",
+    "curriculum/electives/advanced-electives/manifest.json",
     "curriculum/path.core.json",
     "curriculum/path.electives.json",
-    "curriculum/projects.json",
-    "curriculum/assessments.json",
-    "curriculum/crossrefs.json",
     "docs/",
-    "scripts/",
-    "internal/tools/curriculum/"
+    "internal/tools/curriculum/",
+    "scripts/"
   ],
   "schema_version": "3.1.0",
   "status": "stable"

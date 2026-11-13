@@ -105,7 +105,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -126,7 +125,7 @@
         "core-02-14"
       ],
       "title": "Module 02 Assessment — Go Setup and Tooling",
-      "type": "project-review"
+      "type": "module-assessment"
     },
     {
       "automated_checks": [
@@ -234,7 +233,6 @@
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "scaffolded",
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
       "suite": "full",
@@ -306,7 +304,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "",
@@ -341,8 +338,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "install-and-verify-go",
       "source_legacy_ids": [
@@ -478,7 +474,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "",
@@ -513,8 +508,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "hello-world",
       "source_legacy_ids": [
@@ -650,7 +644,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "",
@@ -685,8 +678,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "go-run",
       "source_legacy_ids": [],
@@ -819,7 +811,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -854,8 +845,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "go-build",
       "source_legacy_ids": [],
@@ -989,7 +979,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1024,8 +1013,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "go-test",
       "source_legacy_ids": [],
@@ -1159,7 +1147,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "",
@@ -1194,8 +1181,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "gofmt",
       "source_legacy_ids": [],
@@ -1329,7 +1315,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1364,8 +1349,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "go-vet",
       "source_legacy_ids": [],
@@ -1499,7 +1483,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "",
@@ -1534,8 +1517,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "go-doc",
       "source_legacy_ids": [],
@@ -1669,7 +1651,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1704,8 +1685,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "editor-setup-and-gopls",
       "source_legacy_ids": [],
@@ -1839,7 +1819,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -1874,8 +1853,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "reading-compiler-errors",
       "source_legacy_ids": [
@@ -2011,7 +1989,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -2046,8 +2023,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "reading-runtime-errors",
       "source_legacy_ids": [],
@@ -2181,7 +2157,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "how-to",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -2216,8 +2191,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "how-to",
-        "required": true
+        "documentation_mode": "how-to"
       },
       "slug": "reading-test-failures",
       "source_legacy_ids": [],
@@ -2358,7 +2332,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 45,
       "files": {
         "assets_dir": "",
@@ -2393,8 +2366,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "go-module-root-basics",
       "source_legacy_ids": [],
@@ -2535,7 +2507,6 @@
         ]
       },
       "difficulty": "foundation",
-      "documentation_mode": "tutorial",
       "estimated_minutes": 30,
       "files": {
         "assets_dir": "",
@@ -2570,8 +2541,7 @@
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "tooling-checklist",
       "source_legacy_ids": [],
@@ -2659,7 +2629,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "project",
       "estimated_minutes": 120,
       "files": {
         "assets_dir": "modules/02-go-setup-tooling/projects/tooling-failure-lab/assets",
@@ -2683,8 +2652,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "slug": "tooling-failure-lab",
       "source_legacy_ids": [],
@@ -2717,7 +2685,6 @@
         "related": []
       },
       "difficulty": "core",
-      "documentation_mode": "assessment",
       "estimated_minutes": 60,
       "files": {
         "assets_dir": "modules/02-go-setup-tooling/assessments/tooling-failure-lab/assets",
@@ -2737,8 +2704,7 @@
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "tooling-failure-lab",
       "source_legacy_ids": [],
@@ -2779,7 +2745,6 @@
       "documentation_mode": "project",
       "id": "project-tooling-failure-lab",
       "module_id": "module-02",
-      "order": 2,
       "placement_anchor_item_id": "core-02-14",
       "portfolio": {
         "architecture_defense_required": false,
@@ -2803,7 +2768,6 @@
         "documentation_mode": "project",
         "required": true
       },
-      "readme_status": "reviewed",
       "reinforcement_targets": [
         "go build",
         "go module cache",
