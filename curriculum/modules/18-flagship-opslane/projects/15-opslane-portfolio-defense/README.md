@@ -33,17 +33,17 @@ flowchart TD
     Graduation["Final Capstone Defense Passed<br/>Senior Go Engineer Portfolio"]:::pass
 
     Panel -->|"Live Examination & Failure Injection"| Contract
-    Contract --> P1
-    Contract --> P2
-    Contract --> P3
-    Contract --> P4
-    Contract --> P5
+    Contract -->|"Programmatic verification"| P1
+    Contract -->|"Programmatic verification"| P2
+    Contract -->|"Milestone suite evidence"| P3
+    Contract -->|"Milestone suite evidence"| P4
+    Contract -->|"Milestone suite evidence"| P5
     P1 & P2 & P3 & P4 & P5 -->|"All 5 Pillars Validated"| Graduation
 ```
 
 ## Machine View
 
-Under the hood, the verification contract tracks five non-negotiable operational invariants:
+Under the hood, the verification contract tracks five non-negotiable operational invariants. Pillars 1 and 2 are exercised programmatically by this harness (`VerifyTenantBoundary`, `VerifyIdempotency`); pillars 3–5 are defense criteria whose behavioral evidence comes from their milestone test suites — transactional rollback (opslane-07), bounded concurrency (opslane-10), and graceful shutdown (opslane-13) — rehearsed here as defense talking points:
 1. **Multi-Tenant Memory & Query Scoping**: All repository reads and in-memory caches scope queries by `tenant_id`. Cross-tenant probes return empty sets or `ErrTenantMismatch`.
 2. **Idempotency Key De-duplication**: Network retries with matching idempotency keys return the cached transaction receipt without re-invoking payment gateways or mutating ledger state.
 3. **Two-Phase Transactional Rollback**: Inventory reservation and order state transitions execute in an atomic transaction; database errors trigger explicit `Rollback()`, leaving zero orphaned rows.

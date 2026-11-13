@@ -200,3 +200,21 @@ func TestConnectDatabase_FileBackedForeignKeyEnforcement(t *testing.T) {
 		t.Fatalf("expected foreign key constraint violation on file-backed DSN, got nil")
 	}
 }
+
+func TestConnectDatabase_DisablingPragmaIsOverridden(t *testing.T) {
+	// ConnectDatabase guarantees foreign-key enforcement: a caller-supplied
+	// _pragma=foreign_keys(0) is followed by the appended (1), and the driver
+	// applies DSN pragmas in query order, so enforcement stays on.
+	db, err := ConnectDatabase("file:" + filepath.ToSlash(filepath.Join(t.TempDir(), "opslane_fk0.db")) + "?_pragma=foreign_keys(0)")
+	if err != nil {
+		t.Fatalf("open db with disabling pragma: %v", err)
+	}
+	defer db.Close()
+
+	if _, err := db.Exec("CREATE TABLE parent (id TEXT PRIMARY KEY); CREATE TABLE child (pid TEXT REFERENCES parent(id))"); err != nil {
+		t.Fatalf("create schema: %v", err)
+	}
+	if _, err := db.Exec("INSERT INTO child (pid) VALUES ('missing-parent')"); err == nil {
+		t.Fatalf("expected foreign key enforcement despite caller-supplied foreign_keys(0)")
+	}
+}

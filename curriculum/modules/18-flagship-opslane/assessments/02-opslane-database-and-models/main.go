@@ -8,6 +8,7 @@ import (
 	"log"
 	"path/filepath"
 	"strings"
+	"sync/atomic"
 	"time"
 
 	_ "modernc.org/sqlite"
@@ -155,6 +156,10 @@ var SchemaMigrations = []Migration{
 
 // Database Connection & Pooling
 
+// memDBSeq disambiguates in-memory databases opened within the same clock
+// tick, where time.Now().UnixNano() alone can collide.
+var memDBSeq atomic.Uint64
+
 // ConnectDatabase opens a SQLite database with foreign-key enforcement
 // enabled. SQLite foreign_keys is a per-connection setting that defaults to
 // OFF, so the declared REFERENCES constraints only fire when the pragma is
@@ -166,15 +171,18 @@ var SchemaMigrations = []Migration{
 //     fixed shared-cache name would silently couple independent callers to
 //     one shared database. A unique name keeps each call isolated while
 //     cache=shared keeps the database alive across the pool.
-//   - "file:" URIs get _pragma=foreign_keys(1) appended (idempotently).
+//   - "file:" URIs always end up with _pragma=foreign_keys(1): the parameter
+//     is appended when absent, and re-appended when a caller supplied a
+//     disabling form such as _pragma=foreign_keys(0) — the driver applies DSN
+//     pragmas in query order, so the appended (1) is the final state.
 //   - Plain filesystem paths are converted to file: URI form so the pragma
 //     parameter can ride along on every connection.
 func ConnectDatabase(dsn string) (*sql.DB, error) {
 	switch {
 	case dsn == ":memory:":
-		dsn = fmt.Sprintf("file:mem%d?mode=memory&cache=shared&_pragma=foreign_keys(1)", time.Now().UnixNano())
+		dsn = fmt.Sprintf("file:mem%d_%d?mode=memory&cache=shared&_pragma=foreign_keys(1)", time.Now().UnixNano(), memDBSeq.Add(1))
 	case strings.HasPrefix(dsn, "file:"):
-		if !strings.Contains(dsn, "_pragma=foreign_keys") {
+		if !strings.Contains(dsn, "_pragma=foreign_keys(1)") {
 			sep := "?"
 			if strings.Contains(dsn, "?") {
 				sep = "&"
