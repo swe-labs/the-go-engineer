@@ -74,9 +74,9 @@ go run ./curriculum/modules/18-flagship-opslane/assessments/02-opslane-database-
    - Version 1: `tenants` and `users` tables with index on `tenant_id`.
    - Version 2: `orders` and `payments` tables with unique constraint on `idempotency_key`.
    - Version 3: `audit_logs` table with composite index `(tenant_id, created_at)`.
-3. **Database Connection Tuning (lines 156–180)**: Configures SQLite foreign key pragmas (`_pragma=foreign_keys(1)`), connection pool bounds (`MaxOpenConns`, `MaxIdleConns`, `ConnMaxLifetime`), and validates connectivity via `db.PingContext(ctx)` with timeout.
-4. **`RunMigrations()` (lines 183–226)**: Queries `schema_migrations` table; skips applied versions; executes unapplied migrations within an atomic `sql.Tx`.
-5. **`OrderRepository` (lines 229–269)**: Implements `Create` and `GetByID` using tenant-scoped SQL queries and `sql.NullString` scanning for nullable fields (`notes`).
+3. **Database Connection Tuning (lines 156–208)**: Normalizes the DSN so SQLite foreign key pragmas (`_pragma=foreign_keys(1)`) ride on every pooled connection — `:memory:` becomes a uniquely named shared-cache URI, `file:` URIs gain the pragma parameter, and plain paths are converted to `file:` URI form — then configures pool bounds (`MaxOpenConns`, `MaxIdleConns`, `ConnMaxLifetime`) and validates connectivity via `db.PingContext(ctx)` with timeout.
+4. **`RunMigrations()` (lines 211–254)**: Queries `schema_migrations` table; skips applied versions; executes unapplied migrations within an atomic `sql.Tx`.
+5. **`OrderRepository` (lines 257–297)**: Implements `Create` and `GetByID` using tenant-scoped SQL queries and `sql.NullString` scanning for nullable fields (`notes`).
 
 ## Try It
 

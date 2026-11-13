@@ -6,6 +6,8 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"path/filepath"
+	"strings"
 	"time"
 
 	_ "modernc.org/sqlite"
@@ -153,10 +155,36 @@ var SchemaMigrations = []Migration{
 
 // Database Connection & Pooling
 
+// ConnectDatabase opens a SQLite database with foreign-key enforcement
+// enabled. SQLite foreign_keys is a per-connection setting that defaults to
+// OFF, so the declared REFERENCES constraints only fire when the pragma is
+// applied to every pooled connection — the driver applies DSN pragma
+// parameters on each new connection, which is why the DSN is normalized here:
+//
+//   - ":memory:" becomes a uniquely named shared-cache URI. A bare ":memory:"
+//     pool would drop the database when its last connection closes, and a
+//     fixed shared-cache name would silently couple independent callers to
+//     one shared database. A unique name keeps each call isolated while
+//     cache=shared keeps the database alive across the pool.
+//   - "file:" URIs get _pragma=foreign_keys(1) appended (idempotently).
+//   - Plain filesystem paths are converted to file: URI form so the pragma
+//     parameter can ride along on every connection.
 func ConnectDatabase(dsn string) (*sql.DB, error) {
-	if dsn == ":memory:" {
-		dsn = "file::memory:?cache=shared&_pragma=foreign_keys(1)"
+	switch {
+	case dsn == ":memory:":
+		dsn = fmt.Sprintf("file:mem%d?mode=memory&cache=shared&_pragma=foreign_keys(1)", time.Now().UnixNano())
+	case strings.HasPrefix(dsn, "file:"):
+		if !strings.Contains(dsn, "_pragma=foreign_keys") {
+			sep := "?"
+			if strings.Contains(dsn, "?") {
+				sep = "&"
+			}
+			dsn += sep + "_pragma=foreign_keys(1)"
+		}
+	default:
+		dsn = "file:" + filepath.ToSlash(dsn) + "?_pragma=foreign_keys(1)"
 	}
+
 	db, err := sql.Open("sqlite", dsn)
 	if err != nil {
 		return nil, fmt.Errorf("failed to open database: %w", err)

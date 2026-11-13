@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"path/filepath"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -148,5 +149,54 @@ func TestOrderRepository_ForeignKeyEnforcement(t *testing.T) {
 	err := repo.Create(ctx, orphanOrder)
 	if err == nil {
 		t.Fatalf("expected foreign key constraint violation inserting orphan order, got nil")
+	}
+}
+
+func TestConnectDatabase_InMemoryIsolation(t *testing.T) {
+	// Two independent :memory: connections must NOT share state: the driver
+	// rewrites each to a uniquely named shared-cache URI, so tables created
+	// in one are invisible to the other.
+	dbA, err := ConnectDatabase(":memory:")
+	if err != nil {
+		t.Fatalf("open A: %v", err)
+	}
+	defer dbA.Close()
+
+	dbB, err := ConnectDatabase(":memory:")
+	if err != nil {
+		t.Fatalf("open B: %v", err)
+	}
+	defer dbB.Close()
+
+	if _, err := dbA.Exec("CREATE TABLE marker_a (id INTEGER PRIMARY KEY)"); err != nil {
+		t.Fatalf("create table in A: %v", err)
+	}
+
+	var countA, countB int
+	if err := dbA.QueryRow("SELECT COUNT(1) FROM sqlite_master WHERE name = 'marker_a'").Scan(&countA); err != nil {
+		t.Fatalf("probe A: %v", err)
+	}
+	if err := dbB.QueryRow("SELECT COUNT(1) FROM sqlite_master WHERE name = 'marker_a'").Scan(&countB); err != nil {
+		t.Fatalf("probe B: %v", err)
+	}
+	if countA != 1 || countB != 0 {
+		t.Fatalf("SECURITY/ISOLATION VIOLATION: expected marker_a only in A (A=%d, B=%d)", countA, countB)
+	}
+}
+
+func TestConnectDatabase_FileBackedForeignKeyEnforcement(t *testing.T) {
+	// A plain filesystem-path DSN is normalized to a file: URI with the
+	// foreign_keys pragma, so declared REFERENCES constraints fire there too.
+	db, err := ConnectDatabase(filepath.Join(t.TempDir(), "opslane_file_fk.db"))
+	if err != nil {
+		t.Fatalf("open file-backed db: %v", err)
+	}
+	defer db.Close()
+
+	if _, err := db.Exec("CREATE TABLE parent (id TEXT PRIMARY KEY); CREATE TABLE child (pid TEXT REFERENCES parent(id))"); err != nil {
+		t.Fatalf("create schema: %v", err)
+	}
+	if _, err := db.Exec("INSERT INTO child (pid) VALUES ('missing-parent')"); err == nil {
+		t.Fatalf("expected foreign key constraint violation on file-backed DSN, got nil")
 	}
 }
