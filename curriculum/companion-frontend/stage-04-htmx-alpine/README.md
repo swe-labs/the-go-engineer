@@ -170,7 +170,7 @@ stage-04-htmx-alpine/
 │   └── task_row.html     # Individual task table row fragment
 ├── datastar/             # Modern Alternative: Pure SSE & Datastar signals variant
 │   ├── components/       # Datastar-native templ component library (GOTD stack)
-│   ├── static/           # Vendored datastar.js (~13 KB single script)
+│   ├── static/           # Vendored datastar.js (~13 KB gzipped single script)
 │   ├── templates/        # Datastar-native templates
 │   ├── main.go           # Server streaming datastar-patch-elements
 │   ├── main_test.go      # Datastar test suite (html/template + templ modes)
@@ -211,7 +211,7 @@ go test -v ./...
 Looking to eliminate the seam between HTMX swaps and Alpine client state?
 
 Check out the complete comparative implementation in [`datastar/`](./datastar/README.md):
-- **Single Script:** Replaces both HTMX (14 KB) and Alpine (15 KB) with a single ~13 KB script (`datastar.js`).
+- **Single Script:** Replaces both HTMX (~14 KB gzipped) and Alpine (~15 KB gzipped) with a single ~13 KB gzipped script (`datastar.js`, ~33 KB raw).
 - **SSE Native:** Uses `datastar-patch-elements` and `datastar-patch-signals` to stream DOM mutations directly to any selector without out-of-band swap hacks.
 - **Run side-by-side:** Start the Datastar server with `go run ./datastar/main.go` listening at `http://localhost:8081` and compare both architectures head-to-head.
 

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"context"
 	"crypto/rand"
+	"crypto/subtle"
 	"embed"
 	"encoding/hex"
 	"io/fs"
@@ -12,20 +12,23 @@ import (
 	"sync"
 	"time"
 
+	"golang.org/x/crypto/bcrypt"
+
 	"github.com/swe-labs/the-go-engineer/curriculum/companion-frontend/stage-03-templ-tailwind/components"
 )
 
 //go:embed static/*
 var defaultStaticFS embed.FS
 
-// User represents an authenticated identity.
+// User represents an authenticated identity. Password is stored as a bcrypt
+// hash — the same credential-at-rest model Module 10 teaches.
 type User struct {
-	ID         string
-	Email      string
-	Password   string
-	Name       string
-	Role       string // "admin" or "viewer"
-	TenantName string
+	ID           string
+	Email        string
+	PasswordHash string
+	Name         string
+	Role         string // "admin" or "viewer"
+	TenantName   string
 }
 
 // Session represents an active browser login session.
@@ -47,6 +50,7 @@ type AuthServer struct {
 	mu           sync.RWMutex
 	users        map[string]*User
 	sessions     map[string]*Session
+	loginTokens  map[string]issuedLoginToken
 	tenantConfig TenantConfig
 	staticFS     fs.FS
 }
@@ -54,8 +58,9 @@ type AuthServer struct {
 // NewAuthServer initializes the authentication and tenant management service.
 func NewAuthServer(staticFS fs.FS) *AuthServer {
 	s := &AuthServer{
-		users:    make(map[string]*User),
-		sessions: make(map[string]*Session),
+		users:       make(map[string]*User),
+		sessions:    make(map[string]*Session),
+		loginTokens: make(map[string]issuedLoginToken),
 		tenantConfig: TenantConfig{
 			Name:            "Acme Cloud Infrastructure",
 			StrictIsolation: true,
@@ -63,23 +68,31 @@ func NewAuthServer(staticFS fs.FS) *AuthServer {
 		staticFS: staticFS,
 	}
 
-	// Seed accounts: 1 Admin and 1 Viewer
-	s.users["alice@acme.corp"] = &User{
-		ID:         "usr-admin-01",
-		Email:      "alice@acme.corp",
-		Password:   "opslane123",
-		Name:       "Alice Admin",
-		Role:       "admin",
-		TenantName: "Acme Corp",
-	}
-
-	s.users["bob@acme.corp"] = &User{
-		ID:         "usr-viewer-02",
-		Email:      "bob@acme.corp",
-		Password:   "opslane123",
-		Name:       "Bob Viewer",
-		Role:       "viewer",
-		TenantName: "Acme Corp",
+	// Seed accounts: 1 Admin and 1 Viewer. Demo passwords are hashed with a
+	// deliberately low bcrypt cost so test suites stay fast; production code
+	// should use bcrypt.DefaultCost or higher.
+	for _, seed := range []struct {
+		email  string
+		id     string
+		name   string
+		role   string
+		tenant string
+	}{
+		{"alice@acme.corp", "usr-admin-01", "Alice Admin", "admin", "Acme Corp"},
+		{"bob@acme.corp", "usr-viewer-02", "Bob Viewer", "viewer", "Acme Corp"},
+	} {
+		hash, err := bcrypt.GenerateFromPassword([]byte("opslane123"), bcrypt.MinCost)
+		if err != nil {
+			log.Fatalf("failed to hash seed password: %v", err)
+		}
+		s.users[seed.email] = &User{
+			ID:           seed.id,
+			Email:        seed.email,
+			PasswordHash: string(hash),
+			Name:         seed.name,
+			Role:         seed.role,
+			TenantName:   seed.tenant,
+		}
 	}
 
 	return s
@@ -90,6 +103,17 @@ func generateRandomToken(bytesLen int) string {
 	_, _ = rand.Read(b)
 	return hex.EncodeToString(b)
 }
+
+// dummyHash is a fixed bcrypt hash used when the submitted email does not
+// exist, so failed logins run the same expensive hash verification regardless
+// of whether the account exists (user-enumeration timing defense).
+var dummyHash = func() []byte {
+	h, err := bcrypt.GenerateFromPassword([]byte("opslane-dummy-password"), bcrypt.MinCost)
+	if err != nil {
+		log.Fatalf("failed to generate dummy hash: %v", err)
+	}
+	return h
+}()
 
 // Handler registers all application routes and middleware.
 func (s *AuthServer) Handler() http.Handler {
@@ -156,12 +180,110 @@ func (s *AuthServer) requireAuth(next http.HandlerFunc) http.HandlerFunc {
 }
 
 // validateCSRF ensures POST submissions include the session's active CSRF token.
+// The comparison is constant-time so token bytes cannot be probed by timing.
 func (s *AuthServer) validateCSRF(r *http.Request, session *Session) bool {
 	token := r.FormValue("csrf_token")
 	if token == "" {
 		token = r.Header.Get("X-CSRF-Token")
 	}
-	return token != "" && token == session.CSRFToken
+	if token == "" {
+		return false
+	}
+	return subtle.ConstantTimeCompare([]byte(token), []byte(session.CSRFToken)) == 1
+}
+
+// loginTokenTTL bounds how long an issued login-form token stays valid.
+const loginTokenTTL = 5 * time.Minute
+
+// maxLoginTokens caps the server-side token store. Under a GET /login
+// flood the store saturates at this size and each new issuance evicts the
+// soonest-expiring entry, so memory and the per-issuance prune scan stay
+// bounded instead of growing with request volume.
+const maxLoginTokens = 1024
+
+// anonymousLoginCookie identifies the browser across the unauthenticated
+// login flow so issued synchronizer tokens are bound to the browser that
+// requested them — the classic login-CSRF defense. Two tabs of the same
+// browser share the cookie, so both tabs' tokens stay valid.
+const anonymousLoginCookie = "login_anon"
+
+// issuedLoginToken couples a form token to the anonymous browser identity
+// it was issued for.
+type issuedLoginToken struct {
+	anonID    string
+	expiresAt time.Time
+}
+
+// issueLoginToken registers a fresh single-use synchronizer token bound to
+// the anonymous browser identity. Tokens live server-side (never embedded in
+// the cookie itself) so a token captured by an attacker is useless without
+// the victim's matching anonymous cookie. Expired entries are pruned on
+// every issuance and the store is hard-capped, so a request flood cannot
+// grow it without bound.
+func (s *AuthServer) issueLoginToken(w http.ResponseWriter, r *http.Request) string {
+	anonID := ""
+	if c, err := r.Cookie(anonymousLoginCookie); err == nil && c.Value != "" {
+		anonID = c.Value
+	} else {
+		anonID = generateRandomToken(16)
+	}
+	// Re-set on every view so the cookie outlives long-lived tabs.
+	http.SetCookie(w, &http.Cookie{
+		Name:     anonymousLoginCookie,
+		Value:    anonID,
+		Path:     "/",
+		HttpOnly: true,
+		SameSite: http.SameSiteLaxMode,
+		MaxAge:   86400,
+	})
+
+	token := generateRandomToken(16)
+	now := time.Now()
+
+	s.mu.Lock()
+	for t, issued := range s.loginTokens {
+		if now.After(issued.expiresAt) {
+			delete(s.loginTokens, t)
+		}
+	}
+	if len(s.loginTokens) >= maxLoginTokens {
+		// Evict the soonest-expiring entry: it is the least valuable live
+		// token (closest to natural death), and under a flood those are
+		// typically the attacker's own earlier requests, not a freshly
+		// issued legitimate token.
+		victim := ""
+		var earliest time.Time
+		for t, issued := range s.loginTokens {
+			if victim == "" || issued.expiresAt.Before(earliest) {
+				victim, earliest = t, issued.expiresAt
+			}
+		}
+		delete(s.loginTokens, victim)
+	}
+	s.loginTokens[token] = issuedLoginToken{anonID: anonID, expiresAt: now.Add(loginTokenTTL)}
+	s.mu.Unlock()
+
+	return token
+}
+
+// consumeLoginToken validates and burns a login-form token (single-use).
+// The token must have been issued for the anonymous identity presented by
+// the calling browser; a token captured from a different browser is refused.
+func (s *AuthServer) consumeLoginToken(token, anonID string) bool {
+	if token == "" {
+		return false
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	issued, ok := s.loginTokens[token]
+	if !ok || time.Now().After(issued.expiresAt) {
+		return false
+	}
+	if subtle.ConstantTimeCompare([]byte(issued.anonID), []byte(anonID)) != 1 {
+		return false
+	}
+	delete(s.loginTokens, token)
+	return true
 }
 
 // handleLoginView displays the sign-in form.
@@ -172,26 +294,29 @@ func (s *AuthServer) handleLoginView(w http.ResponseWriter, r *http.Request) {
 	}
 
 	flash := r.URL.Query().Get("error")
-	csrf := generateRandomToken(16)
-
-	// Set temporary CSRF cookie for unauthenticated login form
-	http.SetCookie(w, &http.Cookie{
-		Name:     "login_csrf",
-		Value:    csrf,
-		Path:     "/",
-		HttpOnly: true,
-		SameSite: http.SameSiteLaxMode,
-		MaxAge:   300,
-	})
+	csrf := s.issueLoginToken(w, r)
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	_ = components.Login(flash, csrf).Render(r.Context(), w)
 }
 
-// handleLoginSubmit processes credential verification.
+// handleLoginSubmit processes credential verification. The login form is
+// CSRF-protected with a single-use synchronizer token bound to the calling
+// browser's anonymous identity (issued by handleLoginView); the submitted
+// token must exist, be unexpired, and match that identity.
 func (s *AuthServer) handleLoginSubmit(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// 1. CSRF verification for the unauthenticated login form
+	anonID := ""
+	if c, err := r.Cookie(anonymousLoginCookie); err == nil {
+		anonID = c.Value
+	}
+	if !s.consumeLoginToken(r.FormValue("csrf_token"), anonID) {
+		http.Redirect(w, r, "/login?error=Login+session+expired%2C+please+retry", http.StatusSeeOther)
 		return
 	}
 
@@ -202,7 +327,16 @@ func (s *AuthServer) handleLoginSubmit(w http.ResponseWriter, r *http.Request) {
 	user, exists := s.users[email]
 	s.mu.RUnlock()
 
-	if !exists || user.Password != password {
+	// bcrypt.CompareHashAndPassword runs the full hash verification even for a
+	// missing user (via a fixed dummy hash), so response timing does not reveal
+	// whether the email exists.
+	var hash []byte
+	if exists {
+		hash = []byte(user.PasswordHash)
+	} else {
+		hash = dummyHash
+	}
+	if bcrypt.CompareHashAndPassword(hash, []byte(password)) != nil || !exists {
 		http.Redirect(w, r, "/login?error=Invalid+credentials+provided", http.StatusSeeOther)
 		return
 	}
@@ -378,7 +512,7 @@ func (s *AuthServer) handleSettings(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	_ = components.Settings(vm).Render(context.Background(), w)
+	_ = components.Settings(vm).Render(r.Context(), w)
 }
 
 func main() {

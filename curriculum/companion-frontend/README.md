@@ -18,7 +18,7 @@ The **Frontend Companion Track** runs parallel to the core Go engineering curric
 │  - Semantic HTML5 & Responsive Tailwind CSS            │
 │  - HTMX (AJAX swaps, polling, out-of-band updates)     │
 │  - Alpine.js (Lightweight client-only UI state)        │
-│  - Datastar (~13 KB unified SSE-first reactive engine) │
+│  - Datastar (~13 KB gzipped SSE-first reactive engine) │
 └───────────────────────────▲────────────────────────────┘
                             │
                HTTP / HTML Fragments & SSE Streams
@@ -166,10 +166,10 @@ Stage 4 includes dual-mode implementations supporting both standard `html/templa
 While HTMX and Alpine.js teach essential, resume-ready hypermedia foundations, Go backend engineers frequently encounter friction at the boundary between HTMX DOM swaps and Alpine client state.
 
 The companion track includes a complete comparative starter in [`stage-04-htmx-alpine/datastar/`](./stage-04-htmx-alpine/datastar/README.md) demonstrating **Datastar**:
-- **Unified ~13 KB Footprint:** Replaces both HTMX and Alpine with a single script, eliminating state desync.
+- **Unified ~13 KB (gzipped) Footprint:** Replaces both HTMX and Alpine with a single script (~33 KB raw), eliminating state desync.
 - **Server-Sent Events Native:** Every HTTP interaction operates over persistent or on-demand SSE streams (`datastar-patch-elements` and `datastar-patch-signals`).
 - **No Out-of-Band Workarounds:** Any SSE event can target arbitrary DOM selectors (`mode: prepend`, `mode: outer`, etc.) directly from Go's standard `http.Flusher`.
-- **First-Class Go SDK & Templ Integration:** Integrates natively with `github.com/starfederation/datastar/sdk/go` and compile-time type-checked `a-h/templ` components.
+- **SDK-Ready Wire Protocol:** Implements `datastar-patch-elements` and `datastar-patch-signals` directly against `http.Flusher` with zero external dependencies — the official Go SDK (`github.com/starfederation/datastar/sdk/go`) exposes the same primitives — and components are compile-time type-checked `a-h/templ`.
 
 ---
 

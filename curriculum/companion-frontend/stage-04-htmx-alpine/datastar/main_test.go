@@ -11,6 +11,42 @@ import (
 	"time"
 )
 
+func TestWorkerPool_EnqueueBeyondCapacityDoesNotDeadlock(t *testing.T) {
+	broker := NewSSEBroker()
+	pool := NewWorkerPool(1, broker, nil)
+
+	done := make(chan *Task, 1)
+	go func() {
+		var last *Task
+		for i := 0; i < 105; i++ {
+			last = pool.Enqueue("Backpressure Probe", 5*time.Millisecond)
+		}
+		done <- last
+	}()
+
+	select {
+	case <-done:
+	case <-time.After(5 * time.Second):
+		t.Fatal("Enqueue deadlocked past queue capacity (channel send under tasksMu)")
+	}
+}
+
+func TestWorkerPool_CancelTerminalTaskIsNoOp(t *testing.T) {
+	broker := NewSSEBroker()
+	pool := NewWorkerPool(1, broker, nil)
+
+	task := pool.Enqueue("Short Job", 10*time.Millisecond)
+	time.Sleep(100 * time.Millisecond)
+
+	got, ok := pool.Cancel(task.ID)
+	if !ok {
+		t.Fatalf("expected Cancel to find the task")
+	}
+	if got.Status != "COMPLETED" {
+		t.Fatalf("expected COMPLETED status preserved on terminal cancel, got %s", got.Status)
+	}
+}
+
 func setupTestDashboard(t *testing.T) (*DashboardServer, *WorkerPool) {
 	t.Helper()
 

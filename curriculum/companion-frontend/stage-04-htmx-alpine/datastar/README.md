@@ -2,7 +2,7 @@
 
 > **Companion Track Stage:** 4 (Modern Alternative Variant)
 > **Core Module Alignment:** Module 11 (_Concurrency & Lifecycle_) and Module 12 (_Observability & Diagnostics_)
-> **Key Technologies:** `Go 1.27+`, `Datastar v1.0.4` (~13 KB single script), `Server-Sent Events (SSE)`, Standard Library `http.Flusher`.
+> **Key Technologies:** `Go 1.27+`, `Datastar v1.0.4` (~13 KB gzipped, ~33 KB raw), `Server-Sent Events (SSE)`, Standard Library `http.Flusher`.
 > **Prerequisites:** [Stage 4 Primary (HTMX &amp; Alpine.js)](../README.md), Go goroutines and buffered channels.
 
 ---
@@ -14,7 +14,7 @@ While the primary Stage 4 track teaches **HTMX & Alpine.js** (the current indust
 ```
 ┌────────────────────────────────────────────────────────┐
 │                   Browser Client                       │
-│  - Single vendor script: datastar.js (~13 KB)          │
+│  - Single vendor script: datastar.js (~13 KB gzipped)  │
 │  - Unified Signals (data-signals, data-bind, data-show)│
 │  - SSE Morphing Engine (datastar-patch-elements)       │
 │  - Zero client state desynchronization                 │
@@ -43,7 +43,7 @@ In the primary HTMX + Alpine.js architecture:
 
 **Datastar eliminates all three:**
 
-- **Single ~13 KB Script:** Replaces both HTMX (14 KB) and Alpine (15 KB) with zero build steps.
+- **Single ~13 KB (gzipped) Script:** Replaces both HTMX (~14 KB gzipped) and Alpine (~15 KB gzipped) with zero build steps.
 - **Native SSE First:** Every action (`@post`, `@get`) and stream can emit `datastar-patch-elements` targeting _any_ CSS selector without OOB workarounds.
 - **Unified Reactive Signals:** Client UI state (`$modalOpen`, `$terminalOpen`) is declared via `data-signals` and can be inspected or mutated both on the client and directly by server SSE events (`datastar-patch-signals`).
 
@@ -155,7 +155,7 @@ stage-04-htmx-alpine/datastar/
 │   ├── task_row_templ.go
 │   └── types.go          # Domain types (Task, MetricsSnapshot)
 ├── static/
-│   ├── datastar.js       # Vendored datastar.js v1.0.4 (~13 KB single script)
+│   ├── datastar.js       # Vendored datastar.js v1.0.4 (~13 KB gzipped, ~33 KB raw)
 │   └── style.css         # Modern dark dashboard & status styles
 ├── templates/            # Standard html/template files (for comparison)
 │   ├── dashboard.html    # Full dashboard view with Datastar attributes
@@ -217,7 +217,7 @@ Open two browser windows:
 Observe:
 
 - In Datastar, clicking **Custom Task Dispatch** and submitting sends `@post('/tasks')` which returns an SSE stream that prepends the table row, updates the metrics card, and resets the client modal signal in **a single continuous HTTP stream**.
-- Inspect Chrome DevTools Network tab: notice that only 1 script tag (`datastar.js`, 13 KB) is transferred.
+- Inspect Chrome DevTools Network tab: notice that only 1 script tag (`datastar.js`, ~33 KB raw / ~13 KB gzipped) is transferred.
 
 ### 3. Run the Unit Test Suite
 
@@ -231,7 +231,7 @@ All tests verify root rendering, SSE wire formatting, signal patching, task canc
 
 ## Stage mission
 
-Demonstrate the Datastar paradigm: a single ~13 KB SSE-first script that replaces both HTMX and Alpine, streams `datastar-patch-elements` and `datastar-patch-signals` events from Go, and removes the state desync between server DOM swaps and client state.
+Demonstrate the Datastar paradigm: a single ~13 KB (gzipped) SSE-first script that replaces both HTMX and Alpine, streams `datastar-patch-elements` and `datastar-patch-signals` events from Go, and removes the state desync between server DOM swaps and client state.
 
 ## Backend alignment
 
