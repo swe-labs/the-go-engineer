@@ -1,11 +1,5 @@
 {
-  "architectural_decision": {
-    "core_rule": "Optimize for learner progression, zero magic, rigorous proof of understanding, production-grade documentation, and job readiness.",
-    "decision": "Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.",
-    "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only.",
-    "manifest_policy": "Authoritative modular v3 manifests are the active source of truth for the curriculum engine.",
-    "v2_policy": "curriculum.v2.json is archived legacy import data, not the active source of truth."
-  },
+
   "curriculum_version": "3.0.0",
   "document_type": "elective_path",
   "items": [
@@ -24,14 +18,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 15.15 — Demo preparation",
             "label": "Module 15.15 — Demo preparation",
             "reason": " requires understanding of Career roadmap.",
             "required": true,
             "target_id": "core-16-15"
           },
           {
-            "display_text": "Module 17.15 — Demo preparation",
             "label": "Module 17.15 — Demo preparation",
             "reason": "This module builds on concepts from the previous module.",
             "required": true,
@@ -41,7 +33,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -50,21 +41,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
             "reason": "Complex generic constraints extends Generics with type sets and approximation (~T).",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
             "reason": "Generic data structures applies Generics to build type-safe collections (Stack, Queue, Ring).",
             "required": false,
             "target_id": "elective-03"
           },
           {
-            "display_text": "Module 17.04 — Functional options",
             "label": "Module 17.04 — Functional options",
             "reason": "Functional options explores alternative extensible constructor designs alongside Generics.",
             "required": false,
@@ -104,20 +92,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must write a generic function that works with at least two distinct concrete types, write a generic data structure (e.g., a Stack or Queue), and explain how monomorphization works at compile time. They must also demonstrate understanding of constraint interfaces by writing a constraint with type approximation (~T) and a type union.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete the core path through Module 15 before starting advanced electives."
-      ],
       "slug": "generics",
       "source_legacy_ids": [
         "TI.9"
@@ -208,14 +189,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.01 — Generics",
             "label": "Module 16.01 — Generics",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Module 16.15 — Demo preparation",
             "label": "Module 16.15 — Demo preparation",
             "reason": "This module builds on concepts from the previous module.",
             "required": true,
@@ -225,7 +204,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -234,21 +212,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
             "reason": "Generics provides the foundational type parameter syntax and monomorphization semantics.",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
             "reason": "Generic data structures leverages complex constraints to enforce element ordering and equality.",
             "required": false,
             "target_id": "elective-03"
           },
           {
-            "display_text": "Module 17.05 — Method values",
             "label": "Module 17.05 — Method values",
             "reason": "Method values provides complementary closure-based delegation alongside generic constraints.",
             "required": false,
@@ -288,20 +263,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must write a constraint with a type union and type approximation, write a generic function that uses the constraint, demonstrate which types satisfy and do not satisfy the constraint, and explain why constraint satisfaction is checked at compile time rather than runtime.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-01."
-      ],
       "slug": "complex-generic-constraints",
       "source_legacy_ids": [],
       "status": "ready",
@@ -389,14 +357,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.02 — Complex generic constraints",
             "label": "Module 16.02 — Complex generic constraints",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Module 16.15 — Demo preparation",
             "label": "Module 16.15 — Demo preparation",
             "reason": "This module builds on concepts from the previous module.",
             "required": true,
@@ -406,7 +372,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -415,21 +380,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
             "reason": "Generics enables type-safe container memory layouts without interface boxing.",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Module 17.02 — Complex generic constraints",
             "label": "Module 17.02 — Complex generic constraints",
             "reason": "Complex generic constraints ensures container keys and values satisfy comparable or custom constraints.",
             "required": false,
             "target_id": "elective-02"
           },
           {
-            "display_text": "Module 17.15 — sync.Pool",
             "label": "Module 17.15 — sync.Pool",
             "reason": "sync.Pool provides high-throughput memory recycling for generic buffer and node allocations.",
             "required": false,
@@ -469,20 +431,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must implement a generic data structure (Stack[T] or Queue[T]) with Push, Pop, Peek, and Len methods, write tests that verify type safety (Stack[int] rejects string values at compile time), and explain how monomorphization produces concrete code for each instantiation.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-02."
-      ],
       "slug": "generic-data-structures",
       "source_legacy_ids": [],
       "status": "ready",
@@ -570,14 +525,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.03 — Generic data structures",
             "label": "Module 16.03 — Generic data structures",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-03"
           },
           {
-            "display_text": "Module 16.15 — Demo preparation",
             "label": "Module 16.15 — Demo preparation",
             "reason": "This module builds on concepts from the previous module.",
             "required": true,
@@ -587,7 +540,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -596,21 +548,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.01 — Generics",
             "label": "Module 17.01 — Generics",
             "reason": "Generics and functional options represent complementary patterns for configurable library APIs.",
             "required": false,
             "target_id": "elective-01"
           },
           {
-            "display_text": "Module 17.05 — Method values",
             "label": "Module 17.05 — Method values",
             "reason": "Method values can be used to construct curried option functions cleanly.",
             "required": false,
             "target_id": "elective-05"
           },
           {
-            "display_text": "Module 17.10 — gRPC fundamentals",
             "label": "Module 17.10 — gRPC fundamentals",
             "reason": "gRPC fundamentals uses functional dial and server options extensively for client configuration.",
             "required": false,
@@ -650,20 +599,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must implement a constructor with functional options: NewServer(addr string, opts ...Option) that accepts at least 3 options (WithTimeout, WithMaxConns, WithTLS), provide sensible defaults, and demonstrate that options are applied in order and that unset options use defaults.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-03."
-      ],
       "slug": "functional-options",
       "source_legacy_ids": [],
       "status": "ready",
@@ -754,14 +696,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.04 — Functional options",
             "label": "Module 16.04 — Functional options",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-04"
           },
           {
-            "display_text": "Module 16.15 — Demo preparation",
             "label": "Module 16.15 — Demo preparation",
             "reason": "This module builds on concepts from the previous module.",
             "required": true,
@@ -771,7 +711,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -780,21 +719,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.04 — Functional options",
             "label": "Module 17.04 — Functional options",
             "reason": "Functional options often utilizes method values as option callbacks.",
             "required": false,
             "target_id": "elective-04"
           },
           {
-            "display_text": "Module 17.08 — Mockery",
             "label": "Module 17.08 — Mockery",
             "reason": "Mockery relies on method signatures and function pointers to verify invocation behavior.",
             "required": false,
             "target_id": "elective-08"
           },
           {
-            "display_text": "Module 17.12 — gRPC interceptors",
             "label": "Module 17.12 — gRPC interceptors",
             "reason": "gRPC interceptors chains method values and handler functions in middleware pipelines.",
             "required": false,
@@ -834,20 +770,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must demonstrate the difference between method values and method expressions, write a sort.Interface implementation using method expressions, and use a method value as a callback in an event emitter pattern.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-04."
-      ],
       "slug": "method-values",
       "source_legacy_ids": [],
       "status": "ready",
@@ -938,14 +867,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.05 — Method values",
             "label": "Module 16.05 — Method values",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-05"
           },
           {
-            "display_text": "Module 17.04 — Functional options",
             "label": "Module 17.04 — Functional options",
             "reason": " extends directly from .",
             "required": true,
@@ -955,7 +882,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -964,21 +890,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.07 — go generate",
             "label": "Module 17.07 — go generate",
             "reason": "go generate directives are commonly paired with build tags to control code generation targets.",
             "required": false,
             "target_id": "elective-07"
           },
           {
-            "display_text": "Module 17.08 — Mockery",
             "label": "Module 17.08 — Mockery",
             "reason": "Mockery can generate mocks guarded by specific build tags for test-only compilation.",
             "required": false,
             "target_id": "elective-08"
           },
           {
-            "display_text": "Module 17.18 — Blue/green deployments",
             "label": "Module 17.18 — Blue/green deployments",
             "reason": "Blue/green deployments utilizes environment-specific compilation units for target environments.",
             "required": false,
@@ -1018,20 +941,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must write a platform-specific implementation using build tags (e.g., a signal handler that uses syscall.SIGUSR1 on Linux and os.Interrupt on Windows), demonstrate that the correct file compiles on each platform, and use a custom build tag to conditionally include debug logging.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-05."
-      ],
       "slug": "build-tags",
       "source_legacy_ids": [],
       "status": "ready",
@@ -1122,14 +1038,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.06 — Build tags",
             "label": "Module 16.06 — Build tags",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-06"
           },
           {
-            "display_text": "Module 17.05 — Method values",
             "label": "Module 17.05 — Method values",
             "reason": " extends directly from .",
             "required": true,
@@ -1139,7 +1053,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -1148,21 +1061,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.06 — Build tags",
             "label": "Module 17.06 — Build tags",
             "reason": "Build tags isolate generated files from standard production compilation paths.",
             "required": false,
             "target_id": "elective-06"
           },
           {
-            "display_text": "Module 17.08 — Mockery",
             "label": "Module 17.08 — Mockery",
             "reason": "Mockery is frequently invoked via //go:generate directives in interface definitions.",
             "required": false,
             "target_id": "elective-08"
           },
           {
-            "display_text": "Module 17.09 — Protobuf",
             "label": "Module 17.09 — Protobuf",
             "reason": "Protobuf relies on go:generate directives to invoke protoc and protoc-gen-go.",
             "required": false,
@@ -1202,20 +1112,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must create a Go file with a //go:generate directive that runs stringer on an enum type, run go generate, verify the generated String() method compiles and works, and document the generation command in the README.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-06."
-      ],
       "slug": "go-generate",
       "source_legacy_ids": [],
       "status": "ready",
@@ -1306,14 +1209,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.07 — go generate",
             "label": "Module 16.07 — go generate",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-07"
           },
           {
-            "display_text": "Module 17.06 — Build tags",
             "label": "Module 17.06 — Build tags",
             "reason": " extends directly from .",
             "required": true,
@@ -1323,7 +1224,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -1332,21 +1232,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.07 — go generate",
             "label": "Module 17.07 — go generate",
             "reason": "go generate automates mock regeneration when interface contracts change.",
             "required": false,
             "target_id": "elective-07"
           },
           {
-            "display_text": "Module 17.10 — gRPC fundamentals",
             "label": "Module 17.10 — gRPC fundamentals",
             "reason": "gRPC fundamentals uses mocks to test gRPC client stubs without spinning up network servers.",
             "required": false,
             "target_id": "elective-10"
           },
           {
-            "display_text": "Module 17.12 — gRPC interceptors",
             "label": "Module 17.12 — gRPC interceptors",
             "reason": "gRPC interceptors uses mock handlers to test telemetry and security middleware.",
             "required": false,
@@ -1386,20 +1283,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must define a Go interface, generate a mock using Mockery with a //go:generate directive, write a test that injects the mock, sets expectations, exercises the code, and calls AssertExpectations — including a negative test that proves AssertExpectations fails when expected calls are not made.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-07."
-      ],
       "slug": "mockery",
       "source_legacy_ids": [],
       "status": "ready",
@@ -1490,14 +1380,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.08 — Mockery",
             "label": "Module 16.08 — Mockery",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-08"
           },
           {
-            "display_text": "Module 17.07 — go generate",
             "label": "Module 17.07 — go generate",
             "reason": " extends directly from .",
             "required": true,
@@ -1507,7 +1395,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -1516,21 +1403,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.10 — gRPC fundamentals",
             "label": "Module 17.10 — gRPC fundamentals",
             "reason": "gRPC fundamentals uses Protobuf as its interface definition and wire serialization protocol.",
             "required": false,
             "target_id": "elective-10"
           },
           {
-            "display_text": "Module 17.13 — REST vs gRPC tradeoffs",
             "label": "Module 17.13 — REST vs gRPC tradeoffs",
             "reason": "REST vs gRPC tradeoffs compares Protobuf wire efficiency against JSON payload overhead.",
             "required": false,
             "target_id": "elective-13"
           },
           {
-            "display_text": "Module 17.07 — go generate",
             "label": "Module 17.07 — go generate",
             "reason": "go generate coordinates protoc compilation within standard Go project workflows.",
             "required": false,
@@ -1570,20 +1454,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must write a .proto file with at least 2 message types and 1 service definition, generate Go code using protoc and protoc-gen-go, marshal and unmarshal a protobuf message in Go, and demonstrate backward compatibility by adding a new field to the proto file without breaking existing messages.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-08."
-      ],
       "slug": "protobuf",
       "source_legacy_ids": [],
       "status": "ready",
@@ -1672,14 +1549,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.09 — Protobuf",
             "label": "Module 16.09 — Protobuf",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-09"
           },
           {
-            "display_text": "Module 17.08 — Mockery",
             "label": "Module 17.08 — Mockery",
             "reason": " extends directly from .",
             "required": true,
@@ -1689,7 +1564,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -1698,21 +1572,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.09 — Protobuf",
             "label": "Module 17.09 — Protobuf",
             "reason": "Protobuf defines the service schemas and message types that gRPC generates.",
             "required": false,
             "target_id": "elective-09"
           },
           {
-            "display_text": "Module 17.11 — gRPC streaming",
             "label": "Module 17.11 — gRPC streaming",
             "reason": "gRPC streaming expands unary RPC patterns into continuous client, server, and bidi streams.",
             "required": false,
             "target_id": "elective-11"
           },
           {
-            "display_text": "Module 17.12 — gRPC interceptors",
             "label": "Module 17.12 — gRPC interceptors",
             "reason": "gRPC interceptors adds cross-cutting authentication, logging, and metrics to gRPC services.",
             "required": false,
@@ -1752,20 +1623,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must define a .proto service with at least one unary RPC, generate Go server and client code using protoc with the gRPC plugin, implement the server, write a client that calls the RPC with a context deadline, and verify the response is correct.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-09."
-      ],
       "slug": "grpc-fundamentals",
       "source_legacy_ids": [],
       "status": "ready",
@@ -1855,14 +1719,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.10 — gRPC fundamentals",
             "label": "Module 16.10 — gRPC fundamentals",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-10"
           },
           {
-            "display_text": "Module 17.09 — Protobuf",
             "label": "Module 17.09 — Protobuf",
             "reason": " extends directly from .",
             "required": true,
@@ -1872,7 +1734,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -1881,21 +1742,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.10 — gRPC fundamentals",
             "label": "Module 17.10 — gRPC fundamentals",
             "reason": "gRPC fundamentals establishes the connection lifecycle and deadline semantics used in streaming.",
             "required": false,
             "target_id": "elective-10"
           },
           {
-            "display_text": "Module 17.12 — gRPC interceptors",
             "label": "Module 17.12 — gRPC interceptors",
             "reason": "gRPC interceptors handles stream interceptors with dedicated StreamServerInterceptor hooks.",
             "required": false,
             "target_id": "elective-12"
           },
           {
-            "display_text": "Module 17.20 — Deeper distributed systems",
             "label": "Module 17.20 — Deeper distributed systems",
             "reason": "Deeper distributed systems addresses flow control, backpressure, and network drops in long-lived streams.",
             "required": false,
@@ -1935,20 +1793,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must implement a server-streaming RPC that sends 10 messages at 1-second intervals, a client that receives them with Recv() until io.EOF, and a bidirectional streaming RPC where the client sends 5 messages and the server echoes each one back.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-10."
-      ],
       "slug": "grpc-streaming",
       "source_legacy_ids": [],
       "status": "ready",
@@ -2036,14 +1887,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.11 — gRPC streaming",
             "label": "Module 16.11 — gRPC streaming",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-11"
           },
           {
-            "display_text": "Module 17.10 — gRPC fundamentals",
             "label": "Module 17.10 — gRPC fundamentals",
             "reason": " extends directly from .",
             "required": true,
@@ -2053,7 +1902,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -2062,21 +1910,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.10 — gRPC fundamentals",
             "label": "Module 17.10 — gRPC fundamentals",
             "reason": "gRPC fundamentals provides the unary handler signature wrapped by UnaryServerInterceptor.",
             "required": false,
             "target_id": "elective-10"
           },
           {
-            "display_text": "Module 17.11 — gRPC streaming",
             "label": "Module 17.11 — gRPC streaming",
             "reason": "gRPC streaming requires specialized stream wrappers to intercept streaming messages.",
             "required": false,
             "target_id": "elective-11"
           },
           {
-            "display_text": "Module 17.17 — Feature flags",
             "label": "Module 17.17 — Feature flags",
             "reason": "Feature flags can be evaluated dynamically within client and server interceptors.",
             "required": false,
@@ -2116,20 +1961,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must implement a unary server interceptor that logs each RPC with method name, request size, duration, and response status, register it with the gRPC server, and verify that every RPC produces a log line with the expected fields.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-11."
-      ],
       "slug": "grpc-interceptors",
       "source_legacy_ids": [],
       "status": "ready",
@@ -2217,14 +2055,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.12 — gRPC interceptors",
             "label": "Module 16.12 — gRPC interceptors",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-12"
           },
           {
-            "display_text": "Module 17.11 — gRPC streaming",
             "label": "Module 17.11 — gRPC streaming",
             "reason": " extends directly from .",
             "required": true,
@@ -2234,7 +2070,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -2243,21 +2078,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.09 — Protobuf",
             "label": "Module 17.09 — Protobuf",
             "reason": "Protobuf wire serialization is a primary factor in gRPC performance advantages.",
             "required": false,
             "target_id": "elective-09"
           },
           {
-            "display_text": "Module 17.10 — gRPC fundamentals",
             "label": "Module 17.10 — gRPC fundamentals",
             "reason": "gRPC fundamentals provides the practical benchmark baseline against REST APIs.",
             "required": false,
             "target_id": "elective-10"
           },
           {
-            "display_text": "Module 17.19 — Microservice splitting",
             "label": "Module 17.19 — Microservice splitting",
             "reason": "Microservice splitting evaluates internal gRPC communication vs external REST gateways.",
             "required": false,
@@ -2297,20 +2129,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must design the API protocol for three scenarios: (1) a public API for a weather service (REST), (2) an internal service for processing real-time stock trades (gRPC streaming), (3) a CRUD API for a CMS admin panel (REST), and explain the tradeoff decision for each scenario.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-12."
-      ],
       "slug": "rest-vs-grpc-tradeoffs",
       "source_legacy_ids": [],
       "status": "ready",
@@ -2397,14 +2222,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.13 — REST vs gRPC tradeoffs",
             "label": "Module 16.13 — REST vs gRPC tradeoffs",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-13"
           },
           {
-            "display_text": "Module 17.12 — gRPC interceptors",
             "label": "Module 17.12 — gRPC interceptors",
             "reason": " extends directly from .",
             "required": true,
@@ -2414,7 +2237,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -2423,21 +2245,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.15 — sync.Pool",
             "label": "Module 17.15 — sync.Pool",
             "reason": "sync.Pool and sync.Map are complementary standard library tools for high-throughput concurrency.",
             "required": false,
             "target_id": "elective-15"
           },
           {
-            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
             "reason": "Generic data structures provides type-safe wrappers around sync.Map untyped any storage.",
             "required": false,
             "target_id": "elective-03"
           },
           {
-            "display_text": "Module 17.20 — Deeper distributed systems",
             "label": "Module 17.20 — Deeper distributed systems",
             "reason": "Deeper distributed systems uses concurrent caches to reduce distributed read amplification.",
             "required": false,
@@ -2477,20 +2296,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must implement a typed cache using sync.Map that stores and retrieves values with type-safe Load and Store wrapper methods, write a concurrent test that proves 10 goroutines reading and 2 goroutines writing do not cause race conditions, and compare the performance against a map with sync.RWMutex using a benchmark.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-13."
-      ],
       "slug": "sync-map",
       "source_legacy_ids": [],
       "status": "ready",
@@ -2580,14 +2392,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.14 — sync.Map",
             "label": "Module 16.14 — sync.Map",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-14"
           },
           {
-            "display_text": "Module 17.13 — REST vs gRPC tradeoffs",
             "label": "Module 17.13 — REST vs gRPC tradeoffs",
             "reason": " extends directly from .",
             "required": true,
@@ -2597,7 +2407,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -2606,21 +2415,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.14 — sync.Map",
             "label": "Module 17.14 — sync.Map",
             "reason": "sync.Map and sync.Pool optimize hot paths under extreme multi-threaded contention.",
             "required": false,
             "target_id": "elective-14"
           },
           {
-            "display_text": "Module 17.03 — Generic data structures",
             "label": "Module 17.03 — Generic data structures",
             "reason": "Generic data structures benefits from pooled node and buffer allocations.",
             "required": false,
             "target_id": "elective-03"
           },
           {
-            "display_text": "Module 17.09 — Protobuf",
             "label": "Module 17.09 — Protobuf",
             "reason": "Protobuf uses buffer recycling to reduce allocation churn during serialization.",
             "required": false,
@@ -2660,20 +2466,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must write a benchmark that allocates 1000 bytes.Buffers without sync.Pool and with sync.Pool, report the allocs/op and ns/op for each approach, and explain why sync.Pool reduces GC pressure despite not reducing total allocation count.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-14."
-      ],
       "slug": "sync-pool",
       "source_legacy_ids": [],
       "status": "ready",
@@ -2762,14 +2561,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.15 — sync.Pool",
             "label": "Module 16.15 — sync.Pool",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-15"
           },
           {
-            "display_text": "Module 17.14 — sync.Map",
             "label": "Module 17.14 — sync.Map",
             "reason": " extends directly from .",
             "required": true,
@@ -2779,7 +2576,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -2788,21 +2584,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.19 — Microservice splitting",
             "label": "Module 17.19 — Microservice splitting",
             "reason": "Microservice splitting frequently isolates read and write bounded contexts using CQRS.",
             "required": false,
             "target_id": "elective-19"
           },
           {
-            "display_text": "Module 17.20 — Deeper distributed systems",
             "label": "Module 17.20 — Deeper distributed systems",
             "reason": "Deeper distributed systems addresses eventual consistency and projection lag in CQRS.",
             "required": false,
             "target_id": "elective-20"
           },
           {
-            "display_text": "Module 17.17 — Feature flags",
             "label": "Module 17.17 — Feature flags",
             "reason": "Feature flags allows rolling out read-model projections independently from command writes.",
             "required": false,
@@ -2842,20 +2635,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must design a CQRS system for an order management service with separate command and query models, implement an event store that persists commands as events, create a read model projection that consumes events and updates a denormalized orders_read table, and demonstrate that a write is visible on the read side only after event propagation completes (eventual consistency).",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-15."
-      ],
       "slug": "cqrs",
       "source_legacy_ids": [],
       "status": "ready",
@@ -2946,14 +2732,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.16 — CQRS",
             "label": "Module 16.16 — CQRS",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-16"
           },
           {
-            "display_text": "Module 17.15 — sync.Pool",
             "label": "Module 17.15 — sync.Pool",
             "reason": " extends directly from .",
             "required": true,
@@ -2963,7 +2747,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -2972,21 +2755,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.18 — Blue/green deployments",
             "label": "Module 17.18 — Blue/green deployments",
             "reason": "Blue/green deployments and feature flags provide dual layers of safe production release control.",
             "required": false,
             "target_id": "elective-18"
           },
           {
-            "display_text": "Module 17.16 — CQRS",
             "label": "Module 17.16 — CQRS",
             "reason": "CQRS read models can be enabled progressively using percentage-based feature flags.",
             "required": false,
             "target_id": "elective-16"
           },
           {
-            "display_text": "Module 17.12 — gRPC interceptors",
             "label": "Module 17.12 — gRPC interceptors",
             "reason": "gRPC interceptors can inject feature flag contexts based on caller metadata.",
             "required": false,
@@ -3026,20 +2806,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must implement a feature flag system supporting percentage-based rollouts and user targeting, wrap a new code path in a flag check, demonstrate that the flag can be toggled at runtime without redeployment, and document the flag removal process.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-16."
-      ],
       "slug": "feature-flags",
       "source_legacy_ids": [],
       "status": "ready",
@@ -3129,14 +2902,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.17 — Feature flags",
             "label": "Module 16.17 — Feature flags",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-17"
           },
           {
-            "display_text": "Module 17.16 — CQRS",
             "label": "Module 17.16 — CQRS",
             "reason": " extends directly from .",
             "required": true,
@@ -3146,7 +2917,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -3155,21 +2925,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.17 — Feature flags",
             "label": "Module 17.17 — Feature flags",
             "reason": "Feature flags mitigates release risk after blue/green traffic switches.",
             "required": false,
             "target_id": "elective-17"
           },
           {
-            "display_text": "Module 17.19 — Microservice splitting",
             "label": "Module 17.19 — Microservice splitting",
             "reason": "Microservice splitting requires independent zero-downtime deployment pipelines for each service.",
             "required": false,
             "target_id": "elective-19"
           },
           {
-            "display_text": "Module 17.20 — Deeper distributed systems",
             "label": "Module 17.20 — Deeper distributed systems",
             "reason": "Deeper distributed systems requires graceful connection draining during blue/green switches.",
             "required": false,
@@ -3209,20 +2976,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must design a blue/green deployment strategy for a Go service with a PostgreSQL database, including: (1) backward-compatible migration, (2) traffic switch mechanism, (3) health check on the standby environment before the switch, (4) cache pre-warming, and (5) rollback procedure.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-17."
-      ],
       "slug": "blue-green-deployments",
       "source_legacy_ids": [],
       "status": "ready",
@@ -3313,14 +3073,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.18 — Blue/green deployments",
             "label": "Module 16.18 — Blue/green deployments",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-18"
           },
           {
-            "display_text": "Module 17.17 — Feature flags",
             "label": "Module 17.17 — Feature flags",
             "reason": " extends directly from .",
             "required": true,
@@ -3330,7 +3088,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -3339,21 +3096,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.16 — CQRS",
             "label": "Module 17.16 — CQRS",
             "reason": "CQRS simplifies extracting bounded contexts from monolithic databases into services.",
             "required": false,
             "target_id": "elective-16"
           },
           {
-            "display_text": "Module 17.13 — REST vs gRPC tradeoffs",
             "label": "Module 17.13 — REST vs gRPC tradeoffs",
             "reason": "REST vs gRPC tradeoffs guides inter-service communication protocol selection.",
             "required": false,
             "target_id": "elective-13"
           },
           {
-            "display_text": "Module 17.20 — Deeper distributed systems",
             "label": "Module 17.20 — Deeper distributed systems",
             "reason": "Deeper distributed systems addresses network partitioning and distributed failures across services.",
             "required": false,
@@ -3393,20 +3147,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must identify three bounded contexts in a sample e-commerce monolith, define the API contract for one extracted service, and explain the migration strategy from monolith to services: data migration, traffic routing, and rollback plan.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-18."
-      ],
       "slug": "microservice-splitting",
       "source_legacy_ids": [],
       "status": "ready",
@@ -3496,14 +3243,12 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 16.19 — Microservice splitting",
             "label": "Module 16.19 — Microservice splitting",
             "reason": " requires understanding of .",
             "required": true,
             "target_id": "elective-19"
           },
           {
-            "display_text": "Module 17.18 — Blue/green deployments",
             "label": "Module 17.18 — Blue/green deployments",
             "reason": " extends directly from .",
             "required": true,
@@ -3513,7 +3258,6 @@
         "preview_only": [],
         "reinforced_in": [
           {
-            "display_text": "Project 17 — Advanced Electives Capstone",
             "label": "Project 17 — Advanced Electives Capstone",
             "reason": "This project reinforces advanced elective concepts.",
             "required": false,
@@ -3522,21 +3266,18 @@
         ],
         "related": [
           {
-            "display_text": "Module 17.16 — CQRS",
             "label": "Module 17.16 — CQRS",
             "reason": "CQRS systems must handle distributed network splits and replica divergence.",
             "required": false,
             "target_id": "elective-16"
           },
           {
-            "display_text": "Module 17.19 — Microservice splitting",
             "label": "Module 17.19 — Microservice splitting",
             "reason": "Microservice splitting creates the distributed boundaries where circuit breakers are needed.",
             "required": false,
             "target_id": "elective-19"
           },
           {
-            "display_text": "Module 17.11 — gRPC streaming",
             "label": "Module 17.11 — gRPC streaming",
             "reason": "gRPC streaming requires connection retry backoff with jitter during network instability.",
             "required": false,
@@ -3576,20 +3317,13 @@
           "Can apply the concept in a small working program."
         ],
         "practice_task": "The learner must explain the CAP tradeoff for a distributed key-value store, implement a circuit breaker that opens after 3 failures and half-opens after 30 seconds, and write a retry function with exponential backoff and jitter that calls an external service and handles transient failures.",
-        "project_id": "project-advanced-electives",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-advanced-electives"
       },
       "readme_contract": {
         "contract_id": "elective-lesson.v3",
         "documentation_mode": "reference",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-19."
-      ],
       "slug": "deeper-distributed-systems",
       "source_legacy_ids": [],
       "status": "ready",
@@ -3679,7 +3413,6 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Module 15.19 — Deployment runbook",
             "label": "Module 15.19 — Deployment runbook",
             "reason": "The deployment runbook establishes the release and rollback discipline that a scheduler automates.",
             "required": true,
@@ -3689,14 +3422,12 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Module 15.07 — Docker images and layers",
             "label": "Module 15.07 — Docker images and layers",
             "reason": "An orchestrator schedules containers, so the image and layer model still governs startup cost.",
             "required": false,
             "target_id": "core-15-07"
           },
           {
-            "display_text": "Module 15.09 — Docker Compose",
             "label": "Module 15.09 — Docker Compose",
             "reason": "Compose is the single-host model that the decision rule compares against orchestration.",
             "required": false,
@@ -3705,7 +3436,6 @@
         ],
         "reinforced_in": [
           {
-            "display_text": "Project — Kubernetes Go Service Capstone",
             "label": "Project — Kubernetes Go Service Capstone",
             "reason": "The capstone applies desired state and reconciliation on a real local cluster.",
             "required": false,
@@ -3745,20 +3475,13 @@
           "Can apply the decision rule to a concrete system."
         ],
         "practice_task": "Given a service with its traffic profile, availability target, and team operations budget, decide whether to adopt an orchestrator and justify the decision with the lesson's decision rule.",
-        "project_id": "project-kubernetes-go-service",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-kubernetes-go-service"
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): core-15-19."
-      ],
       "slug": "why-orchestration",
       "source_legacy_ids": [],
       "status": "ready",
@@ -3848,7 +3571,6 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Elective 21 — Why orchestration",
             "label": "Elective 21 — Why orchestration",
             "reason": "The object model is the vocabulary of the reconciliation loop introduced earlier.",
             "required": true,
@@ -3858,7 +3580,6 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Module 15.05 — Networking basics",
             "label": "Module 15.05 — Networking basics",
             "reason": "Service and Ingress routing build on the DNS and TCP fundamentals from the core path.",
             "required": false,
@@ -3867,7 +3588,6 @@
         ],
         "reinforced_in": [
           {
-            "display_text": "Project — Kubernetes Go Service Capstone",
             "label": "Project — Kubernetes Go Service Capstone",
             "reason": "The capstone deploys a Service and an Ingress around a real Go service.",
             "required": false,
@@ -3907,20 +3627,13 @@
           "Can name the layer responsible for a given failure symptom."
         ],
         "practice_task": "For a Go HTTP service on port 8080, write the Deployment, Service, and Ingress objects and trace what a client sees at each layer when the Service has zero endpoints.",
-        "project_id": "project-kubernetes-go-service",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-kubernetes-go-service"
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-21."
-      ],
       "slug": "kubernetes-object-model",
       "source_legacy_ids": [],
       "status": "ready",
@@ -4011,7 +3724,6 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Elective 22 — Kubernetes object model",
             "label": "Elective 22 — Kubernetes object model",
             "reason": "Configuration is injected into the Pod template defined by the object model.",
             "required": true,
@@ -4021,14 +3733,12 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Module 15.14 — Configuration in deployment",
             "label": "Module 15.14 — Configuration in deployment",
             "reason": "The twelve-factor configuration model carried from containers applies unchanged inside a Pod.",
             "required": false,
             "target_id": "core-15-14"
           },
           {
-            "display_text": "Module 15.15 — Secrets in deployment",
             "label": "Module 15.15 — Secrets in deployment",
             "reason": "Secret handling builds on the core secrets lessons.",
             "required": false,
@@ -4037,7 +3747,6 @@
         ],
         "reinforced_in": [
           {
-            "display_text": "Project — Kubernetes Go Service Capstone",
             "label": "Project — Kubernetes Go Service Capstone",
             "reason": "The capstone requires a ConfigMap and Secret split and a hardened security context.",
             "required": false,
@@ -4077,20 +3786,13 @@
           "Can set a non-root, read-only security context."
         ],
         "practice_task": "Harden an in-memory Deployment, move the database URL to a file mount, add a validated timeout value, and write a table-driven test for the timeout.",
-        "project_id": "project-kubernetes-go-service",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-kubernetes-go-service"
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-22."
-      ],
       "slug": "config-and-security-context",
       "source_legacy_ids": [],
       "status": "ready",
@@ -4182,7 +3884,6 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Elective 23 — Configuration and security context",
             "label": "Elective 23 — Configuration and security context",
             "reason": "Probes and shutdown are configured in the same Pod template as the loader and security context.",
             "required": true,
@@ -4192,14 +3893,12 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Module 15.10 — Container health checks",
             "label": "Module 15.10 — Container health checks",
             "reason": "The core health-check lesson establishes readiness and liveness before Kubernetes adds startup probes.",
             "required": false,
             "target_id": "core-15-10"
           },
           {
-            "display_text": "Module 15.02 — Signals",
             "label": "Module 15.02 — Signals",
             "reason": "Graceful shutdown depends on the SIGTERM semantics from the core path.",
             "required": false,
@@ -4208,7 +3907,6 @@
         ],
         "reinforced_in": [
           {
-            "display_text": "Project — Kubernetes Go Service Capstone",
             "label": "Project — Kubernetes Go Service Capstone",
             "reason": "The capstone requires all three probes and a bounded drain before the grace period expires.",
             "required": false,
@@ -4248,20 +3946,13 @@
           "Can bound the drain to the grace period."
         ],
         "practice_task": "Add a startup phase that simulates a slow migration and a test that asserts /readyz returns 503, then 200, then 503 after shutdown.",
-        "project_id": "project-kubernetes-go-service",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-kubernetes-go-service"
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-23."
-      ],
       "slug": "probes-and-graceful-shutdown",
       "source_legacy_ids": [],
       "status": "ready",
@@ -4353,7 +4044,6 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Elective 24 — Probes and graceful shutdown",
             "label": "Elective 24 — Probes and graceful shutdown",
             "reason": "Resource limits and the runtime interplay determine whether the probes keep passing under load.",
             "required": true,
@@ -4363,14 +4053,12 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Module 11.11 — Goroutines",
             "label": "Module 11.11 — Goroutines",
             "reason": "GOMAXPROCS caps how many goroutines execute Go code in parallel.",
             "required": false,
             "target_id": "core-11-11"
           },
           {
-            "display_text": "Module 13.05 — Escape analysis",
             "label": "Module 13.05 — Escape analysis",
             "reason": "Allocation behavior determines the working set that the memory limit must accommodate.",
             "required": false,
@@ -4379,7 +4067,6 @@
         ],
         "reinforced_in": [
           {
-            "display_text": "Project — Kubernetes Go Service Capstone",
             "label": "Project — Kubernetes Go Service Capstone",
             "reason": "The capstone requires resource requests and limits wired to the Go runtime.",
             "required": false,
@@ -4419,20 +4106,13 @@
           "Can name the metric that reveals CPU throttling."
         ],
         "practice_task": "Given a Go service with a measured working set and p99 latency, choose requests and limits, set GOMEMLIMIT, and justify the numbers with the throttling argument.",
-        "project_id": "project-kubernetes-go-service",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-kubernetes-go-service"
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-24."
-      ],
       "slug": "resources-and-go-runtime",
       "source_legacy_ids": [],
       "status": "ready",
@@ -4523,7 +4203,6 @@
       "crossrefs": {
         "builds_on": [
           {
-            "display_text": "Elective 25 — Resources and the Go runtime",
             "label": "Elective 25 — Resources and the Go runtime",
             "reason": "A rollout multiplies resource demand transiently, which the resource budget must absorb.",
             "required": true,
@@ -4533,7 +4212,6 @@
         "preview_only": [],
         "related": [
           {
-            "display_text": "Module 15.18 — Rollback basics",
             "label": "Module 15.18 — Rollback basics",
             "reason": "The rollback discipline from the core path is what kubectl rollout undo automates.",
             "required": false,
@@ -4542,7 +4220,6 @@
         ],
         "reinforced_in": [
           {
-            "display_text": "Project — Kubernetes Go Service Capstone",
             "label": "Project — Kubernetes Go Service Capstone",
             "reason": "The capstone must demonstrate a rollout, a rollback, and a node drain under a PodDisruptionBudget.",
             "required": false,
@@ -4580,20 +4257,13 @@
           "Can diagnose a stalled rollout from events."
         ],
         "practice_task": "Extend the Module 15 runbook with a Kubernetes rollout and rollback phase, an expand/contract migration step, a PodDisruptionBudget, and the top three failure modes with exact commands.",
-        "project_id": "project-kubernetes-go-service",
-        "rubric_ids": [
-          "rubric-module-17"
-        ]
+        "project_id": "project-kubernetes-go-service"
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [
-        "Complete prerequisite lesson(s): elective-25."
-      ],
       "slug": "rollouts-and-troubleshooting",
       "source_legacy_ids": [],
       "status": "ready",
@@ -4694,13 +4364,10 @@
         "contract_id": "elective-module.v3",
         "documentation_mode": "elective-overview"
       },
-      "readme_status": "reviewed",
       "recommended_break_after": false,
       "required": false,
-      "slug": "advanced-electives",
       "source_legacy_section_ids": [],
       "status": "stable",
-      "summary": "Keep advanced Go and backend topics without blocking the core learner path.",
       "tags": [
         "elective"
       ],
@@ -4750,33 +4417,7 @@
       "elective-26"
     ]
   },
-  "quality_gates": [
-    "schema-valid",
-    "graph-valid",
-    "no-orphan-core-items",
-    "all-prerequisites-exist",
-    "implemented-items-have-readmes",
-    "implemented-items-have-run-or-test-command",
-    "projects-have-rubrics",
-    "lessons-have-zero-magic-contract",
-    "future-concepts-have-preview-only",
-    "electives-do-not-block-core",
-    "legacy-v2-is-not-authoritative",
-    "starter-solution-parity",
-    "no-broken-internal-links",
-    "readme-required-headings-valid",
-    "readme-level-purpose-valid",
-    "readme-crossrefs-rendered-with-human-titles",
-    "readme-no-generic-zero-magic-placeholders",
-    "readme-no-stale-v2-section-labels",
-    "readme-next-step-valid",
-    "readme-module-map-generated-from-curriculum",
-    "readme-project-rubric-present",
-    "readme-assessment-evidence-present",
-    "readme-preview-only-required-for-future-concepts",
-    "readme-no-elective-blocks-core",
-    "readme-no-broken-human-readable-links"
-  ],
+
   "repository_structure": [
     "electives/advanced-electives",
     "curriculum/path.core.json",
@@ -4784,19 +4425,11 @@
     "curriculum/projects.json",
     "curriculum/assessments.json",
     "curriculum/crossrefs.json",
-    "curriculum/legacy/migration.v2-to-v3.json",
-    "curriculum/legacy/curriculum.v2.json",
-    "docs/",
+          "docs/",
     "scripts/",
     "internal/tools/curriculum/"
   ],
   "schema_version": "3.1.0",
-  "status": "stable",
-  "validation_commands": {
-    "validate_all": "go run ./internal/tools/curriculum validate-all",
-    "validate_graph": "go run ./internal/tools/curriculum validate-graph",
-    "validate_lessons": "go run ./internal/tools/curriculum validate-lessons",
-    "validate_readmes": "go run ./internal/tools/curriculum validate-readmes",
-    "validate_schema": "go run ./internal/tools/curriculum validate-schema"
-  }
+  "status": "stable"
+
 }

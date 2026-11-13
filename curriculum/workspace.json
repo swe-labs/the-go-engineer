@@ -15,7 +15,9 @@
     "curriculum/failures.json",
     "curriculum/readme.contracts.json"
   ],
-  "generated_files": [],
+  "generated_files": [
+    "curriculum/README.md"
+  ],
   "policy": {
     "split_files_are_authoritative": true,
     "full_bundle_is_required": false,
@@ -32,9 +34,7 @@
     "concepts": "curriculum/concepts.json",
     "failures": "curriculum/failures.json",
     "readme_contracts": "curriculum/readme.contracts.json",
-    "companion_frontend": "curriculum/companion-frontend/README.md",
-    "legacy_migration": "curriculum/legacy/migration.v2-to-v3.json",
-    "legacy_source": "curriculum/legacy/curriculum.v2.json"
+    "companion_frontend": "curriculum/companion-frontend/README.md"
   },
   "quality_gates": [
     "validate-schema",

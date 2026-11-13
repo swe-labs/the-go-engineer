@@ -853,33 +853,6 @@ Total cross-references: **2086**
 | reinforced_in | 512   | Practical application links to projects and labs |
 | preview_only  | 46    | Early mental-model previews developed fully later |
 
----
-
-# Migration: v2 → v3
-
-**Source Schema:** 2
-
-**Target Schema:** 3.1.0
-
-**Default Policy:** Every legacy item must be mapped to keep, rewrite, split, merge, move-to-elective, replace, or archive. Every migrated README must also receive a legacy_readme_action: reuse, rewrite, split, merge, or archive.
-
-**Frozen Source:** `curriculum/legacy/curriculum.v2.json`
-
-### High-Confidence Moves
-
-| Legacy Pattern        | Outcome          | Target    | Reason                                                                    |
-| --------------------- | ---------------- | --------- | ------------------------------------------------------------------------- |
-| API.4-API.9           | move-to-elective | module-17 | Protobuf/gRPC is valuable but should not block the core beginner path.    |
-| TI.14-TI.15           | move-to-elective | module-17 | Complex generics and generic data structures are advanced.                |
-| TI.12                 | move-to-elective | module-17 | Functional options are useful but not core beginner material.             |
-| CP.3                  | move-to-elective | module-17 | sync.Pool is performance-specialized.                                     |
-| SY.2 sync.Map portion | move-to-elective | module-17 | sync.Map is specialized and should follow normal map+mutex reasoning.     |
-| ARCH.7                | move-to-elective | module-17 | CQRS is advanced architecture.                                            |
-| DEPLOY.2              | move-to-elective | module-17 | Blue/green deployment is advanced deployment strategy.                    |
-| TE.1-TE.11            | rewrite          | module-06 | Testing and debugging must move before backend work.                      |
-| DB.*                 | rewrite          | module-09 | Database path must become SQL/Postgres-first with migrations and EXPLAIN. |
-| SEC.*                | rewrite          | module-10 | Security needs authn/authz strategy and secure API practice.              |
-
 ### Authoritative Quality Gates
 
 - `validate-schema`: 11 canonical JSON manifests valid against Schema 3.1.0
