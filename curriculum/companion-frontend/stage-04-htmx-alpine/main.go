@@ -229,8 +229,6 @@ func (wp *WorkerPool) broadcastMetrics() {
 // Enqueue adds a new task to the queue and returns it.
 func (wp *WorkerPool) Enqueue(taskType string, duration time.Duration) *Task {
 	wp.tasksMu.Lock()
-	defer wp.tasksMu.Unlock()
-
 	task := &Task{
 		ID:          wp.nextID,
 		Type:        taskType,
@@ -242,15 +240,25 @@ func (wp *WorkerPool) Enqueue(taskType string, duration time.Duration) *Task {
 	}
 	wp.tasks[wp.nextID] = task
 	wp.nextID++
+	// Snapshot under the lock: a worker may receive the task and mutate its
+	// status fields as soon as the channel send below unblocks it.
+	taskCopy := *task
+	wp.tasksMu.Unlock()
 
+	// The channel send happens outside tasksMu on purpose: if the bounded
+	// queue is full, this call blocks until a worker drains a slot. Holding
+	// tasksMu across the send would block every worker that needs the mutex
+	// to record a state transition — a self-deadlock.
 	wp.taskQueue <- task
+
 	wp.broadcastLog(fmt.Sprintf("[Queue] Enqueued new job #%d (%s, target: %s)", task.ID, task.Type, task.DurationStr))
 
-	taskCopy := *task
 	return &taskCopy
 }
 
-// Cancel attempts to abort an active or queued task.
+// Cancel attempts to abort an active or queued task. Cancelling an already
+// terminal task (COMPLETED or CANCELLED) is a no-op that returns the record
+// unchanged — rewriting history would turn a finished job into a cancelled one.
 func (wp *WorkerPool) Cancel(id int) (*Task, bool) {
 	wp.tasksMu.Lock()
 	defer wp.tasksMu.Unlock()
@@ -258,6 +266,11 @@ func (wp *WorkerPool) Cancel(id int) (*Task, bool) {
 	task, exists := wp.tasks[id]
 	if !exists {
 		return nil, false
+	}
+
+	if task.Status == "COMPLETED" || task.Status == "CANCELLED" {
+		taskCopy := *task
+		return &taskCopy, true
 	}
 
 	if cancel, running := wp.cancelFuncs[id]; running {
@@ -477,7 +490,6 @@ func (s *DashboardServer) handleSSE(w http.ResponseWriter, r *http.Request) {
 	} else {
 		_, _ = fmt.Fprintf(w, "event: log\ndata: <div class=\"log-entry log-system\"><span class=\"log-time font-mono\">%s</span><span class=\"log-msg\">[SSE] Live stream established with browser</span></div>\n\n", now)
 	}
-	flusher.Flush()
 	flusher.Flush()
 
 	notify := r.Context().Done()

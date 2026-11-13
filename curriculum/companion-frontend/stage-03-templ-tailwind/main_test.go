@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"regexp"
 	"strings"
 	"testing"
 )
@@ -11,6 +12,56 @@ import (
 func setupTestAuthServer(t *testing.T) *AuthServer {
 	t.Helper()
 	return NewAuthServer(defaultStaticFS)
+}
+
+// loginAs performs the full CSRF-protected login flow: it fetches /login to
+// obtain the login_csrf cookie and the hidden synchronizer token, then
+// submits the credentials and returns the auth_session cookie.
+func loginAs(t *testing.T, server *AuthServer, email, password string) *http.Cookie {
+	t.Helper()
+
+	reqView := httptest.NewRequest(http.MethodGet, "/login", nil)
+	rrView := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rrView, reqView)
+
+	var loginCSRFCookie *http.Cookie
+	for _, c := range rrView.Result().Cookies() {
+		if c.Name == "login_csrf" {
+			loginCSRFCookie = c
+			break
+		}
+	}
+	if loginCSRFCookie == nil {
+		t.Fatalf("expected login_csrf cookie from GET /login")
+	}
+
+	m := regexp.MustCompile(`name="csrf_token" value="([^"]+)"`).FindStringSubmatch(rrView.Body.String())
+	if m == nil {
+		t.Fatalf("expected hidden csrf_token field in rendered login form")
+	}
+
+	form := url.Values{
+		"email":      {email},
+		"password":   {password},
+		"csrf_token": {m[1]},
+	}
+	reqLogin := httptest.NewRequest(http.MethodPost, "/auth/login", strings.NewReader(form.Encode()))
+	reqLogin.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	reqLogin.AddCookie(loginCSRFCookie)
+	rrLogin := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rrLogin, reqLogin)
+
+	if rrLogin.Code != http.StatusSeeOther {
+		t.Fatalf("expected 303 redirect on login for %s, got %d: %s", email, rrLogin.Code, rrLogin.Body.String())
+	}
+
+	for _, c := range rrLogin.Result().Cookies() {
+		if c.Name == "auth_session" && c.Value != "" {
+			return c
+		}
+	}
+	t.Fatalf("expected non-empty auth_session cookie for %s", email)
+	return nil
 }
 
 func TestAuthServer_UnauthenticatedRedirect(t *testing.T) {
@@ -33,13 +84,53 @@ func TestAuthServer_UnauthenticatedRedirect(t *testing.T) {
 func TestAuthServer_LoginFlow(t *testing.T) {
 	server := setupTestAuthServer(t)
 
-	// 1. Invalid credentials
-	badForm := url.Values{
+	// 1. POST /auth/login without the login CSRF pair is rejected before
+	// credentials are even evaluated.
+	form := url.Values{
 		"email":    {"alice@acme.corp"},
-		"password": {"wrong-password"},
+		"password": {"opslane123"},
+	}
+	reqNoCSRF := httptest.NewRequest(http.MethodPost, "/auth/login", strings.NewReader(form.Encode()))
+	reqNoCSRF.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	rrNoCSRF := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rrNoCSRF, reqNoCSRF)
+
+	if rrNoCSRF.Code != http.StatusSeeOther {
+		t.Fatalf("expected 303 redirect on missing login CSRF pair, got %d", rrNoCSRF.Code)
+	}
+	if !strings.Contains(rrNoCSRF.Header().Get("Location"), "expired") {
+		t.Errorf("expected 'session expired' redirect location, got %q", rrNoCSRF.Header().Get("Location"))
+	}
+
+	// 2. Fetch the login view to obtain a valid CSRF pair, then submit wrong
+	// credentials -> error redirect and no session cookie.
+	reqView := httptest.NewRequest(http.MethodGet, "/login", nil)
+	rrView := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rrView, reqView)
+
+	var loginCSRFCookie *http.Cookie
+	for _, c := range rrView.Result().Cookies() {
+		if c.Name == "login_csrf" {
+			loginCSRFCookie = c
+			break
+		}
+	}
+	if loginCSRFCookie == nil {
+		t.Fatalf("expected login_csrf cookie from GET /login")
+	}
+	m := regexp.MustCompile(`name="csrf_token" value="([^"]+)"`).FindStringSubmatch(rrView.Body.String())
+	if m == nil {
+		t.Fatalf("expected hidden csrf_token field in rendered login form")
+	}
+
+	badForm := url.Values{
+		"email":      {"alice@acme.corp"},
+		"password":   {"wrong-password"},
+		"csrf_token": {m[1]},
 	}
 	reqBad := httptest.NewRequest(http.MethodPost, "/auth/login", strings.NewReader(badForm.Encode()))
 	reqBad.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	reqBad.AddCookie(loginCSRFCookie)
 	rrBad := httptest.NewRecorder()
 	server.Handler().ServeHTTP(rrBad, reqBad)
 
@@ -49,30 +140,14 @@ func TestAuthServer_LoginFlow(t *testing.T) {
 	if !strings.Contains(rrBad.Header().Get("Location"), "error=") {
 		t.Errorf("expected error parameter in redirect location")
 	}
-
-	// 2. Valid credentials
-	goodForm := url.Values{
-		"email":    {"alice@acme.corp"},
-		"password": {"opslane123"},
-	}
-	reqGood := httptest.NewRequest(http.MethodPost, "/auth/login", strings.NewReader(goodForm.Encode()))
-	reqGood.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	rrGood := httptest.NewRecorder()
-	server.Handler().ServeHTTP(rrGood, reqGood)
-
-	if rrGood.Code != http.StatusSeeOther {
-		t.Fatalf("expected 303 redirect on successful login, got %d", rrGood.Code)
-	}
-
-	cookies := rrGood.Result().Cookies()
-	var authCookie *http.Cookie
-	for _, c := range cookies {
-		if c.Name == "auth_session" {
-			authCookie = c
-			break
+	for _, c := range rrBad.Result().Cookies() {
+		if c.Name == "auth_session" && c.Value != "" {
+			t.Fatalf("SECURITY VIOLATION: session cookie issued despite wrong password")
 		}
 	}
 
+	// 3. Valid credentials issue a session cookie and consume the CSRF token.
+	authCookie := loginAs(t, server, "alice@acme.corp", "opslane123")
 	if authCookie == nil || authCookie.Value == "" {
 		t.Fatalf("expected non-empty auth_session cookie")
 	}
@@ -81,17 +156,8 @@ func TestAuthServer_LoginFlow(t *testing.T) {
 func TestAuthServer_CSRFProtection(t *testing.T) {
 	server := setupTestAuthServer(t)
 
-	// Authenticate as Alice
-	loginForm := url.Values{
-		"email":    {"alice@acme.corp"},
-		"password": {"opslane123"},
-	}
-	reqLogin := httptest.NewRequest(http.MethodPost, "/auth/login", strings.NewReader(loginForm.Encode()))
-	reqLogin.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	rrLogin := httptest.NewRecorder()
-	server.Handler().ServeHTTP(rrLogin, reqLogin)
-
-	authCookie := rrLogin.Result().Cookies()[0]
+	// Authenticate as Alice via the full CSRF-protected login flow
+	authCookie := loginAs(t, server, "alice@acme.corp", "opslane123")
 
 	// 1. POST /profile without CSRF token -> 403 Forbidden
 	noCSRFForm := url.Values{
@@ -140,17 +206,8 @@ func TestAuthServer_CSRFProtection(t *testing.T) {
 func TestAuthServer_RoleBasedAccessControl(t *testing.T) {
 	server := setupTestAuthServer(t)
 
-	// Authenticate as Bob (Viewer)
-	loginForm := url.Values{
-		"email":    {"bob@acme.corp"},
-		"password": {"opslane123"},
-	}
-	reqLogin := httptest.NewRequest(http.MethodPost, "/auth/login", strings.NewReader(loginForm.Encode()))
-	reqLogin.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	rrLogin := httptest.NewRecorder()
-	server.Handler().ServeHTTP(rrLogin, reqLogin)
-
-	bobCookie := rrLogin.Result().Cookies()[0]
+	// Authenticate as Bob (Viewer) via the full login flow
+	bobCookie := loginAs(t, server, "bob@acme.corp", "opslane123")
 	bobSession := server.sessions[bobCookie.Value]
 
 	// 1. GET /settings should display Read-Only Viewer banner
@@ -182,16 +239,7 @@ func TestAuthServer_RoleBasedAccessControl(t *testing.T) {
 	}
 
 	// 3. Admin (Alice) attempts POST /settings -> 200 OK
-	adminLoginForm := url.Values{
-		"email":    {"alice@acme.corp"},
-		"password": {"opslane123"},
-	}
-	reqAdminLogin := httptest.NewRequest(http.MethodPost, "/auth/login", strings.NewReader(adminLoginForm.Encode()))
-	reqAdminLogin.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	rrAdminLogin := httptest.NewRecorder()
-	server.Handler().ServeHTTP(rrAdminLogin, reqAdminLogin)
-
-	aliceCookie := rrAdminLogin.Result().Cookies()[0]
+	aliceCookie := loginAs(t, server, "alice@acme.corp", "opslane123")
 	aliceSession := server.sessions[aliceCookie.Value]
 
 	adminSettingsForm := url.Values{
@@ -216,17 +264,8 @@ func TestAuthServer_RoleBasedAccessControl(t *testing.T) {
 func TestAuthServer_Logout(t *testing.T) {
 	server := setupTestAuthServer(t)
 
-	// Login
-	loginForm := url.Values{
-		"email":    {"alice@acme.corp"},
-		"password": {"opslane123"},
-	}
-	reqLogin := httptest.NewRequest(http.MethodPost, "/auth/login", strings.NewReader(loginForm.Encode()))
-	reqLogin.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	rrLogin := httptest.NewRecorder()
-	server.Handler().ServeHTTP(rrLogin, reqLogin)
-
-	authCookie := rrLogin.Result().Cookies()[0]
+	// Login via the full CSRF-protected flow
+	authCookie := loginAs(t, server, "alice@acme.corp", "opslane123")
 
 	// Logout
 	reqLogout := httptest.NewRequest(http.MethodPost, "/auth/logout", nil)

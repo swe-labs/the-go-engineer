@@ -13,6 +13,7 @@ import (
 	"regexp"
 	"strings"
 	"time"
+	"unicode"
 )
 
 // Embed static assets, templates, and initial markdown documentation
@@ -99,7 +100,7 @@ func (ws *WikiServer) extractTitle(slug string) string {
 	path := fmt.Sprintf("content/%s.md", slug)
 	data, err := fs.ReadFile(ws.contentFS, path)
 	if err != nil {
-		return strings.Title(strings.ReplaceAll(slug, "-", " "))
+		return titleCase(slug)
 	}
 
 	lines := strings.Split(string(data), "\n")
@@ -109,7 +110,21 @@ func (ws *WikiServer) extractTitle(slug string) string {
 			return strings.TrimSpace(strings.TrimPrefix(trimmed, "# "))
 		}
 	}
-	return strings.Title(strings.ReplaceAll(slug, "-", " "))
+	return titleCase(slug)
+}
+
+// titleCase upper-cases the first letter of each dash-separated word.
+// strings.Title is deprecated since Go 1.18 and mis-handles word boundaries.
+func titleCase(slug string) string {
+	words := strings.Split(strings.ReplaceAll(slug, "-", " "), " ")
+	for i, w := range words {
+		if w == "" {
+			continue
+		}
+		r := []rune(w)
+		words[i] = string(unicode.ToUpper(r[0])) + string(r[1:])
+	}
+	return strings.Join(words, " ")
 }
 
 // Handler returns the root http.Handler with all registered routes.

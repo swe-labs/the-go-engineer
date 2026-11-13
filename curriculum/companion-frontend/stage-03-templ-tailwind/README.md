@@ -68,7 +68,7 @@ stage-03-templ-tailwind/
 │   ├── ui/               # shadcn-templ copy-and-own UI component primitives
 │   │   ├── badge.templ   # Accessible status badge component (8 variants + link mode)
 │   │   ├── badge_templ.go
-│   │   ├── button.templ  # Button with 6 visual variants, 8 sizes, and link/button switching
+│   │   ├── button.templ  # Button with 6 visual variants, 5 sizes, and link/button switching
 │   │   ├── button_templ.go
 │   │   ├── card.templ    # Container Card, Header, Title, Description, Action, Content, Footer
 │   │   ├── card_templ.go
