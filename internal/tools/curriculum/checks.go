@@ -12,10 +12,8 @@ func validatePrerequisiteClosure() {
 	fmt.Println("=== validate-prerequisite-closure ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -104,11 +102,9 @@ func validateProjectBinding() {
 	fmt.Println("=== validate-project-binding ===")
 	ok := true
 
-	var core CoreBundle
-	readJSON("path.core.json", &core)
+	core := loadCoreBundle()
 
-	var electives ElectiveBundle
-	readJSON("path.electives.json", &electives)
+	electives := loadElectiveBundle()
 
 	// Build combined module lookup (core + electives)
 	allModules := make(map[string]bool)
@@ -243,10 +239,8 @@ func validateNoPlaceholderZM() {
 	fmt.Println("=== validate-no-placeholder-zm ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -429,10 +423,8 @@ func validateUniqueTags() {
 	fmt.Println("=== validate-unique-tags ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -497,10 +489,8 @@ func validateConceptOwnership() {
 		ok = false
 	}
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -560,11 +550,6 @@ func validateConceptOwnership() {
 func validateCognitiveLoad() {
 	fmt.Println("=== validate-cognitive-load ===")
 	ok := true
-
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
 
 	// Read raw module data to check fields
 	var rawCore map[string]any
@@ -656,10 +641,8 @@ func validateZeroMagic() {
 	fmt.Println("=== validate-zero-magic ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -720,10 +703,8 @@ func validateFailureEngineering() {
 	fmt.Println("=== validate-failure-engineering ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -781,10 +762,8 @@ func validateOperationalFailures() {
 	}
 
 	// Build set of valid module IDs from core path + electives
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	validModuleIDs := make(map[string]bool)
 	for _, m := range core.Modules {
@@ -845,10 +824,8 @@ func validateCrossrefs() {
 	fmt.Println("=== validate-crossrefs ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var crossrefs CrossrefBundle
 	readJSON("crossrefs.json", &crossrefs)

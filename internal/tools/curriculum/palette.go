@@ -12,8 +12,7 @@ func validateDiagramPalette() {
 	fmt.Println("=== validate-diagram-palette ===")
 	ok := true
 
-	var core CoreBundle
-	readJSON("path.core.json", &core)
+	core := loadCoreBundle()
 
 	// Locked modules (single source of truth: curriculum/expected.json).
 	lockedModules := lockedModuleSet()

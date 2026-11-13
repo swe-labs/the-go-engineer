@@ -99,8 +99,7 @@ func validateAnchorQuotes() {
 	fmt.Println("=== validate-anchor-quotes ===")
 	ok := true
 
-	var core CoreBundle
-	readJSON("path.core.json", &core)
+	core := loadCoreBundle()
 
 	// Modules audited and locked into zero-magic pioneer anchor quote requirements
 	// (single source of truth: curriculum/expected.json).

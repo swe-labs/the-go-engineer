@@ -175,10 +175,8 @@ func validateSchema() {
 	}
 
 	// 2. Read core and electives for deeper checks
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 	var projects ProjectsBundle
 	readJSON("projects.json", &projects)
 	var crossrefs CrossrefBundle

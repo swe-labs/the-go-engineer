@@ -577,6 +577,8 @@ func installFixture(t *testing.T, dir string) {
 	prevDir := curriculumDir
 	prevExpected := expectedCache
 	prevRegistry := registryCache
+	prevCoreBundle := coreBundleCache
+	prevElectiveBundle := electiveBundleCache
 	prevStrict := strictMode
 	prevAdvisory := advisoryMode
 	prevReport := reportPath
@@ -588,6 +590,8 @@ func installFixture(t *testing.T, dir string) {
 	curriculumDir = dir
 	expectedCache = nil
 	registryCache = nil
+	coreBundleCache = nil
+	electiveBundleCache = nil
 	strictMode = false
 	advisoryMode = false
 	reportPath = ""
@@ -600,6 +604,8 @@ func installFixture(t *testing.T, dir string) {
 		curriculumDir = prevDir
 		expectedCache = prevExpected
 		registryCache = prevRegistry
+		coreBundleCache = prevCoreBundle
+		electiveBundleCache = prevElectiveBundle
 		strictMode = prevStrict
 		advisoryMode = prevAdvisory
 		reportPath = prevReport

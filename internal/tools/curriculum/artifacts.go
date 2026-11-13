@@ -30,10 +30,8 @@ func validatePhysicalArtifacts() {
 	fmt.Println("=== validate-physical-artifacts ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -173,10 +171,8 @@ func validateAssessmentArtifacts() {
 	}
 	readJSON("assessments.json", &rawAssessments)
 
-	var core CoreBundle
-	readJSON("path.core.json", &core)
-	var electives ElectiveBundle
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	moduleDirs := make(map[string]string)
 	for _, m := range append(append([]Module{}, core.Modules...), electives.Modules...) {
@@ -296,10 +292,8 @@ func validateStarterParity() {
 	}
 	readJSON("projects.json", &rawProjects)
 
-	var core CoreBundle
-	readJSON("path.core.json", &core)
-	var electives ElectiveBundle
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	projectRoots := projectDirectories(core.Modules, electives.Modules)
 
