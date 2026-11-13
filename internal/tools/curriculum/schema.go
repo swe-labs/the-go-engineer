@@ -362,16 +362,6 @@ func validateSchema() {
 				ok = false
 			}
 		}
-		if len(item.Proof.RubricIDs) == 0 {
-			errorf("%s: proof.rubric_ids is empty", item.ID)
-			ok = false
-		}
-		for i, rubric := range item.Proof.RubricIDs {
-			if strings.TrimSpace(rubric) == "" {
-				errorf("%s: proof.rubric_ids[%d] is empty", item.ID, i)
-				ok = false
-			}
-		}
 	}
 
 	// 5b. Check verification metadata. The mode is a closed vocabulary, and a

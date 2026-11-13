@@ -299,13 +299,11 @@ func readJSON(path string, v any) {
 type Module struct {
 	ID              string          `json:"id"`
 	Number          int             `json:"number"`
-	Slug            string          `json:"slug"`
 	Title           string          `json:"title"`
 	Phase           string          `json:"phase"`
 	Path            string          `json:"path"`
 	Status          string          `json:"status"`
 	LearningGoal    string          `json:"learning_goal"`
-	Summary         string          `json:"summary"`
 	Order           int             `json:"order"`
 	Required        bool            `json:"required"`
 	PortfolioOutput bool            `json:"portfolio_output"`
@@ -361,7 +359,6 @@ type Proof struct {
 	ProjectID        *string  `json:"project_id"`
 	ExpectedArtifact string   `json:"expected_artifact"`
 	MasteryChecks    []string `json:"mastery_checks"`
-	RubricIDs        []string `json:"rubric_ids"`
 }
 
 type ReadmeContract struct {
@@ -402,32 +399,30 @@ type Files struct {
 }
 
 type Item struct {
-	ID                     string           `json:"id"`
-	ModuleID               string           `json:"module_id"`
-	Slug                   string           `json:"slug"`
-	Title                  string           `json:"title"`
-	Type                   string           `json:"type"`
-	Subtype                string           `json:"subtype"`
-	Status                 string           `json:"status"`
-	Difficulty             string           `json:"difficulty"`
-	Phase                  string           `json:"phase"`
-	Order                  int              `json:"order"`
-	EstimatedMinutes       int              `json:"estimated_minutes"`
-	LearningObjective      string           `json:"learning_objective"`
-	RequiredPriorKnowledge []string         `json:"required_prior_knowledge"`
-	Prerequisites          []string         `json:"prerequisites"`
-	NextItemIDs            []string         `json:"next_item_ids"`
-	ZeroMagic              *ZeroMagic       `json:"zero_magic"`
-	CrossRefs              *ItemCrossRefs   `json:"crossrefs"`
-	Proof                  *Proof           `json:"proof"`
-	ContentContract        *ContentContract `json:"content_contract"`
-	Verification           *Verification    `json:"verification"`
-	Files                  *Files           `json:"files"`
-	ReadmeContract         *ReadmeContract  `json:"readme_contract"`
-	ReadmeStatus           string           `json:"readme_status"`
-	ZeroMagicStatus        string           `json:"zero_magic_status"`
-	SourceLegacyIDs        []string         `json:"source_legacy_ids"`
-	Tags                   []string         `json:"tags"`
+	ID                string           `json:"id"`
+	ModuleID          string           `json:"module_id"`
+	Slug              string           `json:"slug"`
+	Title             string           `json:"title"`
+	Type              string           `json:"type"`
+	Subtype           string           `json:"subtype"`
+	Status            string           `json:"status"`
+	Difficulty        string           `json:"difficulty"`
+	Phase             string           `json:"phase"`
+	Order             int              `json:"order"`
+	EstimatedMinutes  int              `json:"estimated_minutes"`
+	LearningObjective string           `json:"learning_objective"`
+	Prerequisites     []string         `json:"prerequisites"`
+	NextItemIDs       []string         `json:"next_item_ids"`
+	ZeroMagic         *ZeroMagic       `json:"zero_magic"`
+	CrossRefs         *ItemCrossRefs   `json:"crossrefs"`
+	Proof             *Proof           `json:"proof"`
+	ContentContract   *ContentContract `json:"content_contract"`
+	Verification      *Verification    `json:"verification"`
+	Files             *Files           `json:"files"`
+	ReadmeContract    *ReadmeContract  `json:"readme_contract"`
+	ZeroMagicStatus   string           `json:"zero_magic_status"`
+	SourceLegacyIDs   []string         `json:"source_legacy_ids"`
+	Tags              []string         `json:"tags"`
 }
 
 // PathBundle is the shape shared by path.core.json and path.electives.json.

@@ -1,11 +1,5 @@
 {
-  "architectural_decision": {
-    "core_rule": "Optimize for learner progression, zero magic, rigorous proof of understanding, production-grade documentation, and job readiness.",
-    "decision": "Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.",
-    "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only.",
-    "manifest_policy": "Authoritative modular v3 manifests are the active source of truth for the curriculum engine.",
-    "v2_policy": "curriculum.v2.json is archived legacy import data, not the active source of truth."
-  },
+
   "crossrefs": {
     "entity_domains": {
       "description": "All valid ID spaces that crossrefs can reference. Validators must load all of these before checking targets.",

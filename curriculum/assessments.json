@@ -1,11 +1,5 @@
 {
-  "architectural_decision": {
-    "core_rule": "Optimize for learner progression, zero magic, rigorous proof of understanding, production-grade documentation, and job readiness.",
-    "decision": "Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.",
-    "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only.",
-    "manifest_policy": "Authoritative modular v3 manifests are the active source of truth for the curriculum engine.",
-    "v2_policy": "curriculum.v2.json is archived legacy import data, not the active source of truth."
-  },
+
   "assessments": [
     {
       "automated_checks": [],
@@ -5555,40 +5549,8 @@
   "document_type": "assessments",
   "last_updated": "2026-10-23",
   "name": "The Go Engineer v3 — Assessments",
-  "quality_gates": [
-    "schema-valid",
-    "graph-valid",
-    "no-orphan-core-items",
-    "all-prerequisites-exist",
-    "implemented-items-have-readmes",
-    "implemented-items-have-run-or-test-command",
-    "projects-have-rubrics",
-    "lessons-have-zero-magic-contract",
-    "future-concepts-have-preview-only",
-    "electives-do-not-block-core",
-    "legacy-v2-is-not-authoritative",
-    "starter-solution-parity",
-    "no-broken-internal-links",
-    "readme-required-headings-valid",
-    "readme-level-purpose-valid",
-    "readme-crossrefs-rendered-with-human-titles",
-    "readme-no-generic-zero-magic-placeholders",
-    "readme-no-stale-v2-section-labels",
-    "readme-next-step-valid",
-    "readme-module-map-generated-from-curriculum",
-    "readme-project-rubric-present",
-    "readme-assessment-evidence-present",
-    "readme-preview-only-required-for-future-concepts",
-    "readme-no-elective-blocks-core",
-    "readme-no-broken-human-readable-links"
-  ],
+
   "schema_version": "3.1.0",
-  "status": "stable",
-  "validation_commands": {
-    "validate_all": "go run ./internal/tools/curriculum validate-all",
-    "validate_graph": "go run ./internal/tools/curriculum validate-graph",
-    "validate_lessons": "go run ./internal/tools/curriculum validate-lessons",
-    "validate_readmes": "go run ./internal/tools/curriculum validate-readmes",
-    "validate_schema": "go run ./internal/tools/curriculum validate-schema"
-  }
+  "status": "stable"
+
 }

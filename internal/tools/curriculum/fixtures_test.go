@@ -57,13 +57,11 @@ func writeCurriculumFixture(t *testing.T) string {
     {
       "id": "module-00",
       "number": 0,
-      "slug": "alpha",
       "title": "Alpha Module",
       "phase": "foundation",
       "path": "00-alpha",
       "status": "stable",
       "learning_goal": "Learn the fixture concept.",
-      "summary": "A minimal module for validator fixtures.",
       "order": 0,
       "required": true,
       "portfolio_output": false,
@@ -84,13 +82,11 @@ func writeCurriculumFixture(t *testing.T) string {
     {
       "id": "module-01",
       "number": 1,
-      "slug": "beta",
       "title": "Beta Module",
       "phase": "foundation",
       "path": "01-beta",
       "status": "stable",
       "learning_goal": "Finish the fixture path.",
-      "summary": "A terminal module with no items.",
       "order": 1,
       "required": true,
       "portfolio_output": false,
@@ -150,16 +146,13 @@ func writeCurriculumFixture(t *testing.T) string {
         "assessment_id": "assessment-module-00",
         "expected_artifact": "A short explanation of the fixture concept.",
         "mastery_checks": ["Can explain the fixture concept."],
-        "practice_task": "Explain the fixture concept in one paragraph.",
-        "rubric_ids": ["rubric-module-00"]
+        "practice_task": "Explain the fixture concept in one paragraph."
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
         "documentation_mode": "tutorial",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [],
       "slug": "alpha-lesson",
       "source_legacy_ids": [],
       "status": "ready",
@@ -216,8 +209,6 @@ func writeCurriculumFixture(t *testing.T) string {
         "documentation_mode": "assessment",
         "required": true
       },
-      "readme_status": "reviewed",
-      "required_prior_knowledge": [],
       "slug": "alpha-checkpoint",
       "source_legacy_ids": [],
       "status": "ready",
@@ -244,8 +235,8 @@ func writeCurriculumFixture(t *testing.T) string {
     {
       "id": "project-alpha",
       "module_id": "module-00",
-      "title": "Alpha project",
       "slug": "alpha",
+      "title": "Alpha project",
       "type": "project",
       "prerequisites": [],
       "deliverables": ["A fixture artifact."],

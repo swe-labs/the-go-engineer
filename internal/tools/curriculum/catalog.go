@@ -579,26 +579,6 @@ func generateCatalog() (string, error) {
 	add(fmt.Sprintf("| reinforced_in | %d   | Practical application links to projects and labs |", relDist["reinforced_in"]))
 	add(fmt.Sprintf("| preview_only  | %d    | Early mental-model previews developed fully later |\n", relDist["preview_only"]))
 
-	add("---\n")
-	add("# Migration: v2 → v3\n")
-	add("**Source Schema:** 2\n")
-	add("**Target Schema:** 3.1.0\n")
-	add("**Default Policy:** Every legacy item must be mapped to keep, rewrite, split, merge, move-to-elective, replace, or archive. Every migrated README must also receive a legacy_readme_action: reuse, rewrite, split, merge, or archive.\n")
-	add("**Frozen Source:** `curriculum/legacy/curriculum.v2.json`\n")
-	add("### High-Confidence Moves\n")
-	add("| Legacy Pattern        | Outcome          | Target    | Reason                                                                    |")
-	add("| --------------------- | ---------------- | --------- | ------------------------------------------------------------------------- |")
-	add("| API.4-API.9           | move-to-elective | module-17 | Protobuf/gRPC is valuable but should not block the core beginner path.    |")
-	add("| TI.14-TI.15           | move-to-elective | module-17 | Complex generics and generic data structures are advanced.                |")
-	add("| TI.12                 | move-to-elective | module-17 | Functional options are useful but not core beginner material.             |")
-	add("| CP.3                  | move-to-elective | module-17 | sync.Pool is performance-specialized.                                     |")
-	add("| SY.2 sync.Map portion | move-to-elective | module-17 | sync.Map is specialized and should follow normal map+mutex reasoning.     |")
-	add("| ARCH.7                | move-to-elective | module-17 | CQRS is advanced architecture.                                            |")
-	add("| DEPLOY.2              | move-to-elective | module-17 | Blue/green deployment is advanced deployment strategy.                    |")
-	add("| TE.1-TE.11            | rewrite          | module-06 | Testing and debugging must move before backend work.                      |")
-	add("| DB.*                 | rewrite          | module-09 | Database path must become SQL/Postgres-first with migrations and EXPLAIN. |")
-	add("| SEC.*                | rewrite          | module-10 | Security needs authn/authz strategy and secure API practice.              |\n")
-
 	add("### Authoritative Quality Gates\n")
 	var gateLines []string
 	gateLines = append(gateLines,

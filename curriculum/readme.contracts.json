@@ -5,13 +5,7 @@
   "last_updated": "2026-10-23",
   "name": "The Go Engineer v3 — README Contracts",
   "status": "stable",
-  "architectural_decision": {
-    "core_rule": "Optimize for learner progression, zero magic, rigorous proof of understanding, production-grade documentation, and job readiness without template slop or artificial over-engineering.",
-    "decision": "Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.",
-    "full_bundle_policy": "Split files are authoritative. curriculum.v3.full.generated.json is an optional generated snapshot for review/export only.",
-    "manifest_policy": "Authoritative modular v3 manifests are the active source of truth for the curriculum engine.",
-    "v2_policy": "curriculum.v2.json is archived legacy import data, not the active source of truth."
-  },
+
   "contract_model": {
     "description": "A README contract is a small invariant core plus an allowlist of optional sections. Families are selected by item shape (type/subtype). Subtype modifiers add or forbid a few sections for a specific kind of lesson. File and code requirements are derived from the item's content_contract flags, so a pure-theory lesson needs only a README while a runnable lesson must ship source and tests.",
     "layers": {
