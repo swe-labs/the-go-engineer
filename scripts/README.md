@@ -26,7 +26,7 @@ go run ./scripts/validate_curriculum.go validate-sese-navigation
 
 | Command | Target Gate | Description |
 | :--- | :--- | :--- |
-| `validate-schema` | Schema 3.1.0 Integrity | Validates all 10 JSON manifests, required properties, canonical alphabetical key ordering, and anti-overengineering contracts. |
+| `validate-schema` | Schema 3.1.0 Integrity | Validates all 27 JSON manifests (8 top-level + 19 per-module `manifest.json` files), required properties, canonical alphabetical key ordering, and anti-overengineering contracts. |
 | `validate-graph` | DAG Acyclicity | Detects circular dependencies and validates all module entry/terminal paths. |
 | `validate-lessons` | Lesson Quality | Enforces zero machine role comments (`//go:role`) and validates `NEXT UP` footers. |
 | `validate-prerequisite-closure` | Pedagogical Progression | Verifies no hidden prerequisite leaks or future-concept violations across module boundaries. |

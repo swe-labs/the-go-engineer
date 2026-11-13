@@ -44,7 +44,7 @@ fmt.Println("---------------------------------------------------")
 
 ## Lesson Progression Alignment
 
-Next item IDs and progression flow match the canonical manifest in [`curriculum/path.core.json`](./curriculum/path.core.json).
+Next item IDs and progression flow match the per-module manifests ([`curriculum/modules/*/manifest.json`](./curriculum/modules/07-cli-files-json-config/manifest.json); module ordering in the [`curriculum/path.core.json`](./curriculum/path.core.json) index).
 
 ## Formatting Standards
 

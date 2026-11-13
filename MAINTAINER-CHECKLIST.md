@@ -145,7 +145,7 @@ All validation gates executed by `go run ./scripts/validate_curriculum.go` must 
 
 | Gate | Description |
 |:---|:---|
-| `validate-schema` | Validates all 10 JSON manifests against `schema.v3.json`. |
+| `validate-schema` | Validates all 27 JSON manifests (8 top-level + 19 per-module) against `schema.v3.json`. |
 | `validate-graph` | Detects cycles and verifies DAG reachability. |
 | `validate-lessons` | Enforces zero machine-role comments and valid `NEXT UP` footers. |
 | `validate-prerequisite-closure` | Verifies prerequisite closures across modules. |
@@ -202,7 +202,7 @@ Before release or workflow changes, verify these documents agree with `ARCHITECT
 
 - [ ] README follows the required pedagogical section order.
 - [ ] `main.go` follows the standard header and key takeaway footer.
-- [ ] `NEXT UP:` matches `curriculum/path.core.json`.
+- [ ] `NEXT UP:` matches the item's per-module manifest entry.
 - [ ] Module README is updated.
 - [ ] Starter code compiles and establishes red verification state.
 - [ ] Tests prove behavior.

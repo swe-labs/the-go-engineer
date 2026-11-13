@@ -37,7 +37,7 @@ Closes #
 - [ ] Manifests in `curriculum/` updated if needed.
 - [ ] Module README updated if needed.
 - [ ] Lesson README follows required pedagogical section order if applicable.
-- [ ] `NEXT UP:` footer matches curriculum metadata in `curriculum/path.core.json` if applicable.
+- [ ] `NEXT UP:` footer matches the item's `curriculum/modules/*/manifest.json` entry if applicable.
 - [ ] Starter code compiles and establishes red verification state if applicable.
 
 ## Tracking

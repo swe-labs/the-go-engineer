@@ -11,7 +11,7 @@ The v3 curriculum is implemented on branch `release/v3`.
 The repository features:
 
 - 18 core modules organized canonically in `curriculum/modules/`
-- 421 core path items in `curriculum/path.core.json`
+- 421 core path items across `curriculum/modules/*/manifest.json`
 - Flagship Opslane Capstone in Module 18 with 15 progressive milestones
 - 26 Advanced Electives in `curriculum/electives/advanced-electives/`
 - Companion Full-Stack Frontend Track in `curriculum/companion-frontend/`
