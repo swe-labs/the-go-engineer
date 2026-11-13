@@ -8,8 +8,8 @@
 
 Before authoring, read (in this order):
 
-1. [zero-magic-authoring-spec.md](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/zero-magic-authoring-spec.md) — pedagogical contract and field definitions
-2. [quality-rubric.md](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/quality-rubric.md) — scoring dimensions and minimums
+1. [zero-magic-authoring-spec.md](./zero-magic-authoring-spec.md) — pedagogical contract and field definitions
+2. [quality-rubric.md](./quality-rubric.md) — scoring dimensions and minimums
 3. This guide — how to apply the standards using golden lesson examples
 
 ---
@@ -18,9 +18,9 @@ Before authoring, read (in this order):
 
 | Spec                 | Location                                                 |
 | -------------------- | -------------------------------------------------------- |
-| Pedagogical contract | [zero-magic-authoring-spec.md](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/zero-magic-authoring-spec.md) |
-| Quality rubric       | [quality-rubric.md](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/quality-rubric.md) |
-| Golden lessons       | [path.core.json](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/path.core.json) items in `goldenLessons` set |
+| Pedagogical contract | [zero-magic-authoring-spec.md](./zero-magic-authoring-spec.md) |
+| Quality rubric       | [quality-rubric.md](./quality-rubric.md) |
+| Golden lessons       | Items with `zero_magic_status: "golden"` in `modules/07-cli-files-json-config/manifest.json` (and every other module manifest beside its README) |
 | Validator            | `go run ./internal/tools/curriculum validate-zero-magic` |
 
 ---
@@ -93,7 +93,7 @@ immediately, and the new goroutine starts executing the function on its own stac
 
 **Purpose:** Mechanical explanation of what happens at runtime. Not API documentation — explain the machinery.
 
-**Good — escape analysis (core-12-14):**
+**Good — escape analysis (core-13-05):**
 
 ```
 "Escape analysis is the compiler pass that decides whether a value lives on the stack or the heap...
@@ -478,11 +478,11 @@ These 27 lessons exemplify the standards:
 | core-12-04 | Correlation IDs            | execution_timeline, real_world_usage         |
 | core-12-14 | Escape analysis            | memory_timeline, proof_of_understanding      |
 | core-12-01 | Why observability exists   | problem_solved, why_it_exists                |
-| core-12-19 | Incident debugging         | debugging_walkthroughs, failure_modes        |
-| core-13-08 | Invariants                 | under_the_hood, failure_modes                |
-| core-13-11 | Retries and idempotency    | step_by_step_execution, failure_modes        |
+| core-12-11 | Incident debugging         | debugging_walkthroughs, failure_modes        |
+| core-14-08 | Invariants                 | under_the_hood, failure_modes                |
+| core-14-11 | Retries and idempotency    | step_by_step_execution, failure_modes        |
 | opslane-05 | Tenant isolation           | execution_timeline, hidden_magic_checks      |
 | opslane-07 | Order processing           | failure_modes, step_by_step_execution        |
 | opslane-13 | Graceful shutdown          | execution_timeline, beginner_mistakes        |
 
-Read any of these lessons in `path.core.json` to see the complete zero_magic block in context.
+Read any of these lessons' entries in `modules/07-cli-files-json-config/manifest.json` (and every other module manifest beside its README) to see the complete zero_magic block in context.

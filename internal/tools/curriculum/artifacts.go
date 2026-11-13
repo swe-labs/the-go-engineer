@@ -130,7 +130,7 @@ func validatePhysicalArtifacts() {
 }
 
 // validateAssessmentArtifacts verifies that all assessments declared in
-// assessments.json and Opslane milestones possess verified physical evaluation artifacts.
+// assessment records in the per-module manifests (module checkpoints, project reviews, and Opslane milestones) possess verified physical evaluation artifacts.
 // assessmentRecord is the subset of the folded assessment records needed to locate the
 // physical artifacts for one assessment. suite/artifact_dir are explicit data,
 // so the validator never hardcodes a slug or guesses a directory.

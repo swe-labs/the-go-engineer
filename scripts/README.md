@@ -34,7 +34,7 @@ go run ./scripts/validate_curriculum.go validate-sese-navigation
 | `validate-no-placeholder-zm` | Zero Placeholders | Strictly scans all `zero_magic` blocks to ensure zero boilerplate or placeholder phrases. |
 | `validate-assessment-completeness` | Assessment Rigor | Verifies all 48 assessments include non-generic, weighted criteria and passing scores. |
 | `validate-unique-tags` | Tag Taxonomy | Enforces tag consistency across all core and elective items. |
-| `validate-crossrefs` | Cross-Reference Graph | Validates bidirectional integrity across 2,086 cross-reference edges. |
+| `validate-crossrefs` | Cross-Reference Graph | Validates bidirectional integrity across 2,228 cross-reference edges. |
 | `validate-concept-ownership` | Concept Ownership | Ensures all 69 canonical concepts map to unambiguous owners without conceptual leaks. |
 | `validate-cognitive-load` | Cognitive Pacing | Verifies cognitive density ratings and recommended break pacing. |
 | `validate-operational-failures` | Failure Taxonomy | Verifies 100% mathematical symmetry across all 13 operational failure categories. |
@@ -44,6 +44,7 @@ go run ./scripts/validate_curriculum.go validate-sese-navigation
 | `validate-assessment-artifacts` | Assessment Suites | Verifies complete 4-file assessment suites across all checkpoints and 14 Opslane milestones. |
 | `validate-starter-parity` | Code AST Parity | Compiles and validates Go AST correctness across all 27 project starters and solutions. |
 | `validate-markdown-links` | Link Crawler | Crawls all Markdown files, extracts relative links/images, verifies physical existence on disk. |
+| `validate-inline-paths` | Link Crawler | Crawls all Markdown files, extracts relative links/images, verifies physical existence on disk. |
 | `validate-sese-navigation` | SESE Flow | Enforces front door (`Start here` -> Lesson 01), prohibits escape hatches, verifies assessment exit gates. |
 | `validate-project-scripts` | Script Parity | Verifies cross-platform parity (`verify.sh` and `verify.ps1`) for script-backed projects. |
 | `validate-no-emojis` | Professional Prose | Scans all Markdown files, enforcing zero non-code emojis across prose, headers, lists, and tables. |
@@ -56,7 +57,7 @@ go run ./scripts/validate_curriculum.go validate-sese-navigation
 
 ## 2. Curriculum Catalog Generator
 
-The authoritative generator for [`curriculum/README.md`](file:///c:/Users/Rasel/Desktop/the-go-engineer/curriculum/README.md) is built directly into the Go curriculum toolchain (`internal/tools/curriculum/catalog.go`). It computes quick stats, module breakdown tables, workload pacing models, project lists, assessment registries, and cross-reference distributions directly from the canonical JSON manifests without requiring external runtimes like Node.js.
+The authoritative generator for [`curriculum/README.md`](../curriculum/README.md) is built directly into the Go curriculum toolchain (`internal/tools/curriculum/catalog.go`). It computes quick stats, module breakdown tables, workload pacing models, project lists, assessment registries, and cross-reference distributions directly from the canonical JSON manifests without requiring external runtimes like Node.js.
 
 ```bash
 # Generate curriculum/README.md via toolchain

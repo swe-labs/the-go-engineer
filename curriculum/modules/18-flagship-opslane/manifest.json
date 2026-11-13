@@ -104,8 +104,7 @@
       "purpose": "Verify that the learner can independently apply and explain end-to-end production Go backend architecture, automated testing, CI/CD, observability, and production deployment.",
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
@@ -3763,8 +3762,7 @@
       ],
       "readme_contract": {
         "contract_id": "flagship.v3",
-        "documentation_mode": "flagship",
-        "required": true
+        "documentation_mode": "flagship"
       },
       "reinforcement_targets": [
         "context cancellation",

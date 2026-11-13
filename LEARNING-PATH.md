@@ -33,14 +33,14 @@ flowchart TD
         FE2["Stage 2: Vanilla DOM & Fetch Client"]
         FE3["Stage 3: Type-Safe Templ & Tailwind"]
         FE4["Stage 4: HTMX, Alpine & Datastar (SSE)"]
-        FE5["Stage 5: Multi-Tenant Opslane Console"]
-    end
+        end
 
     subgraph Electives["Advanced Elective Gateways (Deep Systems)"]
         EL1["Gateway A: Generics & Options\n(Electives 01–04)"]
         EL2["Gateway B: Protobuf & gRPC\n(Electives 09–13)"]
         EL3["Gateway C: sync.Pool & sync.Map\n(Electives 14–15)"]
         EL4["Gateway D: Distributed Systems & Releases\n(Electives 16–20)"]
+        EL5["Gateway E: Kubernetes Operations\n(Electives 21–26)"]
     end
 
     %% Fork Points
@@ -52,10 +52,11 @@ flowchart TD
     M11 -.->|"Fork Point 6"| FE4
     M11 -.->|"Fork Point 7"| EL3
     M15 -.->|"Fork Point 8"| EL4
+    EL4 -.->|"Kubernetes track"| EL5
 
     %% Final Convergence
-    FE5 --> M18
     EL4 --> M18
+    EL5 --> M18
 ```
 
 ---
@@ -84,15 +85,15 @@ Choose your trajectory before beginning Phase 2 (Module 05):
 
 | Completed Core Module                                        | Available Branch / Fork                           | Prerequisites Earned                             | Why Fork Here?                                                                                                        |
 | ------------------------------------------------------------ | ------------------------------------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
-| **After Module 05** *(Types, Interfaces & Packages)* | 🚀**Elective Gateway A** (Electives 01–04) | Struct composition, method sets, interfaces      | Deepen type-parameter mechanics with Generics and Functional Options before handling file I/O.                        |
-| **After Module 07** *(CLI, Files & Templates)*       | 🎨**Companion Frontend Stage 1**            | Filesystem I/O, config parsing,`text/template` | Build a static documentation and template renderer using Go and semantic HTML/CSS without JavaScript.                 |
-| **After Module 08 & 09** *(REST APIs & SQL)*         | 🎨**Companion Frontend Stage 2**            | HTTP routing, JSON serialization, PostgreSQL     | Build a responsive browser client querying the Book Catalog REST API and PostgreSQL database engineered in M08/M09.   |
-| **After Module 08** *(HTTP & REST)*                  | 🚀**Elective Gateway B** (Electives 09–13) | HTTP lifecycle, handlers, serialization          | Compare JSON HTTP APIs with high-performance binary Protobuf and gRPC streaming services.                             |
-| **After Module 10** *(Auth & Security)*              | 🎨**Companion Frontend Stage 3**            | JWT, bcrypt, RBAC, CSRF, cookie sessions         | Build an authenticated multi-tenant portal with type-safe`templ` components, Tailwind styling, and CSRF protection. |
-| **After Module 11** *(Concurrency & Context)*        | 🎨**Companion Frontend Stage 4**            | Goroutines, channels,`http.Flusher`, context   | Stream real-time server-sent events (SSE) to reactive HTMX/Datastar dashboards without Node or npm.                   |
-| **After Module 11** *(Concurrency & Context)*        | 🚀**Elective Gateway C** (Electives 14–15) | Mutex, atomics, race detector, leaks             | Master memory pooling with`sync.Pool` and read-heavy concurrent maps with `sync.Map`.                             |
-| **After Module 15** *(Docker & CI/CD)*               | 🚀**Elective Gateway D** (Electives 16–20) | Multi-stage Docker, GitHub Actions, runbooks     | Explore distributed patterns: CQRS, Feature flags, Blue/Green deployments, and microservice boundaries.               |
-| **At Module 18** *(Opslane Capstone)*                | 🏁**Final Convergence**                     | All core and companion foundations               | Engineer the complete 15-milestone Opslane SaaS platform and companion administration console.                        |
+| **After Module 05** *(Types, Interfaces & Packages)* | **Elective Gateway A** (Electives 01–04) | Struct composition, method sets, interfaces      | Deepen type-parameter mechanics with Generics and Functional Options before handling file I/O.                        |
+| **After Module 07** *(CLI, Files & Templates)*       | **Companion Frontend Stage 1**            | Filesystem I/O, config parsing,`text/template` | Build a static documentation and template renderer using Go and semantic HTML/CSS without JavaScript.                 |
+| **After Module 08 & 09** *(REST APIs & SQL)*         | **Companion Frontend Stage 2**            | HTTP routing, JSON serialization, PostgreSQL     | Build a responsive browser client querying the Book Catalog REST API and PostgreSQL database engineered in M08/M09.   |
+| **After Module 08** *(HTTP & REST)*                  | **Elective Gateway B** (Electives 09–13) | HTTP lifecycle, handlers, serialization          | Compare JSON HTTP APIs with high-performance binary Protobuf and gRPC streaming services.                             |
+| **After Module 10** *(Auth & Security)*              | **Companion Frontend Stage 3**            | JWT, bcrypt, RBAC, CSRF, cookie sessions         | Build an authenticated multi-tenant portal with type-safe`templ` components, Tailwind styling, and CSRF protection. |
+| **After Module 11** *(Concurrency & Context)*        | **Companion Frontend Stage 4**            | Goroutines, channels,`http.Flusher`, context   | Stream real-time server-sent events (SSE) to reactive HTMX/Datastar dashboards without Node or npm.                   |
+| **After Module 11** *(Concurrency & Context)*        | **Elective Gateway C** (Electives 14–15) | Mutex, atomics, race detector, leaks             | Master memory pooling with`sync.Pool` and read-heavy concurrent maps with `sync.Map`.                             |
+| **After Module 15** *(Docker & CI/CD)*               | **Elective Gateway D** (Electives 16–20) | Multi-stage Docker, GitHub Actions, runbooks     | Explore distributed patterns: CQRS, Feature flags, Blue/Green deployments, and microservice boundaries.               |
+| **At Module 18** *(Opslane Capstone)*                | **Final Convergence**                     | All core and companion foundations               | Engineer the complete 15-milestone Opslane SaaS platform and companion administration console.                        |
 
 ---
 

@@ -103,8 +103,7 @@
       "purpose": "Verify that the learner can independently apply and explain variables, control flow, data types, structs, slices, maps, and Go program structure.",
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
@@ -4835,8 +4834,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "reinforcement_targets": [
         "slice header",
@@ -5057,8 +5055,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "reinforcement_targets": [
         "slice header",

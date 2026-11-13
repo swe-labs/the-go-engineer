@@ -163,6 +163,8 @@ All validation gates executed by `go run ./scripts/validate_curriculum.go` must 
 | `validate-assessment-artifacts` | Verifies 4-file assessment suites across all checkpoints and milestones. |
 | `validate-starter-parity` | Compiles and validates Go AST correctness across starters and solutions. |
 | `validate-markdown-links` | Crawls Markdown files and verifies all relative links exist on disk. |
+| `validate-inline-paths` | Crawls Markdown files and verifies all relative links exist on disk. |
+| `validate-anti-slop` | Crawls Markdown files and verifies all relative links exist on disk. |
 | `validate-sese-navigation` | Enforces SESE entry (`## Start here`) and exit gate integrity. |
 | `validate-project-scripts` | Verifies cross-platform script parity (`verify.sh` and `verify.ps1`). |
 | `validate-no-emojis` | Enforces strict zero-emoji invariant across all Markdown prose. |
@@ -187,7 +189,7 @@ Before release or workflow changes, verify these documents agree with `ARCHITECT
 - `CONTRIBUTING.md`
 - `RELEASE.md`
 - `MAINTAINER-CHECKLIST.md`
-- `.github/pull_request_template.md`
+- `.github/PULL_REQUEST_TEMPLATE.md`
 - `.github/ISSUE_TEMPLATE/*`
 
 ## Architecture Checklist

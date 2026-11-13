@@ -228,7 +228,7 @@
         "How Go uses it": "Idiomatic usage patterns across the Go standard library, runtime internals, and production architectures.",
         "Learning objective": "Measurable, behavioral statement: 'By the end of this lesson, you will be able to...'",
         "Mental model": "Durable physical analogy or conceptual construct that accurately models mechanical behavior without hand-waving.",
-        "NEXT UP": "Relative link and canonical item ID to the next sequential learning node in path.core.json.",
+        "NEXT UP": "Relative link and canonical item ID to the next sequential learning node in the item's per-module manifest entry.",
         "Performance implications": "Algorithmic complexity (Big-O), heap vs stack allocations, CPU cache line effects, struct alignment, and GC overhead. Skip if performance is neutral or non-applicable.",
         "Practice task": "Actionable, hands-on modification exercise for the learner to alter code and observe behavioral changes.",
         "Production notes": "Operational risks, defense-in-depth patterns, and failure modes from curriculum/failures.json.",

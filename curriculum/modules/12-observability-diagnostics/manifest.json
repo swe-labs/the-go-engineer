@@ -104,8 +104,7 @@
       "purpose": "Verify that the learner can independently apply and explain structured logging, OpenTelemetry tracing, metrics exposition, error tracking, alerting, and dashboard design.",
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
@@ -2855,8 +2854,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "reinforcement_targets": [
         "structured logging",
@@ -3058,8 +3056,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "reinforcement_targets": [
         "structured logging",
