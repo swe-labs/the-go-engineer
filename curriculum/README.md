@@ -20,14 +20,14 @@
 | Core Modules                     | 18    | Modules 00 through 16, plus Module 18 (Flagship Opslane)          |
 | Elective Modules                 | 1     | Module 17 (Advanced Electives)                                    |
 | Total Modules                    | 19    | Modules 00–18                                                     |
-| Core Path Items (Metadata Total) | 421   | Total items array in `path.core.json` across all core modules     |
+| Core Path Items (Metadata Total) | 421   | Total items across the per-module core manifests     |
 | Instructional Lessons & Labs     | 321   | 320 lessons + 1 lab across Modules 00–16                         |
 | Flagship Opslane Milestones      | 15    | 14 checkpoints + 1 capstone defense in Module 18          |
 | Learner Instructional Units      | 336   | 321 instructional lessons/labs + 15 Opslane milestones            |
 | Elective Items                   | 26    | 26 advanced elective lessons across Generics, gRPC, and distributed patterns in Module 17 |
 | Projects                         | 29    | 28 module projects + 1 flagship capstone project                  |
 | In-Path Assessment Checkpoints   | 57    | End-of-module checkpoints, project reviews, and flagship Opslane milestones across Modules 00–18 |
-| Assessment Registry Records      | 48    | 19 module assessments + 29 project assessments in `assessments.json`|
+| Assessment Registry Records      | 48    | 19 module assessments + 29 project assessments across the per-module manifests|
 | Canonical Concepts               | 69    | Fully resolved ownership without leaks in `concepts.json`         |
 | Operational Categories           | 13    | Mapped across 18 module coverage entries                          |
 
@@ -828,9 +828,9 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 Total cross-references: **2228**
 
 > **Gating vs. lineage:** Hard progression gates are the `prerequisites` arrays in
-> `path.core.json` and `path.electives.json`. `builds_on` records the broader,
-> directional pedagogical lineage and must remain acyclic, but it is not the
-> field a learner-frontier tool should use to block progression.
+> the per-module manifests. `builds_on` records the broader, directional
+> pedagogical lineage and must remain acyclic, but it is not the field a
+> learner-frontier tool should use to block progression.
 
 ### Style Rules
 

@@ -64,7 +64,6 @@ func generateCatalog() (string, error) {
 		assessBundle.Assessments = append(assessBundle.Assessments, mm.Assessments...)
 	}
 
-
 	var concepts catalogConceptsBundle
 	readJSON("concepts.json", &concepts)
 
@@ -187,14 +186,14 @@ func generateCatalog() (string, error) {
 	add(fmt.Sprintf("| Core Modules                     | %s | Modules 00 through 16, plus Module 18 (Flagship Opslane)          |", pad(coreModulesCount, 5)))
 	add(fmt.Sprintf("| Elective Modules                 | %s | Module 17 (Advanced Electives)                                    |", pad(electiveModulesCount, 5)))
 	add(fmt.Sprintf("| Total Modules                    | %s | Modules 00–18                                                     |", pad(totalModulesCount, 5)))
-	add(fmt.Sprintf("| Core Path Items (Metadata Total) | %s | Total items array in `path.core.json` across all core modules     |", pad(len(coreItems), 5)))
+	add(fmt.Sprintf("| Core Path Items (Metadata Total) | %s | Total items across the per-module core manifests     |", pad(len(coreItems), 5)))
 	add(fmt.Sprintf("| Instructional Lessons & Labs     | %s | %d lessons + %d lab across Modules 00–16                         |", pad(lessons+labs, 5), lessons, labs))
 	add(fmt.Sprintf("| Flagship Opslane Milestones      | %s | %d checkpoints + %d capstone defense in Module 18          |", pad(checkpoints+capstones, 5), checkpoints, capstones))
 	add(fmt.Sprintf("| Learner Instructional Units      | %s | %d instructional lessons/labs + %d Opslane milestones            |", pad(lessons+labs+checkpoints+capstones, 5), lessons+labs, checkpoints+capstones))
 	add(fmt.Sprintf("| Elective Items                   | %s | %d advanced elective lessons across Generics, gRPC, and distributed patterns in Module 17 |", pad(electiveItems, 5), electiveItems))
 	add(fmt.Sprintf("| Projects                         | %s | %d module projects + %d flagship capstone project                  |", pad(prjRecords, 5), prjRecords-flagshipProjectsCount, flagshipProjectsCount))
 	add(fmt.Sprintf("| In-Path Assessment Checkpoints   | %s | End-of-module checkpoints, project reviews, and flagship Opslane milestones across Modules 00–18 |", pad(pathAssessments, 5)))
-	add(fmt.Sprintf("| Assessment Registry Records      | %s | %d module assessments + %d project assessments in `assessments.json`|", pad(regAssessments, 5), len(moduleAssessments), len(projectAssessments)))
+	add(fmt.Sprintf("| Assessment Registry Records      | %s | %d module assessments + %d project assessments across the per-module manifests|", pad(regAssessments, 5), len(moduleAssessments), len(projectAssessments)))
 	add(fmt.Sprintf("| Canonical Concepts               | %s | Fully resolved ownership without leaks in `concepts.json`         |", pad(conceptCount, 5)))
 	add(fmt.Sprintf("| Operational Categories           | %s | Mapped across %d module coverage entries                          |\n", pad(failureCategoryCount, 5), coreModulesCount))
 
@@ -586,7 +585,7 @@ func generateCatalog() (string, error) {
 	}
 
 	add(fmt.Sprintf("Total cross-references: **%d**\n", len(refs)))
-	add("> **Gating vs. lineage:** Hard progression gates are the `prerequisites` arrays in\n> `path.core.json` and `path.electives.json`. `builds_on` records the broader,\n> directional pedagogical lineage and must remain acyclic, but it is not the\n> field a learner-frontier tool should use to block progression.\n")
+	add("> **Gating vs. lineage:** Hard progression gates are the `prerequisites` arrays in\n> the per-module manifests. `builds_on` records the broader, directional\n> pedagogical lineage and must remain acyclic, but it is not the field a\n> learner-frontier tool should use to block progression.\n")
 	add("### Style Rules\n")
 	add("| Relation      | Template                                                     |")
 	add("| ------------- | ------------------------------------------------------------ |")
