@@ -101,8 +101,7 @@
       "purpose": "Verify that the learner can independently apply and explain navigating the course, running exercises, understanding zero magic, and using the architecture tools.",
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",

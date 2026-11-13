@@ -103,8 +103,7 @@
       "purpose": "Verify that the learner can independently apply and explain CLI flag parsing, file I/O, JSON encoding/decoding, config file loading, signal handling, and subprocess management.",
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
@@ -4734,8 +4733,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "reinforcement_targets": [
         "file I/O",
@@ -4946,8 +4944,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "reinforcement_targets": [
         "file I/O",
@@ -5158,8 +5155,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "reinforcement_targets": [
         "file I/O",

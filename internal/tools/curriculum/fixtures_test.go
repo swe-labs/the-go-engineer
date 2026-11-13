@@ -71,8 +71,7 @@ func writeCurriculumFixture(t *testing.T) string {
       "tags": ["alpha"],
       "readme_contract": {
         "contract_id": "module.v3",
-        "documentation_mode": "module-overview",
-        "required": true
+        "documentation_mode": "module-overview"
       },
       "cognitive_load": "low",
       "recommended_break_after": false,
@@ -96,8 +95,7 @@ func writeCurriculumFixture(t *testing.T) string {
       "tags": ["beta"],
       "readme_contract": {
         "contract_id": "module.v3",
-        "documentation_mode": "module-overview",
-        "required": true
+        "documentation_mode": "module-overview"
       },
       "cognitive_load": "moderate",
       "recommended_break_after": false,
@@ -154,8 +152,7 @@ func writeCurriculumFixture(t *testing.T) string {
       },
       "readme_contract": {
         "contract_id": "lesson.v3",
-        "documentation_mode": "tutorial",
-        "required": true
+        "documentation_mode": "tutorial"
       },
       "slug": "alpha-lesson",
       "source_legacy_ids": [],
@@ -224,8 +221,7 @@ func writeCurriculumFixture(t *testing.T) string {
       "prerequisites": [],
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "slug": "alpha-checkpoint",
       "source_legacy_ids": [],

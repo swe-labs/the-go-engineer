@@ -159,7 +159,7 @@ Every lesson `main.go` should include:
 - exact `RUN:` command
 - readable teaching comments
 - `KEY TAKEAWAY`
-- `NEXT UP:` footer matching canonical progression in `curriculum/path.core.json`
+- `NEXT UP:` footer matching the item's entry in `curriculum/modules/*/manifest.json`
 
 ## Cross-References
 
@@ -198,7 +198,7 @@ Before final review:
 - canonical v3 18-module architecture remains intact
 - manifests in `curriculum/` match files and lesson metadata
 - README, source, tests, and module maps agree
-- `NEXT UP:` footers match curriculum metadata in `curriculum/path.core.json`
+- `NEXT UP:` footers match the item's entry in `curriculum/modules/*/manifest.json`
 - Go code is formatted and idiomatic
 - tests prove behavior where behavior should be provable
 - all automated curriculum quality gates pass (`go run ./scripts/validate_curriculum.go`)

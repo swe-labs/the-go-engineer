@@ -103,8 +103,7 @@
       "purpose": "Verify that the learner can independently apply and explain database/sql, connection pooling, migrations, CRUD queries, transactions, prepared statements, and PostgreSQL-specific features.",
       "readme_contract": {
         "contract_id": "assessment.v3",
-        "documentation_mode": "assessment",
-        "required": true
+        "documentation_mode": "assessment"
       },
       "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
       "status": "ready",
@@ -5239,8 +5238,7 @@
       ],
       "readme_contract": {
         "contract_id": "project.v3",
-        "documentation_mode": "project",
-        "required": true
+        "documentation_mode": "project"
       },
       "reinforcement_targets": [
         "database/sql pool",

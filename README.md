@@ -47,12 +47,12 @@ The core path runs through 18 modules in order, from orientation to the flagship
 | 04 | [Functions, Errors, and Data Semantics](./curriculum/modules/04-functions-errors-data-semantics/README.md) | go-core | Boundaries, failure, cleanup, and mutation |
 | 05 | [Types, Interfaces, Packages, and Modules](./curriculum/modules/05-types-interfaces-packages-modules/README.md) | engineering-core | Maintainable, modular Go programs |
 | 06 | [Testing, Debugging, and Refactoring](./curriculum/modules/06-testing-debugging-refactoring/README.md) | engineering-core | Proof, diagnosis, and safe change |
-| 07 | [CLI, Files, JSON, and Config](./curriculum/modules/07-cli-files-json-config/README.md) | cli-io | Useful local programs and process lifecycle |
-| 08 | [HTTP and REST APIs](./curriculum/modules/08-http-rest-apis/README.md) | data | The first serious backend service |
-| 09 | [SQL and PostgreSQL Persistence](./curriculum/modules/09-sql-postgres-persistence/README.md) | security | Real relational backend work |
-| 10 | [Authentication, Authorization, and Security](./curriculum/modules/10-auth-security/README.md) | concurrency | Explicit, secure backend behavior |
-| 11 | [Lifecycle, Context, and Concurrency](./curriculum/modules/11-lifecycle-context-concurrency/README.md) | reliability | Safe concurrent systems and request lifecycle |
-| 12 | [Observability and Diagnostics](./curriculum/modules/12-observability-diagnostics/README.md) | performance | Services you can see into |
+| 07 | [CLI, Files, JSON, Config, and Runtime Coordination](./curriculum/modules/07-cli-files-json-config/README.md) | cli-io | Useful local programs and process lifecycle |
+| 08 | [HTTP and REST APIs](./curriculum/modules/08-http-rest-apis/README.md) | backend | The first serious backend service |
+| 09 | [SQL and PostgreSQL Persistence](./curriculum/modules/09-sql-postgres-persistence/README.md) | data | Real relational backend work |
+| 10 | [Authentication, Authorization, and Security](./curriculum/modules/10-auth-security/README.md) | security | Explicit, secure backend behavior |
+| 11 | [Lifecycle, Context, and Concurrency](./curriculum/modules/11-lifecycle-context-concurrency/README.md) | concurrency | Safe concurrent systems and request lifecycle |
+| 12 | [Observability and Diagnostics](./curriculum/modules/12-observability-diagnostics/README.md) | reliability | Services you can see into |
 | 13 | [Performance and Memory Engineering](./curriculum/modules/13-performance-memory-engineering/README.md) | performance | Profiling and benchmark-driven optimization |
 | 14 | [Architecture and Distributed Systems](./curriculum/modules/14-architecture-distributed-systems/README.md) | architecture | Architecture as tradeoff reasoning |
 | 15 | [Docker, CI/CD, and Deployment](./curriculum/modules/15-docker-cicd-deployment/README.md) | delivery | Shippable, repeatable software |
