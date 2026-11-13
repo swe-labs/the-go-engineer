@@ -9,16 +9,11 @@ import (
 )
 
 // resolveModuleDir finds the physical directory for a module path
+// resolveModuleDir resolves a module's physical directory. The relative
+// layout rule lives in moduleRelDir (loader.go) - one owner for the
+// modules/ vs electives/ prefix question.
 func resolveModuleDir(modPath string) string {
-	candidate1 := filepath.Join(curriculumDir, "modules", modPath)
-	if info, err := os.Stat(candidate1); err == nil && info.IsDir() {
-		return candidate1
-	}
-	candidate2 := filepath.Join(curriculumDir, modPath)
-	if info, err := os.Stat(candidate2); err == nil && info.IsDir() {
-		return candidate2
-	}
-	return candidate1
+	return filepath.Join(curriculumDir, moduleRelDir(modPath))
 }
 
 // deriveNextModuleLinks maps each module to the relative link of the module
@@ -190,7 +185,7 @@ func validateProjectScripts() {
 	core := loadCoreBundle()
 
 	modPathMap := make(map[string]string)
-	for _, m := range core.Modules {
+	for _, m := range append(append([]Module{}, core.Modules...), loadElectiveBundle().Modules...) {
 		modPathMap[m.ID] = m.Path
 	}
 

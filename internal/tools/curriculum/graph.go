@@ -41,10 +41,6 @@ func validateGraph() {
 		moduleMap[electives.Modules[i].ID] = &electives.Modules[i]
 	}
 
-	coreItemIDs := make(map[string]bool)
-	for _, item := range core.Items {
-		coreItemIDs[item.ID] = true
-	}
 	moduleOrder := make(map[string]int)
 	for i := range core.Modules {
 		moduleOrder[core.Modules[i].ID] = core.Modules[i].Number
@@ -79,24 +75,9 @@ func validateGraph() {
 		}
 	}
 
-	// 4. Check item-level crossrefs
-	for _, item := range allItems {
-		if item.CrossRefs == nil {
-			continue
-		}
-		checkRefs := func(refs []CrossrefRef, category string) {
-			for _, ref := range refs {
-				if _, exists := itemMap[ref.TargetID]; !exists {
-					errorf("%s: crossrefs.%s target '%s' does not exist", item.ID, category, ref.TargetID)
-					ok = false
-				}
-			}
-		}
-		checkRefs(item.CrossRefs.BuildsOn, "builds_on")
-		checkRefs(item.CrossRefs.PreviewOnly, "preview_only")
-		checkRefs(item.CrossRefs.Related, "related")
-		checkRefs(item.CrossRefs.ReinforcedIn, "reinforced_in")
-	}
+	// 4. Crossref target existence is owned by validate-crossrefs; graph
+	// keeps progression structure (prereqs, next ids, builds_on ordering,
+	// reachability).
 
 	// 4b. builds_on must point backward. Embedded item crossrefs are the
 	// single source since the central crossrefs.json registry was removed.

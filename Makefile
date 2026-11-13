@@ -92,10 +92,10 @@ catalog: ## Regenerate curriculum/README.md from manifests
 
 ## Run Examples
 run-hello: ## Run the Hello World example
-	go run ./curriculum/modules/00-orientation/lessons/01-how-to-use-this-repository/main.go
+	go run ./curriculum/modules/02-go-setup-tooling/lessons/02-hello-world
 
 run-env: ## Run the environment check
-	go run ./curriculum/modules/02-go-setup-tooling/lessons/01-toolchain-installation-and-path/main.go
+	go run ./curriculum/modules/02-go-setup-tooling/lessons/01-install-and-verify-go
 
 ## CI
 ci: build vet fmt-check tidy test test-race cover validate ## Run CI-equivalent local checks

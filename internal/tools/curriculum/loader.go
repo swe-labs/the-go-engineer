@@ -18,24 +18,21 @@ var (
 	manifestPathsCache  []string
 )
 
-// moduleRelDir resolves a module's directory relative to curriculumDir,
-// mirroring resolveModuleDir's two-candidate logic (some module paths carry
-// a legacy "modules/" prefix).
+// moduleRelDir resolves a module's directory relative to curriculumDir.
+// Electives (path prefix "electives/") live outside modules/; everything
+// else hangs under modules/. An index path that already carries the
+// "modules/" prefix is tolerated for compatibility.
 func moduleRelDir(modPath string) string {
 	rel := filepath.ToSlash(modPath)
-	if strings.HasPrefix(rel, "modules/") {
+	if strings.HasPrefix(rel, "electives/") || strings.HasPrefix(rel, "modules/") {
 		return rel
 	}
 	return filepath.ToSlash(filepath.Join("modules", rel))
 }
 
-// moduleManifestPath returns the curriculumDir-relative manifest path for a
-// module. Electives live outside modules/ (their index path is already
-// curriculumDir-relative, e.g. electives/advanced-electives).
+// moduleManifestPath returns the curriculumDir-relative manifest path for
+// a module.
 func moduleManifestPath(modPath string) string {
-	if strings.HasPrefix(filepath.ToSlash(modPath), "electives/") {
-		return filepath.ToSlash(filepath.Join(modPath, "manifest.json"))
-	}
 	return filepath.ToSlash(filepath.Join(moduleRelDir(modPath), "manifest.json"))
 }
 
