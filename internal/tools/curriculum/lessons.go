@@ -16,10 +16,8 @@ type lessonIssue struct {
 func validateLessons() {
 	fmt.Println("=== validate-lessons ===")
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	allItems := make([]Item, 0, len(core.Items)+len(electives.Items))
 	allItems = append(allItems, core.Items...)

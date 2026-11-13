@@ -9,12 +9,8 @@ func validateGraph() {
 	fmt.Println("=== validate-graph ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
-	var crossrefs CrossrefBundle
-	readJSON("crossrefs.json", &crossrefs)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -27,10 +23,14 @@ func validateGraph() {
 	}
 
 	// Also register project IDs as valid targets
-	var projects ProjectsBundle
-	readJSON("projects.json", &projects)
-	for _, p := range projects.Projects {
-		itemMap[p.ID] = nil // exists but not an Item
+	for _, mf := range moduleManifestPaths() {
+		var mm struct {
+			Projects []Project `json:"projects"`
+		}
+		readJSON(mf, &mm)
+		for _, p := range mm.Projects {
+			itemMap[p.ID] = nil // exists but not an Item
+		}
 	}
 
 	moduleMap := make(map[string]*Module)
@@ -79,18 +79,6 @@ func validateGraph() {
 		}
 	}
 
-	// 3. Check crossref targets exist
-	for _, ref := range crossrefs.Crossrefs.References {
-		if _, exists := itemMap[ref.FromID]; !exists {
-			errorf("crossref from '%s' does not exist", ref.FromID)
-			ok = false
-		}
-		if _, exists := itemMap[ref.TargetID]; !exists {
-			errorf("crossref to '%s' does not exist", ref.TargetID)
-			ok = false
-		}
-	}
-
 	// 4. Check item-level crossrefs
 	for _, item := range allItems {
 		if item.CrossRefs == nil {
@@ -110,15 +98,10 @@ func validateGraph() {
 		checkRefs(item.CrossRefs.ReinforcedIn, "reinforced_in")
 	}
 
-	// 4b. builds_on must point backward. Central crossrefs.json is authoritative
-	// for core items; electives carry their crossrefs in path.electives.json.
+	// 4b. builds_on must point backward. Embedded item crossrefs are the
+	// single source since the central crossrefs.json registry was removed.
 	buildsOn := make(map[string][]string)
-	for _, ref := range crossrefs.Crossrefs.References {
-		if ref.Relation == "builds_on" && coreItemIDs[ref.FromID] {
-			buildsOn[ref.FromID] = append(buildsOn[ref.FromID], ref.TargetID)
-		}
-	}
-	for _, item := range electives.Items {
+	for _, item := range allItems {
 		if item.CrossRefs == nil {
 			continue
 		}

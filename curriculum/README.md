@@ -8,7 +8,7 @@
 
 **Decision:** Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.
 
-- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON manifests: `curriculum/path.core.json`, `curriculum/path.electives.json`, `curriculum/projects.json`, `curriculum/assessments.json`, `curriculum/crossrefs.json`, `curriculum/concepts.json`, and `curriculum/failures.json`.
+- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON manifests: the `curriculum/path.core.json` and `curriculum/path.electives.json` indexes, the per-module manifest.json files beside each module README (items, projects, assessments, and embedded crossrefs), `curriculum/concepts.json`, and `curriculum/failures.json`.
 - **Physical Curriculum Delivery:** Physical lesson READMEs, runnable examples, test suites, and exercises are organized canonically under `curriculum/modules/` and `curriculum/electives/`.
 - **Core Scope:** The core curriculum is dedicated to production Go backend engineering (systems, networking, persistence, concurrency, observability, architecture, and deployment). Modern server-driven full-stack frontend engineering is delivered via the companion path (semantic HTML, CSS, JavaScript, and progressive enhancement with Go templates/templ/HTMX/Tailwind/Datastar).
 - **Capstone & Learning Path Flow:** Flagship Opslane (Module 18) directly requires the complete backend engineering and deployment runbook foundation of Module 15 (`core-15-19`). Module 16 (Portfolio and Interview Readiness) packages the production artifacts produced by Opslane for senior-level engineering interviews. Module 17 (Advanced Electives) provides independent specialization tracks in Generics, gRPC, and distributed systems.
@@ -20,14 +20,14 @@
 | Core Modules                     | 18    | Modules 00 through 16, plus Module 18 (Flagship Opslane)          |
 | Elective Modules                 | 1     | Module 17 (Advanced Electives)                                    |
 | Total Modules                    | 19    | Modules 00–18                                                     |
-| Core Path Items (Metadata Total) | 421   | Total items array in `path.core.json` across all core modules     |
+| Core Path Items (Metadata Total) | 421   | Total items across the per-module core manifests     |
 | Instructional Lessons & Labs     | 321   | 320 lessons + 1 lab across Modules 00–16                         |
 | Flagship Opslane Milestones      | 15    | 14 checkpoints + 1 capstone defense in Module 18          |
 | Learner Instructional Units      | 336   | 321 instructional lessons/labs + 15 Opslane milestones            |
 | Elective Items                   | 26    | 26 advanced elective lessons across Generics, gRPC, and distributed patterns in Module 17 |
 | Projects                         | 29    | 28 module projects + 1 flagship capstone project                  |
 | In-Path Assessment Checkpoints   | 57    | End-of-module checkpoints, project reviews, and flagship Opslane milestones across Modules 00–18 |
-| Assessment Registry Records      | 48    | 19 module assessments + 29 project assessments in `assessments.json`|
+| Assessment Registry Records      | 48    | 19 module assessments + 29 project assessments across the per-module manifests|
 | Canonical Concepts               | 69    | Fully resolved ownership without leaks in `concepts.json`         |
 | Operational Categories           | 13    | Mapped across 18 module coverage entries                          |
 
@@ -122,15 +122,12 @@ curriculum/
     README.md
   GRADUATION_CRITERIA.md
   PILOT_TESTING_PROTOCOL.md
-  assessments.json
   concepts.json
   contributor-authoring-guide.md
-  crossrefs.json
   expected.json
   failures.json
   path.core.json
   path.electives.json
-  projects.json
   quality-rubric.md
   readme.contracts.json
   schema.v3.json
@@ -787,18 +784,16 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 | `assessment-module-14` | **Module 14 Assessment — Architecture and Distributed Systems** | project-review | 80% |
 | `assessment-module-15` | **Module 15 Assessment — Docker, CI/CD, and Deployment** | project-review | 80% |
 | `assessment-module-16` | **Module 16 Assessment — Portfolio and Interview Readiness** | portfolio-review | 80% |
-| `assessment-module-17` | **Module 17 Assessment — Electives and Advanced Engineering** | project-review | 80% |
 | `assessment-module-18` | **Module 18 Assessment — Flagship Opslane** | capstone-defense | 80% |
+| `assessment-module-17` | **Module 17 Assessment — Electives and Advanced Engineering** | project-review | 80% |
 
 ### Project Assessments (29 Records)
 
 | ID | Title | Type | Passing Score |
 | -- | ----- | ---- | ------------- |
+| `assessment-project-course-setup` | **Assessment — Course Setup Verification** | project-review | 80% |
 | `assessment-project-shell-git-lab` | **Assessment — Shell + Git Lab** | project-review | 80% |
 | `assessment-project-tooling-failure-lab` | **Assessment — Tooling Failure Lab** | project-review | 80% |
-| `assessment-project-course-setup` | **Assessment — Course Setup Verification** | project-review | 80% |
-| `assessment-project-performance-analysis-lab` | **Assessment — Performance Analysis Lab** | project-review | 80% |
-| `assessment-project-advanced-electives` | **Assessment — Advanced Electives Capstone** | project-review | 80% |
 | `assessment-project-pricing-checkout` | **Assessment — Pricing Checkout** | project-review | 80% |
 | `assessment-project-contact-directory` | **Assessment — Contact Directory** | project-review | 80% |
 | `assessment-project-order-summary-refactor` | **Assessment — Order Summary Refactor** | project-review | 80% |
@@ -817,23 +812,25 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 | `assessment-project-bounded-worker-pool` | **Assessment — Bounded Worker Pool** | project-review | 80% |
 | `assessment-project-pii-redactor` | **Assessment — PII Redactor** | project-review | 80% |
 | `assessment-project-observability-retrofit` | **Assessment — Observability Retrofit** | project-review | 80% |
+| `assessment-project-performance-analysis-lab` | **Assessment — Performance Analysis Lab** | project-review | 80% |
 | `assessment-project-profile-and-fix-lab` | **Assessment — Profile and Fix Lab** | project-review | 80% |
 | `assessment-project-modular-refactor-review` | **Assessment — Modular Refactor Review** | project-review | 80% |
 | `assessment-project-dockerized-service-cicd` | **Assessment — Dockerized Service with CI/CD** | project-review | 80% |
 | `assessment-project-portfolio-review-pack` | **Assessment — Portfolio Review Pack** | project-review | 80% |
 | `assessment-project-opslane` | **Assessment — Opslane Flagship** | project-review | 80% |
+| `assessment-project-advanced-electives` | **Assessment — Advanced Electives Capstone** | project-review | 80% |
 | `assessment-project-kubernetes-go-service` | **Assessment — Kubernetes Go Service Capstone** | project-review | 80% |
 
 ---
 
 # Cross-References
 
-Total cross-references: **2086**
+Total cross-references: **2228**
 
 > **Gating vs. lineage:** Hard progression gates are the `prerequisites` arrays in
-> `path.core.json` and `path.electives.json`. `builds_on` records the broader,
-> directional pedagogical lineage and must remain acyclic, but it is not the
-> field a learner-frontier tool should use to block progression.
+> the per-module manifests. `builds_on` records the broader, directional
+> pedagogical lineage and must remain acyclic, but it is not the field a
+> learner-frontier tool should use to block progression.
 
 ### Style Rules
 
@@ -848,14 +845,14 @@ Total cross-references: **2086**
 
 | Relation      | Count | Description |
 | ------------- | ----- | ----------- |
-| related       | 944   | Bidirectional conceptual links between related lessons |
-| builds_on     | 584   | Directional pedagogical lineage (acyclic; not the hard gate) |
-| reinforced_in | 512   | Practical application links to projects and labs |
+| related       | 1014   | Bidirectional conceptual links between related lessons |
+| builds_on     | 630   | Directional pedagogical lineage (acyclic; not the hard gate) |
+| reinforced_in | 538   | Practical application links to projects and labs |
 | preview_only  | 46    | Early mental-model previews developed fully later |
 
 ### Authoritative Quality Gates
 
-- `validate-schema`: 11 canonical JSON manifests valid against Schema 3.1.0
+- `validate-schema`: 8 canonical JSON manifests valid against Schema 3.1.0
 - `validate-graph`: Strict DAG acyclicity across all item dependencies
 - `validate-lessons`: Zero machine role comments or unmotivated markers
 - `validate-prerequisite-closure`: Strict pedagogical progression across module boundaries

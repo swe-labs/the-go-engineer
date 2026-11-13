@@ -51,10 +51,8 @@ func validateSESENavigation() {
 	fmt.Println("=== validate-sese-navigation ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	allModules := append(append([]Module{}, core.Modules...), electives.Modules...)
 	allItems := append(append([]Item{}, core.Items...), electives.Items...)
@@ -176,10 +174,20 @@ func validateProjectScripts() {
 			Verification any    `json:"verification"`
 		} `json:"projects"`
 	}
-	readJSON("projects.json", &rawProjects)
+	for _, mf := range moduleManifestPaths() {
+		var mm struct {
+			Projects []struct {
+				ID           string `json:"id"`
+				ModuleID     string `json:"module_id"`
+				Slug         string `json:"slug"`
+				Verification any    `json:"verification"`
+			} `json:"projects"`
+		}
+		readJSON(mf, &mm)
+		rawProjects.Projects = append(rawProjects.Projects, mm.Projects...)
+	}
 
-	var core CoreBundle
-	readJSON("path.core.json", &core)
+	core := loadCoreBundle()
 
 	modPathMap := make(map[string]string)
 	for _, m := range core.Modules {

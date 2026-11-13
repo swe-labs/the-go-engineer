@@ -1,0 +1,2005 @@
+{
+  "assessments": [
+    {
+      "automated_checks": [
+        "go test ./..."
+      ],
+      "criteria": [
+        {
+          "description": "Learner can explain the concepts without memorized magic.",
+          "id": "module-13-conceptual",
+          "levels": [
+            {
+              "description": "Cannot explain CPU profiling, memory profiling, benchmarking, GC optimization.",
+              "score": 0
+            },
+            {
+              "description": "Can explain basics of CPU profiling, memory profiling, benchmarking, GC optimization with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Clearly explains CPU profiling, memory profiling, benchmarking, GC optimization, including mechanics, purpose, and common mistakes.",
+              "score": 5
+            }
+          ],
+          "title": "Conceptual clarity",
+          "weight": 30
+        },
+        {
+          "description": "Learner can produce working code or an appropriate artifact.",
+          "id": "module-13-implementation",
+          "levels": [
+            {
+              "description": "No working implementation; missing or non-functional code.",
+              "score": 0
+            },
+            {
+              "description": "Partial implementation with minor bugs or gaps.",
+              "score": 3
+            },
+            {
+              "description": "Complete, clean implementation with proper Go idioms and error handling.",
+              "score": 5
+            }
+          ],
+          "title": "Implementation",
+          "weight": 35
+        },
+        {
+          "description": "Learner can verify the work through tests, checks, or review.",
+          "id": "module-13-proof",
+          "levels": [
+            {
+              "description": "No proof of understanding; no artifact provided.",
+              "score": 0
+            },
+            {
+              "description": "Some proof provided but lacks depth or edge cases.",
+              "score": 3
+            },
+            {
+              "description": "Strong proof with tests or verification covering CPU profiling, memory profiling and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can communicate decisions and tradeoffs.",
+          "id": "module-13-communication",
+          "levels": [
+            {
+              "description": "No explanation provided; unable to discuss the work.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation with some clarity but lacks depth.",
+              "score": 3
+            },
+            {
+              "description": "Professional explanation linking CPU profiling, memory profiling, benchmarking, GC optimization to broader system design and trade-offs.",
+              "score": 5
+            }
+          ],
+          "title": "Communication",
+          "weight": 10
+        }
+      ],
+      "documentation_mode": "assessment",
+      "evidence_required": [
+        "pprof profile analysis",
+        "Benchmark comparison",
+        "Memory allocation optimization"
+      ],
+      "id": "assessment-module-13",
+      "manual_review_questions": [
+        "Walk me through using `go tool pprof` to find a memory leak. What does the heap profile show and what does it hide?",
+        "Explain escape analysis. Give me a concrete example of a change that keeps a value on the stack and why it matters.",
+        "What does a benchmark with `testing.B` actually measure? What are the common pitfalls that make benchmarks lie?"
+      ],
+      "module_id": "module-13",
+      "passing_score": 80,
+      "purpose": "Verify that the learner can independently apply and explain pprof profiling, CPU/memory analysis, escape analysis, GC tuning, benchmarking, and allocation optimization.",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "readme_status": "scaffolded",
+      "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
+      "status": "ready",
+      "suite": "full",
+      "target_ids": [
+        "core-13-01",
+        "core-13-02",
+        "core-13-03",
+        "core-13-04",
+        "core-13-05",
+        "core-13-06",
+        "core-13-07",
+        "core-13-08"
+      ],
+      "title": "Module 13 Assessment — Performance and Memory Engineering",
+      "type": "project-review"
+    },
+    {
+      "automated_checks": [
+        "go test ./..."
+      ],
+      "criteria": [
+        {
+          "id": "project-performance-analysis-lab-correctness",
+          "levels": [
+            {
+              "description": "Incorrect or missing implementation.",
+              "score": 0
+            },
+            {
+              "description": "Partially correct with minor issues.",
+              "score": 3
+            },
+            {
+              "description": "Fully correct implementation.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "id": "project-performance-analysis-lab-quality",
+          "levels": [
+            {
+              "description": "Poor code structure.",
+              "score": 0
+            },
+            {
+              "description": "Adequate code structure.",
+              "score": 3
+            },
+            {
+              "description": "Idiomatic, clean Go code.",
+              "score": 5
+            }
+          ],
+          "title": "Code quality",
+          "weight": 25
+        },
+        {
+          "id": "project-performance-analysis-lab-proof",
+          "levels": [
+            {
+              "description": "No proof provided.",
+              "score": 0
+            },
+            {
+              "description": "Partial proof.",
+              "score": 3
+            },
+            {
+              "description": "Comprehensive proof with edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "id": "project-performance-analysis-lab-communication",
+          "levels": [
+            {
+              "description": "No explanation.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear, professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Communication",
+          "weight": 15
+        }
+      ],
+      "documentation_mode": "assessment",
+      "evidence_required": [
+        "Project implementation",
+        "Tests",
+        "Written explanation"
+      ],
+      "id": "assessment-project-performance-analysis-lab",
+      "manual_review_questions": [
+        "Can the learner explain their design decisions?",
+        "Does the implementation handle edge cases?",
+        "Is the code idiomatic Go?"
+      ],
+      "module_id": "module-13",
+      "passing_score": 80,
+      "purpose": "Evaluate the Performance Analysis Lab project submission.",
+      "readme_status": "scaffolded",
+      "retake_policy": "Learner may retry after fixing gaps and writing a correction note.",
+      "status": "ready",
+      "target_ids": [
+        "project-performance-analysis-lab"
+      ],
+      "title": "Assessment — Performance Analysis Lab",
+      "type": "project-review"
+    },
+    {
+      "criteria": [
+        {
+          "id": "project-profile-and-fix-lab-crit-1",
+          "levels": [
+            {
+              "description": "Optimization breaks application correctness or fails to demonstrate measurable performance improvement.",
+              "score": 0
+            },
+            {
+              "description": "Achieves minor performance gains, but misses primary CPU/memory bottlenecks identified in profiling traces.",
+              "score": 3
+            },
+            {
+              "description": "Resolves major CPU and memory bottlenecks with verified benchmarks, achieving significant latency reduction and allocation elimination while preserving correctness.",
+              "score": 5
+            }
+          ],
+          "name": "Correctness",
+          "weight": 35
+        },
+        {
+          "id": "project-profile-and-fix-lab-crit-2",
+          "levels": [
+            {
+              "description": "Obfuscated code, unsafe pointer tricks without justification, or premature optimizations that destroy readability.",
+              "score": 0
+            },
+            {
+              "description": "Optimizations improve performance, but code comments explaining algorithmic changes are missing.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic optimization: slice pre-allocation, pointer avoidance where values are cheaper, string/byte conversions without copies, and benchmark-proven decisions.",
+              "score": 5
+            }
+          ],
+          "name": "Go quality",
+          "weight": 25
+        },
+        {
+          "id": "project-profile-and-fix-lab-crit-3",
+          "levels": [
+            {
+              "description": "No benchmark results (testing.B) or profiling graphs (pprof) provided to substantiate improvements.",
+              "score": 0
+            },
+            {
+              "description": "Benchmarks provided, but missing benchstat comparison or memory allocation numbers (-benchmem).",
+              "score": 3
+            },
+            {
+              "description": "Rigorous proof: before/after pprof profile captures (CPU and heap), benchstat statistical comparison proving p \u003c 0.05 speedup and allocation drops.",
+              "score": 5
+            }
+          ],
+          "name": "Proof",
+          "weight": 25
+        },
+        {
+          "id": "project-profile-and-fix-lab-crit-4",
+          "levels": [
+            {
+              "description": "Cannot explain how to read pprof flame graphs or explain compiler escape analysis.",
+              "score": 0
+            },
+            {
+              "description": "Explains top functions in pprof, but struggles with inlining, escape analysis (stack vs heap), or garbage collector pressure.",
+              "score": 3
+            },
+            {
+              "description": "Deeply explains Go runtime memory allocation (mcache, mcentral, mheap), GC sweep/mark phases, escape analysis flags (-gcflags='-m'), and CPU cache locality.",
+              "score": 5
+            }
+          ],
+          "name": "Explanation",
+          "weight": 15
+        }
+      ],
+      "evidence_required": [
+        "Working implementation of Profile and Fix Lab",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "id": "assessment-project-profile-and-fix-lab",
+      "manual_review_questions": [
+        "Walk me through your before/after benchmark results: what specific bottleneck did the pprof CPU/heap profile reveal, and what code change resolved it?",
+        "How does escape analysis explain why heap allocations were occurring in the unoptimized version, and how did your refactor keep allocations on the stack?",
+        "Why is optimizing without benchmarks dangerous, and how did you use benchstat to verify that your performance gains were statistically significant?"
+      ],
+      "module_id": "module-13",
+      "passing_score": 80,
+      "purpose": "Evaluate the Profile and Fix Lab project submission: Profile a Go application with pprof, identify performance bottlenecks, and optimize CPU and memory usage.",
+      "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
+      "status": "ready",
+      "target_ids": [
+        "project-profile-and-fix-lab"
+      ],
+      "title": "Assessment — Profile and Fix Lab",
+      "type": "project-review"
+    }
+  ],
+  "curriculum_version": "3.0.0",
+  "document_type": "module_manifest",
+  "items": [
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "advanced",
+      "documentation_mode": "explanation",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/lessons/01-pprof/assets",
+        "diagram_paths": [],
+        "main_path": "modules/13-performance-memory-engineering/lessons/01-pprof/main.go",
+        "readme_path": "modules/13-performance-memory-engineering/lessons/01-pprof/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/13-performance-memory-engineering/lessons/01-pprof/main_test.go"
+      },
+      "id": "core-13-01",
+      "learning_objective": "Capture CPU and heap profiles programmatically using `runtime/pprof`, serve them via `net/http/pprof`, and inspect them with `go tool pprof` to identify performance hotspots and memory patterns in Go programs.",
+      "module_id": "module-13",
+      "next_item_ids": [
+        "core-13-02"
+      ],
+      "order": 1,
+      "phase": "reliability",
+      "prerequisites": [
+        "core-12-12"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-13",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must instrument a Go HTTP server with net/http/pprof, generate load with a tool, collect a 30-second CPU profile, run go tool pprof -http=:8080, identify the top 3 functions consuming CPU, write an optimization that reduces CPU in at least one of them, and re-profile to confirm the improvement.",
+        "project_id": "project-profile-and-fix-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "explanation",
+        "required": true
+      },
+      "slug": "pprof",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "operations",
+      "tags": [
+        "reliability",
+        "advanced",
+        "operations"
+      ],
+      "title": "pprof",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./12-observability-performance-reliability/10-pprof",
+        "test_command": "go test ./12-observability-performance-reliability/10-pprof"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Profiling in production without CPU or memory overhead limits — pprof sampling adds ~5% CPU overhead by default; leaving profiling on 24/7 at 100Hz on every instance can cost noticeable capacity. Use runtime.SetCPUProfileRate(0) to disable, or enable profiling only during investigation windows.",
+          "Confusing sampling with tracing — pprof samples every 100th event (default 100Hz CPU, 1 sample/512KB alloc). It does NOT capture every call or allocation. If a function runs 50 times between samples, only 1 appears in the profile. Use execution tracing (go test -trace, runtime/trace) when you need every event, not just statistical representation.",
+          "Reading a single profile in isolation — a CPU profile taken during idle time shows different hot spots than one taken under load. Always compare profiles: 'before vs after' or 'idle vs loaded'. One profile proves nothing."
+        ],
+        "execution_timeline": [
+          "Developer enables pprof: import \"net/http/pprof\" registers /debug/pprof/ handlers on default mux",
+          "→ Application starts: runtime/pprof begins sampling based on configuration",
+          "→ CPU profiling: OS sends SIGPROF to the process at configured frequency (default 100Hz)",
+          "→ Signal handler calls sigprof: captures current goroutine's stack trace (program counter, stack pointer, frame pointer)",
+          "→ runtime.hashStackTrace: hashes the stack trace into a bucket index, increments the sample count for that bucket",
+          "→ Developer runs: go tool pprof http://localhost:6060/debug/pprof/profile?seconds=30",
+          "→ pprof tool collects 30 seconds of samples, writes a compressed protobuf to a .pb.gz file",
+          "→ Developer runs: go tool pprof -http=:8080 profile.pb.gz — web UI opens with flame graph, call graph, top table",
+          "→ Developer identifies hottest function: 45% of samples in json.Unmarshal — optimizes by switching to a streaming decoder",
+          "→ Developer re-profiles: json.Unmarshal drops to 12% — confirms the fix reduced CPU usage"
+        ],
+        "failure_modes": [
+          "pprof port exposed to the internet: importing net/http/pprof on a public-facing port exposes profiling data to anyone — an attacker can extract stack traces revealing internal code structure, library versions, and business logic hotspots. Fix: register pprof on a separate admin port (e.g., :6060) bound to localhost or an internal network, not the public :443.",
+          "Profile file exceeds disk quota: a 30-second CPU profile on a high-throughput service can produce 50-200MB of .pb.gz data. Running automated profiling every minute without rotation fills the disk. Fix: set max age/size on profile output, or stream directly to analysis instead of saving every file.",
+          "Profiling a dead process: running go tool pprof against a stopped binary produces an empty profile with no samples. The binary must be actively running and receiving request traffic to produce meaningful data."
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain why a function that runs 200 times between SIGPROF signals may not appear in a 100Hz CPU profile at all, even though it consumes 20% of CPU.",
+          "Learner must use go tool pprof to compare two profiles and identify which one was collected under load and which one was collected at idle, explaining the visual differences.",
+          "Learner must set up pprof on an admin port (not the public port), collect a profile, and identify the top 3 functions consuming CPU — then propose an optimization for each."
+        ],
+        "how_go_uses_it": "pprof is Go's built-in profiling framework. It works by statistical sampling: the runtime interrupts the process at regular intervals (or on specific events like allocations) and records the current goroutine's stack trace. Over thousands of samples, the frequency of each stack trace approximates the time or allocation cost of that code path. Go provides two packages: runtime/pprof for programmatic profile control, and net/http/pprof that exposes profiles via HTTP endpoints. The go tool pprof command reads the protobuf-encoded profile data and produces interactive visualizations: flame graphs, call graphs, top-N tables, and source-level annotation.",
+        "mental_model": "pprof is the process equivalent of an x-ray machine taking snapshots at regular intervals. Each snapshot captures 'what line of code is the CPU executing right now?' (CPU profile) or 'what code path allocated this memory?' (heap profile). After enough snapshots (thousands), the distribution of stack traces accurately reflects where time or memory is going. It is statistical, not precise — like polling 1,000 voters and extrapolating to the entire population.",
+        "performance_implications": [
+          "CPU profiling at 100Hz adds ~5% overhead on a busy process (one interrupt per 10ms). Higher sample rates (e.g., 1000Hz with runtime.SetCPUProfileRate) give finer resolution but cause 20-50% overhead.",
+          "Heap profiling samples 1 allocation per 512KB by default (controlled by runtime.MemProfileRate). Lowering MemProfileRate increases memory overhead proportionally: setting it to 1 captures every allocation but also allocates memory for every sample record.",
+          "Profile collection and visualization are I/O-bound for large profiles: a 30-second CPU profile on a 64-core machine produces ~192,000 samples (100Hz x 30s x 64 cores), creating a ~100MB protobuf file that can take minutes to load in the web UI."
+        ],
+        "problem_solved": "New Go developers guess where their program spends time — 'the database must be the bottleneck' — and optimize without data. Senior engineers measure first. pprof eliminates guessing by providing a statistical profile of CPU, memory, goroutine, mutex, and block contention. The key insight: without profiling, you cannot know what your program is doing; with profiling, you can see exactly which functions consume resources.",
+        "proof_of_understanding": "The learner must instrument a Go HTTP server with net/http/pprof, generate load with a tool, collect a 30-second CPU profile, run go tool pprof -http=:8080, identify the top 3 functions consuming CPU, write an optimization that reduces CPU in at least one of them, and re-profile to confirm the improvement.",
+        "real_world_usage": "Production Go services at every scale use pprof for performance investigation. The standard library exposes profiles via net/http/pprof on admin ports. Kubernetes liveness probes can trigger heap profile collection when memory exceeds a threshold. Datadog's Go profiler agent pulls pprof endpoints periodically. Google's internal Go profiling guide requires a profile before any performance optimization is accepted.",
+        "step_by_step_execution": [
+          "Add import _ \"net/http/pprof\" to your HTTP server — registers /debug/pprof/ handlers",
+          "Start the server and generate traffic: go run main.go \u0026; go-wrk http://localhost:8080/api",
+          "Collect CPU profile: curl -o cpu.pprof http://localhost:6060/debug/pprof/profile?seconds=30",
+          "Analyze: go tool pprof -http=:8081 cpu.pprof — browser opens flame graph",
+          "Identify top function in the 'Top' view — e.g., json.Unmarshal at 37%",
+          "Switch to 'Peek' view: shows source lines within json.Unmarshal consuming the most samples",
+          "Apply optimization (e.g., use json.Decoder instead of json.Unmarshal for streaming)",
+          "Re-profile with the same load: json.Unmarshal drops to 11% — optimization confirmed"
+        ],
+        "under_the_hood": "pprof uses the OS signal mechanism (SIGPROF on Unix) for CPU profiling. When enabled, the runtime installs a signal handler that receives SIGPROF at the configured frequency (default 100Hz). On each signal, the handler calls sigprof which reads the interrupted goroutine's PC (program counter), SP (stack pointer), and FP (frame pointer) from the signal context. It unwinds the stack frame-by-frame using Go's stack unwinding metadata (gopclntab). The resulting call stack is hashed and stored in a hash table with an incrementing count. Every 10ms, one call stack is recorded. After 30 seconds, 3,000 call stacks form a statistically significant picture. For heap profiling, the sampling happens on allocation: each call to runtime.mallocgc randomly samples 1 allocation per 512KB based on MemProfileRate, recording the allocation stack trace and byte count.",
+        "why_it_exists": "pprof exists because performance optimization without data is guesswork. In production, the bottleneck is rarely where developers expect it — a 10ms database query appears slow until a profile shows that json.Unmarshal on the response consumes 40% of CPU. pprof gives developers a shared vocabulary for performance: 'this function consumes 37% of CPU' is a fact, not an opinion. Without statistical profiling, every optimization is an opinion."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "advanced",
+      "documentation_mode": "explanation",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/lessons/02-cpu-profiling/assets",
+        "diagram_paths": [],
+        "main_path": "modules/13-performance-memory-engineering/lessons/02-cpu-profiling/main.go",
+        "readme_path": "modules/13-performance-memory-engineering/lessons/02-cpu-profiling/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/13-performance-memory-engineering/lessons/02-cpu-profiling/main_test.go"
+      },
+      "id": "core-13-02",
+      "learning_objective": "Collect CPU profiles from Go programs, interpret the output of `go tool pprof`, identify hotspots using `top`, `list`, and `web` commands, and read flame graphs to prioritize optimization targets.",
+      "module_id": "module-13",
+      "next_item_ids": [
+        "core-13-03"
+      ],
+      "order": 2,
+      "phase": "reliability",
+      "prerequisites": [
+        "core-13-01"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-13",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write an HTTP handler that performs CPU-intensive work (json.",
+        "project_id": "project-profile-and-fix-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "explanation",
+        "required": true
+      },
+      "slug": "cpu-profiling",
+      "source_legacy_ids": [
+        "PR.1"
+      ],
+      "status": "ready",
+      "subtype": "operations",
+      "tags": [
+        "reliability",
+        "advanced",
+        "operations"
+      ],
+      "title": "CPU profiling",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./12-observability-performance-reliability/11-cpu-profiling",
+        "test_command": "go test ./12-observability-performance-reliability/11-cpu-profiling"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Profiling a cold process — a CPU profile collected when the service just started and has no request traffic shows runtime startup code (GC initialization, map zeroing, type registration) that disappears after warmup. Always profile under realistic load after the process has handled at least a few thousand requests.",
+          "Optimizing functions that consume \u003c5% of CPU — optimizing a function that appears at 3% in the profile improves overall performance by at most 3%, but the optimization itself may introduce bugs or complexity. Focus on the top 3-5 functions that cumulatively account for \u003e50% of samples.",
+          "Misreading flat vs cumulative time — flat time is samples where the function was on top of the stack (it was executing its own code). Cumulative time includes samples where the function was anywhere on the stack (it called something that consumed CPU). A high flat time means the function is CPU-intensive itself. A low flat but high cumulative time means the function calls something expensive."
+        ],
+        "execution_timeline": [
+          "Developer starts CPU profiling: runtime/pprof.StartCPUProfile(w) enables SIGPROF handler",
+          "→ Runtime sets up a timer that delivers SIGPROF every 10ms (100Hz) to the process",
+          "→ OS sends SIGPROF signal to a random OS thread in the process",
+          "→ Signal handler (sigprof in runtime) reads the interrupted thread's register context",
+          "→ Handler determines which goroutine was running on that thread",
+          "→ Handler reads the goroutine's PC (program counter) from the signal context",
+          "→ Handler unwinds the stack: walks frame pointers using Go's gopclntab metadata",
+          "→ Handler hashes the full call stack into a bucket (map[symbol+offset] → sample count)",
+          "→ Handler increments the bucket's sample count by 1",
+          "→ After 30 seconds: pprof.StopCPUProfile() flushes all buckets to the writer as protobuf",
+          "→ go tool pprof reads the protobuf, computes relative percentages from sample counts",
+          "→ Developer sees: json.Unmarshal: 37% flat (it is CPU-bound), 62% cumulative (callers also counted)"
+        ],
+        "failure_modes": [
+          "SIGPROF delivery failure under heavy load: when all OS threads are in a cgo call or blocked in a syscall, SIGPROF cannot be delivered to a goroutine-running thread — the profile shows idle time even though the process is busy. Fix: ensure at least one thread is available for signal delivery, or monitor the profile's sample count — fewer samples than expected indicate signal starvation.",
+          "Goroutine profile vs CPU profile confusion: a goroutine profile shows '45 goroutines in net/http.Handler.ServeHTTP' but a CPU profile shows only 2% CPU in that handler — the goroutines are blocked on I/O, not consuming CPU. Interpreting the goroutine profile as a CPU bottleneck wastes time optimizing blocking code that is not CPU-bound.",
+          "Short profile misses periodic work: a 10-second CPU profile may miss a 30-second GC cycle that causes 500ms STW pauses. Profile duration must cover at least one full cycle of the slowest periodic operation. For GC, profile for at least 2x the GC cycle time."
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain why a function with 0% flat time but 80% cumulative time is NOT a candidate for direct optimization — the expensive work is in its callees.",
+          "Learner must collect a CPU profile, identify which function appears most in the 'flat' column, read its source code, and propose an optimization that targets the specific line consuming the most samples.",
+          "Learner must distinguish between CPU-bound and I/O-bound code paths by comparing a CPU profile with an execution trace (go test -trace)."
+        ],
+        "how_go_uses_it": "CPU profiling in Go uses statistical sampling via SIGPROF. The runtime installs a signal handler that fires at a configurable rate (default 100Hz, one sample per 10ms). Each sample records the complete call stack of the currently running goroutine. After thousands of samples, the distribution of stack traces converges to the actual CPU time distribution. Go's runtime/pprof.StartCPUProfile and pprof.StopCPUProfile control collection. The go tool pprof command visualizes the result.",
+        "mental_model": "CPU profiling is like a photographer taking a flash photo of the CPU every 10ms. Each photo captures 'what function is the CPU executing right now?' After 3,000 photos (30 seconds), the stack trace that appears in 37% of photos likely consumes ~37% of CPU. It is not exact — sampling error exists — but with enough samples, the error is small enough to guide optimization decisions. Functions that never appear in any photo consume negligible CPU and should not be optimized first.",
+        "performance_implications": [
+          "A single CPU profile at 100Hz costs ~5% CPU overhead because SIGPROF delivery + stack unwinding + hash + bucket insert takes ~50µs per sample, and at 100 samples/second that is ~5ms/second of CPU time.",
+          "Higher sample rates (e.g., 1000Hz via runtime.SetCPUProfileRate) give 10x more samples for finer detail but cost ~50% CPU overhead — only usable in development or low-traffic staging.",
+          "Profiling a multicore machine scales: 100Hz on 64 cores means 6,400 samples/second, producing a ~200MB profile in 30 seconds. The web UI becomes sluggish. Use go tool pprof -proto to aggregate profiles before visualization."
+        ],
+        "problem_solved": "New Go developers optimize by intuition — 'the database is slow' — and often optimize the wrong thing. CPU profiling replaces intuition with measurement. Instead of guessing, developers can see: 'json.Unmarshal consumes 37% of CPU' and target optimization there. The lesson teaches how to collect, read, and act on CPU profiles.",
+        "proof_of_understanding": "The learner must write an HTTP handler that performs CPU-intensive work (json.Unmarshal on a large payload + string formatting in a loop), profile it under load for 30 seconds, identify the top 3 CPU consumers, optimize one of them (e.g., switch from json.Unmarshal to json.Decoder, or pre-allocate the string builder), and re-profile to confirm at least a 15% reduction in the targeted function's flat time.",
+        "real_world_usage": "CPU profiling is the standard first step in Go performance investigations. Every major Go shop — Uber, Datadog, Cloudflare, Google — has an internal runbook that starts with 'collect a CPU profile.' Kubernetes sidecars like the Google Cloud Profiler agent periodically pull pprof endpoints. In incident response, a CPU profile is the fastest way to determine whether a latency spike is caused by CPU contention or I/O blocking.",
+        "step_by_step_execution": [
+          "Write: import \"runtime/pprof\"; f, _ := os.Create(\"cpu.pprof\"); pprof.StartCPUProfile(f); defer pprof.StopCPUProfile()",
+          "Place profiling start before the load test begins, defer StopCPUProfile after load completes",
+          "Generate load: hey -n 100000 -c 50 http://localhost:8080/api/users",
+          "Stop profile: defer runs StopCPUProfile which flushes all sample buckets to the file as protobuf",
+          "Analyze: go tool pprof -http=:8081 cpu.pprof — open in browser, click 'Top'",
+          "Read output: json.Unmarshal: 37% flat, 62% cumulative — this function is the top CPU consumer",
+          "Click 'Source' on json.Unmarshal — pprof annotates each line with sample counts",
+          "Identify line: a call to json.Decode.Decode consumes 22% of samples",
+          "Apply optimization: replace json.Unmarshal with a streaming json.NewDecoder(r).Decode(\u0026v)",
+          "Re-profile: run the same load test, collect a new profile, confirm json.Unmarshal dropped to 11%"
+        ],
+        "under_the_hood": "When pprof.StartCPUProfile is called, the runtime calls runtime.SetCPUProfileRate(100) which programs the OS interval timer (setitimer on Linux, ITIMER_PROF) to deliver SIGPROF at 100Hz. The signal handler (sigprof in runtime/signal_unix.go) reads the interrupted thread's m (OS thread) and gp (goroutine pointer) from thread-local storage. It then calls gentraceback to unwind the goroutine's stack: starting from the PC/SP saved in the signal context, it walks frame-by-frame using Go's stack map metadata. Each frame's PC is mapped to a function name + line number via the gopclntab (Go program counter line number table). The resulting stack is hashed with a FNV-1a hash into a fixed-size hash table. If the bucket exists, the count is incremented; if not, a new bucket is allocated. On StopCPUProfile, the runtime serializes all buckets into a protobuf-format profile (pprof's proto format defined in src/runtime/pprof/proto.go).",
+        "why_it_exists": "CPU profiling exists because CPU is the most contended resource in most services, and developers are consistently wrong about where it goes. A 2021 study of Go performance optimizations at Uber showed that 70% of developer-chosen optimization targets did not match profile data — developers optimized code they 'felt' was slow, not code the profiler showed was slow. CPU profiling eliminates the gap between intuition and measurement."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "advanced",
+      "documentation_mode": "explanation",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/lessons/03-memory-profiling/assets",
+        "diagram_paths": [],
+        "main_path": "modules/13-performance-memory-engineering/lessons/03-memory-profiling/main.go",
+        "readme_path": "modules/13-performance-memory-engineering/lessons/03-memory-profiling/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/13-performance-memory-engineering/lessons/03-memory-profiling/main_test.go"
+      },
+      "id": "core-13-03",
+      "learning_objective": "Collect and interpret Go heap profiles, distinguish between alloc_objects, alloc_space, inuse_objects, and inuse_space views, detect memory leaks by comparing heap profiles over time, and identify the call sites responsible for excessive allocation.",
+      "module_id": "module-13",
+      "next_item_ids": [
+        "core-13-04"
+      ],
+      "order": 3,
+      "phase": "reliability",
+      "prerequisites": [
+        "core-13-02"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-13",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write a Go program that allocates memory in at least three different functions (one of which has a memory leak via a forgotten reference), collect a heap profile, identify the leaking function by inuse_space, trace the reference chain, fix the leak by removing the forgotten reference, and confirm the fix by collecting a second heap profile showing inuse_space for that function dropped to near-zero.",
+        "project_id": "project-profile-and-fix-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "explanation",
+        "required": true
+      },
+      "slug": "memory-profiling",
+      "source_legacy_ids": [
+        "PR.3"
+      ],
+      "status": "ready",
+      "subtype": "operations",
+      "tags": [
+        "reliability",
+        "advanced",
+        "operations"
+      ],
+      "title": "Memory profiling",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./12-observability-performance-reliability/12-memory-profiling",
+        "test_command": "go test ./12-observability-performance-reliability/12-memory-profiling"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Reading alloc_space instead of inuse_space — alloc_space shows the total allocations since start (cumulative bytes allocated over the process lifetime). inuse_space shows currently live allocations (allocated minus freed). For finding memory leaks, inuse_space is the relevant metric. alloc_space is useful for understanding allocation rate and GC pressure.",
+          "Profiling heap at the wrong point in the request lifecycle — a heap profile collected during peak request processing shows inflated inuse because many requests are in-flight. A profile collected during idle shows only the baseline. Compare both to distinguish per-request allocation from persistent allocation.",
+          "Forgetting that heap profiles show allocation call sites, not current owners — a heap profile shows which function allocated the memory, but does not show which code path currently holds the reference. A buffer allocated at connection creation and held by a leaked goroutine appears as 'allocated by conn.setup' even though the goroutine is the root of the leak."
+        ],
+        "execution_timeline": [
+          "Initial state: process started, heap baseline = 50MB inuse_space, 512KB sample rate",
+          "→ Request arrives: handler creates 1MB buffer via make([]byte, 1_000_000) — mallocgc allocates 1MB on GC heap",
+          "→ mallocgc probabilistically decides to sample: adds a profile record (stack trace = handler, size = 1MB)",
+          "→ Handler processes the request, buffer is no longer referenced — GC runs, frees the 1MB",
+          "→ The profile record remains: it shows allocation history, not current liveness",
+          "→ Leaked goroutine holds a reference to a 500KB struct — GC cannot free it",
+          "→ inuse_space shows 500KB from the leak: the struct's allocation site appears in the profile",
+          "→ After 1000 leaked goroutines: inuse_space = 50MB + 1000 × 500KB = 550MB",
+          "→ Developer collects heap profile: sees the struct's allocation site at top of inuse_space — identifies the leak"
+        ],
+        "failure_modes": [
+          "Heap profile does not show a memory leak until after GC: if the leaked memory is referenced by a goroutine that is still running, the GC cannot free it — inuse_space shows the leak. But if the leaking object is no longer referenced but the reference is in a forgotten map entry that is never cleared, inuse_space shows the leak as long as the map is alive. Only after all references to the map are dropped does GC free the entries.",
+          "MemProfileRate too low causes massive profiling overhead: setting MemProfileRate to 1 (sample every allocation) causes every mallocgc call to record a stack trace — the profiler itself allocates memory for sample records, causing a feedback loop where the profiler causes more allocations which cause more profiling. The process OOMs from profiling metadata.",
+          "In-use space appears zero after a GC cycle: if a heap profile is collected immediately after GC and the application has not processed any requests, inuse_space shows near-zero. This is not a memory leak — it is an empty profile. Always collect heap profiles under load or compare inuse_space over time (inuse_space trend, not snapshot)."
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain the difference between inuse_space and alloc_space by describing a scenario where one shows a problem and the other does not.",
+          "Learner must collect a heap profile, identify the function with the highest inuse_space, trace the reference chain to understand why that memory is still live, and propose a fix.",
+          "Learner must use go tool pprof -diff_base to compare heap profiles before and after a code change and explain whether memory usage increased or decreased."
+        ],
+        "how_go_uses_it": "Memory profiling in Go uses statistical sampling on every heap allocation via runtime.MemProfileRate (default 512KB). Every time mallocgc allocates on the GC heap, it probabilistically decides whether to record the stack trace. The heap profile is collected via runtime/pprof.WriteHeapProfile or the /debug/pprof/heap HTTP endpoint. The profile contains sample records: each record has a stack trace, the number of bytes allocated ('alloc_space'/'alloc_objects'), and the number of bytes still in use ('inuse_space'/'inuse_objects'). The go tool pprof command visualizes both views.",
+        "mental_model": "A heap profile is a photograph of the heap at a single moment, showing 'what code allocated the memory that is still alive?' Each sample represents ~512KB of live allocation. If a function appears in 10 samples, it is responsible for ~5MB of live heap. The profile is a probability-weighted estimate: functions that allocate rarely may not appear in any sample, and functions that allocate heavily appear in proportion to their allocation.",
+        "performance_implications": [
+          "Heap profiling sampling adds ~1-3% CPU overhead at default 512KB rate because each allocation checks the random condition and occasionally records a stack trace. The overhead is proportional to allocation rate, not allocation size.",
+          "Lowering MemProfileRate below 512KB increases resolution but also increases the number of profile records stored in memory — at 1KB rate, a service allocating 1GB/s generates 1M records/second, consuming significant memory for profile metadata.",
+          "Reading heap profiles remotely via HTTP uses HTTP/1.1 chunked encoding — for services with large heaps (\u003e10GB), the profile transfer takes seconds and temporarily doubles memory (the serialized protobuf is built in memory before sending). Use pprof's --seconds flag for a delta profile instead of a full dump."
+        ],
+        "problem_solved": "New Go developers know their service uses memory but do not know why. Memory profiling answers: 'which code paths are responsible for the live heap?' Without profiling, a memory leak investigation is manual — reading code, adding log lines, guessing. With profiling, the answer is: 'function X allocated 70% of live heap in this call stack.' The lesson teaches how to collect, read, and interpret heap profiles.",
+        "proof_of_understanding": "The learner must write a Go program that allocates memory in at least three different functions (one of which has a memory leak via a forgotten reference), collect a heap profile, identify the leaking function by inuse_space, trace the reference chain, fix the leak by removing the forgotten reference, and confirm the fix by collecting a second heap profile showing inuse_space for that function dropped to near-zero.",
+        "real_world_usage": "Memory profiling is the standard tool for debugging Go memory leaks and high memory usage. Kubernetes operators use heap profiles to set memory limits (the profile shows the live heap size under load). Datadog's continuous profiler collects heap profiles from Go services every minute. In incident response, the first question about an OOM kill is: 'collect a heap profile and look at inuse_space by function.'",
+        "step_by_step_execution": [
+          "Write: a handler that allocates a buffer per request: make([]byte, 10_000_000) for each incoming request",
+          "Add import _ \"net/http/pprof\" to expose /debug/pprof/heap",
+          "Start server, generate load: hey -n 100 http://localhost:8080/api/bigresponse",
+          "Collect heap profile: curl -o heap1.pprof http://localhost:6060/debug/pprof/heap",
+          "Analyze: go tool pprof -http=:8081 heap1.pprof — browser shows inuse_space by default",
+          "Switch to 'alloc_space' in the dropdown — see total allocation by function, not just live",
+          "Identify: main.bigResponseHandler allocates 800MB alloc_space and 4MB inuse_space",
+          "The high alloc_space but low inuse_space per request pattern: allocates and frees, but GC pressure is high",
+          "Optimization: reuse the buffer with sync.Pool — alloc_space drops, GC runs less frequently",
+          "Re-profile: collect heap2.pprof, confirm alloc_space for bigResponseHandler dropped by \u003e80%"
+        ],
+        "under_the_hood": "Heap profiling is implemented in runtime/mprof.go. Each M (OS thread) has a per-thread allocation counter. When mallocgc is called, it increments the counter by the allocation size. When the counter exceeds MemProfileRate / 2 (biased for randomness), the runtime generates a random number and decides whether to sample. On sample, it calls recordstacktrace which captures up to 32 PC values from the current goroutine's stack. The record is stored in a global slice of MemProfileRecord entries. Each record contains: AllocBytes (total bytes allocated at this site), FreeBytes (bytes freed), AllocObjects (count allocated), FreeObjects (count freed), and the stack trace. On WriteHeapProfile, the runtime iterates all records, computes inuse = AllocBytes - FreeBytes, and serializes as a pprof profile. The profile type is 'heap' and each sample type has two units: 'alloc_objects'/'alloc_space' and 'inuse_objects'/'inuse_space'.",
+        "why_it_exists": "Memory profiling exists because memory is the second-most-common production bottleneck after CPU, and memory leaks are among the hardest bugs to diagnose without tooling. A goroutine leak that holds 500KB per leaked goroutine grows linearly with load — without a heap profile, it appears as a slow OOM over hours. With a heap profile, the leaking allocation site is visible in 5 seconds. Memory profiling makes invisible leaks visible."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "advanced",
+      "documentation_mode": "explanation",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/lessons/04-benchmarks/assets",
+        "diagram_paths": [],
+        "main_path": "modules/13-performance-memory-engineering/lessons/04-benchmarks/main.go",
+        "readme_path": "modules/13-performance-memory-engineering/lessons/04-benchmarks/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/13-performance-memory-engineering/lessons/04-benchmarks/main_test.go"
+      },
+      "id": "core-13-04",
+      "learning_objective": "Write and run Go benchmark functions using `testing.B`, interpret benchmark output, use `-benchmem` to measure allocations, compare benchmark results with `benchstat`, and apply benchmarks to prevent performance regressions.",
+      "module_id": "module-13",
+      "next_item_ids": [
+        "core-13-05"
+      ],
+      "order": 4,
+      "phase": "reliability",
+      "prerequisites": [
+        "core-13-03"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-13",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write two implementations of the same function (e.",
+        "project_id": "project-profile-and-fix-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "explanation",
+        "required": true
+      },
+      "slug": "benchmarks",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "operations",
+      "tags": [
+        "reliability",
+        "advanced",
+        "operations"
+      ],
+      "title": "Benchmarks",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./12-observability-performance-reliability/13-benchmarks",
+        "test_command": "go test ./12-observability-performance-reliability/13-benchmarks"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Benchmarking with compiler optimizations disabled — running a benchmark with -gcflags='-N -l' (disable optimization and inlining) measures the unoptimized code path, which is never what runs in production. Always benchmark with default compiler flags. The compiler inlines and optimizes differently at different optimization levels.",
+          "Not resetting the timer before the measured loop — if the benchmark function has setup code (file reads, allocation of test data), that setup time is included in the reported ns/op unless b.ResetTimer() is called before the loop. The setup happens once but its time skews the per-op measurement.",
+          "Benchmarking I/O-bound work — the -bench framework measures CPU time per operation. If the benchmarked function makes an HTTP call or reads from disk, the reported ns/op includes I/O wait time, which is non-deterministic and varies with system load. Use go test -bench for CPU-bound code only; use go test -bench with -count and statistical analysis for I/O-bound code."
+        ],
+        "execution_timeline": [
+          "Developer writes: func BenchmarkXxx(b *testing.B) — function with *testing.B parameter",
+          "→ Developer runs: go test -bench=. -benchmem ./pkg — testing framework discovers BenchmarkXxx",
+          "→ Framework calls BenchmarkXxx(b) with b.N = 1 (initial iteration count)",
+          "→ Benchmark function runs b.N = 1 iteration: runtime = 50ns -\u003e too fast for meaningful measurement",
+          "→ Framework computes estimated N: target runtime ~100ms / 50ns per op = 2,000,000 iterations",
+          "→ Framework calls BenchmarkXxx(b) again with b.N = 2,000,000",
+          "→ Benchmark function runs 2,000,000 iterations, total runtime ~100ms",
+          "→ Framework records: ns/op = total_time / N, allocs/op = total_allocs / N, bytes/op = total_bytes / N",
+          "→ Framework repeats the benchmark (default -count=1) and reports the results",
+          "→ Developer compares two implementations by running both benchmarks and computing speedup ratio"
+        ],
+        "failure_modes": [
+          "Benchmark results non-deterministic due to GC — if the benchmark allocates heavily, the GC runs during the measurement loop, adding unpredictable latency to some iterations. The reported ns/op is an average that includes GC time — the standard deviation is high. Fix: call runtime.GC() before b.ResetTimer() to ensure GC has run before measurement starts, and benchmark with a large enough N that GC cost is amortized.",
+          "Compiler eliminating the benchmark body — if the benchmarked function has no side effects and returns a value that is never used, the compiler may optimize away the entire function call. The benchmark reports unrealistically low ns/op. Fix: assign the result to a package-level variable (b.StopTimer(); sink = result; b.StartTimer()).",
+          "Benchmarking in short mode — go test -short reduces b.N, causing insufficient samples for statistical significance. A benchmark of 10 iterations has high variance. Always run benchmarks without -short for reliable results."
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain why a benchmark of a pure function (e.g., func add(a, b int) int { return a + b }) reports ns/op = 0.3 when the actual CPU cost is 1 cycle — the compiler inlined and eliminated the call, and the result was not used.",
+          "Learner must write a benchmark that compares two implementations of the same function, compute the speedup ratio (old_ns/op / new_ns/op), and explain whether the difference is statistically significant given the benchmark's variance.",
+          "Learner must explain why a benchmark of a function that calls time.Sleep(1ms) reports ns/op = 1,200,000 instead of 1,000,000 — the framework overhead and measurement granularity add ~20%."
+        ],
+        "how_go_uses_it": "Go's testing framework includes a benchmark subsystem via testing.B. Benchmarks measure CPU time (ns/op), memory allocations (allocs/op), and bytes allocated (B/op) per operation. The framework automatically determines the number of iterations (b.N) to achieve statistically stable results. Benchmark functions follow the naming convention BenchmarkXxx(b *testing.B). The go test -bench flag runs benchmarks. The -benchmem flag reports allocation statistics. Go's benchmark framework is designed for CPU-bound, deterministic operations — it runs the function repeatedly and measures the average cost.",
+        "mental_model": "A benchmark is a stopwatch that runs a function many times and reports the average time per run. The framework finds the right number of repetitions to get a stable average — just like measuring a runner's lap time by timing 100 laps, not 1 lap. The key insight: benchmarks measure the same code path repeatedly to cancel out measurement noise.",
+        "performance_implications": [
+          "Benchmark measurements have ~2-5% noise on an idle machine and 10-30% noise on a loaded machine. Run benchmarks with -count=5 and report the minimum (which approximates the best-case execution, closest to true CPU cost without OS interference).",
+          "Go's benchmark framework uses wall-clock time, not CPU time. If the benchmark runs on a machine with CPU throttling or other processes, the wall-clock measurement includes time spent not executing the benchmarked code. Use b.SetParallelism and benchmark on an isolated machine for production-critical measurements.",
+          "The benchmark framework cannot measure microbenchmarks below ~0.5ns reliably because time.Now() has ~50ns resolution on most platforms — the framework needs enough iterations (b.N) to make the total measurable time \u003e\u003e resolution."
+        ],
+        "problem_solved": "New Go developers make optimization decisions by intuition — 'version B feels faster' or 'using a map should be faster than a slice lookup.' Benchmarks replace intuition with measurement. Instead of guessing, developers write a benchmark, run it, and get a number: 'version B is 3.2x faster with 40% fewer allocations.' The lesson teaches how to write, run, and interpret Go benchmarks.",
+        "proof_of_understanding": "The learner must write two implementations of the same function (e.g., summing integers: range loop vs recursion vs reduce), write benchmarks for each with -benchmem, run with -count=5, compute ns/op, B/op, and allocs/op for each, identify the fastest and most memory-efficient implementation, and explain the tradeoff between CPU and memory cost.",
+        "real_world_usage": "Benchmarks are the standard tool for Go performance regression testing. The standard library runs benchmarks on every commit. Kubernetes benchmarks critical code paths (API serialization, RBAC evaluation) and requires benchmark evidence for performance-sensitive changes. In the Go community, benchmarks are the currency of optimization discussions — claims like 'this library is faster' must include a benchmark run with -benchmem.",
+        "step_by_step_execution": [
+          "Write: func BenchmarkSumRange(b *testing.B) { nums := []int{1,2,3,4,5}; b.ResetTimer(); for i := 0; i \u003c b.N; i++ { sumRange(nums) } }",
+          "Write: func BenchmarkSumRecursive(b *testing.B) { nums := []int{1,2,3,4,5}; b.ResetTimer(); for i := 0; i \u003c b.N; i++ { sumRecursive(nums) } }",
+          "Run: go test -bench=. -benchmem -count=5 ./pkg — outputs ns/op, B/op, allocs/op for each",
+          "Read output: BenchmarkSumRange-8 100000000 12.3 ns/op 0 B/op 0 allocs/op",
+          "Read output: BenchmarkSumRecursive-8 50000000 28.7 ns/op 16 B/op 1 allocs/op",
+          "Compute speedup: 28.7 / 12.3 = 2.33x faster for the range loop",
+          "Note: recursion allocates (stack frames) while the range loop is allocation-free",
+          "Conclusion: for summing small slices, the range loop is faster and allocation-free — prefer range over recursion"
+        ],
+        "under_the_hood": "When go test -bench runs, the testing framework parses benchmark function names, creates a testing.B for each, and calls the benchmark function. The framework starts with b.N = 1 and runs the function once. It measures the wall-clock duration with time.Now(). If the duration is below the minimum benchmark time (default 1 second), it computes a scaling factor: target_ns / measured_ns * 1.1 (10% safety margin). It then runs the benchmark again with the estimated N. It repeats until either the runtime is above the minimum time or N stops growing (for very fast operations, it may iterate this calibration loop multiple times). Internally, testing.B calls runtime.ReadMemStats before and after the benchmark loop to compute B/op and allocs/op. The reported value is the delta divided by N. The framework also tracks the number of iterations completed in each sub-benchmark and reports the minimum time across runs (not the average) to reduce noise from GC or OS scheduling.",
+        "why_it_exists": "Benchmarks exist because human intuition about performance is unreliable. A developer may 'feel' that a map lookup is faster than a binary search on a sorted slice, but a benchmark may show otherwise: for 100 items, binary search on a sorted slice is 2x faster than a map lookup because the map has hash computation overhead and the slice has cache locality. Without benchmarks, the developer picks the map and loses performance. Benchmarks replace feelings with numbers."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "advanced",
+      "documentation_mode": "explanation",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/lessons/05-escape-analysis/assets",
+        "diagram_paths": [],
+        "main_path": "modules/13-performance-memory-engineering/lessons/05-escape-analysis/main.go",
+        "readme_path": "modules/13-performance-memory-engineering/lessons/05-escape-analysis/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/13-performance-memory-engineering/lessons/05-escape-analysis/main_test.go"
+      },
+      "id": "core-13-05",
+      "learning_objective": "Explain how the Go compiler decides whether to allocate a value on the stack or heap, use `go build -gcflags=-m` to inspect escape analysis decisions, and write code that minimizes heap allocations by keeping values on the stack.",
+      "module_id": "module-13",
+      "next_item_ids": [
+        "core-13-06"
+      ],
+      "order": 5,
+      "phase": "reliability",
+      "prerequisites": [
+        "core-13-04"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-13",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write three versions of a function that creates a struct and: (1) returns the struct by value, (2) returns a pointer to a local struct, (3) returns the value via interface{}.",
+        "project_id": "project-profile-and-fix-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "explanation",
+        "required": true
+      },
+      "slug": "escape-analysis",
+      "source_legacy_ids": [
+        "PR.4"
+      ],
+      "status": "ready",
+      "subtype": "operations",
+      "tags": [
+        "reliability",
+        "advanced",
+        "operations"
+      ],
+      "title": "Escape analysis",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./12-observability-performance-reliability/14-escape-analysis",
+        "test_command": "go test ./12-observability-performance-reliability/14-escape-analysis"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Optimizing allocation by guessing — changing \u0026T{} to T{} or vice versa based on superstition rather than running -gcflags=-m or profiling.",
+          "Assuming all function parameters are heap-allocated — small structs passed by value live on the stack; only values that escape (returned, stored in interface, captured by closure) go to the heap.",
+          "Returning pointers to local variables unknowingly — the compiler detects this and allocates on heap, but the developer may think it is a stack allocation because the code 'looks local.'",
+          "Using pointers everywhere to 'avoid copying' — pointers cause escape to heap more often than values, and copying small structs (up to a few words) is cheaper than heap allocation + GC.",
+          "Believing that 'make' always allocates on heap — make for small slices created in a function and returned may allocate; but slices that never escape stay on stack if their backing array is small enough."
+        ],
+        "execution_timeline": [
+          "Initial state: function makeUser() called with local variable user User on stack frame",
+          "→ user := User{Name: \"alice\"} — struct allocated at SP+8 (stack offset), no heap involved",
+          "→ return \u0026user — compiler traces the pointer: address \u0026user is returned to caller, outlives makeUser's frame",
+          "→ Compiler decision: \u0026user escapes to heap — runtime.newobject called, struct allocated on GC heap instead of stack",
+          "→ caller receives pointer to heap-allocated User — heap memory must be scanned by GC",
+          "→ Alternative: return user (by value) — compiler sees user does not escape (no pointer to it leaves makeUser's scope)",
+          "→ user is allocated on the stack frame, copied into caller's stack on return — no GC involvement",
+          "→ Interface case: func print(v interface{}) called with print(user) — interface parameter forces escape because interface{} requires a pointer to the value (unless value fits in one word on 64-bit)",
+          "→ Compiler output: ./main.go:5:6: moved to heap: user — visible with -gcflags=-m"
+        ],
+        "failure_modes": [
+          "Unexpected heap allocation in hot path: a function called 1M times/s allocates on heap due to a parameter that escapes — the GC runs frequently, causing 10-100ms STW (stop-the-world) pauses every few seconds.",
+          "False sharing from pointer-heavy structs: a struct accessed by multiple goroutines has pointer fields that point to different cache lines — each pointer dereference causes a cache miss on NUMA systems.",
+          "Closure capture causing unintended escape: a loop variable captured by a goroutine closure escapes to heap — every iteration allocates a new closure object, and in Go \u003c1.22 the loop variable address was shared.",
+          "Interface parameter forcing heap allocation: passing a small struct to a function with interface{} parameter causes the struct to escape — the interface{} requires a pointer to the value, and values that fit in one word are allocated in the interface's data word (no escape on 64-bit for small types)."
+        ],
+        "hidden_magic_checks": [
+          "Learner must run go build -gcflags=-m on a given function and identify which allocations escape and why, comparing with their own prediction.",
+          "Learner must rewrite a function that allocates on every call (returning pointer) to avoid heap allocation entirely (return value) and verify with -gcflags=-m that the escape is eliminated.",
+          "Learner must identify a function where an interface{} parameter causes escape and explain how to avoid it (use type parameter or concrete type)."
+        ],
+        "how_go_uses_it": "Escape analysis is the compiler pass that decides whether a value lives on the stack or the heap. Go uses it to minimize GC pressure: stack allocations are free (just a SP offset), and heap allocations require malloc + GC. The -gcflags=-m flag prints escape analysis decisions. Go's compiler implements an interprocedural analysis: it traces values through function calls to determine if they escape the allocating function's scope. The result is printed as 'moved to heap' or 'does not escape'.",
+        "mental_model": "Escape analysis is the compiler's answer to: 'Does this value's address outlive the function that creates it?' If yes -\u003e heap (GC must track it). If no -\u003e stack (cheap allocation, freed when function returns). The compiler traces every pointer from creation to final use: if the pointer is returned, stored in a global, put into a heap-allocated struct, or captured by a closure — it escapes. If the pointer is only used locally or passed to functions that do not store it — it stays on the stack.",
+        "performance_implications": [
+          "Heap allocation costs: malloc call (~50-100ns) + GC overhead (scan + mark + sweep, unpredictable latency impact). Stack allocation costs: 0 (just a SP subtract/add at function entry/exit).",
+          "Reducing one heap allocation per request on a 10K req/s service saves ~500K-1M allocs/s and reduces GC pause time by milliseconds.",
+          "Pointer indirection is not free: dereferencing a pointer on the heap requires the CPU to load from memory (cache miss if cold). Value types on the stack are already in the cache.",
+          "The compiler's escape analysis is conservative: if it cannot prove a value does not escape, it allocates on heap. Understanding the rules helps you write code that stays on the stack."
+        ],
+        "problem_solved": "New Go developers do not know whether their allocations go to stack or heap. They use pointers everywhere (fearing copies), accidentally cause escapes, and wonder why GC overhead is high. They optimize by guessing — 'use pointers to avoid copies' — which paradoxically increases heap allocation. This lesson makes the compiler's allocation decisions visible so learners write allocation-efficient code by understanding, not by guessing.",
+        "proof_of_understanding": "The learner must write three versions of a function that creates a struct and: (1) returns the struct by value, (2) returns a pointer to a local struct, (3) returns the value via interface{}. They must run -gcflags=-m on each version, record which allocations escape and why, and predict the relative GC overhead of each version under high load.",
+        "real_world_usage": "Escape analysis optimization is critical for high-throughput Go services. The standard library's net/http server uses object pools (sync.Pool) for buffer reuse precisely because escape analysis shows that response buffers would otherwise escape to the heap. Uber's goleak detection and Datadog's trace-agent both optimize hot paths to avoid escape. In production profiling, the first question about unexpected GC overhead is: 'what is escaping to the heap?'",
+        "step_by_step_execution": [
+          "Write: func makeUser() *User { return \u0026User{Name: \"alice\"} } — \u0026User escapes because address is returned",
+          "Run: go build -gcflags='-m' main.go — output: \"\u0026User escapes to heap\"",
+          "Write: func makeUser() User { return User{Name: \"alice\"} } — User does not escape, lives on stack",
+          "Run: go build -gcflags='-m' main.go — output: \"User does not escape\"",
+          "Write: func printName(v interface{}) { fmt.Println(v) }; printName(User{...}) — User escapes (interface param causes heap)",
+          "Write: func printName[T any](v T) { fmt.Println(v) }; printName(User{...}) — User does not escape (generics inline)",
+          "Run benchmark: compare allocs/op with 'go test -bench=. -benchmem' to confirm heap vs stack impact"
+        ],
+        "under_the_hood": "Escape analysis runs on the compiler's SSA form. It builds a directed graph of value flows: allocations, stores, loads, and function calls. For each allocation (call to runtime.newobject or stack allocation), the analysis walks forward through all uses of the allocated value. If any use stores the address in a location that outlives the allocating function (global, heap-allocated struct field, returned value, closure variable), the allocation is marked 'heap'. The analysis is interprocedural: it also analyzes callees to determine if they store the value in escaping locations. The compiler prints the reasoning with -gcflags=-m -m (two -m flags for more detail). Go's implementation is in cmd/compile/internal/escape.",
+        "why_it_exists": "Escape analysis exists because manual stack/heap decisions are error-prone and non-portable. Without it, developers would have to annotate every allocation as stack or heap, and a small change in usage would silently change allocation behavior. Go's compiler automates this decision with provable correctness: the same code on different architectures or Go versions may produce different escape decisions, but the compiler ensures correctness in all cases."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "advanced",
+      "documentation_mode": "explanation",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/lessons/06-memory-layout/assets",
+        "diagram_paths": [],
+        "main_path": "modules/13-performance-memory-engineering/lessons/06-memory-layout/main.go",
+        "readme_path": "modules/13-performance-memory-engineering/lessons/06-memory-layout/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/13-performance-memory-engineering/lessons/06-memory-layout/main_test.go"
+      },
+      "id": "core-13-06",
+      "learning_objective": "Explain how Go aligns struct fields in memory, use `unsafe.Sizeof` and `unsafe.Offsetof` to measure struct sizes and field offsets, reorder struct fields to minimize padding waste, and understand how struct layout affects CPU cache utilization.",
+      "module_id": "module-13",
+      "next_item_ids": [
+        "core-13-07"
+      ],
+      "order": 6,
+      "phase": "reliability",
+      "prerequisites": [
+        "core-13-05"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-13",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write a struct with at least 5 fields of mixed sizes (int64, int32, int16, bool, string), predict its size using alignment rules, check with unsafe.",
+        "project_id": "project-profile-and-fix-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "explanation",
+        "required": true
+      },
+      "slug": "memory-layout",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "operations",
+      "tags": [
+        "reliability",
+        "advanced",
+        "operations"
+      ],
+      "title": "Memory layout",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./12-observability-performance-reliability/15-memory-layout",
+        "test_command": "go test ./12-observability-performance-reliability/15-memory-layout"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Declaring struct fields in logical order instead of size order — field order determines struct size due to alignment padding. Sorting fields by size descending (largest first) minimizes padding. A struct with fields int64, int32, bool (8+4+1 = 13 bytes) can require 24 bytes if declared as bool, int32, int64 (1 + 3 padding + 4 + 4 padding + 8 = 24).",
+          "Assuming sizeof(struct) = sum(sizeof(fields)) — alignment rules require each field to be at an address that is a multiple of its alignment (field size, up to 8 bytes on 64-bit). The compiler adds padding between fields to satisfy alignment, and at the end of the struct to ensure the next element in an array is aligned. The actual size includes invisible padding.",
+          "Using bool fields in hot loops because 'bool is smaller' — bool is 1 byte but has alignment 1. Adjacent int32 fields require 3 bytes of padding. A bool in a struct accessed in a hot loop causes a cache line to hold only bool + padding + int32, wasting cache space. Using a bitmask (uint8) for multiple bools avoids the padding."
+        ],
+        "execution_timeline": [
+          "Initial state: struct declared with fields bool, int64, bool — order as written by developer",
+          "→ Compiler processes field 0: bool at offset 0 — occupies byte 0 (size 1, alignment 1)",
+          "→ Compiler processes field 1: int64 at offset 1 — alignment requires offset to be multiple of 8",
+          "→ Compiler adds 7 bytes of padding at offsets 1-7 to align int64 to offset 8",
+          "→ Compiler places int64 at offset 8-15 (8 bytes)",
+          "→ Compiler processes field 2: bool at offset 16 — alignment 1, offset 16 is fine, occupies byte 16",
+          "→ Struct size must be multiple of max alignment (8): current size 17, pads to 24 bytes with 7 bytes at end",
+          "→ Result: bool + 7 pad + int64 + bool + 7 pad = 24 bytes, but only 10 bytes of actual data",
+          "→ Reordered: int64, bool, bool — int64 at 0-7, bool at 8, bool at 9, no padding, size = 16 bytes (10 data + 6 trailing padding to align to 8)"
+        ],
+        "failure_modes": [
+          "False sharing in concurrent structs: two hot fields (one written by goroutine A, one by goroutine B) placed on the same cache line (64 bytes) cause cache line bouncing: every write by A invalidates B's cache, forcing B to reload from L3/memory. Fix: add sufficient padding between fields (e.g., type T struct { a int64; _ [56]byte; b int64 }) to separate them onto different cache lines.",
+          "Large structs causing stack overflow: a struct larger than the goroutine's stack can grow (~4KB initial, grows as needed) is not a direct overflow risk, but passing a 10KB struct by value on every function call copies 10KB to the stack — if called in a hot loop, this causes stack copy overhead and cache pressure. Fix: pass large structs by pointer.",
+          "Cache line waste from hot + cold fields: a struct with one frequently-accessed field (e.g., ID int64) and many rarely-accessed fields (e.g., 50 bytes of metadata) occupies 64+ bytes per entry in a slice. Iterating 1M entries reads 64MB of data from memory, but only 8MB (the ID fields) is useful. 87.5% of memory bandwidth is wasted. Fix: separate hot fields into a small struct and cold fields into a referenced struct (hot.Cold = \u0026cold)."
+        ],
+        "hidden_magic_checks": [
+          "Learner must predict the size of a struct with fields declared in a given order using unsafe.Sizeof and check by running the code, explaining where each padding byte goes.",
+          "Learner must reorder struct fields to minimize size, verify with unsafe.Sizeof, and explain the before/after difference in padding bytes.",
+          "Learner must identify a false-sharing scenario in a concurrent struct and estimate the performance improvement from adding cache line padding."
+        ],
+        "how_go_uses_it": "Go's compiler lays out struct fields sequentially in memory, respecting each field's alignment requirement. The alignment of a type is its size (up to the hardware's max alignment, typically 8 bytes on 64-bit). The compiler sorts fields by alignment in some cases (Go 1.18+'s field layout optimizations) but generally preserves declaration order with padding inserted to satisfy alignment. The runtime provides unsafe.Offsetof and unsafe.Sizeof to inspect field positions and struct sizes. The reflect package reports field offsets via reflect.TypeOf(t).Field(i).Offset.",
+        "mental_model": "Memory layout is like Tetris: each field is a block of a certain width (its size), and the compiler places them in a row (the struct). If a block cannot start at the current position because it would overlap a boundary (alignment), the compiler adds padding (empty space) before it. The row's total width is padded at the end to be a multiple of the widest block. Poor ordering wastes space (padding); optimal ordering fits all blocks with minimal gaps.",
+        "performance_implications": [
+          "Struct size directly affects cache efficiency: each 64-byte cache line holds fewer structs when padding is wasted. A 24-byte struct (but only 10 bytes data) wastes 58% of cache bandwidth. Reordering to 16 bytes reduces waste to 37%.",
+          "Field ordering affects whether hot fields share a cache line with cold fields. Place frequently-accessed fields at the start of the struct so they occupy the first cache line (bytes 0-63). Cold fields after the first cache line are only loaded when accessed.",
+          "Passing large structs by value causes memcpy proportional to struct size on every function call boundary. For structs \u003e 128 bytes, Go's escape analysis may allocate on heap instead of copying on stack — this changes allocation behavior silently."
+        ],
+        "problem_solved": "New Go developers treat struct memory layout as a compiler detail they do not need to understand. They declare fields in logical groups — 'all user fields together, then all metadata fields.' The result is bloated structs that waste cache space and memory bandwidth. This lesson makes struct padding, alignment, and cache line behavior visible so developers can write layout-efficient code.",
+        "proof_of_understanding": "The learner must write a struct with at least 5 fields of mixed sizes (int64, int32, int16, bool, string), predict its size using alignment rules, check with unsafe.Sizeof, reorder the fields to minimize size, verify the new size with unsafe.Sizeof, and explain the padding savings in bytes and percentage.",
+        "real_world_usage": "Memory layout optimization is critical in high-performance Go: the standard library's sync.Map, net/http.Server, and runtime structures are carefully ordered to minimize size and avoid false sharing. DataDog's Go trace-agent reordered hotspot structs to fit within a 64-byte cache line. In Kubernetes, optimizing the Pod struct layout saved 8 bytes per pod — on a cluster with 10,000 pods, that is 80KB of saved heap (minor) but more importantly, better cache utilization for the scheduler's hot loop.",
+        "step_by_step_execution": [
+          "Write: type Bad struct { active bool; id int64; flag bool; timestamp int64; count int32 }",
+          "Predict size: compute max alignment = 8 (int64), estimate padding: bool(1)+7pad+int64(8)+bool(1)+3pad+int64(8)+int32(4)+4pad = 36 bytes",
+          "Verify: fmt.Println(unsafe.Sizeof(Bad{})) — prints 40 (Go may add trailing padding to make size a multiple of max alignment)",
+          "Write: type Good struct { id int64; timestamp int64; count int32; active bool; flag bool }",
+          "Predict size: int64(8)+int64(8)+int32(4)+bool(1)+bool(1)+2pad = 24 bytes",
+          "Verify: fmt.Println(unsafe.Sizeof(Good{})) — prints 24",
+          "Savings: 40 bytes → 24 bytes = 40% reduction, no data loss — only padding eliminated",
+          "Benchmark: iterate 1M structs, measure allocation and iteration speed — Good is faster due to better cache utilization"
+        ],
+        "under_the_hood": "Go uses the System V AMD64 ABI alignment rules on most platforms. Each type has a natural alignment equal to its size (e.g., int64 aligns to 8 bytes, int32 to 4, int16 to 2, bool/int8 to 1). The compiler processes struct fields in declaration order, maintaining a current offset. For each field, if offset % field.alignment != 0, it adds padding bytes until offset is aligned. After processing all fields, the compiler adds trailing padding to make the struct size a multiple of the maximum alignment among all fields. The resulting layout is visible via unsafe.Offsetof which returns the byte offset of each field from the struct's start. Go is a memory-safe language — it does not allow reading padding bytes, and the padding bytes are zero-initialized but their content is undefined after struct mutation. The compiler may reorder fields for optimization (Go 1.18+ attempts field reordering by size), but this does not change the safety invariants.",
+        "why_it_exists": "Memory layout knowledge exists because struct padding is invisible: a developer writes 'type User struct { active bool; id int64 }' and sees only two fields, but the struct occupies 16 bytes — 7 of which are padding waste. Without understanding alignment, developers cannot diagnose cache inefficiency, memory bloat, or false sharing. The wasted space multiplies across every instance: 1M User structs at 16 bytes instead of 9 bytes wastes 7MB of heap. Understanding layout eliminates invisible waste."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [
+          {
+            "label": "Module 14.14 — Caching architecture",
+            "reason": "Connects in-memory single-process cache mechanics to distributed Redis cache-aside topology, stampede mitigation, and tenant key isolation.",
+            "required": false,
+            "target_id": "core-14-14"
+          }
+        ],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "advanced",
+      "documentation_mode": "explanation",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/lessons/07-caching-basics/assets",
+        "diagram_paths": [],
+        "main_path": "modules/13-performance-memory-engineering/lessons/07-caching-basics/main.go",
+        "readme_path": "modules/13-performance-memory-engineering/lessons/07-caching-basics/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/13-performance-memory-engineering/lessons/07-caching-basics/main_test.go"
+      },
+      "id": "core-13-07",
+      "learning_objective": "Build an in-memory cache in Go with TTL expiry and concurrent access safety, choose between `sync.Map` and `map` with `sync.RWMutex` for different access patterns, implement LRU eviction, and understand read-through vs write-through cache strategies.",
+      "module_id": "module-13",
+      "next_item_ids": [
+        "core-13-08"
+      ],
+      "order": 7,
+      "phase": "reliability",
+      "prerequisites": [
+        "core-13-06"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-13",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must implement a thread-safe in-memory cache with: (1) Set(key, value, ttl), (2) Get(key) (value, bool) with TTL expiration, (3) LRU eviction when the cache exceeds maxSize, (4) a background goroutine that evicts expired entries every 30 seconds.",
+        "project_id": "project-profile-and-fix-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "explanation",
+        "required": true
+      },
+      "slug": "caching-basics",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "operations",
+      "tags": [
+        "reliability",
+        "advanced",
+        "operations"
+      ],
+      "title": "Caching basics",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./12-observability-performance-reliability/16-caching-basics",
+        "test_command": "go test ./12-observability-performance-reliability/16-caching-basics"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Using sync.Map for read-heavy workloads with simple keys — sync.Map is optimized for two patterns: (1) append-only writes with many readers, (2) write-once/read-many. For a standard read-heavy workload (90% reads, single writer), a regular map with sync.RWMutex is 2-5x faster because sync.Map's atomic Load overhead outweighs mutex contention at low concurrency.",
+          "Adding a cache without a TTL or eviction policy — an unbounded cache grows until the process OOMs. Every cache must have: max size (item count or byte limit), eviction policy (LRU, LFU, TTL), and a plan for stale data. A cache with no eviction policy is a memory leak waiting to happen.",
+          "Caching at the wrong layer — caching a computed value instead of the expensive input-to-output mapping. If the expensive work is json.Unmarshal of the same response body, cache the parsed result (Go struct), not the raw HTTP response. Caching at the right layer maximizes the cost saved per cache hit."
+        ],
+        "execution_timeline": [
+          "Initial state: cache map is empty, maxSize=1000, TTL=5m, heap baseline = 100MB",
+          "→ Request 1: cache.Set(\"user:42\", userStruct{...}) — allocates key+value in map, ~500 bytes added to heap",
+          "→ Request 2: cache.Set(\"user:7\", userStruct{...}) — another ~500 bytes, heap grows to 100.001MB",
+          "→ ... after 1000 unique keys: heap includes 1000 entries × ~500 bytes = ~500KB of cached data",
+          "→ Key 1001 triggers eviction: LRU entry is deleted from map, its value becomes GC-eligible",
+          "→ GC runs: freed memory from evicted entry, heap returns to ~100.5MB (1000 entries remain)",
+          "→ After 1 hour with TTL=5m: entries expire lazily — on each get, expired entries are deleted",
+          "→ Steady state: ~1000 active entries, ~500KB cache heap, no growth — eviction balances writes"
+        ],
+        "failure_modes": [
+          "Cache stampede (thundering herd): 100 concurrent requests for the same uncached key all miss the cache and all hit the DB simultaneously — the DB sees 100x load instead of 1. Fix: request coalescing — only one goroutine fetches the value; others wait on a shared channel (singleflight.Group).",
+          "Stale cache serving deleted data: a user deletes their account, but the cache entry with TTL=30m continues serving the stale profile for 30 minutes. Fix: active invalidation — delete the cache entry in the same transaction as the DB delete, or use write-through caching that updates cache and DB atomically.",
+          "Cache poisoning from partial writes: a function that computes a cached value panics halfway through, leaving a partial/zero value in the cache. On the next hit, the zero value is treated as valid. Fix: only store in cache after the value is fully computed — write to a local variable first, then atomic.Store to the cache."
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain why a cache with 1,000 entries and 100,000 requests/second still has a 50% miss rate if the request key distribution is uniform random across 10,000 keys — LRU evicts entries before they are reused.",
+          "Learner must implement a cache with TTL and LRU eviction using only the standard library (map + container/list), handle concurrent access, and benchmark it against sync.Map for a read-heavy workload.",
+          "Learner must identify the cache stampede window in a given code path and explain how singleflight.Group would prevent it."
+        ],
+        "how_go_uses_it": "Go provides sync.Map for concurrent map access with amortized read optimization, but most production Go caching uses external libraries (hashicorp/golang-lru, dgraph-io/ristretto) or a simple map + sync.RWMutex + TTL goroutine. The standard library uses caching internally: DNS results (net.ResolveIPAddr), TLS session tickets, and HTTP connection pooling all use in-memory caches with TTL. For distributed caching, Go services use Redis or Memcached clients.",
+        "mental_model": "A cache is a fast temporary storage that sits between the application and a slow data source. The drawer has limited space — when it fills up, the least-used tool goes back to the toolbox (LRU eviction). The key insight: caching only helps if the access pattern has locality — the same keys are requested repeatedly within the eviction window.",
+        "performance_implications": [
+          "Cache hit vs miss cost ratio determines the performance gain. A DB query at 5ms vs cache lookup at 50µs = 100x faster on hit. At 90% hit rate, the effective latency = 0.9 × 50µs + 0.1 × 5ms = 545µs — 9x faster than always hitting the DB.",
+          "Cache overhead: each cached entry adds ~200 bytes for the map entry + key + value. For 1M entries, that is ~200MB of heap. The GC must scan this memory on every cycle. Use a cache with a byte-size limit, not just an item-count limit.",
+          "TTL-based caches add goroutine overhead: if each entry has its own time.Timer, 1M entries = 1M active timers = 1M goroutines on the timer bucket. Use a single cleanup goroutine that scans for expired entries every N seconds instead."
+        ],
+        "problem_solved": "New Go developers add caches without understanding the mechanics: they use sync.Map because 'it is concurrent' without checking the workload pattern, or they use an unbounded map and wonder why the process OOMs. This lesson teaches the concrete mechanics of caching: hit/miss ratio, TTL, eviction policies, concurrency, and memory cost. After this lesson, learners can reason about caching tradeoffs instead of blindly adding a map.",
+        "proof_of_understanding": "The learner must implement a thread-safe in-memory cache with: (1) Set(key, value, ttl), (2) Get(key) (value, bool) with TTL expiration, (3) LRU eviction when the cache exceeds maxSize, (4) a background goroutine that evicts expired entries every 30 seconds. Then benchmark: populate the cache with 10K entries, measure Get latency at 90% hit rate vs 10% hit rate, and report the latency ratio.",
+        "real_world_usage": "In-memory caching is the most common optimization technique in Go production services. Standard patterns: (1) per-request cache (sync.Once or map inside a request context), (2) per-process cache (sync.Map or golang-lru shared by all requests), (3) distributed cache (Redis with go-redis client). Kubernetes uses in-memory caching for API object deserialization. The Go playground caches compiled binaries. Every Go HTTP service with a database should have some form of in-memory cache.",
+        "step_by_step_execution": [
+          "Write: type Cache struct { mu sync.RWMutex; items map[string]*entry; maxSize int }",
+          "Write: type entry struct { value interface{}; expiresAt time.Time }",
+          "Write: Get(key) — mu.RLock, lookup item in map, check time.Now().After(item.expiresAt), if expired delete and return nil, else return item.value",
+          "Write: Set(key, value, ttl) — mu.Lock, if len(items) \u003e= maxSize, remove LRU entry (track access order with container/list), insert new entry, mu.Unlock",
+          "Write: evictExpired() goroutine — for range time.Tick(30 * time.Second) { mu.Lock; iterate map, delete expired entries; mu.Unlock }",
+          "Benchmark: cache 10K entries, run 100K Gets with workload A (90% hits) and workload B (10% hits)",
+          "Result: workload A: avg 50µs per Get; workload B: avg 5ms (cache miss → DB) — 100x difference"
+        ],
+        "under_the_hood": "A Go map used as a cache is a hash table with O(1) average lookup, but it is not goroutine-safe without external synchronization. sync.Map uses a combination of atomic loads for read-mostly workloads and a mutex-protected 'dirty' map for writes. hashicorp/golang-lru implements LRU with a doubly-linked list + map: on access, the entry is moved to the front of the list; on eviction, the entry at the back is removed. TTL expiration in most implementations uses lazy eviction (check on Get) plus a periodic cleanup goroutine. The tradeoff is: lazy eviction is cheaper per-op but can leave stale entries in memory longer; periodic cleanup removes stale entries in batches but adds a mutex contention spike every N seconds. For very large caches, use a sharded design: divide the key space across N independent caches, each with its own lock, reducing lock contention by Nx.",
+        "why_it_exists": "Caching exists because accessing data from the original source (database, API, disk) is orders of magnitude slower than reading it from memory. A PostgreSQL query takes 1-10ms; an in-memory map lookup takes 50-500ns — 10,000x faster. Caching is the single highest-impact optimization technique because it converts slow operations into fast ones without changing the operation itself. Every production Go service needs caching to meet latency SLAs, and every developer needs to understand the mechanics to avoid the common failure modes."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [
+          {
+            "label": "Module 14.01 — Why architecture exists",
+            "reason": "Preview of Why architecture exists from Architecture and Distributed Systems.",
+            "required": false,
+            "target_id": "core-14-01"
+          }
+        ],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "advanced",
+      "documentation_mode": "explanation",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/lessons/08-cache-invalidation/assets",
+        "diagram_paths": [],
+        "main_path": "modules/13-performance-memory-engineering/lessons/08-cache-invalidation/main.go",
+        "readme_path": "modules/13-performance-memory-engineering/lessons/08-cache-invalidation/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/13-performance-memory-engineering/lessons/08-cache-invalidation/main_test.go"
+      },
+      "id": "core-13-08",
+      "learning_objective": "Implement cache invalidation strategies in Go, including TTL-based expiry, write-invalidate, write-update, and stale-while-revalidate patterns, and prevent cache stampede using singleflight and probabilistic early expiration.",
+      "module_id": "module-13",
+      "next_item_ids": [
+        "core-14-01"
+      ],
+      "order": 8,
+      "phase": "reliability",
+      "prerequisites": [
+        "core-13-07"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-13",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must implement a cache layer for a user profile service with: (1) cache-aside read pattern with version checking, (2) active invalidation on profile update (delete cache entry after DB write succeeds), (3) a TTL fallback of 5 minutes, (4) a test that demonstrates the TOCTOU race and the fix.",
+        "project_id": "project-profile-and-fix-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "explanation",
+        "required": true
+      },
+      "slug": "cache-invalidation",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "operations",
+      "tags": [
+        "reliability",
+        "advanced",
+        "operations"
+      ],
+      "title": "Cache invalidation",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./12-observability-performance-reliability/17-cache-invalidation",
+        "test_command": "go test ./12-observability-performance-reliability/17-cache-invalidation"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Setting a long TTL as the only invalidation mechanism — a 30-minute TTL means updates are invisible for up to 30 minutes. Users see stale data and report bugs that are 'already fixed.' TTL-only caches are acceptable only for data that changes rarely or where staleness is acceptable (e.g., 'top 10 articles' updated hourly).",
+          "Deleting cache entries before writing the new value to the database — if the cache entry is deleted and the DB write fails, the next request sees a cache miss and the old data is never served again until a new write succeeds. The cache is now empty for this key, and the DB may be hit harder. Fix: delete after the DB write succeeds, not before.",
+          "Invalidating a cache entry that was never cached — calling cache.Delete(key) for every DB write is wasteful if the key was never cached. Track whether a key has been cached (e.g., a bloom filter or a set of cached keys) before sending invalidation events. Unnecessary invalidation is harmless for correctness but creates write amplification on the cache.",
+          "Using cache-aside without a version check — in cache-aside (lazy population), the cache stores whatever the DB returns. If two concurrent requests race: request A updates the DB, request B reads old data and writes the old value to cache — the old value overwrites the new one. Fix: use a version number or timestamp and only write to cache if the version matches."
+        ],
+        "execution_timeline": [
+          "Initial state: cache has user:42 → {name: \"Alice\", version: 5}, expires in 30m",
+          "→ Write request: PATCH /users/42 — DB updates name to \"Bob\", version becomes 6",
+          "→ Cache invalidation: cache.Delete(\"user:42\") — entry removed from map, ~500 bytes freed",
+          "→ Read request: GET /users/42 — cache miss, reads DB: {name: \"Bob\", version: 6}",
+          "→ Cache populated: cache.Set(\"user:42\", {name: \"Bob\", version: 6}) — ~500 bytes allocated on heap",
+          "→ If invalidation is lost: cache still has {name: \"Alice\", version: 5} — stale data served",
+          "→ After TTL expires (30m): entry evicted, next read gets fresh data from DB",
+          "→ Race scenario: read gets miss, DB returns version 5 (old), write updates DB to version 6, read writes version 5 to cache — version 6 is invisible until TTL expires"
+        ],
+        "failure_modes": [
+          "Invalidation event lost due to network partition: a service deletes a user account but the cache invalidation message is lost in transit (Redis connection dropped, message queue backlog). The cache continues serving the deleted account's data indefinitely. Fix: add a short TTL as backup — even with active invalidation, every cached entry has a maximum lifetime so stale data is eventually purged.",
+          "Cascading invalidation storm: updating one entity requires invalidating N related cache keys (e.g., updating a product price invalidates the product page, the category page, the search index, and the user's cart). If the update propagates to 100 concurrent updates, 100 × N = 4000 invalidation events hit the cache simultaneously — causing a load spike on the cache server and temporary unavailability. Fix: batch invalidation events or use a version-based cache key (product:v42 instead of product) so old keys become unreferenced naturally.",
+          "Time-of-check-to-time-of-use (TOCTOU) race: request A checks the cache, gets a miss, and starts fetching from DB. Request B updates the DB. Request A finishes the DB fetch (with old data) and writes it to the cache — overwriting the now-stale data with even staler data. Fix: use a compare-and-swap on cache write — only write if the version in cache is older than the version from DB."
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain why a 5-minute TTL on a cache of 'user profile' data can cause a user to see a deleted account for up to 5 minutes, even though the code deletes the cache entry when the account is deleted — the invalidation event may be lost and TTL is the only backup.",
+          "Learner must design an invalidation strategy for a cache that stores the output of a function combining data from three DB tables — when any of the three tables changes, the cached output may be stale.",
+          "Learner must identify the TOCTOU race in a given cache-aside implementation and fix it using version numbers."
+        ],
+        "how_go_uses_it": "Go production services typically use cache-aside (lazy population) with active invalidation: on read, check cache → miss → read DB → write cache; on write, update DB → delete or update cache. write-through caching updates cache and DB atomically, but this requires the cache to support transactions. write-behind caching writes to cache immediately and asynchronously updates DB — this is fast but risks data loss if the process crashes between cache write and DB write. Go's standard library does not include a caching framework; production services use Redis (go-redis) for distributed caches or hashicorp/golang-lru for in-process caches.",
+        "mental_model": "Cache invalidation is the problem of keeping a copy (cache) consistent with the source of truth (DB). If the erasure is forgotten, the whiteboard shows old data. If the erasure happens before the ledger update, the whiteboard is empty even though the update failed. If two people erase and write simultaneously, the final whiteboard state may match neither intended update. The three mechanisms are: TTL (the whiteboard self-erases after a timeout), active invalidation (someone erases when the ledger changes), and write-through (someone updates the whiteboard as part of the ledger update). Each has tradeoffs.",
+        "performance_implications": [
+          "Active invalidation creates write amplification: every DB write triggers N cache operations (delete or update). For a service with 1000 writes/second and 5 related cache keys per write, that is 5000 additional cache operations/second — adding ~2-5% load to the cache server.",
+          "TTL-only invalidation avoids write amplification but creates read amplification on expiration: when a TTL expires, the next read hits the DB. If a popular key expires under load (all instances' TTLs align), the stampede effect multiplies DB load by the number of instances.",
+          "Version-based cache keys (cache key includes data version) eliminate invalidation entirely — old versions become unreferenced and are GC'd. But this increases key cardinality, requiring more memory and making LRU eviction less effective (old versions occupy cache slots until evicted)."
+        ],
+        "problem_solved": "New Go developers add caching and discover that stale data is worse than no cache — users see incorrect information and report bugs. They set a TTL and pray. This lesson teaches that caching without an invalidation strategy is a correctness bug waiting to happen. The lesson covers the three invalidation strategies (TTL, active invalidation, write-through) and their tradeoffs, plus the TOCTOU race that plagues cache-aside implementations.",
+        "proof_of_understanding": "The learner must implement a cache layer for a user profile service with: (1) cache-aside read pattern with version checking, (2) active invalidation on profile update (delete cache entry after DB write succeeds), (3) a TTL fallback of 5 minutes, (4) a test that demonstrates the TOCTOU race and the fix. The test must: start two goroutines — one reading the profile in a loop (10 reads/s), one writing the profile every 100ms — and verify that no read ever returns a version older than the last write minus one (allowing for eventual consistency).",
+        "real_world_usage": "Cache invalidation strategies are a core architectural decision in every production Go service with caching. Kubernetes uses watch-based invalidation: clients watch for resource changes and invalidate local caches. Uber's caching layer uses a write-through pattern with Redis and a version matrix. The Go playground uses TTL-only (10 minutes) because the data changes rarely and staleness is acceptable. In distributed systems, cache invalidation is typically solved with: (1) Redis pub/sub for invalidation events, (2) database triggers that emit NOTIFY on row changes (LISTEN/NOTIFY), or (3) a version vector attached to each cache entry.",
+        "step_by_step_execution": [
+          "Write: type CachedUser struct { User User; Version int; ExpiresAt time.Time }",
+          "Write: GetUser(id) — cache.Get(key) returns (CachedUser, ok); if ok and version \u003e= expectedVersion, return user",
+          "Write: GetUser(id) — on cache miss: db.QueryRow(\"SELECT ...\", id) returns (User, version); cache.Set(key, CachedUser{user, version, time.Now().Add(TTL)})",
+          "Write: UpdateUser(id, newData) — db.Exec(\"UPDATE users SET ...\", newData, id) returns updated version",
+          "Write: After DB update succeeds: cache.Delete(key) — this is the active invalidation",
+          "Write: If DB update fails: do NOT delete cache — preserve the old data rather than lose it",
+          "Test: start reader goroutine (10 reads/s) and writer goroutine (10 writes/s), run for 10 seconds",
+          "Verify: no read returns a version \u003c max_written_version - 1 (TOCTOU window allows at most one stale read)",
+          "Conclusion: cache-aside + active invalidation + TTL fallback provides eventual consistency with bounded staleness"
+        ],
+        "under_the_hood": "Cache invalidation in Go typically uses one of three patterns. (1) Cache-aside with delete: the application reads from cache first; on cache miss, reads from DB and populates the cache. On writes, it updates the DB and deletes the cache entry (or updates it). This is the most common pattern because it handles concurrent writes safely — deleting is idempotent, and the next read fetches fresh data. (2) Write-through: the application updates both cache and DB atomically. Go has no built-in distributed transaction support, so this requires coordinating a two-phase commit between cache (Redis) and DB (PostgreSQL) — typically implemented with the outbox pattern: write to a DB table, a separate process reads the outbox and updates the cache. (3) Write-behind: the application writes to cache immediately and queues the DB write. If the process crashes between cache write and DB write, the data is lost. Go's channels and worker pools implement this pattern naturally. The key invariant: in cache-aside, the cache is always a snapshot of the DB at some point in time; the invalidation strategy determines the staleness window, not the correctness.",
+        "why_it_exists": "Cache invalidation is the hardest problem in caching because it exposes the fundamental tension between performance and consistency. A cache with 100% hit rate and instant consistency is a distributed transaction, which defeats the purpose of caching (speed). Every cache invalidation strategy is a business decision about how much staleness is acceptable. Without understanding the mechanics, developers pick random TTLs and hope — the result is either stale data (TTL too long) or no caching benefit (TTL too short, high miss rate). Cache invalidation mechanics turn 'praying' into 'engineering with a bounded staleness guarantee.'"
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "estimated_minutes": 120,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/projects/performance-analysis-lab/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/13-performance-memory-engineering/projects/performance-analysis-lab/README.md",
+        "solution_path": "modules/13-performance-memory-engineering/projects/performance-analysis-lab/_solution",
+        "starter_path": "modules/13-performance-memory-engineering/projects/performance-analysis-lab/_starter",
+        "test_path": ""
+      },
+      "id": "project-performance-analysis-lab",
+      "learning_objective": "Build and verify Performance Analysis Lab demonstrating core module-13 engineering capabilities.",
+      "module_id": "module-13",
+      "next_item_ids": [],
+      "order": 99,
+      "phase": "go-core",
+      "prerequisites": [
+        "core-13-01",
+        "core-13-04"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "slug": "performance-analysis-lab",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "project",
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "title": "Performance Analysis Lab",
+      "type": "project",
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "estimated_minutes": 120,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/projects/profile-and-fix-lab/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/13-performance-memory-engineering/projects/profile-and-fix-lab/README.md",
+        "solution_path": "modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_solution",
+        "starter_path": "modules/13-performance-memory-engineering/projects/profile-and-fix-lab/_starter",
+        "test_path": ""
+      },
+      "id": "project-profile-and-fix-lab",
+      "learning_objective": "Build and verify Profile And Fix Lab demonstrating core module-13 engineering capabilities.",
+      "module_id": "module-13",
+      "next_item_ids": [],
+      "order": 99,
+      "phase": "go-core",
+      "prerequisites": [
+        "core-12-01",
+        "core-12-02",
+        "core-12-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "slug": "profile-and-fix-lab",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "project",
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "title": "Profile And Fix Lab",
+      "type": "project",
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "assessment",
+      "estimated_minutes": 60,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/13-performance-memory-engineering/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "assessment-module-13-checkpoint",
+      "learning_objective": "Demonstrate mastery of module-13 competencies through automated verification and oral defense.",
+      "module_id": "module-13",
+      "next_item_ids": [],
+      "order": 100,
+      "phase": "go-core",
+      "prerequisites": [],
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "slug": "checkpoint",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "assessment",
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "title": "Module 13 Checkpoint — Profiling, Performance, and Runtime Optimization",
+      "type": "assessment",
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "assessment",
+      "estimated_minutes": 60,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/assessments/performance-analysis-lab/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/13-performance-memory-engineering/assessments/performance-analysis-lab/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "assessment-performance-memory-engineering-performance-analysis-lab",
+      "learning_objective": "Demonstrate mastery of module-13 competencies through automated verification and oral defense.",
+      "module_id": "module-13",
+      "next_item_ids": [],
+      "order": 100,
+      "phase": "go-core",
+      "prerequisites": [],
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "slug": "performance-analysis-lab",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "assessment",
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "title": "Performance Analysis Lab",
+      "type": "assessment",
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "assessment",
+      "estimated_minutes": 60,
+      "files": {
+        "assets_dir": "modules/13-performance-memory-engineering/assessments/profile-and-fix-lab/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/13-performance-memory-engineering/assessments/profile-and-fix-lab/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "assessment-performance-memory-engineering-profile-and-fix-lab",
+      "learning_objective": "Demonstrate mastery of module-13 competencies through automated verification and oral defense.",
+      "module_id": "module-13",
+      "next_item_ids": [],
+      "order": 100,
+      "phase": "go-core",
+      "prerequisites": [],
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "slug": "profile-and-fix-lab",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "assessment",
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "title": "Profile And Fix Lab",
+      "type": "assessment",
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    }
+  ],
+  "last_updated": "2026-10-23",
+  "module_id": "module-13",
+  "projects": [
+    {
+      "assessment_id": "assessment-project-profile-and-fix-lab",
+      "deliverables": [
+        "Working implementation of Profile and Fix Lab",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "advanced",
+      "documentation_mode": "project",
+      "id": "project-profile-and-fix-lab",
+      "module_id": "module-13",
+      "order": 21,
+      "placement_anchor_item_id": "core-13-08",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Profile and Fix Lab can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": true,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-13-01",
+        "core-13-02",
+        "core-13-03"
+      ],
+      "prerequisites": [
+        "core-13-01",
+        "core-13-02",
+        "core-13-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "CPU profiling",
+        "heap allocation optimization",
+        "escape analysis",
+        "sync.Pool memory reuse"
+      ],
+      "reinforces": [
+        "core-13-01",
+        "core-13-02",
+        "core-13-03",
+        "core-13-04",
+        "core-13-05",
+        "core-13-06",
+        "core-13-07",
+        "core-13-08"
+      ],
+      "required_concepts": [
+        "pprof profiling",
+        "benchmarking performance",
+        "memory allocation",
+        "escape analysis",
+        "sync.Pool"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-profile-and-fix-lab-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-profile-and-fix-lab-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-profile-and-fix-lab-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-profile-and-fix-lab-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "profile-and-fix-lab",
+      "source_legacy_ids": [],
+      "stage": "core",
+      "status": "ready",
+      "summary": "Profile a CPU and memory bottlenecked Go batch-processing application using pprof, identify heap allocation hotspots, and apply mechanical optimizations to eliminate GC pressure.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "13-performance-memory-engineering"
+          ],
+          "id": "project-profile-and-fix-lab-task-build",
+          "instruction": "Use pprof to profile a Go application, identify CPU and memory bottlenecks, and apply targeted optimizations.",
+          "instructions": "Implement the main requirements for Profile and Fix Lab.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "13-performance-memory-engineering"
+          ],
+          "id": "project-profile-and-fix-lab-task-test",
+          "instruction": "Write benchmarks that measure before/after performance and verify improvement without correctness regression.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "13-performance-memory-engineering"
+          ],
+          "id": "project-profile-and-fix-lab-task-explain",
+          "instruction": "Document your profiling process: flame graph analysis, identified bottleneck, fix applied, and measured improvement.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Profile and Fix Lab",
+      "type": "portfolio-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run .",
+        "test_command": "go test -v ./..."
+      }
+    },
+    {
+      "assessment_id": "assessment-project-performance-analysis-lab",
+      "deliverables": [
+        "pprof CPU and heap profiles",
+        "Optimized Go code with benchmarks",
+        "Performance analysis report"
+      ],
+      "difficulty": "advanced",
+      "documentation_mode": "tutorial",
+      "id": "project-performance-analysis-lab",
+      "module_id": "module-13",
+      "placement_anchor_item_id": "core-13-08",
+      "prerequisite_item_ids": [
+        "core-13-01",
+        "core-13-04"
+      ],
+      "prerequisites": [
+        "core-13-01",
+        "core-13-04"
+      ],
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "CPU and heap profiling",
+        "escape analysis and stack allocation",
+        "benchmark-driven optimization"
+      ],
+      "required_concepts": [
+        "pprof profiling",
+        "benchmarking performance",
+        "memory allocation"
+      ],
+      "rubric": [
+        {
+          "criterion": "Profiling accuracy",
+          "description": "Correct identification of CPU and memory bottlenecks with pprof flame graphs and heap profiles.",
+          "weight": 35
+        },
+        {
+          "criterion": "Optimization quality",
+          "description": "Optimizations target the real bottlenecks and follow Go performance best practices.",
+          "weight": 25
+        },
+        {
+          "criterion": "Proof",
+          "description": "Before/after benchmark data with statistical significance and profiling evidence.",
+          "weight": 25
+        },
+        {
+          "criterion": "Explanation",
+          "description": "Clear explanation of profiling process, bottleneck analysis, and optimization rationale.",
+          "weight": 15
+        }
+      ],
+      "schema_version": "3.1.0",
+      "slug": "performance-analysis-lab",
+      "source_legacy_ids": [],
+      "stage": "core",
+      "status": "ready",
+      "summary": "Profile a Go application with pprof, identify CPU and memory bottlenecks, and apply targeted optimizations with measurable improvements.",
+      "tags": [
+        "performance",
+        "profiling",
+        "optimization"
+      ],
+      "tasks": [
+        {
+          "instruction": "Run pprof CPU profiling on a provided Go application, generate a flame graph, and identify the top 3 CPU hotspots.",
+          "title": "Profile CPU usage with pprof"
+        },
+        {
+          "instruction": "Use pprof heap profiling and escape analysis to identify excessive allocations and objects escaping to the heap.",
+          "title": "Analyze memory allocations"
+        },
+        {
+          "instruction": "Apply targeted optimizations (object pooling, slice preallocation, escape reduction) and measure before/after with benchmarks.",
+          "title": "Optimize and benchmark"
+        }
+      ],
+      "title": "Performance Analysis Lab",
+      "type": "mini-project",
+      "verification": "Automated: before/after benchmark comparison. Manual review: flame graph analysis and optimization report."
+    }
+  ],
+  "schema_version": "3.1.0",
+  "status": "stable"
+}

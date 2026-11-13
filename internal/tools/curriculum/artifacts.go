@@ -30,10 +30,8 @@ func validatePhysicalArtifacts() {
 	fmt.Println("=== validate-physical-artifacts ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -171,12 +169,16 @@ func validateAssessmentArtifacts() {
 	var rawAssessments struct {
 		Assessments []assessmentRecord `json:"assessments"`
 	}
-	readJSON("assessments.json", &rawAssessments)
+	for _, mf := range moduleManifestPaths() {
+		var mm struct {
+			Assessments []assessmentRecord `json:"assessments"`
+		}
+		readJSON(mf, &mm)
+		rawAssessments.Assessments = append(rawAssessments.Assessments, mm.Assessments...)
+	}
 
-	var core CoreBundle
-	readJSON("path.core.json", &core)
-	var electives ElectiveBundle
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	moduleDirs := make(map[string]string)
 	for _, m := range append(append([]Module{}, core.Modules...), electives.Modules...) {
@@ -294,12 +296,20 @@ func validateStarterParity() {
 			Slug     string `json:"slug"`
 		} `json:"projects"`
 	}
-	readJSON("projects.json", &rawProjects)
+	for _, mf := range moduleManifestPaths() {
+		var mm struct {
+			Projects []struct {
+				ID       string `json:"id"`
+				ModuleID string `json:"module_id"`
+				Slug     string `json:"slug"`
+			} `json:"projects"`
+		}
+		readJSON(mf, &mm)
+		rawProjects.Projects = append(rawProjects.Projects, mm.Projects...)
+	}
 
-	var core CoreBundle
-	readJSON("path.core.json", &core)
-	var electives ElectiveBundle
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	projectRoots := projectDirectories(core.Modules, electives.Modules)
 

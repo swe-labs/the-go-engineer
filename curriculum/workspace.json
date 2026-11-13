@@ -3,14 +3,13 @@
   "document_type": "workspace_manifest",
   "curriculum_version": "3.0.0",
   "last_updated": "2026-10-23",
-  "name": "The Go Engineer v3 \u2014 Curriculum Workspace",
+  "name": "The Go Engineer v3 — Curriculum Workspace",
   "status": "stable",
   "source_of_truth": [
     "curriculum/path.core.json",
     "curriculum/path.electives.json",
-    "curriculum/projects.json",
-    "curriculum/assessments.json",
-    "curriculum/crossrefs.json",
+    "curriculum/modules/*/manifest.json",
+    "curriculum/electives/advanced-electives/manifest.json",
     "curriculum/concepts.json",
     "curriculum/failures.json",
     "curriculum/readme.contracts.json"
@@ -26,15 +25,14 @@
   },
   "files": {
     "schema": "curriculum/schema.v3.json",
-    "core_path": "curriculum/path.core.json",
-    "electives": "curriculum/path.electives.json",
-    "projects": "curriculum/projects.json",
-    "assessments": "curriculum/assessments.json",
-    "crossrefs": "curriculum/crossrefs.json",
+    "core_path": "curriculum/path.core.json (thin index)",
+    "electives": "curriculum/path.electives.json (thin index)",
+    "crossrefs": "(deleted — crossrefs are embedded per item; central file removed in the split)",
     "concepts": "curriculum/concepts.json",
     "failures": "curriculum/failures.json",
     "readme_contracts": "curriculum/readme.contracts.json",
-    "companion_frontend": "curriculum/companion-frontend/README.md"
+    "companion_frontend": "curriculum/companion-frontend/README.md",
+    "module_manifests": "curriculum/modules/*/manifest.json + curriculum/electives/advanced-electives/manifest.json"
   },
   "quality_gates": [
     "validate-schema",

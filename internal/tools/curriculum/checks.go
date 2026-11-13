@@ -1,10 +1,7 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
-	"path/filepath"
 	"strings"
 )
 
@@ -12,10 +9,8 @@ func validatePrerequisiteClosure() {
 	fmt.Println("=== validate-prerequisite-closure ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -104,11 +99,9 @@ func validateProjectBinding() {
 	fmt.Println("=== validate-project-binding ===")
 	ok := true
 
-	var core CoreBundle
-	readJSON("path.core.json", &core)
+	core := loadCoreBundle()
 
-	var electives ElectiveBundle
-	readJSON("path.electives.json", &electives)
+	electives := loadElectiveBundle()
 
 	// Build combined module lookup (core + electives)
 	allModules := make(map[string]bool)
@@ -119,32 +112,21 @@ func validateProjectBinding() {
 		allModules[m.ID] = true
 	}
 
-	// Read projects.json as raw to check fields
-	projectsPath := filepath.Join(curriculumDir, "projects.json")
-	projectsData, err := os.ReadFile(projectsPath)
-	if err != nil {
-		fatalf("cannot read projects.json: %v", err)
+	// Read the folded per-module manifests as raw to check fields
+	type rawProjectManifest struct {
+		Projects []map[string]any `json:"projects"`
 	}
-	var projectsRaw map[string]any
-	if err := json.Unmarshal(projectsData, &projectsRaw); err != nil {
-		fatalf("cannot parse projects.json: %v", err)
-	}
-
-	projects, ok2 := projectsRaw["projects"].([]any)
-	if !ok2 {
-		fatalf("projects.json: 'projects' is not an array")
+	var projects []map[string]any
+	for _, mf := range moduleManifestPaths() {
+		var mm rawProjectManifest
+		readJSON(mf, &mm)
+		projects = append(projects, mm.Projects...)
 	}
 
-	for _, p := range projects {
-		proj, isObj := p.(map[string]any)
-		if !isObj {
-			errorf("projects.json: project entry is not a JSON object")
-			ok = false
-			continue
-		}
+	for _, proj := range projects {
 		projID, hasID := proj["id"].(string)
 		if !hasID {
-			errorf("projects.json: project entry is missing a string 'id'")
+			errorf("module manifest: project entry is missing a string 'id'")
 			ok = false
 			continue
 		}
@@ -243,10 +225,8 @@ func validateNoPlaceholderZM() {
 	fmt.Println("=== validate-no-placeholder-zm ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -303,32 +283,20 @@ func validateAssessmentCompleteness() {
 	fmt.Println("=== validate-assessment-completeness ===")
 	ok := true
 
-	assessPath := filepath.Join(curriculumDir, "assessments.json")
-	data, err := os.ReadFile(assessPath)
-	if err != nil {
-		fatalf("cannot read assessments.json: %v", err)
+	type rawAssessmentManifest struct {
+		Assessments []map[string]any `json:"assessments"`
+	}
+	var assessments []map[string]any
+	for _, mf := range moduleManifestPaths() {
+		var mm rawAssessmentManifest
+		readJSON(mf, &mm)
+		assessments = append(assessments, mm.Assessments...)
 	}
 
-	var rawMap map[string]any
-	if err := json.Unmarshal(data, &rawMap); err != nil {
-		fatalf("cannot parse assessments.json: %v", err)
-	}
-
-	assessments, ok2 := rawMap["assessments"].([]any)
-	if !ok2 {
-		fatalf("assessments.json: 'assessments' is not an array")
-	}
-
-	for _, a := range assessments {
-		assess, isObj := a.(map[string]any)
-		if !isObj {
-			errorf("assessments.json: assessment entry is not a JSON object")
-			ok = false
-			continue
-		}
+	for _, assess := range assessments {
 		assessID, hasID := assess["id"].(string)
 		if !hasID {
-			errorf("assessments.json: assessment entry is missing a string 'id'")
+			errorf("module manifest: assessment entry is missing a string 'id'")
 			ok = false
 			continue
 		}
@@ -429,10 +397,8 @@ func validateUniqueTags() {
 	fmt.Println("=== validate-unique-tags ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -497,10 +463,8 @@ func validateConceptOwnership() {
 		ok = false
 	}
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -560,11 +524,6 @@ func validateConceptOwnership() {
 func validateCognitiveLoad() {
 	fmt.Println("=== validate-cognitive-load ===")
 	ok := true
-
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
 
 	// Read raw module data to check fields
 	var rawCore map[string]any
@@ -656,10 +615,8 @@ func validateZeroMagic() {
 	fmt.Println("=== validate-zero-magic ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -720,10 +677,8 @@ func validateFailureEngineering() {
 	fmt.Println("=== validate-failure-engineering ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -781,10 +736,8 @@ func validateOperationalFailures() {
 	}
 
 	// Build set of valid module IDs from core path + electives
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	validModuleIDs := make(map[string]bool)
 	for _, m := range core.Modules {
@@ -845,13 +798,8 @@ func validateCrossrefs() {
 	fmt.Println("=== validate-crossrefs ===")
 	ok := true
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
-
-	var crossrefs CrossrefBundle
-	readJSON("crossrefs.json", &crossrefs)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var allItems []Item
 	allItems = append(allItems, core.Items...)
@@ -863,26 +811,17 @@ func validateCrossrefs() {
 	}
 
 	// Add project IDs as valid targets
-	var projects ProjectsBundle
-	readJSON("projects.json", &projects)
 	projectIDs := make(map[string]bool)
-	for _, p := range projects.Projects {
-		projectIDs[p.ID] = true
-	}
-
-	// 1. Check all crossrefs.json references resolve
-	for _, ref := range crossrefs.Crossrefs.References {
-		if _, exists := itemMap[ref.FromID]; !exists && !projectIDs[ref.FromID] {
-			errorf("crossrefs.json: from_id '%s' does not exist", ref.FromID)
-			ok = false
-		}
-		if _, exists := itemMap[ref.TargetID]; !exists && !projectIDs[ref.TargetID] {
-			errorf("crossrefs.json: target_id '%s' does not exist", ref.TargetID)
-			ok = false
+	for _, mf := range moduleManifestPaths() {
+		var mm ProjectsBundle
+		readJSON(mf, &mm)
+		for _, p := range mm.Projects {
+			projectIDs[p.ID] = true
 		}
 	}
 
-	// 2. Check item-level crossrefs resolve
+	// 1. Check item-level crossrefs resolve (embedded data is the single
+	// source since the central crossrefs.json registry was removed)
 	moduleOrder := make(map[string]int)
 	for _, m := range core.Modules {
 		moduleOrder[m.ID] = m.Number
@@ -916,57 +855,6 @@ func validateCrossrefs() {
 				if targetModNum <= itemModNum {
 					errorf("%s: preview_only target '%s' is in module %s (order %d), not in a future module (item at order %d)",
 						item.ID, ref.TargetID, targetItem.ModuleID, targetModNum, itemModNum)
-					ok = false
-				}
-			}
-		}
-	}
-
-	// 4. Reconcile core item-embedded crossrefs with the central registry.
-	// crossrefs.json is authoritative for core items. Electives carry their
-	// crossrefs only in path.electives.json, so they are checked for target
-	// existence above but are not part of the central registry.
-	electiveIDs := make(map[string]bool)
-	for _, item := range electives.Items {
-		electiveIDs[item.ID] = true
-	}
-	central := make(map[string]map[string]map[string]bool)
-	for _, ref := range crossrefs.Crossrefs.References {
-		if itemMap[ref.FromID] == nil {
-			continue // project-origin references are not embedded in Item objects
-		}
-		if central[ref.FromID] == nil {
-			central[ref.FromID] = make(map[string]map[string]bool)
-		}
-		if central[ref.FromID][ref.Relation] == nil {
-			central[ref.FromID][ref.Relation] = make(map[string]bool)
-		}
-		central[ref.FromID][ref.Relation][ref.TargetID] = true
-	}
-	relations := []string{"builds_on", "preview_only", "related", "reinforced_in"}
-	for _, item := range allItems {
-		if electiveIDs[item.ID] || item.CrossRefs == nil {
-			continue
-		}
-		embedded := map[string][]CrossrefRef{
-			"builds_on":     item.CrossRefs.BuildsOn,
-			"preview_only":  item.CrossRefs.PreviewOnly,
-			"related":       item.CrossRefs.Related,
-			"reinforced_in": item.CrossRefs.ReinforcedIn,
-		}
-		for _, relation := range relations {
-			centralTargets := central[item.ID][relation]
-			embeddedTargets := make(map[string]bool)
-			for _, ref := range embedded[relation] {
-				embeddedTargets[ref.TargetID] = true
-				if !centralTargets[ref.TargetID] {
-					errorf("%s: crossrefs.%s target '%s' is missing from crossrefs.json", item.ID, relation, ref.TargetID)
-					ok = false
-				}
-			}
-			for targetID := range centralTargets {
-				if !embeddedTargets[targetID] {
-					errorf("%s: crossrefs.%s target '%s' is missing from the item manifest", item.ID, relation, targetID)
 					ok = false
 				}
 			}

@@ -36,8 +36,7 @@
       },
       "then": {
         "required": [
-          "modules",
-          "items"
+          "modules"
         ]
       }
     },
@@ -51,7 +50,21 @@
       },
       "then": {
         "required": [
-          "modules",
+          "modules"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "document_type": {
+            "const": "module_manifest"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "module_id",
           "items"
         ]
       }
@@ -180,6 +193,7 @@
         "workspace_manifest",
         "core_path",
         "elective_path",
+        "module_manifest",
         "projects",
         "assessments",
         "crossrefs",

@@ -110,7 +110,7 @@ Maintainers and authors must strictly preserve the boundary between internal too
 1. **Maintainer-Only Scope**:
    - `internal/tools/curriculum/`: Automated graph engine, schema validation, contract validation, and verification CLI.
    - `scripts/`: Operational runners (`validate_curriculum.go`), maintenance scripts, catalog generators.
-   - `curriculum/*.json`: Authoritative schema and graph manifests (`path.core.json`, `projects.json`, `schema.v3.json`, etc.).
+   - `curriculum/*.json` + `curriculum/modules/*/manifest.json`: Authoritative schema and graph manifests (thin `path.core.json`/`path.electives.json` indexes, per-module item/project/assessment manifests, `schema.v3.json`, etc.).
    - `MAINTAINER-CHECKLIST.md`, `CONTRIBUTING.md`, `ARCHITECTURE.md`: Contributor and maintainer standards.
 
 2. **Learner-Facing Scope**:

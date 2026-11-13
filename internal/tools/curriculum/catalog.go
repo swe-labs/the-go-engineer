@@ -47,19 +47,22 @@ type catalogFailuresBundle struct {
 
 // generateCatalog produces the authoritative Markdown catalog for curriculum/README.md.
 func generateCatalog() (string, error) {
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	var projBundle catalogProjectsBundle
-	readJSON("projects.json", &projBundle)
+	for _, mf := range moduleManifestPaths() {
+		var mm catalogProjectsBundle
+		readJSON(mf, &mm)
+		projBundle.Projects = append(projBundle.Projects, mm.Projects...)
+	}
 
 	var assessBundle catalogAssessmentsBundle
-	readJSON("assessments.json", &assessBundle)
-
-	var crossrefs CrossrefBundle
-	readJSON("crossrefs.json", &crossrefs)
+	for _, mf := range moduleManifestPaths() {
+		var mm catalogAssessmentsBundle
+		readJSON(mf, &mm)
+		assessBundle.Assessments = append(assessBundle.Assessments, mm.Assessments...)
+	}
 
 	var concepts catalogConceptsBundle
 	readJSON("concepts.json", &concepts)
@@ -90,7 +93,7 @@ func generateCatalog() (string, error) {
 	// Architecture Decision
 	add("## Architecture Decision\n")
 	add("**Decision:** Authoritative v3 modular curriculum engineered around a zero-magic phase-based path from foundational Go to production software engineering.\n")
-	add("- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON manifests: `curriculum/path.core.json`, `curriculum/path.electives.json`, `curriculum/projects.json`, `curriculum/assessments.json`, `curriculum/crossrefs.json`, `curriculum/concepts.json`, and `curriculum/failures.json`.")
+	add("- **Authoritative Source of Truth:** Authoritative curriculum metadata resides in the modular JSON manifests: the `curriculum/path.core.json` and `curriculum/path.electives.json` indexes, the per-module manifest.json files beside each module README (items, projects, assessments, and embedded crossrefs), `curriculum/concepts.json`, and `curriculum/failures.json`.")
 	add("- **Physical Curriculum Delivery:** Physical lesson READMEs, runnable examples, test suites, and exercises are organized canonically under `curriculum/modules/` and `curriculum/electives/`.")
 	add("- **Core Scope:** The core curriculum is dedicated to production Go backend engineering (systems, networking, persistence, concurrency, observability, architecture, and deployment). Modern server-driven full-stack frontend engineering is delivered via the companion path (semantic HTML, CSS, JavaScript, and progressive enhancement with Go templates/templ/HTMX/Tailwind/Datastar).")
 	add("- **Capstone & Learning Path Flow:** Flagship Opslane (Module 18) directly requires the complete backend engineering and deployment runbook foundation of Module 15 (`core-15-19`). Module 16 (Portfolio and Interview Readiness) packages the production artifacts produced by Opslane for senior-level engineering interviews. Module 17 (Advanced Electives) provides independent specialization tracks in Generics, gRPC, and distributed systems.\n")
@@ -183,14 +186,14 @@ func generateCatalog() (string, error) {
 	add(fmt.Sprintf("| Core Modules                     | %s | Modules 00 through 16, plus Module 18 (Flagship Opslane)          |", pad(coreModulesCount, 5)))
 	add(fmt.Sprintf("| Elective Modules                 | %s | Module 17 (Advanced Electives)                                    |", pad(electiveModulesCount, 5)))
 	add(fmt.Sprintf("| Total Modules                    | %s | Modules 00–18                                                     |", pad(totalModulesCount, 5)))
-	add(fmt.Sprintf("| Core Path Items (Metadata Total) | %s | Total items array in `path.core.json` across all core modules     |", pad(len(coreItems), 5)))
+	add(fmt.Sprintf("| Core Path Items (Metadata Total) | %s | Total items across the per-module core manifests     |", pad(len(coreItems), 5)))
 	add(fmt.Sprintf("| Instructional Lessons & Labs     | %s | %d lessons + %d lab across Modules 00–16                         |", pad(lessons+labs, 5), lessons, labs))
 	add(fmt.Sprintf("| Flagship Opslane Milestones      | %s | %d checkpoints + %d capstone defense in Module 18          |", pad(checkpoints+capstones, 5), checkpoints, capstones))
 	add(fmt.Sprintf("| Learner Instructional Units      | %s | %d instructional lessons/labs + %d Opslane milestones            |", pad(lessons+labs+checkpoints+capstones, 5), lessons+labs, checkpoints+capstones))
 	add(fmt.Sprintf("| Elective Items                   | %s | %d advanced elective lessons across Generics, gRPC, and distributed patterns in Module 17 |", pad(electiveItems, 5), electiveItems))
 	add(fmt.Sprintf("| Projects                         | %s | %d module projects + %d flagship capstone project                  |", pad(prjRecords, 5), prjRecords-flagshipProjectsCount, flagshipProjectsCount))
 	add(fmt.Sprintf("| In-Path Assessment Checkpoints   | %s | End-of-module checkpoints, project reviews, and flagship Opslane milestones across Modules 00–18 |", pad(pathAssessments, 5)))
-	add(fmt.Sprintf("| Assessment Registry Records      | %s | %d module assessments + %d project assessments in `assessments.json`|", pad(regAssessments, 5), len(moduleAssessments), len(projectAssessments)))
+	add(fmt.Sprintf("| Assessment Registry Records      | %s | %d module assessments + %d project assessments across the per-module manifests|", pad(regAssessments, 5), len(moduleAssessments), len(projectAssessments)))
 	add(fmt.Sprintf("| Canonical Concepts               | %s | Fully resolved ownership without leaks in `concepts.json`         |", pad(conceptCount, 5)))
 	add(fmt.Sprintf("| Operational Categories           | %s | Mapped across %d module coverage entries                          |\n", pad(failureCategoryCount, 5), coreModulesCount))
 
@@ -268,9 +271,10 @@ func generateCatalog() (string, error) {
 	for _, it := range coreItems {
 		if it.Type == "project" {
 			pType := projectTypeMap[it.ID]
-			if pType == "mini-project" {
+			switch pType {
+			case "mini-project":
 				miniProjects = append(miniProjects, it)
-			} else if pType == "portfolio-project" {
+			case "portfolio-project":
 				portfolioProjects = append(portfolioProjects, it)
 			}
 			if pType == "flagship" || strings.Contains(it.ID, "opslane") {
@@ -555,14 +559,33 @@ func generateCatalog() (string, error) {
 	add("\n---\n")
 	add("# Cross-References\n")
 
-	refs := crossrefs.Crossrefs.References
+	// Relation distribution comes from the embedded per-item crossrefs —
+	// the single source since the central registry was removed.
+	var refs []struct{ Relation string }
+	for _, item := range append(append([]Item{}, core.Items...), electives.Items...) {
+		if item.CrossRefs == nil {
+			continue
+		}
+		for range item.CrossRefs.BuildsOn {
+			refs = append(refs, struct{ Relation string }{"builds_on"})
+		}
+		for range item.CrossRefs.PreviewOnly {
+			refs = append(refs, struct{ Relation string }{"preview_only"})
+		}
+		for range item.CrossRefs.Related {
+			refs = append(refs, struct{ Relation string }{"related"})
+		}
+		for range item.CrossRefs.ReinforcedIn {
+			refs = append(refs, struct{ Relation string }{"reinforced_in"})
+		}
+	}
 	relDist := make(map[string]int)
 	for _, r := range refs {
 		relDist[r.Relation]++
 	}
 
 	add(fmt.Sprintf("Total cross-references: **%d**\n", len(refs)))
-	add("> **Gating vs. lineage:** Hard progression gates are the `prerequisites` arrays in\n> `path.core.json` and `path.electives.json`. `builds_on` records the broader,\n> directional pedagogical lineage and must remain acyclic, but it is not the\n> field a learner-frontier tool should use to block progression.\n")
+	add("> **Gating vs. lineage:** Hard progression gates are the `prerequisites` arrays in\n> the per-module manifests. `builds_on` records the broader, directional\n> pedagogical lineage and must remain acyclic, but it is not the field a\n> learner-frontier tool should use to block progression.\n")
 	add("### Style Rules\n")
 	add("| Relation      | Template                                                     |")
 	add("| ------------- | ------------------------------------------------------------ |")
