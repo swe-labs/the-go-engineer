@@ -169,7 +169,13 @@ func validateAssessmentArtifacts() {
 	var rawAssessments struct {
 		Assessments []assessmentRecord `json:"assessments"`
 	}
-	readJSON("assessments.json", &rawAssessments)
+	for _, mf := range moduleManifestPaths() {
+		var mm struct {
+			Assessments []assessmentRecord `json:"assessments"`
+		}
+		readJSON(mf, &mm)
+		rawAssessments.Assessments = append(rawAssessments.Assessments, mm.Assessments...)
+	}
 
 	core := loadCoreBundle()
 	electives := loadElectiveBundle()
@@ -290,7 +296,17 @@ func validateStarterParity() {
 			Slug     string `json:"slug"`
 		} `json:"projects"`
 	}
-	readJSON("projects.json", &rawProjects)
+	for _, mf := range moduleManifestPaths() {
+		var mm struct {
+			Projects []struct {
+				ID       string `json:"id"`
+				ModuleID string `json:"module_id"`
+				Slug     string `json:"slug"`
+			} `json:"projects"`
+		}
+		readJSON(mf, &mm)
+		rawProjects.Projects = append(rawProjects.Projects, mm.Projects...)
+	}
 
 	core := loadCoreBundle()
 	electives := loadElectiveBundle()

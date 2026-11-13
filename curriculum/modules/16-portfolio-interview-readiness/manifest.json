@@ -1,0 +1,3392 @@
+{
+  "assessments": [
+    {
+      "automated_checks": [],
+      "criteria": [
+        {
+          "description": "Learner can explain the concepts without memorized magic.",
+          "id": "module-16-conceptual",
+          "levels": [
+            {
+              "description": "Cannot explain portfolio building, code review, interview preparation, technical communication.",
+              "score": 0
+            },
+            {
+              "description": "Can explain basics of portfolio building, code review, interview preparation, technical communication with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Clearly explains portfolio building, code review, interview preparation, technical communication, including mechanics, purpose, and common mistakes.",
+              "score": 5
+            }
+          ],
+          "title": "Conceptual clarity",
+          "weight": 30
+        },
+        {
+          "description": "Learner can produce working code or an appropriate artifact.",
+          "id": "module-16-implementation",
+          "levels": [
+            {
+              "description": "No working implementation; missing or non-functional code.",
+              "score": 0
+            },
+            {
+              "description": "Partial implementation with minor bugs or gaps.",
+              "score": 3
+            },
+            {
+              "description": "Complete, clean implementation with proper Go idioms and error handling.",
+              "score": 5
+            }
+          ],
+          "title": "Implementation",
+          "weight": 35
+        },
+        {
+          "description": "Learner can verify the work through tests, checks, or review.",
+          "id": "module-16-proof",
+          "levels": [
+            {
+              "description": "No proof of understanding; no artifact provided.",
+              "score": 0
+            },
+            {
+              "description": "Some proof provided but lacks depth or edge cases.",
+              "score": 3
+            },
+            {
+              "description": "Strong proof with tests or verification covering portfolio building, code review and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can communicate decisions and tradeoffs.",
+          "id": "module-16-communication",
+          "levels": [
+            {
+              "description": "No explanation provided; unable to discuss the work.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation with some clarity but lacks depth.",
+              "score": 3
+            },
+            {
+              "description": "Professional explanation linking portfolio building, code review, interview preparation, technical communication to broader system design and trade-offs.",
+              "score": 5
+            }
+          ],
+          "title": "Communication",
+          "weight": 10
+        }
+      ],
+      "documentation_mode": "assessment",
+      "evidence_required": [
+        "Portfolio project presentation",
+        "Code review participation",
+        "Technical interview practice"
+      ],
+      "id": "assessment-module-16",
+      "manual_review_questions": [
+        "Walk me through your most complex project from this curriculum. Explain the architecture, the tradeoffs, and what you would do differently.",
+        "What are the most common Go interview gotchas and how would you answer them?",
+        "How would you explain your Opslane project to a senior engineer at a job interview?"
+      ],
+      "module_id": "module-16",
+      "passing_score": 80,
+      "purpose": "Verify that the learner can independently apply and explain portfolio presentation, technical communication, code review dynamics, system design interviews, and job search strategy.",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "readme_status": "scaffolded",
+      "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
+      "status": "ready",
+      "suite": "full",
+      "target_ids": [
+        "core-16-01",
+        "core-16-02",
+        "core-16-03",
+        "core-16-04",
+        "core-16-05",
+        "core-16-06",
+        "core-16-07",
+        "core-16-08",
+        "core-16-09",
+        "core-16-10",
+        "core-16-11",
+        "core-16-12",
+        "core-16-13",
+        "core-16-14",
+        "core-16-15"
+      ],
+      "title": "Module 16 Assessment — Portfolio and Interview Readiness",
+      "type": "portfolio-review"
+    },
+    {
+      "criteria": [
+        {
+          "id": "project-portfolio-review-pack-crit-1",
+          "levels": [
+            {
+              "description": "Portfolio repositories are incomplete, unrunnable, missing READMEs, or code fails basic build checks.",
+              "score": 0
+            },
+            {
+              "description": "Repositories compile and run, but documentation is minimal, architectural diagrams are missing, or commit history is messy.",
+              "score": 3
+            },
+            {
+              "description": "Professional portfolio suite: clean git commit histories, architectural diagrams (Mermaid), comprehensive READMEs, clear setup runbooks, and demo videos/recordings.",
+              "score": 5
+            }
+          ],
+          "name": "Correctness",
+          "weight": 35
+        },
+        {
+          "id": "project-portfolio-review-pack-crit-2",
+          "levels": [
+            {
+              "description": "Code across portfolio projects exhibits elementary anti-patterns, lint errors, or unformatted files.",
+              "score": 0
+            },
+            {
+              "description": "Code compiles cleanly, but consistency across projects (formatting, error handling, package structure) varies significantly.",
+              "score": 3
+            },
+            {
+              "description": "Senior engineering consistency: all projects formatted with gofumpt, zero lint warnings under golangci-lint, consistent error wrapping, and idiomatic naming throughout.",
+              "score": 5
+            }
+          ],
+          "name": "Go quality",
+          "weight": 25
+        },
+        {
+          "id": "project-portfolio-review-pack-crit-3",
+          "levels": [
+            {
+              "description": "No automated verification scripts or test instructions provided in portfolio repositories.",
+              "score": 0
+            },
+            {
+              "description": "Tests exist in projects, but lack single-command verification scripts (e.g., make test or go test ./...) or badges.",
+              "score": 3
+            },
+            {
+              "description": "Every portfolio project includes automated test suites, CI status badges, reproducible Docker commands, and documented verification steps.",
+              "score": 5
+            }
+          ],
+          "name": "Proof",
+          "weight": 25
+        },
+        {
+          "id": "project-portfolio-review-pack-crit-4",
+          "levels": [
+            {
+              "description": "Unable to conduct a technical walkthrough of portfolio projects during mock interview review.",
+              "score": 0
+            },
+            {
+              "description": "Can explain code walkthrough, but struggles to articulate trade-offs, scalability bottlenecks, or design alternatives.",
+              "score": 3
+            },
+            {
+              "description": "Senior-level technical defense: articulates architectural trade-offs, operational bottlenecks, distributed failure modes, and lessons learned with confidence.",
+              "score": 5
+            }
+          ],
+          "name": "Explanation",
+          "weight": 15
+        }
+      ],
+      "evidence_required": [
+        "Working implementation of Portfolio Review Pack",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "id": "assessment-project-portfolio-review-pack",
+      "manual_review_questions": [
+        "Walk me through your Flagship Opslane repository: how is the README structured so that an engineering hiring manager can evaluate your competence in 90 seconds?",
+        "How did you document your testing strategy, production deployment instructions, and disaster recovery procedures across your showcase repositories?",
+        "Defend one difficult architectural tradeoff made in your flagship project: what alternative did you consider, why did you reject it, and what were the consequences?"
+      ],
+      "module_id": "module-16",
+      "passing_score": 80,
+      "purpose": "Evaluate the Portfolio Review Pack project submission: Curate and present your strongest Go projects in a professional portfolio format for job applications.",
+      "retake_policy": "Learner may revise code and resubmit after addressing all rubric gaps.",
+      "status": "ready",
+      "suite": "full",
+      "target_ids": [
+        "project-portfolio-review-pack"
+      ],
+      "title": "Assessment — Portfolio Review Pack",
+      "type": "project-review"
+    }
+  ],
+  "curriculum_version": "3.0.0",
+  "document_type": "module_manifest",
+  "items": [
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 15.17 — One deployment target",
+            "reason": "Portfolio strategy builds on core understanding of One deployment target.",
+            "required": true,
+            "target_id": "core-15-17"
+          },
+          {
+            "label": "Module 15.16 — Vulnerability scanning",
+            "reason": "Portfolio strategy builds on core understanding of Vulnerability scanning.",
+            "required": true,
+            "target_id": "core-15-16"
+          },
+          {
+            "label": "Module 15.19 — Deployment runbook",
+            "reason": "Portfolio strategy builds on core understanding of Deployment runbook.",
+            "required": true,
+            "target_id": "core-15-19"
+          },
+          {
+            "label": "Module 15.18 — Rollback basics",
+            "reason": "Portfolio and Interview Readiness relies on foundational concepts from Docker, CI/CD, and Deployment.",
+            "required": true,
+            "target_id": "core-15-18"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "Uses the containerized deployment project as a concrete portfolio case study demonstrating DevOps competency.",
+            "required": false,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Opslane Flagship",
+            "reason": "Uses the Opslane multi-tenant backend as the centerpiece portfolio case study for senior engineering interviews.",
+            "required": false,
+            "target_id": "project-opslane"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Portfolio strategy concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Related concepts.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Related concepts.",
+            "required": false,
+            "target_id": "core-16-03"
+          },
+          {
+            "label": "Module 16.04 — Technical writing for engineers",
+            "reason": "Related concepts.",
+            "required": false,
+            "target_id": "core-16-04"
+          },
+          {
+            "label": "Module 16.05 — Resume and LinkedIn optimization",
+            "reason": "Failure engineering: deployment, retry storm, and resource exhaustion failure patterns in production",
+            "required": false,
+            "target_id": "core-16-05"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/01-portfolio-strategy/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/01-portfolio-strategy/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/01-portfolio-strategy/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/01-portfolio-strategy/main_test.go"
+      },
+      "id": "core-16-01",
+      "learning_objective": "Build a standout Go engineering portfolio by selecting, analyzing, and presenting projects that demonstrate technical depth, clean code practices, and real-world impact.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-02"
+      ],
+      "order": 1,
+      "phase": "career",
+      "prerequisites": [
+        "core-15-19"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a planning a job-ready Go portfolio artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "portfolio-strategy",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Portfolio strategy",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/01-portfolio-strategy",
+        "test_command": "go test ./16-portfolio-interview-readiness/01-portfolio-strategy"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into planning a job-ready Go portfolio without understanding the job market expectations for this skill.",
+          "Practicing planning a job-ready Go portfolio in isolation without integrating feedback from real reviewers.",
+          "Treating planning a job-ready Go portfolio as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for planning a job-ready Go portfolio at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting planning a job-ready Go portfolio but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's planning a job-ready Go portfolio artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require planning a job-ready Go portfolio and map their own experience to each requirement.",
+          "Learner must explain why planning a job-ready Go portfolio is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample planning a job-ready Go portfolio artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for planning a job-ready Go portfolio is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on planning a job-ready Go portfolio yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating planning a job-ready Go portfolio have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing planning a job-ready Go portfolio practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Portfolio strategy bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a planning a job-ready Go portfolio artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine planning a job-ready Go portfolio throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational planning a job-ready Go portfolio practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for planning a job-ready Go portfolio by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to planning a job-ready Go portfolio.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Portfolio strategy exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Project selection and scoping requires Portfolio strategy as a prerequisite.",
+            "required": true,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 15.17 — One deployment target",
+            "reason": "Project selection and scoping builds on core understanding of One deployment target.",
+            "required": true,
+            "target_id": "core-15-17"
+          },
+          {
+            "label": "Module 15.19 — Deployment runbook",
+            "reason": "Portfolio and Interview Readiness relies on foundational concepts from Docker, CI/CD, and Deployment.",
+            "required": true,
+            "target_id": "core-15-19"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "Evaluates scope, architecture boundaries, and deployment trade-offs when presenting the containerized service.",
+            "required": false,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Opslane Flagship",
+            "reason": "Scopes and highlights key technical challenges (concurrency, idempotency, persistence) for portfolio review.",
+            "required": false,
+            "target_id": "project-opslane"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Project selection and scoping concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Related concepts.",
+            "required": false,
+            "target_id": "core-16-03"
+          },
+          {
+            "label": "Module 16.04 — Technical writing for engineers",
+            "reason": "Related concepts.",
+            "required": false,
+            "target_id": "core-16-04"
+          },
+          {
+            "label": "Module 16.05 — Resume and LinkedIn optimization",
+            "reason": "Related concepts.",
+            "required": false,
+            "target_id": "core-16-05"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/02-project-selection-and-scoping/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/02-project-selection-and-scoping/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/02-project-selection-and-scoping/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/02-project-selection-and-scoping/main_test.go"
+      },
+      "id": "core-16-02",
+      "learning_objective": "Select a portfolio project that matches your skill level and goals, define its MVP scope, estimate timeline and complexity, and avoid common scope creep traps.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-03"
+      ],
+      "order": 2,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-01"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a choosing and scoping portfolio projects artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "project-selection-and-scoping",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Project selection and scoping",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/02-project-selection-and-scoping",
+        "test_command": "go test ./16-portfolio-interview-readiness/02-project-selection-and-scoping"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into choosing and scoping portfolio projects without understanding the job market expectations for this skill.",
+          "Practicing choosing and scoping portfolio projects in isolation without integrating feedback from real reviewers.",
+          "Treating choosing and scoping portfolio projects as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for choosing and scoping portfolio projects at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting choosing and scoping portfolio projects but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's choosing and scoping portfolio projects artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require choosing and scoping portfolio projects and map their own experience to each requirement.",
+          "Learner must explain why choosing and scoping portfolio projects is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample choosing and scoping portfolio projects artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for choosing and scoping portfolio projects is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on choosing and scoping portfolio projects yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating choosing and scoping portfolio projects have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing choosing and scoping portfolio projects practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Project selection and scoping bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a choosing and scoping portfolio projects artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine choosing and scoping portfolio projects throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational choosing and scoping portfolio projects practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for choosing and scoping portfolio projects by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to choosing and scoping portfolio projects.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Project selection and scoping exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Code review readiness requires understanding of Project selection and scoping.",
+            "required": true,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 15.17 — One deployment target",
+            "reason": "Portfolio and Interview Readiness relies on foundational concepts from Docker, CI/CD, and Deployment.",
+            "required": true,
+            "target_id": "core-15-17"
+          },
+          {
+            "label": "Module 15.19 — Deployment runbook",
+            "reason": "Portfolio and Interview Readiness relies on foundational concepts from Docker, CI/CD, and Deployment.",
+            "required": true,
+            "target_id": "core-15-19"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies Code review readiness concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Code review readiness concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both Code review readiness and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.04 — Technical writing for engineers",
+            "reason": "Both Code review readiness and Technical writing for engineers build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-04"
+          },
+          {
+            "label": "Module 16.05 — Resume and LinkedIn optimization",
+            "reason": "Both Code review readiness and Resume and LinkedIn optimization build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-05"
+          },
+          {
+            "label": "Module 16.06 — Behavioral interview preparation",
+            "reason": "Failure engineering: deployment, retry storm, and resource exhaustion failure patterns in production",
+            "required": false,
+            "target_id": "core-16-06"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/03-code-review-readiness/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/03-code-review-readiness/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/03-code-review-readiness/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/03-code-review-readiness/main_test.go"
+      },
+      "id": "core-16-03",
+      "learning_objective": "Prepare Go code for professional code review by running a structured checklist across six categories (correctness, style, performance, security, reliability, maintainability) and interpreting the results to improve code quality before submitting a PR.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-04"
+      ],
+      "order": 3,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-02"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a preparing code for professional review artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "code-review-readiness",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Code review readiness",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/03-code-review-readiness",
+        "test_command": "go test ./16-portfolio-interview-readiness/03-code-review-readiness"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into preparing code for professional review without understanding the job market expectations for this skill.",
+          "Practicing preparing code for professional review in isolation without integrating feedback from real reviewers.",
+          "Treating preparing code for professional review as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for preparing code for professional review at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting preparing code for professional review but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's preparing code for professional review artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require preparing code for professional review and map their own experience to each requirement.",
+          "Learner must explain why preparing code for professional review is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample preparing code for professional review artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for preparing code for professional review is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on preparing code for professional review yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating preparing code for professional review have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing preparing code for professional review practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Code review readiness bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a preparing code for professional review artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine preparing code for professional review throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational preparing code for professional review practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for preparing code for professional review by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to preparing code for professional review.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Code review readiness exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Technical writing for engineers requires understanding of Code review readiness.",
+            "required": true,
+            "target_id": "core-16-03"
+          },
+          {
+            "label": "Module 15.17 — One deployment target",
+            "reason": "Portfolio and Interview Readiness relies on foundational concepts from Docker, CI/CD, and Deployment.",
+            "required": true,
+            "target_id": "core-15-17"
+          },
+          {
+            "label": "Module 15.19 — Deployment runbook",
+            "reason": "Portfolio and Interview Readiness relies on foundational concepts from Docker, CI/CD, and Deployment.",
+            "required": true,
+            "target_id": "core-15-19"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies Technical writing for engineers concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Technical writing for engineers concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both Technical writing for engineers and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Both Technical writing for engineers and Project selection and scoping build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.05 — Resume and LinkedIn optimization",
+            "reason": "Both Technical writing for engineers and Resume and LinkedIn optimization build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-05"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/04-technical-writing-for-engineers/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/04-technical-writing-for-engineers/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/04-technical-writing-for-engineers/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/04-technical-writing-for-engineers/main_test.go"
+      },
+      "id": "core-16-04",
+      "learning_objective": "Write clear, effective technical documentation for Go projects including README files, API documentation, architecture docs, and Go doc comments that render correctly with `godoc`.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-05"
+      ],
+      "order": 4,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-03"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a writing clear READMEs and technical docs artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "technical-writing-for-engineers",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Technical writing for engineers",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/04-technical-writing-for-engineers",
+        "test_command": "go test ./16-portfolio-interview-readiness/04-technical-writing-for-engineers"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into writing clear READMEs and technical docs without understanding the job market expectations for this skill.",
+          "Practicing writing clear READMEs and technical docs in isolation without integrating feedback from real reviewers.",
+          "Treating writing clear READMEs and technical docs as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for writing clear READMEs and technical docs at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting writing clear READMEs and technical docs but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's writing clear READMEs and technical docs artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require writing clear READMEs and technical docs and map their own experience to each requirement.",
+          "Learner must explain why writing clear READMEs and technical docs is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample writing clear READMEs and technical docs artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for writing clear READMEs and technical docs is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on writing clear READMEs and technical docs yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating writing clear READMEs and technical docs have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing writing clear READMEs and technical docs practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Technical writing for engineers bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a writing clear READMEs and technical docs artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine writing clear READMEs and technical docs throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational writing clear READMEs and technical docs practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for writing clear READMEs and technical docs by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to writing clear READMEs and technical docs.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Technical writing for engineers exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.04 — Technical writing for engineers",
+            "reason": "Resume and LinkedIn optimization requires understanding of Technical writing for engineers.",
+            "required": true,
+            "target_id": "core-16-04"
+          },
+          {
+            "label": "Module 15.17 — One deployment target",
+            "reason": "Portfolio and Interview Readiness relies on foundational concepts from Docker, CI/CD, and Deployment.",
+            "required": true,
+            "target_id": "core-15-17"
+          },
+          {
+            "label": "Module 15.19 — Deployment runbook",
+            "reason": "Portfolio and Interview Readiness relies on foundational concepts from Docker, CI/CD, and Deployment.",
+            "required": true,
+            "target_id": "core-15-19"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies Resume and LinkedIn optimization concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Resume and LinkedIn optimization concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both Resume and LinkedIn optimization and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Both Resume and LinkedIn optimization and Project selection and scoping build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Both Resume and LinkedIn optimization and Code review readiness build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-03"
+          },
+          {
+            "label": "Module 16.06 — Behavioral interview preparation",
+            "reason": "Failure engineering: deployment, retry storm, and resource exhaustion failure patterns in production",
+            "required": false,
+            "target_id": "core-16-06"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/05-resume-and-linkedin-optimization/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/05-resume-and-linkedin-optimization/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/05-resume-and-linkedin-optimization/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/05-resume-and-linkedin-optimization/main_test.go"
+      },
+      "id": "core-16-05",
+      "learning_objective": "Craft a resume and LinkedIn profile optimized for Go engineering roles by analyzing keyword coverage, structuring achievement-based bullets, and understanding how applicant tracking systems score your profile.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-06"
+      ],
+      "order": 5,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-04"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a optimizing resume and LinkedIn for Go roles artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "resume-and-linkedin-optimization",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Resume and LinkedIn optimization",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/05-resume-and-linkedin-optimization",
+        "test_command": "go test ./16-portfolio-interview-readiness/05-resume-and-linkedin-optimization"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into optimizing resume and LinkedIn for Go roles without understanding the job market expectations for this skill.",
+          "Practicing optimizing resume and LinkedIn for Go roles in isolation without integrating feedback from real reviewers.",
+          "Treating optimizing resume and LinkedIn for Go roles as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for optimizing resume and LinkedIn for Go roles at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting optimizing resume and LinkedIn for Go roles but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's optimizing resume and LinkedIn for Go roles artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require optimizing resume and LinkedIn for Go roles and map their own experience to each requirement.",
+          "Learner must explain why optimizing resume and LinkedIn for Go roles is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample optimizing resume and LinkedIn for Go roles artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for optimizing resume and LinkedIn for Go roles is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on optimizing resume and LinkedIn for Go roles yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating optimizing resume and LinkedIn for Go roles have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing optimizing resume and LinkedIn for Go roles practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Resume and LinkedIn optimization bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a optimizing resume and LinkedIn for Go roles artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine optimizing resume and LinkedIn for Go roles throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational optimizing resume and LinkedIn for Go roles practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for optimizing resume and LinkedIn for Go roles by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to optimizing resume and LinkedIn for Go roles.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Resume and LinkedIn optimization exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.05 — Resume and LinkedIn optimization",
+            "reason": "Behavioral interview preparation requires understanding of Resume and LinkedIn optimization.",
+            "required": true,
+            "target_id": "core-16-05"
+          },
+          {
+            "label": "Module 16.04 — Technical writing for engineers",
+            "reason": "Behavioral interview preparation extends directly from Technical writing for engineers.",
+            "required": true,
+            "target_id": "core-16-04"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies Behavioral interview preparation concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Behavioral interview preparation concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both Behavioral interview preparation and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Both Behavioral interview preparation and Project selection and scoping build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Both Behavioral interview preparation and Code review readiness build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-03"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/06-behavioral-interview-preparation/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/06-behavioral-interview-preparation/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/06-behavioral-interview-preparation/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/06-behavioral-interview-preparation/main_test.go"
+      },
+      "id": "core-16-06",
+      "learning_objective": "Prepare for behavioral interviews using the STAR method (Situation, Task, Action, Result) and analyze your responses to ensure every story includes context, challenge, contribution, and measurable outcome.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-07"
+      ],
+      "order": 6,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-05"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a preparing for behavioral interviews artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "behavioral-interview-preparation",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Behavioral interview preparation",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/06-behavioral-interview-preparation",
+        "test_command": "go test ./16-portfolio-interview-readiness/06-behavioral-interview-preparation"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into preparing for behavioral interviews without understanding the job market expectations for this skill.",
+          "Practicing preparing for behavioral interviews in isolation without integrating feedback from real reviewers.",
+          "Treating preparing for behavioral interviews as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for preparing for behavioral interviews at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting preparing for behavioral interviews but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's preparing for behavioral interviews artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require preparing for behavioral interviews and map their own experience to each requirement.",
+          "Learner must explain why preparing for behavioral interviews is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample preparing for behavioral interviews artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for preparing for behavioral interviews is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on preparing for behavioral interviews yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating preparing for behavioral interviews have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing preparing for behavioral interviews practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Behavioral interview preparation bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a preparing for behavioral interviews artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine preparing for behavioral interviews throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational preparing for behavioral interviews practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for preparing for behavioral interviews by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to preparing for behavioral interviews.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Behavioral interview preparation exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.06 — Behavioral interview preparation",
+            "reason": "System design interview basics requires understanding of Behavioral interview preparation.",
+            "required": true,
+            "target_id": "core-16-06"
+          },
+          {
+            "label": "Module 16.05 — Resume and LinkedIn optimization",
+            "reason": "System design interview basics extends directly from Resume and LinkedIn optimization.",
+            "required": true,
+            "target_id": "core-16-05"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies System design interview basics concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies System design interview basics concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both System design interview basics and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Both System design interview basics and Project selection and scoping build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Both System design interview basics and Code review readiness build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-03"
+          },
+          {
+            "label": "Module 16.04 — Technical writing for engineers",
+            "reason": "Failure engineering: deployment, retry storm, and resource exhaustion failure patterns in production",
+            "required": false,
+            "target_id": "core-16-04"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/07-system-design-interview-basics/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/07-system-design-interview-basics/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/07-system-design-interview-basics/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/07-system-design-interview-basics/main_test.go"
+      },
+      "id": "core-16-07",
+      "learning_objective": "Approach system design interviews with a structured framework: parse requirements, estimate capacity, identify tradeoffs, and communicate a coherent design under time pressure.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-08"
+      ],
+      "order": 7,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-06"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a preparing for system design interviews artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "system-design-interview-basics",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "System design interview basics",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/07-system-design-interview-basics",
+        "test_command": "go test ./16-portfolio-interview-readiness/07-system-design-interview-basics"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into preparing for system design interviews without understanding the job market expectations for this skill.",
+          "Practicing preparing for system design interviews in isolation without integrating feedback from real reviewers.",
+          "Treating preparing for system design interviews as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for preparing for system design interviews at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting preparing for system design interviews but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's preparing for system design interviews artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require preparing for system design interviews and map their own experience to each requirement.",
+          "Learner must explain why preparing for system design interviews is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample preparing for system design interviews artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for preparing for system design interviews is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on preparing for system design interviews yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating preparing for system design interviews have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing preparing for system design interviews practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. System design interview basics bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a preparing for system design interviews artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine preparing for system design interviews throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational preparing for system design interviews practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for preparing for system design interviews by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to preparing for system design interviews.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. System design interview basics exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.07 — System design interview basics",
+            "reason": "Live coding interview practice requires understanding of System design interview basics.",
+            "required": true,
+            "target_id": "core-16-07"
+          },
+          {
+            "label": "Module 16.06 — Behavioral interview preparation",
+            "reason": "Live coding interview practice extends directly from Behavioral interview preparation.",
+            "required": true,
+            "target_id": "core-16-06"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies Live coding interview practice concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Live coding interview practice concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both Live coding interview practice and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Both Live coding interview practice and Project selection and scoping build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Both Live coding interview practice and Code review readiness build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-03"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/08-live-coding-interview-practice/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/08-live-coding-interview-practice/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/08-live-coding-interview-practice/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/08-live-coding-interview-practice/main_test.go"
+      },
+      "id": "core-16-08",
+      "learning_objective": "Approach live coding interviews with a structured problem-solving framework, verbalize your thought process clearly, write testable Go code under time pressure, and handle feedback gracefully.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-09"
+      ],
+      "order": 8,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-07"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a practicing live coding under interview conditions artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "live-coding-interview-practice",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Live coding interview practice",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/08-live-coding-interview-practice",
+        "test_command": "go test ./16-portfolio-interview-readiness/08-live-coding-interview-practice"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into practicing live coding under interview conditions without understanding the job market expectations for this skill.",
+          "Practicing practicing live coding under interview conditions in isolation without integrating feedback from real reviewers.",
+          "Treating practicing live coding under interview conditions as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for practicing live coding under interview conditions at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting practicing live coding under interview conditions but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's practicing live coding under interview conditions artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require practicing live coding under interview conditions and map their own experience to each requirement.",
+          "Learner must explain why practicing live coding under interview conditions is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample practicing live coding under interview conditions artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for practicing live coding under interview conditions is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on practicing live coding under interview conditions yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating practicing live coding under interview conditions have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing practicing live coding under interview conditions practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Live coding interview practice bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a practicing live coding under interview conditions artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine practicing live coding under interview conditions throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational practicing live coding under interview conditions practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for practicing live coding under interview conditions by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to practicing live coding under interview conditions.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Live coding interview practice exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.08 — Live coding interview practice",
+            "reason": "Take-home project strategy requires understanding of Live coding interview practice.",
+            "required": true,
+            "target_id": "core-16-08"
+          },
+          {
+            "label": "Module 16.07 — System design interview basics",
+            "reason": "Take-home project strategy extends directly from System design interview basics.",
+            "required": true,
+            "target_id": "core-16-07"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies Take-home project strategy concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Take-home project strategy concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both Take-home project strategy and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Both Take-home project strategy and Project selection and scoping build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Both Take-home project strategy and Code review readiness build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-03"
+          },
+          {
+            "label": "Module 16.04 — Technical writing for engineers",
+            "reason": "Failure engineering: deployment, retry storm, and resource exhaustion failure patterns in production",
+            "required": false,
+            "target_id": "core-16-04"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/09-take-home-project-strategy/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/09-take-home-project-strategy/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/09-take-home-project-strategy/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/09-take-home-project-strategy/main_test.go"
+      },
+      "id": "core-16-09",
+      "learning_objective": "Develop a systematic approach to completing take-home projects that demonstrates production-quality software engineering, including requirements analysis, time management, testing strategy, documentation, and a structured submission checklist.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-10"
+      ],
+      "order": 9,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-08"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a approaching take-home projects effectively artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "take-home-project-strategy",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Take-home project strategy",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/09-take-home-project-strategy",
+        "test_command": "go test ./16-portfolio-interview-readiness/09-take-home-project-strategy"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into approaching take-home projects effectively without understanding the job market expectations for this skill.",
+          "Practicing approaching take-home projects effectively in isolation without integrating feedback from real reviewers.",
+          "Treating approaching take-home projects effectively as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for approaching take-home projects effectively at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting approaching take-home projects effectively but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's approaching take-home projects effectively artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require approaching take-home projects effectively and map their own experience to each requirement.",
+          "Learner must explain why approaching take-home projects effectively is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample approaching take-home projects effectively artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for approaching take-home projects effectively is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on approaching take-home projects effectively yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating approaching take-home projects effectively have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing approaching take-home projects effectively practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Take-home project strategy bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a approaching take-home projects effectively artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine approaching take-home projects effectively throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational approaching take-home projects effectively practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for approaching take-home projects effectively by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to approaching take-home projects effectively.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Take-home project strategy exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.09 — Take-home project strategy",
+            "reason": "Negotiation fundamentals requires understanding of Take-home project strategy.",
+            "required": true,
+            "target_id": "core-16-09"
+          },
+          {
+            "label": "Module 16.08 — Live coding interview practice",
+            "reason": "Negotiation fundamentals extends directly from Live coding interview practice.",
+            "required": true,
+            "target_id": "core-16-08"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies Negotiation fundamentals concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Negotiation fundamentals concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both Negotiation fundamentals and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Both Negotiation fundamentals and Project selection and scoping build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Both Negotiation fundamentals and Code review readiness build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-03"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/10-negotiation-fundamentals/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/10-negotiation-fundamentals/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/10-negotiation-fundamentals/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/10-negotiation-fundamentals/main_test.go"
+      },
+      "id": "core-16-10",
+      "learning_objective": "Evaluate job offers by calculating total compensation across salary, equity, bonuses, and benefits, and apply negotiation strategies including BATNA preparation, timing, and value-anchored counter-offers.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-11"
+      ],
+      "order": 10,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-09"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a understanding offer negotiation basics artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "negotiation-fundamentals",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Negotiation fundamentals",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/10-negotiation-fundamentals",
+        "test_command": "go test ./16-portfolio-interview-readiness/10-negotiation-fundamentals"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into understanding offer negotiation basics without understanding the job market expectations for this skill.",
+          "Practicing understanding offer negotiation basics in isolation without integrating feedback from real reviewers.",
+          "Treating understanding offer negotiation basics as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for understanding offer negotiation basics at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting understanding offer negotiation basics but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's understanding offer negotiation basics artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require understanding offer negotiation basics and map their own experience to each requirement.",
+          "Learner must explain why understanding offer negotiation basics is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample understanding offer negotiation basics artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for understanding offer negotiation basics is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on understanding offer negotiation basics yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating understanding offer negotiation basics have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing understanding offer negotiation basics practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Negotiation fundamentals bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a understanding offer negotiation basics artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine understanding offer negotiation basics throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational understanding offer negotiation basics practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for understanding offer negotiation basics by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to understanding offer negotiation basics.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Negotiation fundamentals exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.10 — Negotiation fundamentals",
+            "reason": "Open source contribution requires understanding of Negotiation fundamentals.",
+            "required": true,
+            "target_id": "core-16-10"
+          },
+          {
+            "label": "Module 16.09 — Take-home project strategy",
+            "reason": "Open source contribution extends directly from Take-home project strategy.",
+            "required": true,
+            "target_id": "core-16-09"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies Open source contribution concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Open source contribution concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both Open source contribution and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Both Open source contribution and Project selection and scoping build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Both Open source contribution and Code review readiness build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-03"
+          },
+          {
+            "label": "Module 16.04 — Technical writing for engineers",
+            "reason": "Failure engineering: deployment, retry storm, and resource exhaustion failure patterns in production",
+            "required": false,
+            "target_id": "core-16-04"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/11-open-source-contribution/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/11-open-source-contribution/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/11-open-source-contribution/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/11-open-source-contribution/main_test.go"
+      },
+      "id": "core-16-11",
+      "learning_objective": "Contribute effectively to open source Go projects by finding suitable projects, making well-scoped first contributions, following PR etiquette, participating in issue triage, and building a professional reputation through sustained quality contributions.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-12"
+      ],
+      "order": 11,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-10"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a contributing to open source Go projects artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "open-source-contribution",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Open source contribution",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/11-open-source-contribution",
+        "test_command": "go test ./16-portfolio-interview-readiness/11-open-source-contribution"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into contributing to open source Go projects without understanding the job market expectations for this skill.",
+          "Practicing contributing to open source Go projects in isolation without integrating feedback from real reviewers.",
+          "Treating contributing to open source Go projects as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for contributing to open source Go projects at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting contributing to open source Go projects but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's contributing to open source Go projects artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require contributing to open source Go projects and map their own experience to each requirement.",
+          "Learner must explain why contributing to open source Go projects is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample contributing to open source Go projects artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for contributing to open source Go projects is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on contributing to open source Go projects yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating contributing to open source Go projects have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing contributing to open source Go projects practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Open source contribution bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a contributing to open source Go projects artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine contributing to open source Go projects throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational contributing to open source Go projects practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for contributing to open source Go projects by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to contributing to open source Go projects.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Open source contribution exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.11 — Open source contribution",
+            "reason": "Technical blog writing requires understanding of Open source contribution.",
+            "required": true,
+            "target_id": "core-16-11"
+          },
+          {
+            "label": "Module 16.10 — Negotiation fundamentals",
+            "reason": "Technical blog writing extends directly from Negotiation fundamentals.",
+            "required": true,
+            "target_id": "core-16-10"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies Technical blog writing concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Technical blog writing concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both Technical blog writing and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Both Technical blog writing and Project selection and scoping build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Both Technical blog writing and Code review readiness build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-03"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/12-technical-blog-writing/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/12-technical-blog-writing/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/12-technical-blog-writing/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/12-technical-blog-writing/main_test.go"
+      },
+      "id": "core-16-12",
+      "learning_objective": "Write clear, engaging technical blog posts about Go that effectively explain concepts, demonstrate code, and connect with your target audience — using a repeatable structure that maximizes readability and impact.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-13"
+      ],
+      "order": 12,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-11"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a writing technical blog posts about Go artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "technical-blog-writing",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Technical blog writing",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/12-technical-blog-writing",
+        "test_command": "go test ./16-portfolio-interview-readiness/12-technical-blog-writing"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into writing technical blog posts about Go without understanding the job market expectations for this skill.",
+          "Practicing writing technical blog posts about Go in isolation without integrating feedback from real reviewers.",
+          "Treating writing technical blog posts about Go as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for writing technical blog posts about Go at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting writing technical blog posts about Go but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's writing technical blog posts about Go artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require writing technical blog posts about Go and map their own experience to each requirement.",
+          "Learner must explain why writing technical blog posts about Go is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample writing technical blog posts about Go artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for writing technical blog posts about Go is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on writing technical blog posts about Go yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating writing technical blog posts about Go have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing writing technical blog posts about Go practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Technical blog writing bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a writing technical blog posts about Go artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine writing technical blog posts about Go throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational writing technical blog posts about Go practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for writing technical blog posts about Go by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to writing technical blog posts about Go.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Technical blog writing exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.12 — Technical blog writing",
+            "reason": "Conference talk preparation requires understanding of Technical blog writing.",
+            "required": true,
+            "target_id": "core-16-12"
+          },
+          {
+            "label": "Module 16.11 — Open source contribution",
+            "reason": "Conference talk preparation extends directly from Open source contribution.",
+            "required": true,
+            "target_id": "core-16-11"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies Conference talk preparation concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Conference talk preparation concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both Conference talk preparation and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Both Conference talk preparation and Project selection and scoping build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Both Conference talk preparation and Code review readiness build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-03"
+          },
+          {
+            "label": "Module 16.04 — Technical writing for engineers",
+            "reason": "Failure engineering: deployment, retry storm, and resource exhaustion failure patterns in production",
+            "required": false,
+            "target_id": "core-16-04"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/13-conference-talk-preparation/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/13-conference-talk-preparation/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/13-conference-talk-preparation/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/13-conference-talk-preparation/main_test.go"
+      },
+      "id": "core-16-13",
+      "learning_objective": "Write compelling conference talk proposals, structure talks for maximum audience impact, design effective slides, and deliver live demos with confidence — increasing your acceptance rate at Go-focused conferences.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-14"
+      ],
+      "order": 13,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-12"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a preparing and delivering conference talks artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "conference-talk-preparation",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Conference talk preparation",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/13-conference-talk-preparation",
+        "test_command": "go test ./16-portfolio-interview-readiness/13-conference-talk-preparation"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into preparing and delivering conference talks without understanding the job market expectations for this skill.",
+          "Practicing preparing and delivering conference talks in isolation without integrating feedback from real reviewers.",
+          "Treating preparing and delivering conference talks as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for preparing and delivering conference talks at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting preparing and delivering conference talks but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's preparing and delivering conference talks artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require preparing and delivering conference talks and map their own experience to each requirement.",
+          "Learner must explain why preparing and delivering conference talks is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample preparing and delivering conference talks artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for preparing and delivering conference talks is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on preparing and delivering conference talks yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating preparing and delivering conference talks have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing preparing and delivering conference talks practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Conference talk preparation bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a preparing and delivering conference talks artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine preparing and delivering conference talks throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational preparing and delivering conference talks practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for preparing and delivering conference talks by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to preparing and delivering conference talks.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Conference talk preparation exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.13 — Conference talk preparation",
+            "reason": "Mentorship and code review requires understanding of Conference talk preparation.",
+            "required": true,
+            "target_id": "core-16-13"
+          },
+          {
+            "label": "Module 16.12 — Technical blog writing",
+            "reason": "Mentorship and code review extends directly from Technical blog writing.",
+            "required": true,
+            "target_id": "core-16-12"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies Mentorship and code review concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Mentorship and code review concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both Mentorship and code review and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Both Mentorship and code review and Project selection and scoping build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Both Mentorship and code review and Code review readiness build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-03"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/14-mentorship-and-code-review/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/14-mentorship-and-code-review/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/14-mentorship-and-code-review/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/14-mentorship-and-code-review/main_test.go"
+      },
+      "id": "core-16-14",
+      "learning_objective": "Provide constructive, actionable code review feedback that helps other engineers grow, and practice mentorship techniques that accelerate the development of junior and peer engineers in a professional Go environment.",
+      "module_id": "module-16",
+      "next_item_ids": [
+        "core-16-15"
+      ],
+      "order": 14,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-13"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a giving and receiving code review feedback artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "mentorship-and-code-review",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Mentorship and code review",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/14-mentorship-and-code-review",
+        "test_command": "go test ./16-portfolio-interview-readiness/14-mentorship-and-code-review"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into giving and receiving code review feedback without understanding the job market expectations for this skill.",
+          "Practicing giving and receiving code review feedback in isolation without integrating feedback from real reviewers.",
+          "Treating giving and receiving code review feedback as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for giving and receiving code review feedback at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting giving and receiving code review feedback but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's giving and receiving code review feedback artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require giving and receiving code review feedback and map their own experience to each requirement.",
+          "Learner must explain why giving and receiving code review feedback is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample giving and receiving code review feedback artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for giving and receiving code review feedback is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on giving and receiving code review feedback yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating giving and receiving code review feedback have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing giving and receiving code review feedback practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Mentorship and code review bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a giving and receiving code review feedback artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine giving and receiving code review feedback throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational giving and receiving code review feedback practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for giving and receiving code review feedback by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to giving and receiving code review feedback.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Mentorship and code review exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": true,
+        "production_notes_required": true,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": true,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 16.14 — Mentorship and code review",
+            "reason": "Career roadmap requires understanding of Mentorship and code review.",
+            "required": true,
+            "target_id": "core-16-14"
+          },
+          {
+            "label": "Module 16.13 — Conference talk preparation",
+            "reason": "Career roadmap extends directly from Conference talk preparation.",
+            "required": true,
+            "target_id": "core-16-13"
+          }
+        ],
+        "preview_only": [
+          {
+            "label": "Module 18.01 — Opslane foundation and configuration",
+            "reason": "Preview of Opslane foundation and configuration from Flagship Opslane.",
+            "required": false,
+            "target_id": "opslane-01"
+          }
+        ],
+        "reinforced_in": [
+          {
+            "label": "Project — Dockerized Service With Ci Cd",
+            "reason": "This project applies Career roadmap concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-dockerized-service-cicd"
+          },
+          {
+            "label": "Project — Portfolio Review Pack",
+            "reason": "This project applies Career roadmap concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-portfolio-review-pack"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Both Career roadmap and Portfolio strategy build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-01"
+          },
+          {
+            "label": "Module 16.02 — Project selection and scoping",
+            "reason": "Both Career roadmap and Project selection and scoping build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-02"
+          },
+          {
+            "label": "Module 16.03 — Code review readiness",
+            "reason": "Both Career roadmap and Code review readiness build understanding within Portfolio and Interview Readiness.",
+            "required": false,
+            "target_id": "core-16-03"
+          },
+          {
+            "label": "Module 16.04 — Technical writing for engineers",
+            "reason": "Failure engineering: deployment, retry storm, and resource exhaustion failure patterns in production",
+            "required": false,
+            "target_id": "core-16-04"
+          }
+        ]
+      },
+      "difficulty": "core",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/lessons/15-career-roadmap/assets",
+        "diagram_paths": [],
+        "main_path": "modules/16-portfolio-interview-readiness/lessons/15-career-roadmap/main.go",
+        "readme_path": "modules/16-portfolio-interview-readiness/lessons/15-career-roadmap/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/16-portfolio-interview-readiness/lessons/15-career-roadmap/main_test.go"
+      },
+      "id": "core-16-15",
+      "learning_objective": "Create a structured career development plan by analyzing your current skills against target role requirements, identifying gaps, prioritizing learning areas, and building a timeline for professional growth as a Go engineer.",
+      "module_id": "module-16",
+      "next_item_ids": [],
+      "order": 15,
+      "phase": "career",
+      "prerequisites": [
+        "core-16-14"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-16",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must produce a planning the next 12 months of career growth artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "project_id": "project-portfolio-review-pack"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "career-roadmap",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "career",
+      "tags": [
+        "career",
+        "core",
+        "portfolio"
+      ],
+      "title": "Career roadmap",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./16-portfolio-interview-readiness/15-career-roadmap",
+        "test_command": "go test ./16-portfolio-interview-readiness/15-career-roadmap"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Jumping into planning the next 12 months of career growth without understanding the job market expectations for this skill.",
+          "Practicing planning the next 12 months of career growth in isolation without integrating feedback from real reviewers.",
+          "Treating planning the next 12 months of career growth as a checkbox task rather than an ongoing skill to develop."
+        ],
+        "execution_timeline": [
+          "Research what employers expect for planning the next 12 months of career growth at the target experience level.",
+          "Review current portfolio or skill level against those expectations and identify gaps.",
+          "Create or improve the artifact addressing the largest gap first.",
+          "Get feedback from a peer, mentor, or community review.",
+          "Incorporate feedback and iterate until the artifact meets the job-ready bar."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treats preparation as an infinite loop instead of a finite gate.",
+            "fix": "Set a deadline, ship the artifact, and start applying. Iterate based on real interview feedback.",
+            "scenario": "A learner spends weeks perfecting planning the next 12 months of career growth but never applies for jobs."
+          },
+          {
+            "cause": "No review pass for security before publishing the portfolio artifact.",
+            "fix": "Add a pre-publish checklist that includes secret scanning and .gitignore verification.",
+            "scenario": "The learner's planning the next 12 months of career growth artifact contains sensitive information like API keys."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify three specific job postings that require planning the next 12 months of career growth and map their own experience to each requirement.",
+          "Learner must explain why planning the next 12 months of career growth is more impactful when demonstrated through a project than listed as a bullet point.",
+          "Learner must critique a sample planning the next 12 months of career growth artifact and identify three improvements."
+        ],
+        "how_go_uses_it": "Go's emphasis on simplicity, readability, and production readiness maps directly to job market expectations. Companies hiring Go engineers look for candidates who can write clear, testable, maintainable code and understand the full delivery lifecycle.",
+        "mental_model": "Job readiness for planning the next 12 months of career growth is a fitness function: you measure yourself against real job requirements, identify the gap, train specifically on the gap, and re-measure. Each iteration narrows the gap until you meet the hiring bar.",
+        "performance_implications": [
+          "Focusing on planning the next 12 months of career growth yields diminishing returns after the job-ready threshold — prioritize breadth over depth at this stage.",
+          "Portfolio artifacts demonstrating planning the next 12 months of career growth have higher impact when they include tests, documentation, and a README.",
+          "Time-boxing planning the next 12 months of career growth practice prevents perfectionism from delaying the job application timeline."
+        ],
+        "problem_solved": "New Go developers struggle to translate technical skills into employability. Career roadmap bridges the gap between knowing Go and being hired to write Go in production by providing a structured approach to demonstrating competence through portfolio artifacts, interview preparation, and market positioning.",
+        "proof_of_understanding": "The learner must produce a planning the next 12 months of career growth artifact that meets the job-ready rubric, submit it for peer review, incorporate feedback, and present the final version with a written reflection on what they improved and why.",
+        "real_world_usage": "Professional Go engineers continuously refine planning the next 12 months of career growth throughout their careers. Senior engineers are evaluated on their ability to deliver production-quality work, communicate technical decisions, and mentor others — all skills that start with the foundational planning the next 12 months of career growth practiced in this module.",
+        "step_by_step_execution": [
+          "Define what job-ready looks like for planning the next 12 months of career growth by reviewing 3-5 real job postings.",
+          "Audit current portfolio and identify the biggest gap related to planning the next 12 months of career growth.",
+          "Plan the artifact: scope, timeline, technologies, and success criteria.",
+          "Build the artifact with tests, documentation, and a README.",
+          "Submit for peer review, incorporate feedback, and publish."
+        ],
+        "under_the_hood": "The Go job market values demonstrated competence over credentials. A well-crafted portfolio artifact that shows production-quality Go code, tests, documentation, and deployment configuration provides stronger signal to hiring managers than a list of technologies. Companies like Google, Uber, and Shopify evaluate Go candidates through take-home projects, system design interviews, and code review exercises — all of which this module prepares the learner for.",
+        "why_it_exists": "Technical skill alone does not guarantee employment. Career roadmap exists because the final step from learner to professional Go engineer requires packaging competence into a format that employers can evaluate: a portfolio, interview performance, and professional network."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "estimated_minutes": 120,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/projects/portfolio-review-pack/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/16-portfolio-interview-readiness/projects/portfolio-review-pack/README.md",
+        "solution_path": "modules/16-portfolio-interview-readiness/projects/portfolio-review-pack/_solution",
+        "starter_path": "modules/16-portfolio-interview-readiness/projects/portfolio-review-pack/_starter",
+        "test_path": ""
+      },
+      "id": "project-portfolio-review-pack",
+      "learning_objective": "Build and verify Portfolio Review Pack demonstrating core module-16 engineering capabilities.",
+      "module_id": "module-16",
+      "next_item_ids": [],
+      "order": 99,
+      "phase": "go-core",
+      "prerequisites": [
+        "core-16-01",
+        "core-16-02",
+        "core-16-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "slug": "portfolio-review-pack",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "project",
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "title": "Portfolio Review Pack",
+      "type": "project",
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "assessment",
+      "estimated_minutes": 60,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/assessments/checkpoint/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/16-portfolio-interview-readiness/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "assessment-module-16-checkpoint",
+      "learning_objective": "Demonstrate mastery of module-16 competencies through automated verification and oral defense.",
+      "module_id": "module-16",
+      "next_item_ids": [],
+      "order": 100,
+      "phase": "go-core",
+      "prerequisites": [],
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "slug": "checkpoint",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "assessment",
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "title": "Module 16 Checkpoint — Capstone Portfolio, Engineering Standards, and Interview Readiness",
+      "type": "assessment",
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "assessment",
+      "estimated_minutes": 60,
+      "files": {
+        "assets_dir": "modules/16-portfolio-interview-readiness/assessments/portfolio-review-pack/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/16-portfolio-interview-readiness/assessments/portfolio-review-pack/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "assessment-portfolio-interview-readiness-portfolio-review-pack",
+      "learning_objective": "Demonstrate mastery of module-16 competencies through automated verification and oral defense.",
+      "module_id": "module-16",
+      "next_item_ids": [],
+      "order": 100,
+      "phase": "go-core",
+      "prerequisites": [],
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "slug": "portfolio-review-pack",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "assessment",
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "title": "Portfolio Review Pack",
+      "type": "assessment",
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    }
+  ],
+  "last_updated": "2026-10-23",
+  "module_id": "module-16",
+  "projects": [
+    {
+      "assessment_id": "assessment-project-portfolio-review-pack",
+      "deliverables": [
+        "Working implementation of Portfolio Review Pack",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "advanced",
+      "documentation_mode": "project",
+      "id": "project-portfolio-review-pack",
+      "module_id": "module-16",
+      "order": 24,
+      "placement_anchor_item_id": "core-16-15",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Portfolio Review Pack can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": true,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-16-01",
+        "core-16-02",
+        "core-16-03"
+      ],
+      "prerequisites": [
+        "core-16-01",
+        "core-16-02",
+        "core-16-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "portfolio strategy",
+        "technical writing",
+        "code review readiness"
+      ],
+      "reinforces": [
+        "core-16-01",
+        "core-16-02",
+        "core-16-03",
+        "core-16-04",
+        "core-16-05",
+        "core-16-06",
+        "core-16-07",
+        "core-16-08",
+        "core-16-09",
+        "core-16-10",
+        "core-16-11",
+        "core-16-12",
+        "core-16-13",
+        "core-16-14",
+        "core-16-15"
+      ],
+      "required_concepts": [
+        "portfolio strategy",
+        "technical writing",
+        "code review readiness"
+      ],
+      "rubric": [
+        {
+          "description": "Implementation satisfies the stated behavior.",
+          "id": "project-portfolio-review-pack-correctness",
+          "levels": [
+            {
+              "description": "Does not run or misses core behavior.",
+              "score": 0
+            },
+            {
+              "description": "Mostly works with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Works correctly across normal and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "description": "Code is idiomatic, readable, and maintainable.",
+          "id": "project-portfolio-review-pack-go-quality",
+          "levels": [
+            {
+              "description": "Hard to read or unidiomatic.",
+              "score": 0
+            },
+            {
+              "description": "Readable with some issues.",
+              "score": 3
+            },
+            {
+              "description": "Clean, idiomatic, and well structured.",
+              "score": 5
+            }
+          ],
+          "title": "Go quality",
+          "weight": 25
+        },
+        {
+          "description": "Tests or verification prove the behavior.",
+          "id": "project-portfolio-review-pack-proof",
+          "levels": [
+            {
+              "description": "No proof.",
+              "score": 0
+            },
+            {
+              "description": "Some proof.",
+              "score": 3
+            },
+            {
+              "description": "Strong automated or documented proof.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can explain the design and tradeoffs.",
+          "id": "project-portfolio-review-pack-explanation",
+          "levels": [
+            {
+              "description": "Cannot explain.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Explanation",
+          "weight": 15
+        }
+      ],
+      "slug": "portfolio-review-pack",
+      "source_legacy_ids": [],
+      "stage": "career",
+      "status": "ready",
+      "summary": "Curate and present your strongest Go projects in a professional portfolio format for job applications.",
+      "tasks": [
+        {
+          "done_when": [
+            "The program runs successfully.",
+            "The main behavior matches the README requirements."
+          ],
+          "files_touched": [
+            "15-portfolio-interview-capstone"
+          ],
+          "id": "project-portfolio-review-pack-task-build",
+          "instruction": "Curate your strongest Go projects, write professional READMEs, and organize them into a portfolio ready for job applications.",
+          "instructions": "Implement the main requirements for Portfolio Review Pack.",
+          "title": "Build the core behavior",
+          "type": "build"
+        },
+        {
+          "done_when": [
+            "Important success paths are verified.",
+            "At least one edge case or failure path is checked."
+          ],
+          "files_touched": [
+            "15-portfolio-interview-capstone"
+          ],
+          "id": "project-portfolio-review-pack-task-test",
+          "instruction": "Review each project for completeness: tests, documentation, error handling, and idiomatic Go style.",
+          "instructions": "Add tests or a manual verification checklist appropriate to the project.",
+          "title": "Prove the behavior",
+          "type": "test"
+        },
+        {
+          "done_when": [
+            "README is clear.",
+            "A reviewer can run or inspect the project without guessing."
+          ],
+          "files_touched": [
+            "15-portfolio-interview-capstone"
+          ],
+          "id": "project-portfolio-review-pack-task-explain",
+          "instruction": "Prepare a presentation explaining your technical growth, design philosophy, and the most challenging problem you solved.",
+          "instructions": "Write a short explanation of what was built and what tradeoffs were made.",
+          "title": "Explain the result",
+          "type": "document"
+        }
+      ],
+      "title": "Portfolio Review Pack",
+      "type": "portfolio-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "bash ./portfolio-check.sh",
+        "test_command": "bash ./portfolio-check.sh"
+      }
+    }
+  ],
+  "schema_version": "3.1.0",
+  "status": "stable"
+}

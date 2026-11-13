@@ -1,10 +1,7 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
-	"path/filepath"
 	"strings"
 )
 
@@ -115,32 +112,21 @@ func validateProjectBinding() {
 		allModules[m.ID] = true
 	}
 
-	// Read projects.json as raw to check fields
-	projectsPath := filepath.Join(curriculumDir, "projects.json")
-	projectsData, err := os.ReadFile(projectsPath)
-	if err != nil {
-		fatalf("cannot read projects.json: %v", err)
+	// Read the folded per-module manifests as raw to check fields
+	type rawProjectManifest struct {
+		Projects []map[string]any `json:"projects"`
 	}
-	var projectsRaw map[string]any
-	if err := json.Unmarshal(projectsData, &projectsRaw); err != nil {
-		fatalf("cannot parse projects.json: %v", err)
-	}
-
-	projects, ok2 := projectsRaw["projects"].([]any)
-	if !ok2 {
-		fatalf("projects.json: 'projects' is not an array")
+	var projects []map[string]any
+	for _, mf := range moduleManifestPaths() {
+		var mm rawProjectManifest
+		readJSON(mf, &mm)
+		projects = append(projects, mm.Projects...)
 	}
 
-	for _, p := range projects {
-		proj, isObj := p.(map[string]any)
-		if !isObj {
-			errorf("projects.json: project entry is not a JSON object")
-			ok = false
-			continue
-		}
+	for _, proj := range projects {
 		projID, hasID := proj["id"].(string)
 		if !hasID {
-			errorf("projects.json: project entry is missing a string 'id'")
+			errorf("module manifest: project entry is missing a string 'id'")
 			ok = false
 			continue
 		}
@@ -297,32 +283,20 @@ func validateAssessmentCompleteness() {
 	fmt.Println("=== validate-assessment-completeness ===")
 	ok := true
 
-	assessPath := filepath.Join(curriculumDir, "assessments.json")
-	data, err := os.ReadFile(assessPath)
-	if err != nil {
-		fatalf("cannot read assessments.json: %v", err)
+	type rawAssessmentManifest struct {
+		Assessments []map[string]any `json:"assessments"`
+	}
+	var assessments []map[string]any
+	for _, mf := range moduleManifestPaths() {
+		var mm rawAssessmentManifest
+		readJSON(mf, &mm)
+		assessments = append(assessments, mm.Assessments...)
 	}
 
-	var rawMap map[string]any
-	if err := json.Unmarshal(data, &rawMap); err != nil {
-		fatalf("cannot parse assessments.json: %v", err)
-	}
-
-	assessments, ok2 := rawMap["assessments"].([]any)
-	if !ok2 {
-		fatalf("assessments.json: 'assessments' is not an array")
-	}
-
-	for _, a := range assessments {
-		assess, isObj := a.(map[string]any)
-		if !isObj {
-			errorf("assessments.json: assessment entry is not a JSON object")
-			ok = false
-			continue
-		}
+	for _, assess := range assessments {
 		assessID, hasID := assess["id"].(string)
 		if !hasID {
-			errorf("assessments.json: assessment entry is missing a string 'id'")
+			errorf("module manifest: assessment entry is missing a string 'id'")
 			ok = false
 			continue
 		}
@@ -840,11 +814,13 @@ func validateCrossrefs() {
 	}
 
 	// Add project IDs as valid targets
-	var projects ProjectsBundle
-	readJSON("projects.json", &projects)
 	projectIDs := make(map[string]bool)
-	for _, p := range projects.Projects {
-		projectIDs[p.ID] = true
+	for _, mf := range moduleManifestPaths() {
+		var mm ProjectsBundle
+		readJSON(mf, &mm)
+		for _, p := range mm.Projects {
+			projectIDs[p.ID] = true
+		}
 	}
 
 	// 1. Check all crossrefs.json references resolve

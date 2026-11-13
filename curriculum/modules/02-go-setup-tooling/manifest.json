@@ -1,0 +1,2892 @@
+{
+  "assessments": [
+    {
+      "artifact_dir": "tooling-failure-lab",
+      "automated_checks": [],
+      "criteria": [
+        {
+          "description": "Learner can explain the concepts without memorized magic.",
+          "id": "module-02-conceptual",
+          "levels": [
+            {
+              "description": "Cannot explain Go installation, workspace setup, build toolchain, debugging tools.",
+              "score": 0
+            },
+            {
+              "description": "Can explain basics of Go installation, workspace setup, build toolchain, debugging tools with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Clearly explains Go installation, workspace setup, build toolchain, debugging tools, including mechanics, purpose, and common mistakes.",
+              "score": 5
+            }
+          ],
+          "title": "Conceptual clarity",
+          "weight": 30
+        },
+        {
+          "description": "Learner can produce working code or an appropriate artifact.",
+          "id": "module-02-implementation",
+          "levels": [
+            {
+              "description": "No working implementation; missing or non-functional code.",
+              "score": 0
+            },
+            {
+              "description": "Partial implementation with minor bugs or gaps.",
+              "score": 3
+            },
+            {
+              "description": "Complete, clean implementation with proper Go idioms and error handling.",
+              "score": 5
+            }
+          ],
+          "title": "Implementation",
+          "weight": 35
+        },
+        {
+          "description": "Learner can verify the work through tests, checks, or review.",
+          "id": "module-02-proof",
+          "levels": [
+            {
+              "description": "No proof of understanding; no artifact provided.",
+              "score": 0
+            },
+            {
+              "description": "Some proof provided but lacks depth or edge cases.",
+              "score": 3
+            },
+            {
+              "description": "Strong proof with tests or verification covering Go installation, workspace setup and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can communicate decisions and tradeoffs.",
+          "id": "module-02-communication",
+          "levels": [
+            {
+              "description": "No explanation provided; unable to discuss the work.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation with some clarity but lacks depth.",
+              "score": 3
+            },
+            {
+              "description": "Professional explanation linking Go installation, workspace setup, build toolchain, debugging tools to broader system design and trade-offs.",
+              "score": 5
+            }
+          ],
+          "title": "Communication",
+          "weight": 10
+        }
+      ],
+      "documentation_mode": "assessment",
+      "evidence_required": [
+        "Go program that builds and runs",
+        "Tooling configuration files",
+        "Debugging session walkthrough"
+      ],
+      "id": "assessment-module-02",
+      "manual_review_questions": [
+        "What does `go build` actually do? Explain the compilation pipeline from source to binary.",
+        "Why does Go enforce import cycles are forbidden? What problem does the module cache solve?",
+        "Show me a compiler error you've seen. Explain exactly why the compiler rejected the code."
+      ],
+      "module_id": "module-02",
+      "passing_score": 80,
+      "purpose": "Verify that the learner can independently apply and explain Go installation, GOPATH vs modules, go build/test/run workflow, IDE configuration and debugging.",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "readme_status": "scaffolded",
+      "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
+      "status": "ready",
+      "suite": "full",
+      "target_ids": [
+        "core-02-01",
+        "core-02-02",
+        "core-02-03",
+        "core-02-04",
+        "core-02-05",
+        "core-02-06",
+        "core-02-07",
+        "core-02-08",
+        "core-02-09",
+        "core-02-10",
+        "core-02-11",
+        "core-02-12",
+        "core-02-13",
+        "core-02-14"
+      ],
+      "title": "Module 02 Assessment — Go Setup and Tooling",
+      "type": "project-review"
+    },
+    {
+      "automated_checks": [
+        "go run ./...",
+        "go test ./...",
+        "gofmt -l .",
+        "go vet ./..."
+      ],
+      "criteria": [
+        {
+          "id": "project-tooling-failure-lab-correctness",
+          "levels": [
+            {
+              "description": "Incorrect or missing implementation.",
+              "score": 0
+            },
+            {
+              "description": "Partially correct with minor issues.",
+              "score": 3
+            },
+            {
+              "description": "Fully correct implementation.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "id": "project-tooling-failure-lab-quality",
+          "levels": [
+            {
+              "description": "No diagnostic approach demonstrated.",
+              "score": 0
+            },
+            {
+              "description": "Some diagnostic steps with gaps.",
+              "score": 3
+            },
+            {
+              "description": "Systematic diagnostic approach: run tool, read error, identify cause, apply fix, verify.",
+              "score": 5
+            }
+          ],
+          "title": "Diagnostic quality",
+          "weight": 25
+        },
+        {
+          "id": "project-tooling-failure-lab-proof",
+          "levels": [
+            {
+              "description": "No proof provided.",
+              "score": 0
+            },
+            {
+              "description": "Partial proof.",
+              "score": 3
+            },
+            {
+              "description": "TROUBLESHOOTING.md documents all failures with verification output.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "id": "project-tooling-failure-lab-communication",
+          "levels": [
+            {
+              "description": "No explanation.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear, professional explanation of diagnostic process and tool usage.",
+              "score": 5
+            }
+          ],
+          "title": "Communication",
+          "weight": 15
+        }
+      ],
+      "documentation_mode": "assessment",
+      "evidence_required": [
+        "Completed Tooling Failure Lab with all fixes",
+        "TROUBLESHOOTING.md",
+        "Tooling verification output"
+      ],
+      "id": "assessment-project-tooling-failure-lab",
+      "manual_review_questions": [
+        "Can the learner explain each tooling failure and how they diagnosed it?",
+        "Does the troubleshooting document cover all failures with root cause and fix?",
+        "Can the learner explain the Go compilation pipeline from source to binary?",
+        "Does the learner understand when to use go run vs go build vs go install?"
+      ],
+      "module_id": "module-02",
+      "passing_score": 80,
+      "purpose": "Evaluate the Tooling Failure Lab project submission.",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "readme_status": "scaffolded",
+      "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
+      "status": "ready",
+      "suite": "full",
+      "target_ids": [
+        "project-tooling-failure-lab"
+      ],
+      "title": "Assessment — Tooling Failure Lab",
+      "type": "project-review"
+    }
+  ],
+  "curriculum_version": "3.0.0",
+  "document_type": "module_manifest",
+  "items": [
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 01.15 — HTTP request and response preview",
+            "reason": "Install and verify Go requires understanding of HTTP request and response preview.",
+            "required": true,
+            "target_id": "core-01-15"
+          },
+          {
+            "label": "Module 01.14 — Web preview: client, server, DNS, and ports",
+            "reason": "Go Setup and Tooling relies on foundational concepts from Computers, Terminal, Git, and the Web.",
+            "required": true,
+            "target_id": "core-01-14"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies Install and verify Go concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "Both Install and verify Go and Hello World build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "Both Install and verify Go and go run build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-03"
+          },
+          {
+            "label": "Module 02.04 — go build",
+            "reason": "Both Install and verify Go and go build build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-04"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/01-install-and-verify-go/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/01-install-and-verify-go/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/01-install-and-verify-go/main_test.go"
+      },
+      "id": "core-02-01",
+      "learning_objective": "Install, configure, and verify the Go toolchain, validating PATH, GOROOT, and GOPATH environment variables.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-02"
+      ],
+      "order": 1,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-01-15"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must install Go (if not already installed), run go version, go env GOROOT, and go env GOPATH, then explain what each command tells them about their setup.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "install-and-verify-go",
+      "source_legacy_ids": [
+        "GT.1"
+      ],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "tooling",
+        "foundation",
+        "concept"
+      ],
+      "title": "Install and verify Go",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/01-install-and-verify-go",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/01-install-and-verify-go"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Downloading Go from an unofficial source or package manager and getting an outdated version.",
+          "Running go version before adding Go to the system PATH and getting a command-not-found error.",
+          "Installing Go but never verifying with go env GOROOT to confirm the toolchain location."
+        ],
+        "execution_timeline": [
+          "Download the Go binary distribution from go.dev/dl and verify the checksum.",
+          "Run the official installer or extract the tarball to the target directory.",
+          "Add GOROOT/bin to the system PATH and confirm with go version."
+        ],
+        "failure_modes": [
+          {
+            "cause": "GOROOT/bin is not on the system PATH, or a different Go installation shadows the intended one.",
+            "fix": "Run where go or which go to find the active binary, then correct the PATH order or add GOROOT/bin.",
+            "scenario": "Running go version returns the wrong version or a command-not-found error."
+          },
+          {
+            "cause": "The GOROOT environment variable points to an incomplete or corrupted installation.",
+            "fix": "Unset GOROOT (Go detects it from the binary location) or reinstall Go to the correct path.",
+            "scenario": "go env GOROOT returns a directory that does not contain a bin/go executable."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must run go version and go env GOROOT and explain what each outputs.",
+          "Learner must intentionally corrupt PATH and restore it, showing they understand how the shell finds executables.",
+          "Learner must verify the installed Go matches the version they downloaded using go version."
+        ],
+        "how_go_uses_it": "The Go toolchain finds itself via GOROOT, which is embedded in the binary at build time. go env GOROOT reveals this path, and go version reports the exact build commit and toolchain version used by the compiler, linker, and standard library.",
+        "mental_model": "Go installation is a self-contained directory tree. The go binary discovers GOROOT relative to its own location. GOPATH defaults to $HOME/go and is where go install places compiled binaries.",
+        "performance_implications": [
+          "A correct installation saves hours of debugging. The download takes about 2 minutes on a typical connection.",
+          "Multiple Go versions can coexist; using a version manager (go install golang.org/dl/go1.X.X@latest) avoids PATH conflicts.",
+          "The go binary itself is about 15 MB and starts instantly — no heavy toolchain overhead."
+        ],
+        "problem_solved": "Before writing Go code, learners need a working toolchain. This lesson ensures the go command is on PATH, the version is correct, and GOROOT points to a valid installation so subsequent tooling lessons work without errors.",
+        "proof_of_understanding": "The learner must install Go (if not already installed), run go version, go env GOROOT, and go env GOPATH, then explain what each command tells them about their setup.",
+        "real_world_usage": "Every Go developer runs go version to confirm the toolchain before starting a project. CI pipelines use fixed Go versions via go.mod directives. Container images pin Go versions to ensure reproducible builds across environments.",
+        "step_by_step_execution": [
+          "Visit go.dev/dl and download the installer for your operating system.",
+          "Run the installer or extract the archive to a permanent location.",
+          "Open a new terminal and run go version to verify the installation.",
+          "Run go env GOROOT to see where Go is installed.",
+          "Run go env GOPATH to see where your workspace binaries will go."
+        ],
+        "under_the_hood": "The Go toolchain is a single self-contained directory. The go binary at GOROOT/bin/go embeds the GOROOT path at compile time and uses it to find the standard library source, compiler (compile), linker (link), and other tools. go env resolves all paths dynamically, showing where each component lives.",
+        "why_it_exists": "Go must be installed before any Go code can compile. This lesson removes the upfront friction of toolchain setup so learners can focus on Go fundamentals rather than installation troubleshooting."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Hello World requires understanding of Install and verify Go.",
+            "required": true,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 01.15 — HTTP request and response preview",
+            "reason": "Go Setup and Tooling relies on foundational concepts from Computers, Terminal, Git, and the Web.",
+            "required": true,
+            "target_id": "core-01-15"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies Hello World concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "Both Hello World and go run build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-03"
+          },
+          {
+            "label": "Module 02.04 — go build",
+            "reason": "Both Hello World and go build build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-04"
+          },
+          {
+            "label": "Module 02.05 — go test",
+            "reason": "Both Hello World and go test build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-05"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/02-hello-world/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/02-hello-world/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/02-hello-world/main_test.go"
+      },
+      "id": "core-02-02",
+      "learning_objective": "Write, compile, and execute a canonical Hello World Go program, understanding package main and the entrypoint main() function.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-03"
+      ],
+      "order": 2,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-01"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write a hello world program, run it with go run.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "hello-world",
+      "source_legacy_ids": [
+        "GT.2"
+      ],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "tooling",
+        "foundation",
+        "concept"
+      ],
+      "title": "Hello World",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/02-hello-world",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/02-hello-world"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Naming the file something other than main.go or a *_test.go pattern and expecting go run to find it.",
+          "Omitting the package main declaration and getting package is not a main package error.",
+          "Writing func main with incorrect capitalization or signature and getting a confusing linker error."
+        ],
+        "execution_timeline": [
+          "Create a new directory and a file named main.go containing package main and func main().",
+          "Call fmt.Println inside main to print output to stdout.",
+          "Run go run . from the directory to compile and execute the program."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The file declares package something instead of package main.",
+            "fix": "Change the package declaration to package main or run go run . on a different directory.",
+            "scenario": "Running go run . produces package is not a main package."
+          },
+          {
+            "cause": "The import fmt line is missing from the source file.",
+            "fix": "Add import fmt at the top of the file, or use gofmt to insert it automatically.",
+            "scenario": "Running go run . produces undefined: fmt."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must write a hello world program from memory without looking at examples.",
+          "Learner must modify the program to print a second line and run it again.",
+          "Learner must explain why Go requires package main and func main() for an executable."
+        ],
+        "how_go_uses_it": "The Go toolchain requires a main package with a main function as the entry point for executables. go build produces a binary named after the parent directory. The standard library's fmt package provides formatted I/O that mirrors C's printf family but is type-safe.",
+        "mental_model": "A Go program is a collection of packages. Only the package named main with func main() produces an executable. Other packages are reusable libraries. This separation forces clear boundaries between executable entry points and library code from day one.",
+        "performance_implications": [
+          "Hello World compiles in under one second. The resulting binary is about 1.5 MB due to the statically linked runtime.",
+          "The startup time is essentially instant — Go does not need a virtual machine or runtime initialization step.",
+          "Using fmt.Println for a single string is fine; for hot paths, consider fmt.Fprintf with a buffered writer."
+        ],
+        "problem_solved": "Every language learner's first milestone is getting a program to compile and run. Hello World validates that the entire toolchain — editor, compiler, linker, and runtime — works end-to-end before tackling more complex concepts.",
+        "proof_of_understanding": "The learner must write a hello world program, run it with go run ., modify it to print the current time using time.Now, and confirm the output.",
+        "real_world_usage": "Hello World is the canonical starting point for any Go project. Production Go services begin as a main.go with func main(), then grow into HTTP servers, CLI tools, or worker processes. The same package main convention applies at every scale.",
+        "step_by_step_execution": [
+          "Create a new directory for your first Go program.",
+          "Create a file named main.go with package main and import fmt.",
+          "Define func main() and call fmt.Println(\"Hello, World!\").",
+          "Open a terminal in that directory and run go run .",
+          "Verify the output reads Hello, World! and no errors appear."
+        ],
+        "under_the_hood": "go run compiles the main package into a temporary directory, links the Go runtime statically, executes the binary, and discards the build artifacts. The Go linker includes the minimum runtime needed — garbage collector, scheduler, and defer stack — even for a trivial program that only calls fmt.Println.",
+        "why_it_exists": "Hello World is the simplest program that proves the toolchain works. It removes the biggest unknown in learning a new language: whether the computer is set up correctly to compile and run code."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "go run requires understanding of Hello World.",
+            "required": true,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 01.15 — HTTP request and response preview",
+            "reason": "Go Setup and Tooling relies on foundational concepts from Computers, Terminal, Git, and the Web.",
+            "required": true,
+            "target_id": "core-01-15"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies go run concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Both go run and Install and verify Go build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 02.04 — go build",
+            "reason": "Both go run and go build build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-04"
+          },
+          {
+            "label": "Module 02.05 — go test",
+            "reason": "Both go run and go test build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-05"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/03-go-run/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/03-go-run/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/03-go-run/main_test.go"
+      },
+      "id": "core-02-03",
+      "learning_objective": "Execute Go programs directly using go run, understanding how the toolchain compiles to a temporary directory before execution.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-04"
+      ],
+      "order": 3,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-02"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write a program that reads os.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "go-run",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "tooling",
+        "foundation",
+        "concept"
+      ],
+      "title": "go run",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/03-go-run",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/03-go-run"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Running go run main.go when the package spans multiple files and expecting it to compile all of them.",
+          "Running go run from a directory that has no .go files and getting an cannot find package error.",
+          "Using go run for production deployments instead of go build to produce a standalone binary."
+        ],
+        "execution_timeline": [
+          "Navigate to the directory containing the main package.",
+          "Run go run . to compile and execute the program.",
+          "Pass command-line arguments after the package pattern, e.g. go run . --flag value."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The program compiled and ran but produced no stdout output because func main() was empty or only wrote to stderr.",
+            "fix": "Check that main() contains a call to fmt.Println or similar output, and that output goes to os.Stdout.",
+            "scenario": "go run . succeeds but the program exits with no output and no error."
+          },
+          {
+            "cause": "The package declaration in the .go file is something other than package main.",
+            "fix": "Change the package declaration to package main, or use go run ./path/to/main to specify a specific package.",
+            "scenario": "go run . reports package is not a main package."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must run a program with command-line arguments using go run . arg1 arg2.",
+          "Learner must explain why go run main.go compiles only one file but go run . compiles the whole directory.",
+          "Learner must identify whether go run produces a visible binary file on disk."
+        ],
+        "how_go_uses_it": "go run is the most common command during development. The Go standard library build system uses go run internally for code generation tools (go generate). The playground at go.dev/play mirrors go run behavior in the browser.",
+        "mental_model": "go run is a convenience shortcut for compile-link-execute-cleanup. It is equivalent to go build -o /tmp/random \u0026\u0026 /tmp/random \u0026\u0026 rm /tmp/random but handles the temporary file and cleanup automatically.",
+        "performance_implications": [
+          "go run compiles from scratch every time. For large projects, use go test -count=1 or go build first to leverage cached compilation.",
+          "The compiled binary is placed in a temp directory and deleted after execution, so there is no disk pollution.",
+          "Startup overhead is the same as a compiled binary — go run does not add runtime latency."
+        ],
+        "problem_solved": "Developers need a fast edit-compile-run loop. go run eliminates the separate build-and-run step, making iteration immediate. It also avoids cluttering the project directory with binary artifacts.",
+        "proof_of_understanding": "The learner must write a program that reads os.Args and prints each argument, then run it with go run . hello world and verify the output.",
+        "real_world_usage": "During development, go run is the primary iteration command. Many Go projects use go run ./cmd/app during development and switch to go build -o bin/app ./cmd/app for production. Short-lived scripts and tools are often run directly with go run.",
+        "step_by_step_execution": [
+          "Navigate to the directory containing your main package.",
+          "Run go run . to compile and execute.",
+          "Observe that no binary remains in the directory after execution.",
+          "Run go build . and notice it produces an executable in the current directory."
+        ],
+        "under_the_hood": "go run resolves the package pattern, compiles it to a temporary directory (os.TempDir()), links the binary, executes it with os.StartProcess, waits for it to complete, then removes the temp binary. If the program panics or crashes, the temp binary is still cleaned up after exit.",
+        "why_it_exists": "Developers need a one-step command to compile and run Go code during learning and prototyping. go run removes the compile-then-run friction so learners can focus on code behavior rather than build mechanics."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "go build requires understanding of go run.",
+            "required": true,
+            "target_id": "core-02-03"
+          },
+          {
+            "label": "Module 01.15 — HTTP request and response preview",
+            "reason": "Go Setup and Tooling relies on foundational concepts from Computers, Terminal, Git, and the Web.",
+            "required": true,
+            "target_id": "core-01-15"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies go build concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Both go build and Install and verify Go build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "Both go build and Hello World build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 02.05 — go test",
+            "reason": "Both go build and go test build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-05"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/04-go-build/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/04-go-build/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/04-go-build/main_test.go"
+      },
+      "id": "core-02-04",
+      "learning_objective": "Compile standalone native executable binaries using go build, configuring output filenames and cross-compilation flags.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-05"
+      ],
+      "order": 4,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-03"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must build a main package with go build, run the binary, cross-compile it for a different OS, and verify the binary exists at the expected path.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "go-build",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "tooling",
+        "foundation",
+        "concept"
+      ],
+      "title": "go build",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/04-go-build",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/04-go-build"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Running go build on a library package and expecting an executable binary file to appear.",
+          "Forgetting to set GOOS and GOARCH for cross-compilation and distributing the wrong platform binary.",
+          "Running go build without the -o flag and not knowing where the binary was placed."
+        ],
+        "execution_timeline": [
+          "Run go build . in the main package directory to produce an executable named after the directory.",
+          "Run go build -o bin/app . to specify the output path explicitly.",
+          "Use GOOS=linux GOARCH=amd64 go build for cross-compilation."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The package is not a main package; library packages compile but produce no executable.",
+            "fix": "Verify the package declaration is package main, or use go build -o output.exe . to force an output path.",
+            "scenario": "go build succeeds but no binary appears in the current directory."
+          },
+          {
+            "cause": "GOOS or GOARCH was set incorrectly, producing a binary for the wrong platform.",
+            "fix": "Run go tool dist list to see valid OS/arch combinations, then rebuild with the correct GOOS/GOARCH.",
+            "scenario": "Cross-compiled binary fails to run on the target machine with exec format error."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain the difference between go build output for main vs library packages.",
+          "Learner must cross-compile a binary for linux/amd64 and verify its format with file or go tool objdump.",
+          "Learner must use -o to place the binary in a specific directory and confirm it exists."
+        ],
+        "how_go_uses_it": "The Go standard library is compiled with go build. Third-party tools are distributed via go install (which is go build plus binary placement). go build -ldflags=\"-s -w\" strips debug info for smaller production binaries.",
+        "mental_model": "go build is the compile-and-link step without execution. It produces a static binary containing the Go runtime and all dependencies, with no external DLLs or shared libraries required at runtime.",
+        "performance_implications": [
+          "go build uses cached compilation — only changed files are recompiled. Consecutive builds of the same code complete in \u003c 1 second.",
+          "The resulting binary is typically 5-20 MB for a small service due to the statically linked runtime.",
+          "Use -ldflags=\"-s -w\" to reduce binary size by ~30% by stripping symbol tables and DWARF debug info."
+        ],
+        "problem_solved": "Developers need a deployable artifact. go build produces a standalone executable that can be copied to any machine with the same OS/arch, with no runtime dependencies or interpreter required.",
+        "proof_of_understanding": "The learner must build a main package with go build, run the binary, cross-compile it for a different OS, and verify the binary exists at the expected path.",
+        "real_world_usage": "Production deployments use go build to create the binary that runs in a Docker container or on a server. CI pipelines run go build to verify the code compiles before running tests. Distribution channels use cross-compilation with go build to support multiple platforms.",
+        "step_by_step_execution": [
+          "Navigate to a directory with a main package.",
+          "Run go build . to produce an executable.",
+          "Run go build -o bin/app . to place the binary in a subdirectory.",
+          "Set GOOS=linux GOARCH=amd64 and run go build . to cross-compile.",
+          "Verify the output file exists and is executable."
+        ],
+        "under_the_hood": "go build invokes the Go compiler (compile) on each package, then the linker (link) to produce the final binary. The linker statically links the Go runtime, includes the garbage collector, scheduler, and memory allocator, and embeds metadata like build info and module version. The resulting binary is self-contained and position-independent.",
+        "why_it_exists": "Code that is not built cannot be deployed. go build is the gateway between source code and a runnable, distributable artifact. Understanding go build separates development from delivery."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.04 — go build",
+            "reason": "go test requires understanding of go build.",
+            "required": true,
+            "target_id": "core-02-04"
+          },
+          {
+            "label": "Module 01.15 — HTTP request and response preview",
+            "reason": "Go Setup and Tooling relies on foundational concepts from Computers, Terminal, Git, and the Web.",
+            "required": true,
+            "target_id": "core-01-15"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies go test concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Both go test and Install and verify Go build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "Both go test and Hello World build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "Both go test and go run build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-03"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "how-to",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/05-go-test/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/05-go-test/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/05-go-test/main_test.go"
+      },
+      "id": "core-02-05",
+      "learning_objective": "Execute unit tests and benchmarks using go test, interpreting pass/fail statuses and test run output.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-06"
+      ],
+      "order": 5,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-04"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write a simple function, write a test file with a passing and failing test case, run go test -v, and explain the output.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "how-to",
+        "required": true
+      },
+      "slug": "go-test",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "testing",
+      "tags": [
+        "tooling",
+        "foundation",
+        "testing"
+      ],
+      "title": "go test",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/05-go-test",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/05-go-test"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Naming test files something_test.go but forgetting the _test suffix and wondering why go test finds no tests.",
+          "Writing a Test function with the wrong signature (e.g., func TestFoo() instead of func TestFoo(t *testing.T)).",
+          "Running go test without -v and then not seeing which specific tests passed or failed."
+        ],
+        "execution_timeline": [
+          "Create a file named *_test.go in the same package as the code being tested.",
+          "Write a function with signature func TestXxx(t *testing.T) containing test logic.",
+          "Run go test -v ./... from the module root to execute all tests verbosely."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The file does not match the *_test.go pattern, or it is in a different package with build tags that exclude it.",
+            "fix": "Rename the file to match *_test.go and ensure build constraints (//go:build) do not exclude it from the current platform.",
+            "scenario": "go test reports no test files but the test file exists."
+          },
+          {
+            "cause": "The test relies on behavior that changed between Go versions (e.g., sort algorithm stability or map iteration order).",
+            "fix": "Pin the Go version in go.mod and run go test with -count=1 to disable caching in CI.",
+            "scenario": "A test passes locally but fails in CI with a different Go version."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must write a passing test and a failing test, then run go test -v and identify which passed and which failed.",
+          "Learner must explain why go test *_test.go fails with syntax errors while go test . succeeds.",
+          "Learner must run go test -run TestName to run a single test by pattern."
+        ],
+        "how_go_uses_it": "The Go standard library is tested entirely with go test. The testing package provides benchmarks (BenchmarkXxx), fuzzing (FuzzXxx), and subtests (t.Run). go test -cover reports code coverage. The testing/slogintest and testing/fstest packages provide example implementations for interface testing.",
+        "mental_model": "go test compiles a special test binary that links the production code with test files. Each Test function is a separate entry point. The testing package provides t.Error/t.Fatal for failures and t.Log for diagnostics. Test files are excluded from production builds.",
+        "performance_implications": [
+          "go test -count=1 disables test caching, forcing a fresh run every time. Without -count, go test caches results when neither code nor tests changed.",
+          "go test -short allows conditional test skipping for long-running tests.",
+          "go test -bench=. -benchmem runs benchmarks with memory allocation statistics."
+        ],
+        "problem_solved": "Developers need a way to verify code correctness automatically. go test provides a built-in, standardized testing framework without requiring external test runners or assertion libraries.",
+        "proof_of_understanding": "The learner must write a simple function, write a test file with a passing and failing test case, run go test -v, and explain the output.",
+        "real_world_usage": "go test is run on every pull request in Go projects. CI pipelines fail on test failures. Coverage thresholds enforce minimum testing standards. Benchmarks with go test -bench detect performance regressions across commits.",
+        "step_by_step_execution": [
+          "Create a file named main_test.go in the same directory as your main.go.",
+          "Add package main and import testing.",
+          "Write func TestHello(t *testing.T) that calls your function and uses t.Errorf on unexpected results.",
+          "Run go test -v to see the test execute.",
+          "Introduce a deliberate bug and re-run to see the failure output."
+        ],
+        "under_the_hood": "go test compiles a virtual package combining the target package and its *_test.go files into a test binary. This binary is executed as a standalone program. Each Test function is discovered via reflection on the test binary's symbol table. The testing framework calls each in sequence, catching panics and reporting failures via the *testing.T argument.",
+        "why_it_exists": "Manual verification does not scale. go test provides a repeatable, automatable way to verify code behavior that integrates directly into development workflow and CI pipelines."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.05 — go test",
+            "reason": "gofmt requires understanding of go test.",
+            "required": true,
+            "target_id": "core-02-05"
+          },
+          {
+            "label": "Module 02.04 — go build",
+            "reason": "gofmt extends directly from go build.",
+            "required": true,
+            "target_id": "core-02-04"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies gofmt concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Both gofmt and Install and verify Go build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "Both gofmt and Hello World build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "Both gofmt and go run build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-03"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/06-gofmt/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/06-gofmt/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/06-gofmt/main_test.go"
+      },
+      "id": "core-02-06",
+      "learning_objective": "Format Go code deterministically using gofmt to enforce standard Go community style and formatting conventions.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-07"
+      ],
+      "order": 6,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-05"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write a deliberately misformatted Go file, run gofmt -d to show the diff, then run gofmt -w to fix it, and verify the file is clean with gofmt -d (no output).",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "gofmt",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "tooling",
+        "foundation",
+        "concept"
+      ],
+      "title": "gofmt",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/06-gofmt",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/06-gofmt"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Running gofmt without -w and wondering why the file did not change on disk.",
+          "Assuming gofmt handles all code style issues including naming conventions and comment placement.",
+          "Disabling gofmt in their editor because they disagree with tab-based indentation."
+        ],
+        "execution_timeline": [
+          "Write Go source code with inconsistent formatting (tabs vs spaces, alignment, blank lines).",
+          "Run gofmt -w file.go to format and write changes in-place.",
+          "Verify the file now follows canonical Go formatting conventions."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The -w (write) flag was omitted, so gofmt only printed the formatted version to stdout instead of modifying the file.",
+            "fix": "Add the -w flag: gofmt -w file.go. To preview changes without modifying, run gofmt -d file.go.",
+            "scenario": "Running gofmt produces no output and exits silently, but the file is still misformatted."
+          },
+          {
+            "cause": "The original file had a syntax error, and gofmt cannot parse it; it will refuse to modify it. A different tool or manual edit must fix the syntax first.",
+            "fix": "Run go vet or go build first to verify the file compiles, then run gofmt.",
+            "scenario": "gofmt changes the file but introduces a syntax error that did not exist before."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must deliberately misformat a Go file (wrong indentation, extra blank lines) and run gofmt -d to see the diff.",
+          "Learner must run gofmt -w and confirm the file was rewritten.",
+          "Learner must explain why gofmt uses tabs for indentation and spaces for alignment."
+        ],
+        "how_go_uses_it": "The Go standard library is formatted with gofmt before every commit. The gofmt -s flag simplifies unnecessary code (like redundant type declarations). gofmt -r rule applies mechanical refactoring patterns across a codebase.",
+        "mental_model": "gofmt is an opinionated code formatter with zero configuration. There is no style guide to memorize — gofmt is the style guide. Every Go file in the ecosystem looks the same because gofmt eliminates formatting debates.",
+        "performance_implications": [
+          "gofmt completes in milliseconds for typical files. It does not compile the code — it parses and reformats the AST.",
+          "Formatting early and often reduces merge conflicts because diff noise from style changes is eliminated.",
+          "Most editors run gofmt on save via gopls, making formatting invisible to the developer."
+        ],
+        "problem_solved": "Teams waste time debating tabs vs spaces, brace placement, and alignment. gofmt eliminates all formatting discussions by enforcing a single, universal format that every Go developer uses.",
+        "proof_of_understanding": "The learner must write a deliberately misformatted Go file, run gofmt -d to show the diff, then run gofmt -w to fix it, and verify the file is clean with gofmt -d (no output).",
+        "real_world_usage": "Every Go CI pipeline runs gofmt -l . to check for unformatted files. Code reviews reject PRs with formatting diffs. gofmt is the zero-config formatter that makes all Go code look uniformly readable.",
+        "step_by_step_execution": [
+          "Write a Go file with inconsistent indentation (mix of tabs and spaces) and extra blank lines.",
+          "Run gofmt -d file.go to preview the formatting changes as a diff.",
+          "Run gofmt -w file.go to apply the formatting changes.",
+          "Open the file and confirm the formatting is consistent.",
+          "Run gofmt -l . to list all files that are not properly formatted."
+        ],
+        "under_the_hood": "gofmt parses the Go source file into an AST, then walks the AST and prints each node using the standard go/printer formatting rules. The printer enforces tabs for indentation, specific spacing around operators, and consistent brace placement. If the file has syntax errors, gofmt refuses to format and reports the error instead.",
+        "why_it_exists": "Code formatting debates waste time and create noise in code reviews. gofmt eliminates this by providing a single, authoritative format that requires no configuration and produces consistent output across the entire Go ecosystem."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.06 — gofmt",
+            "reason": "go vet requires understanding of gofmt.",
+            "required": true,
+            "target_id": "core-02-06"
+          },
+          {
+            "label": "Module 02.05 — go test",
+            "reason": "go vet extends directly from go test.",
+            "required": true,
+            "target_id": "core-02-05"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies go vet concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Both go vet and Install and verify Go build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "Both go vet and Hello World build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "Both go vet and go run build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-03"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/07-go-vet/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/07-go-vet/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/07-go-vet/main_test.go"
+      },
+      "id": "core-02-07",
+      "learning_objective": "Audit code for subtle bugs, unkeyed struct literals, and unreachable code using the static analysis tool go vet.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-08"
+      ],
+      "order": 7,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-06"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write a program with at least two go-vet-detectable issues (e.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "go-vet",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "tooling",
+        "foundation",
+        "concept"
+      ],
+      "title": "go vet",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/07-go-vet",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/07-go-vet"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Running go vet only once and ignoring its warnings because the code compiles and runs fine.",
+          "Confusing go vet warnings with compiler errors — vet warnings are suspicious patterns, not syntax errors.",
+          "Assuming go vet catches all bugs — it only detects specific known patterns, not logic errors or missing tests."
+        ],
+        "execution_timeline": [
+          "Write Go code that compiles successfully but contains a suspicious pattern (e.g., unused variable, printf format mismatch).",
+          "Run go vet ./... from the module root to analyze all packages.",
+          "Read the vet warnings and fix the flagged issues even though the code compiles."
+        ],
+        "failure_modes": [
+          {
+            "cause": "A format verb in fmt.Printf or fmt.Sprintf does not match the argument type.",
+            "fix": "Change the format verb (e.g., %s for string) or convert the argument to the expected type.",
+            "scenario": "go vet reports Printf format %d expects int but got string."
+          },
+          {
+            "cause": "A return, panic, or os.Exit before the flagged line makes that line dead code.",
+            "fix": "Remove the unreachable code or restructure the control flow so every path is reachable.",
+            "scenario": "go vet reports unreachable code but the logic seems correct."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must write code with a printf format mismatch and observe go vet catching it.",
+          "Learner must write an unused variable and observe go vet detecting it.",
+          "Learner must explain why go vet warnings are not compiler errors but are still important to fix."
+        ],
+        "how_go_uses_it": "The Go standard library is vetted before every release. go vet is integrated into the go toolchain and runs specific analyzers for printf mismatches, unreachable code, shadowed variables, lock misuses, and test format issues. The golang.org/x/tools repository contains additional analyzers that can be added via go vet -vettool.",
+        "mental_model": "go vet is a static analysis linter that finds suspicious code patterns — code that compiles but is probably wrong. Unlike gofmt which fixes style, go vet flags likely bugs.",
+        "performance_implications": [
+          "go vet runs after compilation and is fast — typically less than a second per package.",
+          "CI pipelines should fail on go vet warnings, preventing suspicious patterns from reaching production.",
+          "go vet ./... on a large monorepo runs in parallel across packages and completes in seconds."
+        ],
+        "problem_solved": "Many bugs are not syntax errors — they compile fine but behave unexpectedly. go vet catches common suspicious patterns like printf argument mismatches, unused variables, and dead assignments before they cause runtime failures.",
+        "proof_of_understanding": "The learner must write a program with at least two go-vet-detectable issues (e.g., Printf mismatch and unused variable), run go vet ./..., read the warnings, and fix all of them.",
+        "real_world_usage": "CI pipelines run go vet ./... in parallel with go test. Many organizations enforce zero go vet warnings in production code. go vet -vettool=$(which staticcheck) runs the staticcheck analyzer as a vet pass for deeper analysis.",
+        "step_by_step_execution": [
+          "Write a Go program that has a fmt.Printf with mismatch between %d and a string argument.",
+          "Run go vet . and observe the warning.",
+          "Add an unused variable declaration and run go vet . again.",
+          "Fix both issues and re-run go vet . to confirm zero warnings.",
+          "Run go vet ./... from the module root to check all packages."
+        ],
+        "under_the_hood": "go vet compiles each package, then runs a set of built-in analyzers on the compiled AST and type information. Each analyzer implements the go/analysis.Analyzer interface. Popular built-in analyzers include printf (checks format verb/argument matching), shadow (detects shadowed variables), copylocks (detects passing locks by value), and unreachable (detects dead code).",
+        "why_it_exists": "Compilation success does not mean code correctness. go vet catches a class of bugs that the compiler does not check — suspicious patterns that are valid Go but likely unintended."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.07 — go vet",
+            "reason": "go doc requires understanding of go vet.",
+            "required": true,
+            "target_id": "core-02-07"
+          },
+          {
+            "label": "Module 02.06 — gofmt",
+            "reason": "go doc extends directly from gofmt.",
+            "required": true,
+            "target_id": "core-02-06"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies go doc concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Both go doc and Install and verify Go build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "Both go doc and Hello World build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "Both go doc and go run build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-03"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/08-go-doc/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/08-go-doc/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/08-go-doc/main_test.go"
+      },
+      "id": "core-02-08",
+      "learning_objective": "Query package and symbol documentation directly in the terminal using go doc for standard library and local code.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-09"
+      ],
+      "order": 8,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-07"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must use go doc to look up three different standard library functions, then write a doc comment for a custom function and verify it with go doc.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "go-doc",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "tooling",
+        "foundation",
+        "concept"
+      ],
+      "title": "go doc",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/08-go-doc",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/08-go-doc"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Running go doc without arguments and getting confused by the large output of the current package.",
+          "Typing go doc fmt.Println when the correct syntax is go doc fmt.Println (capital P in Println matters).",
+          "Never writing doc comments because the code feels self-explanatory, then having no go doc output."
+        ],
+        "execution_timeline": [
+          "Run go doc fmt to see documentation for the fmt package.",
+          "Run go doc fmt.Println to see documentation for a specific function.",
+          "Write a doc comment above a function and run go doc to confirm it appears."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The identifier was misspelled or had incorrect capitalization (exported names must start with a capital letter).",
+            "fix": "Check the exact spelling and capitalization: go doc fmt.Println (capital P, capital L).",
+            "scenario": "go doc fmt.Println returns no output or doc not found."
+          },
+          {
+            "cause": "The comments are not in the standard doc comment format (they must immediately precede the declaration with no blank lines).",
+            "fix": "Place the comment directly above the declaration without blank lines between the comment and the func/type/const/var keyword.",
+            "scenario": "Running go doc on a local function returns no documentation even though comments exist."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must use go doc fmt to find the documentation for the Println function.",
+          "Learner must write a doc comment for a function and verify it appears in go doc output.",
+          "Learner must explain the difference between a package-level doc comment and a function-level doc comment."
+        ],
+        "how_go_uses_it": "The entire Go standard library is documented via doc comments. go doc extracts and formats these comments. pkg.go.dev renders the same documentation for all publicly available Go packages. The convention is: package comments start with Package \u003cname\u003e, function comments start with the function name.",
+        "mental_model": "go doc reads doc comments from Go source files and displays them in the terminal. A doc comment is a plain text comment preceding a top-level declaration. The first sentence becomes the short summary; the full comment body is the detailed documentation.",
+        "performance_implications": [
+          "go doc is instant — it reads source files directly without compiling.",
+          "Well-documented code is faster to onboard into, reducing the time to understand unfamiliar packages.",
+          "go doc requires no internet access; it works fully offline for any installed package."
+        ],
+        "problem_solved": "Developers need quick access to documentation without leaving the terminal or opening a browser. go doc provides instant, offline access to package, type, function, and method documentation from any Go source file.",
+        "proof_of_understanding": "The learner must use go doc to look up three different standard library functions, then write a doc comment for a custom function and verify it with go doc.",
+        "real_world_usage": "Professional Go developers use go doc constantly during development to check function signatures, available methods, and behavior. go doc is the first line of documentation before consulting web-based references.",
+        "step_by_step_execution": [
+          "Run go doc fmt to view the fmt package documentation.",
+          "Run go doc fmt.Println to view Println's documentation.",
+          "Write a Go file with a commented function: // Add returns the sum of two integers.",
+          "Run go doc . to see your package's documentation.",
+          "Run go doc Add to see your function's documentation."
+        ],
+        "under_the_hood": "go doc parses Go source files using the go/parser and go/ast packages. It extracts doc comments attached to top-level declarations. The formatting follows the Godoc format rules: indented lines are code blocks, blank lines separate paragraphs, and the first sentence is extracted as a short summary by tools like pkg.go.dev.",
+        "why_it_exists": "Documentation is useless if it is hard to access. go doc puts documentation at your fingertips without leaving the terminal, encouraging the habit of writing and reading doc comments."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.08 — go doc",
+            "reason": "Editor setup and gopls requires understanding of go doc.",
+            "required": true,
+            "target_id": "core-02-08"
+          },
+          {
+            "label": "Module 02.07 — go vet",
+            "reason": "Editor setup and gopls extends directly from go vet.",
+            "required": true,
+            "target_id": "core-02-07"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies Editor setup and gopls concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Both Editor setup and gopls and Install and verify Go build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "Both Editor setup and gopls and Hello World build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "Both Editor setup and gopls and go run build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-03"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/09-editor-setup-and-gopls/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/09-editor-setup-and-gopls/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/09-editor-setup-and-gopls/main_test.go"
+      },
+      "id": "core-02-09",
+      "learning_objective": "Configure an editor with gopls Language Server Protocol (LSP) for real-time type checking, auto-completion, and jump-to-definition.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-10"
+      ],
+      "order": 9,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-08"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must install gopls if not already present, open a Go file, use hover to view documentation on fmt.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "editor-setup-and-gopls",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "tooling",
+        "foundation",
+        "concept"
+      ],
+      "title": "Editor setup and gopls",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/09-editor-setup-and-gopls",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/09-editor-setup-and-gopls"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Installing a Go extension without independently installing gopls and then getting no language features.",
+          "Assuming the editor catches all errors before running go build or go vet.",
+          "Disabling the Go extension because gopls startup feels slow, losing all IDE features."
+        ],
+        "execution_timeline": [
+          "Install gopls via go install golang.org/x/tools/gopls@latest.",
+          "Install the Go extension for your editor (VS Code, Vim, Neovim, Emacs, etc.).",
+          "Open a Go file and verify that gopls provides completion, hover docs, and diagnostics."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The module does not have a go.mod file, or gopls cannot find the module root.",
+            "fix": "Run go mod init \u003cmodule-name\u003e in the project root, then reload the window.",
+            "scenario": "The editor shows gopls: no packages found or gopls: package not found for every file."
+          },
+          {
+            "cause": "The gopls version is outdated, or the editor is using a different Go version than the terminal.",
+            "fix": "Run gopls version to check the version, then go install golang.org/x/tools/gopls@latest to update. Ensure GOROOT and PATH are consistent between editor and terminal.",
+            "scenario": "gopls reports inconsistent diagnostics between editor and go build."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must verify gopls is installed and running with gopls version.",
+          "Learner must open a Go file with a deliberate syntax error and observe the diagnostic in their editor.",
+          "Learner must use gopls completion (Ctrl+Space) to complete a function call and explain what happened."
+        ],
+        "how_go_uses_it": "The Go team develops gopls as the official language server. It powers all Go editor integrations. gopls provides completion, hover documentation, go-to-definition, references, rename, formatting (via gofmt), diagnostics, and code actions. The golang.org/x/tools/gopls package is updated alongside Go releases.",
+        "mental_model": "gopls is the brain behind your Go editor. It reads your Go source files, builds an in-memory model of your codebase using the same analysis tools as go vet and go doc, and responds to editor requests (hover, go-to-def, completion) via the Language Server Protocol (LSP).",
+        "performance_implications": [
+          "gopls indexes the module on first open, which can take 2-10 seconds for large modules.",
+          "Incremental updates after the initial index are sub-second. gopls watches file changes and re-indexes only modified files.",
+          "Memory usage is typically 100-300 MB for a medium-sized module. This is normal and expected for a language server."
+        ],
+        "problem_solved": "Without gopls, Go developers have no IDE features — no autocomplete, no go-to-definition, no inline errors. gopls provides these capabilities and ensures every editor has the same high-quality Go experience.",
+        "proof_of_understanding": "The learner must install gopls if not already present, open a Go file, use hover to view documentation on fmt.Println, use go-to-definition to navigate to the standard library source, and fix a diagnostic shown by gopls.",
+        "real_world_usage": "Every professional Go developer uses gopls daily. VS Code's Go extension, vim-go, and gopls Emacs mode all depend on gopls for the core editing experience. CI does not use gopls, but developers rely on it for real-time feedback.",
+        "step_by_step_execution": [
+          "Verify gopls is installed: gopls version.",
+          "If not installed, run: go install golang.org/x/tools/gopls@latest.",
+          "Install your editor's Go extension (e.g., VS Code Go, vim-go, eglot for Emacs).",
+          "Open a Go file and verify features: hover over fmt.Println, trigger completion with ., go to definition on a function call.",
+          "Introduce a syntax error and observe the red squiggly underline with the error message."
+        ],
+        "under_the_hood": "gopls implements the Language Server Protocol (LSP) — a JSON-RPC protocol for editor communication. It parses the module's Go files, resolves imports, builds a type-checked AST, and maintains a cache of symbols and their locations. When you hover over a symbol, gopls looks up its doc comment; when you go-to-definition, it returns the file, line, and column of the declaration.",
+        "why_it_exists": "Editors without language servers are just text editors with syntax highlighting. gopls transforms any LSP-compatible editor into a full-featured Go IDE, providing real-time feedback that accelerates learning and development."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.09 — Editor setup and gopls",
+            "reason": "Reading compiler errors requires understanding of Editor setup and gopls.",
+            "required": true,
+            "target_id": "core-02-09"
+          },
+          {
+            "label": "Module 02.08 — go doc",
+            "reason": "Reading compiler errors extends directly from go doc.",
+            "required": true,
+            "target_id": "core-02-08"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies Reading compiler errors concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Both Reading compiler errors and Install and verify Go build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "Both Reading compiler errors and Hello World build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "Both Reading compiler errors and go run build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-03"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/10-reading-compiler-errors/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/10-reading-compiler-errors/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/10-reading-compiler-errors/main_test.go"
+      },
+      "id": "core-02-10",
+      "learning_objective": "Diagnose and resolve Go compiler syntax, type-mismatch, and import errors by interpreting compiler diagnostic messages.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-11"
+      ],
+      "order": 10,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-09"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write code that produces three different compiler errors, identify each error's location and cause from the message alone, and fix all three.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "reading-compiler-errors",
+      "source_legacy_ids": [
+        "GT.6"
+      ],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "tooling",
+        "foundation",
+        "concept"
+      ],
+      "title": "Reading compiler errors",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/10-reading-compiler-errors",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/10-reading-compiler-errors"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Panicking when a compiler error appears and trying random changes instead of reading the error message.",
+          "Only looking at the error type (e.g., syntax error) and ignoring the line number and column indicator.",
+          "Treating all compiler errors as fatal without understanding that Go produces multiple errors in one pass."
+        ],
+        "execution_timeline": [
+          "Write Go code with a deliberate mistake (e.g., missing comma, wrong type, undeclared variable).",
+          "Run go build or go vet and observe the error output.",
+          "Read the file path, line number, column, error code, and message to locate and fix the issue."
+        ],
+        "failure_modes": [
+          {
+            "cause": "In Go, a variable is only considered used if it is read, not just assigned. An assignment without reading the value is unused.",
+            "fix": "Use the variable in a read context (e.g., fmt.Println(x)), or declare it with _ = x to suppress the error intentionally.",
+            "scenario": "Go reports declared and not used: x on line 5, but the variable x is clearly used on line 6."
+          },
+          {
+            "cause": "A function expects an int but a string was passed. Go does not perform implicit type conversions.",
+            "fix": "Convert the value explicitly, e.g., strconv.Atoi(str) to get an int, or change the argument type to match.",
+            "scenario": "Go reports cannot use str (type string) as type int in argument to add."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must produce three different compiler errors (syntax, type mismatch, unused variable) and explain each message.",
+          "Learner must identify the line and column from a Go compiler error message.",
+          "Learner must explain the difference between a compile-time error and a run-time panic."
+        ],
+        "how_go_uses_it": "Go's compiler produces error messages with a consistent format: file:line:col: error message. The Go compiler is designed to produce clear, actionable error messages. Go 1.20+ improved error messages with more context, including suggested fixes for common mistakes.",
+        "mental_model": "Compiler errors are the Go compiler's way of saying I cannot translate this into machine code. The error message tells you exactly where (file:line:col) and why (error message). The first error is usually the real cause; later errors are often cascading effects.",
+        "performance_implications": [
+          "Go's compiler stops after the first pass but may report multiple errors from that pass.",
+          "Fix errors from top to bottom — the first error is often the root cause of subsequent ones.",
+          "Reading and understanding the error message is faster than random trial-and-error debugging."
+        ],
+        "problem_solved": "Compile errors are frustrating for beginners who do not know what the messages mean. This lesson teaches learners to read error messages systematically, reducing the time between error and fix.",
+        "proof_of_understanding": "The learner must write code that produces three different compiler errors, identify each error's location and cause from the message alone, and fix all three.",
+        "real_world_usage": "Professional Go developers encounter compile errors daily. The ability to quickly parse file:line:col messages and understand the error type directly impacts development speed. gopls shows these errors in-editor, but the same message format is used in CI logs.",
+        "step_by_step_execution": [
+          "Write code with a deliberate syntax error (e.g., missing closing brace).",
+          "Run go build . and read the error: note the file, line number, column, and message.",
+          "Fix the syntax error.",
+          "Introduce a type mismatch error (passing string to an int parameter).",
+          "Run go build . and read the error, then fix it."
+        ],
+        "under_the_hood": "Go's compiler (cmd/compile) parses source into tokens, builds an AST, performs type checking, and generates machine code via SSA (Static Single Assignment) form. Errors are collected during each phase. The error format file:line:col is produced by the compiler's base position information, which tracks source locations through every transformation.",
+        "why_it_exists": "New Go developers see compile errors as obstacles rather than information. Learning to read compiler errors systematically turns them from frustration into a fast feedback mechanism."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.10 — Reading compiler errors",
+            "reason": "Reading runtime errors requires understanding of Reading compiler errors.",
+            "required": true,
+            "target_id": "core-02-10"
+          },
+          {
+            "label": "Module 02.09 — Editor setup and gopls",
+            "reason": "Reading runtime errors extends directly from Editor setup and gopls.",
+            "required": true,
+            "target_id": "core-02-09"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies Reading runtime errors concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Both Reading runtime errors and Install and verify Go build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "Both Reading runtime errors and Hello World build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "Both Reading runtime errors and go run build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-03"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/11-reading-runtime-errors/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/11-reading-runtime-errors/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/11-reading-runtime-errors/main_test.go"
+      },
+      "id": "core-02-11",
+      "learning_objective": "Analyze runtime panics and stack traces to pinpoint the exact line, function, and cause of a runtime crash.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-12"
+      ],
+      "order": 11,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-10"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write a program that panics with index out of range, read the traceback, identify the exact line, fix the bug, and confirm the program runs without panicking.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "reading-runtime-errors",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "tooling",
+        "foundation",
+        "concept"
+      ],
+      "title": "Reading runtime errors",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/11-reading-runtime-errors",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/11-reading-runtime-errors"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Seeing a panic traceback and closing the terminal without reading any of the stack frames.",
+          "Looking only at the panic message (e.g., nil pointer dereference) and ignoring the file and line where it happened.",
+          "Assuming a runtime panic means the entire program is broken, rather than fixing the specific nil check or bounds error."
+        ],
+        "execution_timeline": [
+          "Write a program that triggers a runtime panic (e.g., nil pointer dereference, index out of range).",
+          "Run the program and observe the panic traceback output.",
+          "Read the traceback from top to bottom to find the exact line that caused the panic."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The code tried to access index 5 of a slice or array that only has 3 elements (indices 0, 1, 2).",
+            "fix": "Check the slice length before accessing, or fix the loop bounds: for i := range slice instead of for i := 0; i \u003c= len(slice); i++.",
+            "scenario": "panic: runtime error: index out of range [5] with length 3."
+          },
+          {
+            "cause": "A pointer variable is nil but the code tried to access its field or method without a nil check.",
+            "fix": "Add a nil check before dereferencing the pointer, or ensure the pointer is initialized before use.",
+            "scenario": "panic: runtime error: invalid memory address or nil pointer dereference."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must trigger a nil pointer dereference and identify the exact line from the traceback.",
+          "Learner must trigger an index out of range and explain how the traceback reveals the invalid index value.",
+          "Learner must recover from a panic using defer and recover and explain when that is appropriate."
+        ],
+        "how_go_uses_it": "Go runtime panics include the goroutine stack trace showing every function call from the panic site up to main. The traceback lists file:line for each frame. go tool pprof can profile panics. The runtime/debug package provides Stack() for programmatic traceback access without panicking.",
+        "mental_model": "A panic traceback is a call stack printed in reverse order. The top of the traceback is the panic site (the line that panicked). Each frame below shows who called whom. Read from top to bottom: the first frame is the bug, the last frame is main.",
+        "performance_implications": [
+          "Printing a traceback is slow (millions of cycles) and should not happen in normal operation.",
+          "Panics are intended for truly exceptional conditions — not for regular error handling.",
+          "Recovering from a panic in a deferred function is the correct way to prevent crashes in long-running servers (e.g., HTTP handler per-request recovery)."
+        ],
+        "problem_solved": "Runtime errors crash programs without warning. Understanding panic tracebacks lets developers find the exact cause quickly instead of guessing where the crash occurred.",
+        "proof_of_understanding": "The learner must write a program that panics with index out of range, read the traceback, identify the exact line, fix the bug, and confirm the program runs without panicking.",
+        "real_world_usage": "Production Go services use panic recovery middleware to prevent crashes from taking down the entire server. When a panic does occur, the traceback is logged and analyzed to find the root cause. Runtime error reading is a critical debugging skill.",
+        "step_by_step_execution": [
+          "Write a program that accesses slice[10] on a slice with 3 elements.",
+          "Run the program and observe the panic traceback.",
+          "Find the file and line number in the traceback.",
+          "Fix the out-of-bounds access by checking len(slice) before accessing.",
+          "Re-run to confirm the panic is resolved."
+        ],
+        "under_the_hood": "When Go code panics (e.g., nil dereference, bounds check failure), the runtime unwinds the goroutine stack. Each frame's program counter is mapped back to a file:line through the binary's DWARF debug info (or the Go symbol table in stripped binaries). The traceback is printed to stderr, then the program exits with a non-zero status code unless a deferred recover() catches the panic.",
+        "why_it_exists": "Runtime crashes are inevitable in any non-trivial program. Reading panic tracebacks is the primary diagnostic tool for finding where and why a crash happened, making it one of the most important debugging skills."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.11 — Reading runtime errors",
+            "reason": "Reading test failures requires understanding of Reading runtime errors.",
+            "required": true,
+            "target_id": "core-02-11"
+          },
+          {
+            "label": "Module 02.10 — Reading compiler errors",
+            "reason": "Reading test failures extends directly from Reading compiler errors.",
+            "required": true,
+            "target_id": "core-02-10"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies Reading test failures concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Both Reading test failures and Install and verify Go build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "Both Reading test failures and Hello World build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "Both Reading test failures and go run build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-03"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "how-to",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/12-reading-test-failures/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/12-reading-test-failures/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/12-reading-test-failures/main_test.go"
+      },
+      "id": "core-02-12",
+      "learning_objective": "Interpret test failure output, comparing expected vs actual values and debugging failing assertion lines.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-13"
+      ],
+      "order": 12,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-11"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must write a test that fails, run go test -v, identify the test name, the file:line of the failure, the expected vs actual values, and fix the test or code.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "how-to",
+        "required": true
+      },
+      "slug": "reading-test-failures",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "testing",
+      "tags": [
+        "tooling",
+        "foundation",
+        "testing"
+      ],
+      "title": "Reading test failures",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/12-reading-test-failures",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/12-reading-test-failures"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Running go test without -v and wondering why only PASS or FAIL is shown with no details.",
+          "Using t.Fatal in a loop and stopping on the first failure instead of reporting all cases.",
+          "Ignoring the test name in the output and not knowing which specific test case failed."
+        ],
+        "execution_timeline": [
+          "Write a test file with at least one test that will fail.",
+          "Run go test -v ./... to see verbose output.",
+          "Read the output: the failing test name, the failure message from t.Error/t.Fatal, and any log output."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The test logic has a bug (wrong expected value, wrong input), or the production code has a bug.",
+            "fix": "Read the test's expected vs actual values from the error message, then trace through the logic to find the discrepancy.",
+            "scenario": "go test -v shows a test failed but the error message says something unexpected."
+          },
+          {
+            "cause": "The test code itself has a bug — usually accessing a test data slice beyond its length.",
+            "fix": "Look at the traceback printed after the panic to find the exact line in the test file. Fix the test's data setup or access pattern.",
+            "scenario": "go test shows panic: runtime error: index out of range inside a test."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must run go test -v on a failing test and explain which line of the error tells them the expected vs actual value.",
+          "Learner must use t.Run to create subtables and explain how subtest names appear in the output.",
+          "Learner must identify a test failure caused by incorrect setup (not a production code bug) from the error message."
+        ],
+        "how_go_uses_it": "Go's testing package reports failures with file:line information. t.Error marks the test as failed but continues execution. t.Fatal marks the test as failed and stops immediately. The -v flag prints all test names and log output. go test -json formats output as JSON for CI tooling.",
+        "mental_model": "A test failure output tells you: which test (TestXxx), where (file:line), what was expected vs what was actual, and any additional log messages. The first failure message is the most actionable — fix it before worrying about cascading failures.",
+        "performance_implications": [
+          "go test -v output can be very long for large test suites — pipe it through less or grep for specific test names.",
+          "Use go test -run ^TestName$ to run a single test and reduce noise.",
+          "Cascading failures happen when an early test failure leaves state that breaks later tests — fix from top to bottom."
+        ],
+        "problem_solved": "Test output is meaningless if you cannot read it. This lesson teaches learners to parse go test -v output, understand failure messages, and locate the exact line causing a test to fail.",
+        "proof_of_understanding": "The learner must write a test that fails, run go test -v, identify the test name, the file:line of the failure, the expected vs actual values, and fix the test or code.",
+        "real_world_usage": "CI pipelines display go test -v output on every PR. Developers scan the output for FAIL lines, click through to the file:line in their editor, and fix the issue. Reading test output efficiently is a daily skill for every professional Go developer.",
+        "step_by_step_execution": [
+          "Write a function and a test that intentionally asserts the wrong expected value.",
+          "Run go test -v and examine the output.",
+          "Identify the test name, the file:line of the failure, and the expected vs actual values.",
+          "Fix the test assertion (or the function) so the test passes.",
+          "Re-run go test -v to confirm the fix."
+        ],
+        "under_the_hood": "go test compiles a test binary that links the testing framework. Each Test function is called with a *testing.T. When t.Error/Errorf is called, the framework records the failure message and file:line (using runtime.Caller). When t.Fatal/Fatalf is called, the framework records the failure and stops executing that test. After all tests complete, the framework prints the summary: number of tests passed, failed, skipped, and total duration.",
+        "why_it_exists": "Tests are only useful when their output tells you what went wrong. This lesson teaches the skill of reading test output to find the root cause of failures quickly."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.12 — Reading test failures",
+            "reason": "Go module root basics requires understanding of Reading test failures.",
+            "required": true,
+            "target_id": "core-02-12"
+          },
+          {
+            "label": "Module 02.11 — Reading runtime errors",
+            "reason": "Go module root basics extends directly from Reading runtime errors.",
+            "required": true,
+            "target_id": "core-02-11"
+          }
+        ],
+        "preview_only": [
+          {
+            "label": "Module 05.18 — Modules",
+            "reason": "Introduces basic project root layout and go.mod initialization before deep semantic module versioning and dependency resolution in Module 05.",
+            "required": false,
+            "target_id": "core-05-18"
+          }
+        ],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies Go module root basics concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Both Go module root basics and Install and verify Go build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "Both Go module root basics and Hello World build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "Both Go module root basics and go run build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-03"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/13-go-module-root-basics/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/13-go-module-root-basics/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/13-go-module-root-basics/main_test.go"
+      },
+      "id": "core-02-13",
+      "learning_objective": "Initialize and manage a Go module root using go mod init, understanding how module paths define import boundaries.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-02-14"
+      ],
+      "order": 13,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-12"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must create a new module with go mod init, write a program that imports a standard library package, add an external dependency, run go mod tidy, explain what go.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "go-module-root-basics",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "tooling",
+        "foundation",
+        "concept"
+      ],
+      "title": "Go module root basics",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/13-go-module-root-basics",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/13-go-module-root-basics"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Creating a go.mod with an incorrect module path that does not match the repository or import scheme.",
+          "Deleting go.mod thinking it is not needed because the program runs with go run.",
+          "Adding a dependency with go get but not running go mod tidy afterward."
+        ],
+        "execution_timeline": [
+          "Run go mod init \u003cmodule-path\u003e in the project root to create go.mod.",
+          "Run go mod tidy to synchronize go.mod with the source code's imports.",
+          "Run go build or go test to verify the module resolves all dependencies."
+        ],
+        "failure_modes": [
+          {
+            "cause": "A dependency was added (via import in code) but go mod tidy was not run to verify the checksum.",
+            "fix": "Run go mod tidy to download the dependency and update go.sum. Never manually edit go.sum.",
+            "scenario": "go build reports missing go.sum entry for a dependency."
+          },
+          {
+            "cause": "The module path in go.mod does not match the import path used in the code, or the module has a major version mismatch.",
+            "fix": "If you intend v2+, add /v2 to the module path in go.mod. Otherwise, update the import path to match go.mod.",
+            "scenario": "go build reports module declares its path as: example.com/foo but required as: example.com/foo/v2."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must run go mod init and explain what the module path means.",
+          "Learner must add a dependency import, run go mod tidy, and explain what go.sum contains.",
+          "Learner must run go mod why -m \u003cdependency\u003e to understand why a dependency is included."
+        ],
+        "how_go_uses_it": "The Go standard library does not use modules internally (it has no go.mod), but every external Go project uses go.mod. The go.mod file defines the module path, Go version, and dependency requirements. go.sum contains cryptographic checksums of all dependency versions for verification.",
+        "mental_model": "A go.mod file is the identity card of a Go module. It declares the module's import path prefix, the Go version, and the exact dependency versions the module requires. Subdirectories within the module are importable as \u003cmodule-path\u003e/\u003csubdir\u003e. The module root is wherever go.mod lives.",
+        "performance_implications": [
+          "go mod tidy is fast (milliseconds for local modules) and should be run after every import change.",
+          "Keeping go.mod clean reduces download time in CI. Run go mod tidy before committing.",
+          "Using a Go module proxy (GOPROXY=proxy.golang.org or your own Athens server) speeds up dependency resolution in CI."
+        ],
+        "problem_solved": "Before Go modules, there was no standard way to declare dependencies or version them. go.mod provides a single, canonical file that defines the module, its dependencies, and their versions, making builds reproducible.",
+        "proof_of_understanding": "The learner must create a new module with go mod init, write a program that imports a standard library package, add an external dependency, run go mod tidy, explain what go.mod and go.sum contain, and build the program.",
+        "real_world_usage": "Every Go project has a go.mod at its root. CI pipelines run go mod tidy -diff to check that go.mod is clean. Dependencies are updated by changing the require directive and running go mod tidy. Go 1.21+ supports toolchain directives in go.mod for automatic Go version management.",
+        "step_by_step_execution": [
+          "Create a new directory for your module.",
+          "Run go mod init example.com/my-module to create go.mod.",
+          "Write a Go file that imports a standard library package and an external package.",
+          "Run go mod tidy to download dependencies and update go.mod and go.sum.",
+          "Run go build . to verify everything compiles."
+        ],
+        "under_the_hood": "go mod init creates a go.mod file with the module path and Go version. go mod tidy scans all .go files in the module, resolves imports to their MVS (Minimum Version Selection), downloads missing modules, removes unused dependencies, and updates go.sum with hashes. The module cache lives at GOPATH/pkg/mod. Builds use the module cache without re-downloading.",
+        "why_it_exists": "Reproducible builds require explicit, versioned dependency declarations. go.mod is the foundation of Go's module system, enabling reproducible builds, semantic import versioning, and minimal version selection."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": true,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": true,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 02.13 — Go module root basics",
+            "reason": "Tooling checklist requires understanding of Go module root basics.",
+            "required": true,
+            "target_id": "core-02-13"
+          },
+          {
+            "label": "Module 02.12 — Reading test failures",
+            "reason": "Tooling checklist extends directly from Reading test failures.",
+            "required": true,
+            "target_id": "core-02-12"
+          }
+        ],
+        "preview_only": [
+          {
+            "label": "Module 03.01 — Values and expressions",
+            "reason": "Preview of Values and expressions from Programming Fundamentals with Go.",
+            "required": false,
+            "target_id": "core-03-01"
+          }
+        ],
+        "reinforced_in": [
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "This project applies Tooling checklist concepts in a practical implementation.",
+            "required": true,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 02.01 — Install and verify Go",
+            "reason": "Both Tooling checklist and Install and verify Go build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-01"
+          },
+          {
+            "label": "Module 02.02 — Hello World",
+            "reason": "Both Tooling checklist and Hello World build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-02"
+          },
+          {
+            "label": "Module 02.03 — go run",
+            "reason": "Both Tooling checklist and go run build understanding within Go Setup and Tooling.",
+            "required": false,
+            "target_id": "core-02-03"
+          }
+        ]
+      },
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 30,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "modules/02-go-setup-tooling/lessons/14-tooling-checklist/main.go",
+        "readme_path": "modules/02-go-setup-tooling/lessons/14-tooling-checklist/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": "modules/02-go-setup-tooling/lessons/14-tooling-checklist/main_test.go"
+      },
+      "id": "core-02-14",
+      "learning_objective": "Validate a complete local Go development environment against an operational tooling verification checklist.",
+      "module_id": "module-02",
+      "next_item_ids": [
+        "core-03-01"
+      ],
+      "order": 14,
+      "phase": "tooling",
+      "prerequisites": [
+        "core-02-13"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-02",
+        "expected_artifact": "Runnable code, tests where appropriate, and a short explanation.",
+        "mastery_checks": [
+          "Can explain the concept without hand-waving.",
+          "Can identify common mistakes.",
+          "Can apply the concept in a small working program."
+        ],
+        "practice_task": "The learner must run every command on the tooling checklist, capture the output of each, and explain what each command verifies about their Go development environment.",
+        "project_id": "project-tooling-failure-lab"
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "tooling-checklist",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "concept",
+      "tags": [
+        "tooling",
+        "foundation",
+        "concept"
+      ],
+      "title": "Tooling checklist",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Run or inspect the example.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "go run ./modules/02-go-setup-tooling/lessons/14-tooling-checklist",
+        "test_command": "go test -v ./modules/02-go-setup-tooling/lessons/14-tooling-checklist"
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Checking only go version and assuming everything else is fine.",
+          "Running the checklist once and never re-verifying after changing editor or Go version.",
+          "Skipping gopls verification because the editor seems to work, then losing IDE features after an update."
+        ],
+        "execution_timeline": [
+          "Verify Go installation: go version, go env GOROOT, go env GOPATH.",
+          "Verify basic commands: go run, go build, go test, go fmt, go vet, go doc.",
+          "Verify editor integration: gopls version, completion, hover diagnostics."
+        ],
+        "failure_modes": [
+          {
+            "cause": "GOROOT was set manually via environment variable and overrides the Go binary's built-in GOROOT.",
+            "fix": "Unset the GOROOT environment variable. Go infers GOROOT from the binary's location automatically.",
+            "scenario": "go version works but go env GOROOT points to a path that does not exist."
+          },
+          {
+            "cause": "The editor's PATH or GOROOT is different from the terminal's. The editor may launch with a different shell environment.",
+            "fix": "Ensure the editor is launched with the correct PATH. In VS Code, configure go.goroot and go.toolsManagement.autoUpdate in settings.",
+            "scenario": "gopls reports gopls: no installed Go tools but go version works fine in the terminal."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must run a complete tooling checklist: go version, go env, go run, go build, go test, go vet, go doc, and gopls version.",
+          "Learner must simulate a broken tool (e.g., broken PATH) and use the checklist to diagnose it.",
+          "Learner must explain the purpose of each item on the checklist."
+        ],
+        "how_go_uses_it": "The Go team provides a standard toolchain where every command follows the same pattern. The tooling checklist mirrors what professional Go developers run to verify their environment is working before starting a new project or after a toolchain update.",
+        "mental_model": "The tooling checklist is a sanity check for your Go development environment.",
+        "performance_implications": [
+          "Running the full checklist takes under 30 seconds and should be done after every Go version upgrade.",
+          "A broken tooling environment can waste hours of debugging time. The checklist catches issues early.",
+          "Document your checklist result (run it, save output) when setting up a new machine or CI environment."
+        ],
+        "problem_solved": "After completing module 02, the learner has learned 14 separate tooling concepts. The checklist consolidates everything into a single rapid verification procedure they can run anytime they set up a new machine or encounter tooling issues.",
+        "proof_of_understanding": "The learner must run every command on the tooling checklist, capture the output of each, and explain what each command verifies about their Go development environment.",
+        "real_world_usage": "Professional Go developers run these checks when setting up a new workstation, after updating Go, or when tooling behaves unexpectedly. CI environments run a similar set of checks (go version, go build, go test, go vet) on every pull request.",
+        "step_by_step_execution": [
+          "Run go version and confirm the output matches your installed Go version.",
+          "Run go env GOROOT and go env GOPATH and ensure both point to valid directories.",
+          "Run go run . on a simple hello world program.",
+          "Run go build . and confirm a binary is produced.",
+          "Run go test . on a package with tests and confirm tests pass.",
+          "Run gofmt -d . and confirm no formatting differences exist.",
+          "Run go vet ./... and confirm zero warnings.",
+          "Run go doc fmt.Println and confirm documentation is displayed.",
+          "Run gopls version and confirm the language server is installed."
+        ],
+        "under_the_hood": "This lesson synthesizes all previous module 02 lessons into a single integrated workflow. Each checklist item corresponds to one lesson: go version (core-02-01), hello world (core-02-02), go run (core-02-03), go build (core-02-04), go test (core-02-05), gofmt (core-02-06), go vet (core-02-07), go doc (core-02-08), gopls (core-02-09), reading errors (core-02-10, core-02-11, core-02-12), and go.mod basics (core-02-13).",
+        "why_it_exists": "All the tooling knowledge in module 02 is only useful if the learner can verify their environment is working. The tooling checklist is the capstone that ties every lesson together into a repeatable verification procedure."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "estimated_minutes": 120,
+      "files": {
+        "assets_dir": "modules/02-go-setup-tooling/projects/tooling-failure-lab/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/02-go-setup-tooling/projects/tooling-failure-lab/README.md",
+        "solution_path": "modules/02-go-setup-tooling/projects/tooling-failure-lab/_solution",
+        "starter_path": "modules/02-go-setup-tooling/projects/tooling-failure-lab/_starter",
+        "test_path": ""
+      },
+      "id": "project-tooling-failure-lab",
+      "learning_objective": "Build and verify Tooling Failure Lab demonstrating core module-02 engineering capabilities.",
+      "module_id": "module-02",
+      "next_item_ids": [],
+      "order": 99,
+      "phase": "go-core",
+      "prerequisites": [
+        "core-02-01",
+        "core-02-02",
+        "core-02-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "slug": "tooling-failure-lab",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "project",
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "title": "Tooling Failure Lab",
+      "type": "project",
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "assessment",
+      "estimated_minutes": 60,
+      "files": {
+        "assets_dir": "modules/02-go-setup-tooling/assessments/tooling-failure-lab/assets",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/02-go-setup-tooling/assessments/tooling-failure-lab/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "assessment-go-setup-tooling-tooling-failure-lab",
+      "learning_objective": "Demonstrate mastery of module-02 competencies through automated verification and oral defense.",
+      "module_id": "module-02",
+      "next_item_ids": [],
+      "order": 100,
+      "phase": "go-core",
+      "prerequisites": [],
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "slug": "tooling-failure-lab",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "assessment",
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "title": "Tooling Failure Lab",
+      "type": "assessment",
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    }
+  ],
+  "last_updated": "2026-10-23",
+  "module_id": "module-02",
+  "projects": [
+    {
+      "assessment_id": "assessment-project-tooling-failure-lab",
+      "deliverables": [
+        "Working implementation of Tooling Failure Lab",
+        "README with run/test instructions",
+        "Tests or verification checklist",
+        "Explanation of design decisions"
+      ],
+      "difficulty": "foundation",
+      "documentation_mode": "project",
+      "id": "project-tooling-failure-lab",
+      "module_id": "module-02",
+      "order": 2,
+      "placement_anchor_item_id": "core-02-14",
+      "portfolio": {
+        "architecture_defense_required": false,
+        "artifact_description": "Tooling Failure Lab can be used as a learning proof artifact.",
+        "demo_required": false,
+        "is_portfolio_ready": false,
+        "readme_required": true
+      },
+      "prerequisite_item_ids": [
+        "core-02-01",
+        "core-02-02",
+        "core-02-03"
+      ],
+      "prerequisites": [
+        "core-02-01",
+        "core-02-02",
+        "core-02-03"
+      ],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "go build",
+        "go module cache",
+        "compiler errors"
+      ],
+      "reinforces": [
+        "core-02-01",
+        "core-02-02",
+        "core-02-03",
+        "core-02-04",
+        "core-02-05",
+        "core-02-06",
+        "core-02-07",
+        "core-02-08",
+        "core-02-09",
+        "core-02-10",
+        "core-02-11",
+        "core-02-12",
+        "core-02-13",
+        "core-02-14"
+      ],
+      "required_concepts": [
+        "go build",
+        "go module cache",
+        "compiler errors"
+      ],
+      "rubric": [
+        {
+          "criterion": "Correctness",
+          "description": "Go installation is correct; failure simulations are realistic and resolvable.",
+          "weight": 35
+        },
+        {
+          "criterion": "Diagnostic quality",
+          "description": "Systematic diagnostic approach: identifying symptoms, isolating causes, applying fixes.",
+          "weight": 25
+        },
+        {
+          "criterion": "Proof",
+          "description": "Terminal outputs, diagnostic logs, and verification commands prove each failure mode was reproduced and resolved.",
+          "weight": 25
+        },
+        {
+          "criterion": "Explanation",
+          "description": "Clear explanation of each failure mechanism, toolchain interaction, and resolution step.",
+          "weight": 15
+        }
+      ],
+      "slug": "tooling-failure-lab",
+      "source_legacy_ids": [],
+      "stage": "tooling",
+      "status": "ready",
+      "summary": "Install Go tooling, then deliberately introduce and diagnose common Go setup failures.",
+      "tasks": [
+        {
+          "instruction": "Install Go, set up GOPATH or workspace, verify the installation with go version, and run a hello-world program.",
+          "title": "Install and configure Go"
+        },
+        {
+          "instruction": "Simulate common tooling failures: wrong PATH, broken GOPATH, missing dependencies, and module resolution errors. Diagnose each failure using available tooling output.",
+          "title": "Introduce and diagnose tooling failures"
+        },
+        {
+          "instruction": "Write a troubleshooting guide documenting each failure, the diagnostic steps taken, and the resolution.",
+          "title": "Document your troubleshooting"
+        }
+      ],
+      "title": "Tooling Failure Lab",
+      "type": "mini-project",
+      "verification": {
+        "expected_output": "Project meets rubric and proves module outcomes.",
+        "manual_steps": [
+          "Run the project.",
+          "Run tests if present.",
+          "Review README.",
+          "Check rubric."
+        ],
+        "mode": "mixed",
+        "run_command": "go run ./main.go",
+        "test_command": "go test ./..."
+      }
+    }
+  ],
+  "schema_version": "3.1.0",
+  "status": "stable"
+}

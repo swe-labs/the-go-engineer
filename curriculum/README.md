@@ -122,7 +122,6 @@ curriculum/
     README.md
   GRADUATION_CRITERIA.md
   PILOT_TESTING_PROTOCOL.md
-  assessments.json
   concepts.json
   contributor-authoring-guide.md
   crossrefs.json
@@ -130,7 +129,6 @@ curriculum/
   failures.json
   path.core.json
   path.electives.json
-  projects.json
   quality-rubric.md
   readme.contracts.json
   schema.v3.json
@@ -787,18 +785,16 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 | `assessment-module-14` | **Module 14 Assessment — Architecture and Distributed Systems** | project-review | 80% |
 | `assessment-module-15` | **Module 15 Assessment — Docker, CI/CD, and Deployment** | project-review | 80% |
 | `assessment-module-16` | **Module 16 Assessment — Portfolio and Interview Readiness** | portfolio-review | 80% |
-| `assessment-module-17` | **Module 17 Assessment — Electives and Advanced Engineering** | project-review | 80% |
 | `assessment-module-18` | **Module 18 Assessment — Flagship Opslane** | capstone-defense | 80% |
+| `assessment-module-17` | **Module 17 Assessment — Electives and Advanced Engineering** | project-review | 80% |
 
 ### Project Assessments (29 Records)
 
 | ID | Title | Type | Passing Score |
 | -- | ----- | ---- | ------------- |
+| `assessment-project-course-setup` | **Assessment — Course Setup Verification** | project-review | 80% |
 | `assessment-project-shell-git-lab` | **Assessment — Shell + Git Lab** | project-review | 80% |
 | `assessment-project-tooling-failure-lab` | **Assessment — Tooling Failure Lab** | project-review | 80% |
-| `assessment-project-course-setup` | **Assessment — Course Setup Verification** | project-review | 80% |
-| `assessment-project-performance-analysis-lab` | **Assessment — Performance Analysis Lab** | project-review | 80% |
-| `assessment-project-advanced-electives` | **Assessment — Advanced Electives Capstone** | project-review | 80% |
 | `assessment-project-pricing-checkout` | **Assessment — Pricing Checkout** | project-review | 80% |
 | `assessment-project-contact-directory` | **Assessment — Contact Directory** | project-review | 80% |
 | `assessment-project-order-summary-refactor` | **Assessment — Order Summary Refactor** | project-review | 80% |
@@ -817,11 +813,13 @@ The assessment framework evaluates mastery across end-of-module milestones and p
 | `assessment-project-bounded-worker-pool` | **Assessment — Bounded Worker Pool** | project-review | 80% |
 | `assessment-project-pii-redactor` | **Assessment — PII Redactor** | project-review | 80% |
 | `assessment-project-observability-retrofit` | **Assessment — Observability Retrofit** | project-review | 80% |
+| `assessment-project-performance-analysis-lab` | **Assessment — Performance Analysis Lab** | project-review | 80% |
 | `assessment-project-profile-and-fix-lab` | **Assessment — Profile and Fix Lab** | project-review | 80% |
 | `assessment-project-modular-refactor-review` | **Assessment — Modular Refactor Review** | project-review | 80% |
 | `assessment-project-dockerized-service-cicd` | **Assessment — Dockerized Service with CI/CD** | project-review | 80% |
 | `assessment-project-portfolio-review-pack` | **Assessment — Portfolio Review Pack** | project-review | 80% |
 | `assessment-project-opslane` | **Assessment — Opslane Flagship** | project-review | 80% |
+| `assessment-project-advanced-electives` | **Assessment — Advanced Electives Capstone** | project-review | 80% |
 | `assessment-project-kubernetes-go-service` | **Assessment — Kubernetes Go Service Capstone** | project-review | 80% |
 
 ---
@@ -855,7 +853,7 @@ Total cross-references: **2086**
 
 ### Authoritative Quality Gates
 
-- `validate-schema`: 11 canonical JSON manifests valid against Schema 3.1.0
+- `validate-schema`: 9 canonical JSON manifests valid against Schema 3.1.0
 - `validate-graph`: Strict DAG acyclicity across all item dependencies
 - `validate-lessons`: Zero machine role comments or unmotivated markers
 - `validate-prerequisite-closure`: Strict pedagogical progression across module boundaries

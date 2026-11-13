@@ -1,0 +1,2200 @@
+{
+  "assessments": [
+    {
+      "automated_checks": [],
+      "criteria": [
+        {
+          "description": "Learner can explain the concepts without memorized magic.",
+          "id": "module-00-conceptual",
+          "levels": [
+            {
+              "description": "Cannot explain course orientation, zero magic philosophy, exercise workflow, architecture overview.",
+              "score": 0
+            },
+            {
+              "description": "Can explain basics of course orientation, zero magic philosophy, exercise workflow, architecture overview with some gaps.",
+              "score": 3
+            },
+            {
+              "description": "Clearly explains course orientation, zero magic philosophy, exercise workflow, architecture overview, including mechanics, purpose, and common mistakes.",
+              "score": 5
+            }
+          ],
+          "title": "Conceptual clarity",
+          "weight": 30
+        },
+        {
+          "description": "Learner can produce working code or an appropriate artifact.",
+          "id": "module-00-implementation",
+          "levels": [
+            {
+              "description": "No working implementation; missing or non-functional code.",
+              "score": 0
+            },
+            {
+              "description": "Partial implementation with minor bugs or gaps.",
+              "score": 3
+            },
+            {
+              "description": "Complete, clean implementation with proper Go idioms and error handling.",
+              "score": 5
+            }
+          ],
+          "title": "Implementation",
+          "weight": 35
+        },
+        {
+          "description": "Learner can verify the work through tests, checks, or review.",
+          "id": "module-00-proof",
+          "levels": [
+            {
+              "description": "No proof of understanding; no artifact provided.",
+              "score": 0
+            },
+            {
+              "description": "Some proof provided but lacks depth or edge cases.",
+              "score": 3
+            },
+            {
+              "description": "Strong proof with tests or verification covering course orientation, zero magic philosophy and edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "description": "Learner can communicate decisions and tradeoffs.",
+          "id": "module-00-communication",
+          "levels": [
+            {
+              "description": "No explanation provided; unable to discuss the work.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation with some clarity but lacks depth.",
+              "score": 3
+            },
+            {
+              "description": "Professional explanation linking course orientation, zero magic philosophy, exercise workflow, architecture overview to broader system design and trade-offs.",
+              "score": 5
+            }
+          ],
+          "title": "Communication",
+          "weight": 10
+        }
+      ],
+      "documentation_mode": "assessment",
+      "evidence_required": [
+        "Completed orientation exercises",
+        "Course setup verification",
+        "Written reflection on zero magic philosophy"
+      ],
+      "id": "assessment-module-00",
+      "manual_review_questions": [
+        "Walk me through why a zero-magic learning contract matters and what happens to learners who skip the orientation.",
+        "What is the difference between a scaffolded README and a golden README? Why does it matter?",
+        "How does the proof-of-understanding system work, and why does it matter more than memorized answers?"
+      ],
+      "module_id": "module-00",
+      "passing_score": 80,
+      "purpose": "Verify that the learner can independently apply and explain navigating the course, running exercises, understanding zero magic, and using the architecture tools.",
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "readme_status": "scaffolded",
+      "retake_policy": "Learner may retry after fixing rubric gaps and writing a short correction note.",
+      "status": "ready",
+      "suite": "full",
+      "target_ids": [
+        "core-00-01",
+        "core-00-02",
+        "core-00-03",
+        "core-00-04",
+        "core-00-05",
+        "core-00-06",
+        "core-00-07",
+        "core-00-08",
+        "core-00-09",
+        "core-00-10"
+      ],
+      "title": "Module 00 Assessment — Orientation",
+      "type": "project-review"
+    },
+    {
+      "automated_checks": [
+        "go test ./..."
+      ],
+      "criteria": [
+        {
+          "id": "project-course-setup-correctness",
+          "levels": [
+            {
+              "description": "Incorrect or missing implementation.",
+              "score": 0
+            },
+            {
+              "description": "Partially correct with minor issues.",
+              "score": 3
+            },
+            {
+              "description": "Fully correct implementation.",
+              "score": 5
+            }
+          ],
+          "title": "Correctness",
+          "weight": 35
+        },
+        {
+          "id": "project-course-setup-quality",
+          "levels": [
+            {
+              "description": "Poor code structure.",
+              "score": 0
+            },
+            {
+              "description": "Adequate code structure.",
+              "score": 3
+            },
+            {
+              "description": "Idiomatic, clean Go code.",
+              "score": 5
+            }
+          ],
+          "title": "Code quality",
+          "weight": 25
+        },
+        {
+          "id": "project-course-setup-proof",
+          "levels": [
+            {
+              "description": "No proof provided.",
+              "score": 0
+            },
+            {
+              "description": "Partial proof.",
+              "score": 3
+            },
+            {
+              "description": "Comprehensive proof with edge cases.",
+              "score": 5
+            }
+          ],
+          "title": "Proof",
+          "weight": 25
+        },
+        {
+          "id": "project-course-setup-communication",
+          "levels": [
+            {
+              "description": "No explanation.",
+              "score": 0
+            },
+            {
+              "description": "Basic explanation.",
+              "score": 3
+            },
+            {
+              "description": "Clear, professional explanation.",
+              "score": 5
+            }
+          ],
+          "title": "Communication",
+          "weight": 15
+        }
+      ],
+      "documentation_mode": "assessment",
+      "evidence_required": [
+        "Project implementation",
+        "Tests",
+        "Written explanation"
+      ],
+      "id": "assessment-project-course-setup",
+      "manual_review_questions": [
+        "Can the learner explain their design decisions?",
+        "Does the implementation handle edge cases?",
+        "Is the code idiomatic Go?"
+      ],
+      "module_id": "module-00",
+      "passing_score": 80,
+      "purpose": "Evaluate the Course Setup Verification project submission.",
+      "readme_status": "scaffolded",
+      "retake_policy": "Learner may retry after fixing gaps and writing a correction note.",
+      "status": "ready",
+      "target_ids": [
+        "project-course-setup"
+      ],
+      "title": "Assessment — Course Setup Verification",
+      "type": "project-review"
+    }
+  ],
+  "curriculum_version": "3.0.0",
+  "document_type": "module_manifest",
+  "items": [
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": false,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": false,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Shell Git Lab",
+            "reason": "Demonstrates how to clone, navigate, inspect branches, and execute repository tasks in the shell.",
+            "required": false,
+            "target_id": "project-shell-git-lab"
+          },
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "Applies repository conventions by diagnosing environment misconfigurations and running local verification commands.",
+            "required": false,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 00.02 — What zero magic means",
+            "reason": "Understanding repository directory boundaries establishes the physical foundation for the zero-magic curriculum contract.",
+            "required": false,
+            "target_id": "core-00-02"
+          },
+          {
+            "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
+            "reason": "Navigating repository directories is required to locate and execute lessons, guided labs, and portfolio milestones.",
+            "required": false,
+            "target_id": "core-00-03"
+          },
+          {
+            "label": "Module 00.04 — How to run code in this repository",
+            "reason": "Understanding directory structure ensures code execution commands are run from the correct package root.",
+            "required": false,
+            "target_id": "core-00-04"
+          }
+        ]
+      },
+      "difficulty": "orientation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "modules/00-orientation/lessons/01-how-to-use-this-repository/assets",
+        "diagram_paths": [
+          "modules/00-orientation/lessons/01-how-to-use-this-repository/assets/diagrams/concept-flow.svg"
+        ],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/lessons/01-how-to-use-this-repository/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "core-00-01",
+      "learning_objective": "Navigate the multi-module curriculum structure, explain the three learning tracks, and understand the standard anatomy of lessons, projects, and assessments.",
+      "module_id": "module-00",
+      "next_item_ids": [
+        "core-00-02"
+      ],
+      "order": 1,
+      "phase": "orientation",
+      "prerequisites": [],
+      "proof": {
+        "assessment_id": "assessment-module-00",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
+        "mastery_checks": [
+          "Can navigate curriculum tracks (Core Backend Path, Companion Frontend Track, Advanced Electives).",
+          "Can explain the standard anatomy of a module (overview, lessons, projects, assessments).",
+          "Can establish and organize a personal workspace directory for course projects."
+        ],
+        "practice_task": "The learner must locate three lessons across different modules on disk, identify their prerequisites, and outline how they will structure their personal project workspace.",
+        "project_id": null
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "how-to-use-this-repository",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "orientation",
+      "tags": [
+        "orientation",
+        "concept"
+      ],
+      "title": "How to use this repository",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Skipping the module README and jumping straight to exercises.",
+          "Trying to memorize folder paths instead of understanding the structure.",
+          "Modifying curriculum files before understanding the governance rules."
+        ],
+        "execution_timeline": [
+          "Open the repository in an editor and browse the top-level folders.",
+          "Read the module README for learning goals, prerequisites, and outputs.",
+          "Navigate to specific lesson folders using the curriculum metadata as a map."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner skipped the orientation module and started from module 01 directly.",
+            "fix": "Return to 00-orientation, read the module README, and follow the prescribed order.",
+            "scenario": "A learner gets lost in the folder structure and cannot find the next lesson."
+          },
+          {
+            "cause": "The file was opened in write mode without understanding the governance contract.",
+            "fix": "Revert the change via git restore and use the README-based workflow instead.",
+            "scenario": "A learner accidentally edits a curriculum JSON or script file and breaks validation."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must locate a specific lesson folder given only the lesson ID from the curriculum metadata.",
+          "Learner must explain which file to read first when entering a new module.",
+          "Learner must identify the correct README contract for a given lesson type."
+        ],
+        "how_go_uses_it": "Go's standard library uses a consistent package layout convention (std vs internal, cmd vs pkg) that mirrors this repository's intentional folder structure. Understanding one helps navigate the other.",
+        "mental_model": "This repository is a structured Go curriculum that builds from first principles to production deployment. Each module depends on previous ones — the graph ensures you have prerequisite knowledge before tackling harder topics.",
+        "performance_implications": [
+          "Reading orientation materials takes 30-60 minutes but saves hours of confusion later.",
+          "Following the prescribed order reduces context-switching overhead across lessons.",
+          "Using curriculum metadata to navigate is faster than manual folder browsing."
+        ],
+        "problem_solved": "Learners need a clear, repeatable way to navigate a large multi-module curriculum without getting lost or missing prerequisite content.",
+        "proof_of_understanding": "The learner must find three lessons by their IDs in the curriculum JSON, locate their README files on disk, and explain the relationship between the JSON entry and the folder structure.",
+        "real_world_usage": "Professional developers navigate large monorepos daily knowing how to find code, tests, docs, and config by convention. This skill transfers from this curriculum to any Go codebase.",
+        "step_by_step_execution": [
+          "Open the repository root and read the top-level directory listing.",
+          "Read the module README to understand the module's learning goal and prerequisites.",
+          "Check next_item_ids in the curriculum JSON to determine the progression.",
+          "Navigate to the correct lesson folder and open its README.md.",
+          "Follow the lesson instructions to complete the exercises or review content."
+        ],
+        "under_the_hood": "The repository uses a convention-over-configuration folder layout where module, lesson, and asset paths are derivable from IDs in the JSON metadata. The curriculum validator script enforces this relationship.",
+        "why_it_exists": "Without a standard navigation contract, learners waste time searching for materials, miss prerequisites, and lose confidence. This lesson establishes the map before the journey begins."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": false,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": false,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 00.01 — How to use this repository",
+            "reason": "What zero magic means requires understanding of How to use this repository.",
+            "required": true,
+            "target_id": "core-00-01"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Shell Git Lab",
+            "reason": "Validates the zero-magic principle by inspecting raw file permissions, environment variables, and exit codes without automation wrappers.",
+            "required": false,
+            "target_id": "project-shell-git-lab"
+          },
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "Enforces zero-magic debugging by analyzing exact compiler diagnostics and tooling errors rather than relying on IDE abstractions.",
+            "required": false,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
+            "reason": "Zero magic defines the standard of proof required in each phase of the lesson-to-checkpoint learning cycle.",
+            "required": false,
+            "target_id": "core-00-03"
+          },
+          {
+            "label": "Module 00.04 — How to run code in this repository",
+            "reason": "Zero magic requires understanding exactly what toolchain commands execute behind go run and go test.",
+            "required": false,
+            "target_id": "core-00-04"
+          },
+          {
+            "label": "Module 00.05 — How starter folders work",
+            "reason": "Both What zero magic means and How starter folders work build understanding within Orientation.",
+            "required": false,
+            "target_id": "core-00-05"
+          }
+        ]
+      },
+      "difficulty": "orientation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/lessons/02-what-zero-magic-means/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "core-00-02",
+      "learning_objective": "Deconstruct implicit abstractions into explicit, verifiable code statements to enforce zero-magic engineering standards.",
+      "module_id": "module-00",
+      "next_item_ids": [
+        "core-00-03"
+      ],
+      "order": 2,
+      "phase": "orientation",
+      "prerequisites": [
+        "core-00-01"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-00",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
+        "mastery_checks": [
+          "Can explain the zero-magic contract: no unexplained dependencies, no hidden frameworks, and no magical boilerplate.",
+          "Can identify hidden assumptions in technical explanations and formulate explicit foundational bridges.",
+          "Can differentiate between operational fundamentals (syscalls, memory, protocols) and convenience abstractions."
+        ],
+        "practice_task": "The learner must take a one-line Go expression that uses implicit behavior, expand it into 5+ explicit lines, and explain what assumption was hidden in the original.",
+        "project_id": null
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "what-zero-magic-means",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "orientation",
+      "tags": [
+        "orientation",
+        "concept"
+      ],
+      "title": "What zero magic means",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Assuming the instructor will always fill in hidden gaps instead of the materials.",
+          "Treating code examples as copy-paste templates rather than studying why they work.",
+          "Skipping explanations because 'it just works' feels sufficient in the moment."
+        ],
+        "execution_timeline": [
+          "Read a concept explanation and identify the core invariant the code relies on.",
+          "Examine the runnable example and trace each line's purpose.",
+          "Explain the behavior out loud before running the code to verify."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treated the example as a recipe instead of reasoning about invariants.",
+            "fix": "Go back to the lesson, identify what invariant the code assumes, and verify it holds in the new context.",
+            "scenario": "A learner uses a pattern from a lesson without understanding the underlying contract."
+          },
+          {
+            "cause": "The library documentation was not read fully, and the assumption was treated as truth.",
+            "fix": "Read the library source or docs explicitly; never assume behavior you have not verified.",
+            "scenario": "A learner cannot debug code because they assumed a library handles edge cases it does not."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify one hidden assumption in a provided code snippet and explain why it could fail.",
+          "Learner must rewrite a 'magic' one-liner into explicit step-by-step code without changing behavior.",
+          "Learner must explain what invariant a Go interface implicitly guarantees about its implementations."
+        ],
+        "how_go_uses_it": "Go's design philosophy explicitly rejects hidden magic: imports are explicit, errors are values, goroutines share nothing by communicating, and the zero value is defined for every type. Zero magic is Go's default.",
+        "mental_model": "A computer program is a sequence of instructions the CPU fetches, decodes, and executes. Every language produces these instructions. Understanding this pipeline removes the magic from compilation and execution.",
+        "performance_implications": [
+          "Reasoning explicitly about code takes 2x longer initially but reduces debugging time by 10x.",
+          "Zero-magic code is easier to review, test, and refactor because assumptions are documented.",
+          "The upfront cost of explicitness pays down technical debt before it accumulates."
+        ],
+        "problem_solved": "Beginner programmers hit walls when code 'magically' works one day and breaks the next. Zero magic eliminates hidden assumptions so every behavior has a traceable cause.",
+        "proof_of_understanding": "The learner must take a one-line Go expression that uses implicit behavior, expand it into 5+ explicit lines, and explain what assumption was hidden in the original.",
+        "real_world_usage": "Senior engineers at Google, Docker, and HashiCorp review code by asking 'what invariant does this assume?' Zero magic makes those assumptions visible so teams can reason about correctness together.",
+        "step_by_step_execution": [
+          "Encounter a concept or code pattern that seems to 'just work'.",
+          "Ask: what must be true for this to be correct?",
+          "Trace the dependency: does the language, library, or runtime guarantee that?",
+          "Write down the invariant as a comment or assertion.",
+          "Test that the invariant actually holds in edge cases."
+        ],
+        "under_the_hood": "Magic in programming is usually a framework or runtime behavior that the developer did not explicitly invoke. Go minimizes magic by requiring explicit imports, explicit error handling, and explicit goroutine communication. When something 'just works' in Go, it is because the language spec guarantees it, not because a framework guessed your intent.",
+        "why_it_exists": "Every hidden assumption is a future bug. Zero magic is a discipline for making assumptions visible so you can reason about, test, and trust your code."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": false,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": false,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 00.02 — What zero magic means",
+            "reason": "How lessons, exercises, projects, and checkpoints work requires understanding of What zero magic means.",
+            "required": true,
+            "target_id": "core-00-02"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Shell Git Lab",
+            "reason": "Walks through the physical structure of starter folders, tests, and solutions in a real Git workflow.",
+            "required": false,
+            "target_id": "project-shell-git-lab"
+          },
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "Practices working with deliberately broken starter code to understand verification and checkpoint mechanics.",
+            "required": false,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 00.01 — How to use this repository",
+            "reason": "The four-tier workflow maps directly to the repository folder hierarchy: lessons/, projects/, and assessments/.",
+            "required": false,
+            "target_id": "core-00-01"
+          },
+          {
+            "label": "Module 00.04 — How to run code in this repository",
+            "reason": "Hands-on exercises and checkpoints require executing and testing code using standard Go CLI commands.",
+            "required": false,
+            "target_id": "core-00-04"
+          },
+          {
+            "label": "Module 00.05 — How starter folders work",
+            "reason": "Both How lessons, exercises, projects, and checkpoints work and How starter folders work build understanding within Orientation.",
+            "required": false,
+            "target_id": "core-00-05"
+          }
+        ]
+      },
+      "difficulty": "orientation",
+      "documentation_mode": "project",
+      "estimated_minutes": 120,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/lessons/03-how-lessons-exercises-projects-and-checkpoints-work/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "core-00-03",
+      "learning_objective": "Execute the end-to-end curriculum workflow spanning theory, hands-on exercises, automated test suites, and portfolio milestone checkpoints.",
+      "module_id": "module-00",
+      "next_item_ids": [
+        "core-00-04"
+      ],
+      "order": 3,
+      "phase": "orientation",
+      "prerequisites": [
+        "core-00-02"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-00",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
+        "mastery_checks": [
+          "Can trace the four-phase curriculum loop: lesson theory -\u003e guided lab -\u003e integrated project -\u003e rigorous assessment.",
+          "Can explain when and how to consult _solution/ folders without compromising cognitive struggle.",
+          "Can identify criteria that turn a standard coding project into verifiable portfolio proof."
+        ],
+        "practice_task": "The learner must complete one lesson cycle (read, exercise, pass tests), then describe which artifact they would add to their portfolio and why.",
+        "project_id": null
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "how-lessons-exercises-projects-and-checkpoints-work",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "orientation",
+      "tags": [
+        "orientation",
+        "concept"
+      ],
+      "title": "How lessons, exercises, projects, and checkpoints work",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Treating every lesson as a reading exercise and skipping the practical project.",
+          "Rushing through exercises without understanding the feedback from test output.",
+          "Confusing the checkpoint review process with formal grading."
+        ],
+        "execution_timeline": [
+          "Read the lesson README and study the concept explanation.",
+          "Open the starter folder and attempt the exercise before looking at the solution.",
+          "Run tests or verification commands to check your work."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner treated exercises as examples to read rather than problems to solve.",
+            "fix": "Reset the exercise by deleting the working file, retry from the starter, and check the solution only after a genuine attempt.",
+            "scenario": "A learner reads the solution before attempting the exercise and does not build debugging skills."
+          },
+          {
+            "cause": "The learner did not understand that projects are the primary proof of job readiness.",
+            "fix": "Start the project incrementally: complete one milestone, get checkpoint feedback, then proceed.",
+            "scenario": "A learner skips the project because it looks intimidating and falls behind on portfolio output."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain the difference between a lesson, an exercise, a project, and a checkpoint.",
+          "Learner must describe the correct workflow for starting and completing an exercise.",
+          "Learner must identify which artifacts are portfolio-proof and which are skill-building."
+        ],
+        "how_go_uses_it": "Go testing conventions (Test functions, table-driven tests, test coverage, benchmarks) mirror the exercise-checkpoint cycle: write code, verify it, measure it, iterate.",
+        "mental_model": "Source code becomes an executable through the compiler, assembler, and linker. Go's toolchain handles all three with a single build command. The result is a native binary with no virtual machine.",
+        "performance_implications": [
+          "Exercises with immediate test feedback accelerate learning by 40 percent compared to passive reading.",
+          "Projects take 3-5x longer than exercises but produce portfolio artifacts that demonstrate capability.",
+          "Checkpoints prevent wasted effort by catching misunderstandings early."
+        ],
+        "problem_solved": "Learners need structured progression from understanding a concept to proving they can apply it in a realistic context, with feedback at each stage.",
+        "proof_of_understanding": "The learner must complete one lesson cycle (read, exercise, pass tests), then describe which artifact they would add to their portfolio and why.",
+        "real_world_usage": "The lesson-exercise-project-checkpoint structure mirrors industry onboarding: read docs, complete a ticket, ship a feature, get a code review. Companies like Google and Stripe use similar progression in their onboarding programs.",
+        "step_by_step_execution": [
+          "Start with the lesson README to learn the concept and see examples.",
+          "Open the _starter directory and implement the exercise without looking at _solution.",
+          "Run the test or verify command to check correctness.",
+          "If stuck for more than 15 minutes, review the concept section again before peeking at the solution.",
+          "For checkpoints, submit your work-in-progress for feedback before moving to the next milestone."
+        ],
+        "under_the_hood": "The starter/solution pattern works because Go's module system treats each lesson directory as its own package. The _starter directory contains intentionally incomplete code with marker comments (TODO or FIXME) that learners replace with their implementation.",
+        "why_it_exists": "Reading code builds familiarity; writing code builds skill; submitting code builds proof. Separating these into distinct artifact types gives learners clear goals and employers clear evidence."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": false,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": false,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
+            "reason": "How to run code in this repository requires understanding of How lessons, exercises, projects, and checkpoints work.",
+            "required": true,
+            "target_id": "core-00-03"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Shell Git Lab",
+            "reason": "Executes shell commands to verify Go toolchain presence and test execution pathways.",
+            "required": false,
+            "target_id": "project-shell-git-lab"
+          },
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "Runs compiler commands directly to observe syntax error reporting and module resolution.",
+            "required": false,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 00.01 — How to use this repository",
+            "reason": "Executing Go commands requires navigating to the appropriate module and lesson directories on disk.",
+            "required": false,
+            "target_id": "core-00-01"
+          },
+          {
+            "label": "Module 00.02 — What zero magic means",
+            "reason": "Toolchain commands replace magical assumptions by providing deterministic compiler and runtime feedback.",
+            "required": false,
+            "target_id": "core-00-02"
+          },
+          {
+            "label": "Module 00.05 — How starter folders work",
+            "reason": "Running go test and go build is the core mechanism used to verify implementations inside starter folders.",
+            "required": false,
+            "target_id": "core-00-05"
+          }
+        ]
+      },
+      "difficulty": "orientation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/lessons/04-how-to-run-code-in-this-repository/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "core-00-04",
+      "learning_objective": "Run, test, format, and vet Go code using essential CLI toolchain commands (go run, go test, go build, go vet, gofmt).",
+      "module_id": "module-00",
+      "next_item_ids": [
+        "core-00-05"
+      ],
+      "order": 4,
+      "phase": "orientation",
+      "prerequisites": [
+        "core-00-03"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-00",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
+        "mastery_checks": [
+          "Can execute, format, build, and test Go packages using go run, gofmt, go build, and go test.",
+          "Can interpret compiler errors, test failures, and exit codes without IDE reliance.",
+          "Can explain the difference between compiling a temporary executable (go run) and emitting a binary (go build)."
+        ],
+        "practice_task": "The learner must write a small Go program, run it with go run, write a test for it, run the test with go test -v, and run go vet without errors.",
+        "project_id": null
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "how-to-run-code-in-this-repository",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "orientation",
+      "tags": [
+        "orientation",
+        "concept"
+      ],
+      "title": "How to run code in this repository",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Running go run from the wrong directory and getting 'package is not in GOROOT' errors.",
+          "Forgetting to run go mod tidy after adding dependencies.",
+          "Running go test without the -v flag and missing detailed failure output."
+        ],
+        "execution_timeline": [
+          "Open a terminal and navigate to the lesson folder.",
+          "Run go run . to execute a single-file program.",
+          "Run go test ./... to run all tests in the lesson package."
+        ],
+        "failure_modes": [
+          {
+            "cause": "go run main.go only works for single-file main packages in the current directory; multi-file packages need go run .",
+            "fix": "Use go run . or go run .\\path\to\\package for multi-file packages.",
+            "scenario": "A learner runs go run main.go but the file is in a subdirectory and the import path is wrong."
+          },
+          {
+            "cause": "Only main packages produce executables; library packages compile but produce no binary.",
+            "fix": "Use go build -o output.exe . for main packages, or go install for module binaries.",
+            "scenario": "A learner runs go build but expects a binary to appear when the package is not main."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must explain the difference between go run, go build, and go install.",
+          "Learner must run the correct command to execute tests in a specific subdirectory.",
+          "Learner must diagnose a 'package not found' error from a missing go.mod."
+        ],
+        "how_go_uses_it": "Go's toolchain is designed around running code with zero configuration: go run, go test, go fmt, go vet, and go build are the five commands that cover 90 percent of daily development workflow.",
+        "mental_model": "Memory is a linear byte array addressed by the CPU. The stack is fast and scoped; the heap is flexible but requires garbage collection. Virtual memory gives each process its own private address space.",
+        "performance_implications": [
+          "go run rebuilds from scratch every time; use go test -count=1 to avoid caching issues during development.",
+          "go build uses cached compilations for fast iteration; use go clean -cache to force a full rebuild.",
+          "The Go compiler is fast enough that rebuild times rarely exceed 2 seconds for lesson-sized projects."
+        ],
+        "problem_solved": "New Go developers waste time on toolchain confusion instead of learning the language. Knowing the five essential commands removes the configuration barrier.",
+        "proof_of_understanding": "The learner must write a small Go program, run it with go run, write a test for it, run the test with go test -v, and run go vet without errors.",
+        "real_world_usage": "Production Go services are built and tested with the same commands. CI pipelines run go test ./... and go vet ./... on every pull request. Mastery of these commands is table stakes for professional Go development.",
+        "step_by_step_execution": [
+          "Navigate to the lesson directory containing the go.mod and .go files.",
+          "Run go run . to compile and execute the main package.",
+          "Run go test . to run unit tests and verify correctness.",
+          "Run go vet . to check for common mistakes like unreachable code or misused strings.",
+          "Run go build . to compile without executing, then run the resulting binary from the command line."
+        ],
+        "under_the_hood": "go run compiles the package into a temporary directory, executes the binary, and cleans up. go test compiles test files alongside the package, runs each Test function in a subprocess, and reports results via the testing framework's protocol buffer output.",
+        "why_it_exists": "Reading about Go is not the same as running Go. The fastest way to internalize a concept is to write, run, break, and fix code. This lesson removes the friction of getting started."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": false,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": false,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 00.04 — How to run code in this repository",
+            "reason": "How starter folders work requires understanding of How to run code in this repository.",
+            "required": true,
+            "target_id": "core-00-04"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Shell Git Lab",
+            "reason": "Navigates directory boundaries and tests starter-versus-solution branches.",
+            "required": false,
+            "target_id": "project-shell-git-lab"
+          },
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "Modifies starter files to resolve deliberate compilation failures and verify passing tests.",
+            "required": false,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 00.01 — How to use this repository",
+            "reason": "Starter and solution folders reside within standardized module paths defined in repository manifests.",
+            "required": false,
+            "target_id": "core-00-01"
+          },
+          {
+            "label": "Module 00.02 — What zero magic means",
+            "reason": "The starter/solution pattern enforces zero magic by requiring learners to write missing logic before viewing reference code.",
+            "required": false,
+            "target_id": "core-00-02"
+          },
+          {
+            "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
+            "reason": "Starter scaffolds serve as the hands-on bridge connecting conceptual lessons to portfolio project milestones.",
+            "required": false,
+            "target_id": "core-00-03"
+          }
+        ]
+      },
+      "difficulty": "orientation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/lessons/05-how-starter-folders-work/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "core-00-05",
+      "learning_objective": "Navigate starter scaffolds, complete marked implementation gaps, pass unit tests, and compare solutions against reference implementations.",
+      "module_id": "module-00",
+      "next_item_ids": [
+        "core-00-06"
+      ],
+      "order": 5,
+      "phase": "orientation",
+      "prerequisites": [
+        "core-00-04"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-00",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
+        "mastery_checks": [
+          "Can navigate starter scaffolds, locate marked TODO gaps, and write passing implementations.",
+          "Can run targeted unit tests to verify specific implementation behavior.",
+          "Can compare personal solutions against reference implementations to analyze architectural tradeoffs."
+        ],
+        "practice_task": "The learner must complete an exercise from the starter, pass all tests, then explain one design choice where their solution differs from the provided solution and why both are valid.",
+        "project_id": null
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "how-starter-folders-work",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "orientation",
+      "tags": [
+        "orientation",
+        "concept"
+      ],
+      "title": "How starter folders work",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Writing solution code directly in the starter folder and mixing working and broken copies.",
+          "Deleting the starter folder and having no clean state to retry the exercise.",
+          "Modifying the starter template markers (TODO comments) instead of replacing them with implementation."
+        ],
+        "execution_timeline": [
+          "Open the _starter folder and inspect all files to understand the expected inputs and outputs.",
+          "Identify the TODO or FIXME markers that indicate where implementation is needed.",
+          "Write your solution, keeping the existing function signatures and types unchanged."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The starter intentionally provides correct type signatures; changing them breaks the test harness.",
+            "fix": "Restore the original signature from the test file or revert to the starter template.",
+            "scenario": "A learner writes code in the _starter folder that does not compile because they changed a function signature."
+          },
+          {
+            "cause": "The solution is treated as a shortcut rather than a reference for self-assessment.",
+            "fix": "Delete the copied solution, retry from the starter, and use the solution only to check your reasoning after your code passes.",
+            "scenario": "A learner copies the solution into the starter without understanding why it works."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify which files in the starter are part of the test harness and which are for implementation.",
+          "Learner must explain why modifying the test file defeats the purpose of the exercise.",
+          "Learner must describe when it is appropriate to look at the solution folder."
+        ],
+        "how_go_uses_it": "Go's convention of separating public API (exported identifiers) from implementation (unexported) mirrors the starter/solution pattern: the starter defines the contract (function signatures), and the learner fills in the implementation.",
+        "mental_model": "The terminal is a text interface to the OS for navigating filesystems, running programs, and chaining commands. Terminal confidence means you can diagnose issues and automate workflows without leaving the keyboard.",
+        "performance_implications": [
+          "Starting from a well-designed starter template reduces setup time by 5-10 minutes per exercise.",
+          "Comparing your solution to the provided one after passing tests reveals alternative techniques and deeper understanding.",
+          "Having a clean starter to retry from is essential for spaced repetition learning."
+        ],
+        "problem_solved": "Blank-page paralysis prevents learners from starting. The starter folder removes the 'where do I begin?' barrier by providing compilable scaffolding with clearly marked gaps.",
+        "proof_of_understanding": "The learner must complete an exercise from the starter, pass all tests, then explain one design choice where their solution differs from the provided solution and why both are valid.",
+        "real_world_usage": "Professional Go codebases use similar patterns: interface definitions (starter) with multiple implementations (solutions), and test doubles that verify behavior against a contract. The starter/skill pattern teaches this real-world workflow.",
+        "step_by_step_execution": [
+          "Copy or navigate to the _starter directory for the current exercise.",
+          "Read all files in the starter to understand the problem, test expectations, and TODO markers.",
+          "Implement the missing logic in the designated files without changing exported signatures.",
+          "Run go test -v from the starter directory and fix any failures.",
+          "Once all tests pass, optionally open the _solution directory to compare approaches."
+        ],
+        "under_the_hood": "Starter and solution directories are both valid Go packages with identical public interfaces but different internal implementations. Tests compile against the public API, so they work identically against both the starter (incomplete) and solution (complete) versions.",
+        "why_it_exists": "Learning programming requires writing code, not just reading it. Starter folders reduce the activation energy for writing code by providing structure, so learners spend time on the concept rather than on boilerplate."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": false,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": false,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 00.05 — How starter folders work",
+            "reason": "How assessments work requires understanding of How starter folders work.",
+            "required": true,
+            "target_id": "core-00-05"
+          },
+          {
+            "label": "Module 00.04 — How to run code in this repository",
+            "reason": "How assessments work extends directly from How to run code in this repository.",
+            "required": true,
+            "target_id": "core-00-04"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Shell Git Lab",
+            "reason": "Demonstrates how rubrics and evidence requirements evaluate repository navigation and Git fluency.",
+            "required": false,
+            "target_id": "project-shell-git-lab"
+          },
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "Demonstrates how assessment rubrics evaluate compiler debugging and tooling problem resolution.",
+            "required": false,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 00.01 — How to use this repository",
+            "reason": "Assessment rubrics verify that learners can independently navigate and explain repository architecture.",
+            "required": false,
+            "target_id": "core-00-01"
+          },
+          {
+            "label": "Module 00.02 — What zero magic means",
+            "reason": "Assessments evaluate whether learners possess genuine first-principles understanding without reliance on hidden magic.",
+            "required": false,
+            "target_id": "core-00-02"
+          },
+          {
+            "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
+            "reason": "Assessments form the terminal validation gate of the lesson-exercise-project-assessment loop.",
+            "required": false,
+            "target_id": "core-00-03"
+          }
+        ]
+      },
+      "difficulty": "orientation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/lessons/06-how-assessments-work/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "core-00-06",
+      "learning_objective": "Prepare for module assessments by distinguishing superficial familiarity from demonstrable mastery, passing automated checks and oral reviews.",
+      "module_id": "module-00",
+      "next_item_ids": [
+        "core-00-07"
+      ],
+      "order": 6,
+      "phase": "orientation",
+      "prerequisites": [
+        "core-00-05"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-00",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
+        "mastery_checks": [
+          "Can explain the structure of checkpoint rubrics across correctness, code quality, testing, and oral defense.",
+          "Can distinguish between superficial multiple-choice familiarity and demonstrable mastery.",
+          "Can formulate a targeted remediation plan after identifying assessment weak points."
+        ],
+        "practice_task": "The learner must take a module assessment, identify the question they were least confident about, return to the relevant lesson, and write a one-paragraph explanation that fills the gap.",
+        "project_id": null
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "how-assessments-work",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "orientation",
+      "tags": [
+        "orientation",
+        "concept"
+      ],
+      "title": "How assessments work",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Treating assessment questions as yes/no memorization instead of reasoning exercises.",
+          "Skipping the self-assessment and moving on without verifying understanding.",
+          "Assuming passing multiple-choice questions equals mastery of the topic."
+        ],
+        "execution_timeline": [
+          "Complete the lesson or module content and all exercises.",
+          "Open the assessment for the module and read each question carefully.",
+          "Answer each question with explanation not just the final answer."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The assessment was treated as a test to pass rather than a diagnostic tool.",
+            "fix": "For every question, write down the reasoning even if you are unsure; the reasoning reveals what you actually understand.",
+            "scenario": "A learner guesses an answer without reasoning and fails to identify the knowledge gap."
+          },
+          {
+            "cause": "The assessment measures recognition, not application; true mastery requires project-level proof.",
+            "fix": "After passing the assessment, immediately apply the concept in the module project to bridge recognition to application.",
+            "scenario": "A learner passes the module assessment but cannot apply the concept in a project."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must complete a module assessment and correctly explain why each wrong answer is wrong.",
+          "Learner must describe the difference between recognition-level and application-level mastery.",
+          "Learner must create a personal retry plan after identifying a knowledge gap from an assessment."
+        ],
+        "how_go_uses_it": "Go's testing framework (go test) functions as a continuous assessment system for code. Table-driven tests in particular let you assess multiple input/output pairs against a single function, mirroring how module assessments test multiple facets of a concept.",
+        "mental_model": "An OS runs many processes by multiplexing CPU time. Each process has its own address space, file descriptors, and state. The kernel schedules, manages memory, and mediates hardware access. Isolation means one crash does not bring down the whole machine.",
+        "performance_implications": [
+          "Taking a 15-minute assessment after each lesson improves long-term retention by 50 percent compared to no assessment.",
+          "Spaced repetition of assessment topics requires 30 minutes per week and cuts relearning time by 70 percent.",
+          "Writing explanations for answers doubles learning per minute compared to multiple-choice-only responses."
+        ],
+        "problem_solved": "Learners often mistake familiarity for understanding. Assessments reveal the gap between 'I have seen this before' and 'I can explain this correctly.'",
+        "proof_of_understanding": "The learner must take a module assessment, identify the question they were least confident about, return to the relevant lesson, and write a one-paragraph explanation that fills the gap.",
+        "real_world_usage": "Technical interviews at companies like Google and Stripe use the same pattern: a question tests a concept, your answer reveals your depth, and the follow-up discussion diagnoses your reasoning process.",
+        "step_by_step_execution": [
+          "Finish the module content and all exercises.",
+          "Open the assessment in the module's assets or curriculum assessment file.",
+          "Read each question and write down your answer with reasoning.",
+          "After answering all questions, check against the answer key.",
+          "For each incorrect or uncertain answer, revisit the relevant lesson and note what you missed."
+        ],
+        "under_the_hood": "Assessments in this curriculum follow a multi-facet model: each question targets a specific combination of concept, context, and cognitive level (recall, apply, evaluate). This structure makes gaps diagnosable at the facet level.",
+        "why_it_exists": "Without assessment, learners inflate their self-assessment. Objective, structured questions expose knowledge gaps before they cause failure in projects or interviews."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": false,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": false,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 00.06 — How assessments work",
+            "reason": "How to ask good debugging questions requires understanding of How assessments work.",
+            "required": true,
+            "target_id": "core-00-06"
+          },
+          {
+            "label": "Module 00.05 — How starter folders work",
+            "reason": "How to ask good debugging questions extends directly from How starter folders work.",
+            "required": true,
+            "target_id": "core-00-05"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Shell Git Lab",
+            "reason": "Applies structured debugging steps to resolve unexpected Git merge conflicts or shell path issues.",
+            "required": false,
+            "target_id": "project-shell-git-lab"
+          },
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "Formulates precise hypotheses about compilation errors and verifies them using Go tool diagnostics.",
+            "required": false,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 00.01 — How to use this repository",
+            "reason": "Formulating high-signal questions requires citing specific repository file paths, manifests, and Git branches.",
+            "required": false,
+            "target_id": "core-00-01"
+          },
+          {
+            "label": "Module 00.02 — What zero magic means",
+            "reason": "Hypothesis-driven debugging eliminates guessing by methodically verifying assumptions against runtime evidence.",
+            "required": false,
+            "target_id": "core-00-02"
+          },
+          {
+            "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
+            "reason": "Debugging discipline is exercised continuously throughout guided labs, project implementations, and checkpoint retakes.",
+            "required": false,
+            "target_id": "core-00-03"
+          }
+        ]
+      },
+      "difficulty": "orientation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/lessons/07-how-to-ask-good-debugging-questions/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "core-00-07",
+      "learning_objective": "Formulate structured, reproducible debugging questions containing environment telemetry, expected vs. actual behavior, and minimal repro steps.",
+      "module_id": "module-00",
+      "next_item_ids": [
+        "core-00-08"
+      ],
+      "order": 7,
+      "phase": "orientation",
+      "prerequisites": [
+        "core-00-06"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-00",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
+        "mastery_checks": [
+          "Can formulate a 7-point debugging question containing environment, expected vs actual behavior, and minimal reproduction.",
+          "Can apply systematic hypothesis-testing to isolate failure modes instead of random code alterations.",
+          "Can extract high-signal stack traces and error messages from terminal outputs."
+        ],
+        "practice_task": "The learner must take a provided buggy code snippet, write a well-structured debugging question for it, then debug and fix it using the hypothesis-testing methodology.",
+        "project_id": null
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "how-to-ask-good-debugging-questions",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "orientation",
+      "tags": [
+        "orientation",
+        "concept"
+      ],
+      "title": "How to ask good debugging questions",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Asking 'why does my code not work?' without providing error messages or expected output.",
+          "Dumping 200 lines of code and asking someone to 'fix it' without isolating the problem area.",
+          "Describing what the code should do instead of what it actually does."
+        ],
+        "execution_timeline": [
+          "Observe the bug: what did you expect to happen and what actually happened?",
+          "Isolate the smallest reproducing example by removing unrelated code.",
+          "Read the error message carefully it usually tells you the exact line and type of failure."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner did not verbalize the problem step by step before diving into code changes.",
+            "fix": "Before changing any code, explain the bug out loud or in writing as if teaching someone else.",
+            "scenario": "A learner spends 2 hours debugging a bug that a 30-second rubber-duck explanation would have solved."
+          },
+          {
+            "cause": "The question did not provide enough information for anyone to help without asking follow-ups.",
+            "fix": "Always include: the exact error message, the code that produced it, what you expected, and what you tried already.",
+            "scenario": "A learner's forum question gets ignored because it lacks error messages and minimal reproduction steps."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must take a vague bug report and rewrite it as a well-structured debugging question.",
+          "Learner must identify the key diagnostic information missing from a given question.",
+          "Learner must reproduce a bug, isolate the root cause, and explain the fix in one sentence."
+        ],
+        "how_go_uses_it": "Go's error handling philosophy (errors are values, handle them explicitly) mirrors good debugging practice: do not ignore signals, inspect them, isolate them, and respond to them explicitly.",
+        "mental_model": "Debugging is hypothesis testing. The error message is your first data point. Form a hypothesis about the cause, design an experiment (add a print, check a value), and let the evidence confirm or refute it.",
+        "performance_implications": [
+          "Writing a clear bug report takes 5 minutes but can save the responder 30 minutes of back-and-forth.",
+          "Isolating a minimal reproduction case narrows the root cause by 90 percent before anyone reads your question.",
+          "Good debugging questions get answered in minutes; vague ones may never get answered."
+        ],
+        "problem_solved": "Vague bug reports waste everyone's time. A structured debugging methodology turns a frustrating blocker into a solvable puzzle and builds a reputation as a thoughtful engineer.",
+        "proof_of_understanding": "The learner must take a provided buggy code snippet, write a well-structured debugging question for it, then debug and fix it using the hypothesis-testing methodology.",
+        "real_world_usage": "Senior engineers at top tech companies are evaluated partly by how they ask for help. A well-structured question signals competence and respect for the responder's time, which is why sites like Stack Overflow enforce question quality standards.",
+        "step_by_step_execution": [
+          "Identify what you expect to happen vs what actually happens.",
+          "Read the full error message and locate the exact line and column.",
+          "Remove code until the bug still reproduces with the smallest possible example.",
+          "Check the most common Go-specific pitfalls: missed error returns, nil interface values, range variable capture, and goroutine races.",
+          "Write your question with: expected behavior, actual behavior, minimal code, full error output, and what you already investigated."
+        ],
+        "under_the_hood": "The Go runtime produces detailed stack traces on panic, including file, line, goroutine ID, and the chain of calls that led to the failure. go vet and staticcheck catch many bugs at compile time. A good debugger uses all three layers: compiler warnings, runtime traces, and logical deduction.",
+        "why_it_exists": "Debugging is the skill that separates junior from senior engineers. Knowing how to ask for help efficiently is force multiplier: it unblocks you faster and respects the time of the people who help you."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": false,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": false,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 00.07 — How to ask good debugging questions",
+            "reason": "What job-ready means requires understanding of How to ask good debugging questions.",
+            "required": true,
+            "target_id": "core-00-07"
+          },
+          {
+            "label": "Module 00.06 — How assessments work",
+            "reason": "What job-ready means extends directly from How assessments work.",
+            "required": true,
+            "target_id": "core-00-06"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Shell Git Lab",
+            "reason": "Establishes production Git hygiene, meaningful commit messages, and clean working tree management.",
+            "required": false,
+            "target_id": "project-shell-git-lab"
+          },
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "Demonstrates professional debugging standards: reproducing errors, reading traces, and verifying fixes.",
+            "required": false,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 00.01 — How to use this repository",
+            "reason": "Job-ready engineering capability includes navigating large unfamiliar codebases and adhering to repository conventions.",
+            "required": false,
+            "target_id": "core-00-01"
+          },
+          {
+            "label": "Module 00.02 — What zero magic means",
+            "reason": "Zero-magic mastery distinguishes production-grade software engineers from tutorial-dependent beginners.",
+            "required": false,
+            "target_id": "core-00-02"
+          },
+          {
+            "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
+            "reason": "Completing the lesson-to-checkpoint loop across all modules generates the observable proof required for job readiness.",
+            "required": false,
+            "target_id": "core-00-03"
+          }
+        ]
+      },
+      "difficulty": "orientation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/lessons/08-what-job-ready-means/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "core-00-08",
+      "learning_objective": "Evaluate technical readiness against observable software engineering graduation criteria rather than passive content consumption.",
+      "module_id": "module-00",
+      "next_item_ids": [
+        "core-00-09"
+      ],
+      "order": 8,
+      "phase": "orientation",
+      "prerequisites": [
+        "core-00-07"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-00",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
+        "mastery_checks": [
+          "Can audit technical capability against the 6 observable graduation outcomes.",
+          "Can identify the difference between passive tutorial completion and autonomous software delivery.",
+          "Can articulate architectural tradeoffs and operational failure recovery in oral defense scenarios."
+        ],
+        "practice_task": "The learner must audit their own portfolio against a provided rubric, identify their weakest dimension, and write an improvement plan with specific next steps.",
+        "project_id": null
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "what-job-ready-means",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "orientation",
+      "tags": [
+        "orientation",
+        "concept"
+      ],
+      "title": "What job-ready means",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Believing job-ready means knowing every Go feature and standard library package.",
+          "Focusing on syntax trivia rather than engineering judgment and problem-solving.",
+          "Skipping portfolio projects because 'I understand the concept so I do not need to build it.'"
+        ],
+        "execution_timeline": [
+          "Complete all module projects and ensure they are in a portfolio-ready state.",
+          "Practice explaining your design decisions for each project out loud.",
+          "Review the job-readiness rubric: code quality, testing, documentation, architecture, delivery."
+        ],
+        "failure_modes": [
+          {
+            "cause": "All practice was writing code; none was verbalizing design reasoning.",
+            "fix": "After each project, write and record a 3-minute explanation of your architecture decisions, tradeoffs, and what you would improve.",
+            "scenario": "A learner has strong coding skills but cannot explain their choices in an interview setting."
+          },
+          {
+            "cause": "The learner focused on consuming content instead of producing portfolio artifacts.",
+            "fix": "Delete cloned tutorial repos and replace them with original projects from this curriculum's portfolio milestones.",
+            "scenario": "A learner has a GitHub with cloned tutorials but no original projects demonstrating engineering judgment."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must evaluate a sample portfolio against the job-readiness rubric and identify gaps.",
+          "Learner must explain which three curriculum projects best demonstrate job readiness and why.",
+          "Learner must describe the difference between 'can write Go' and 'can engineer Go systems.'"
+        ],
+        "how_go_uses_it": "Go's cultural emphasis on simplicity, readability, and maintainability directly maps to what employers look for: not clever code, but code that a team can understand, deploy, and operate confidently.",
+        "mental_model": "Job-ready means you can take a vague requirement, design a solution, implement it testably, document your decisions, and deliver it through CI to production — independently.",
+        "performance_implications": [
+          "A portfolio with 3 well-documented projects is more impressive than 10 unfinished tutorials.",
+          "Employers spend an average of 7 seconds per resume scan; your portfolio link and project descriptions must communicate competence instantly.",
+          "Interview performance is 70 percent communication and 30 percent coding; practice verbalizing your reasoning."
+        ],
+        "problem_solved": "Learners cannot tell when they are actually ready for a job vs when they are stuck in a learning loop. Job readiness is defined by demonstrable outputs, not time spent or content consumed.",
+        "proof_of_understanding": "The learner must audit their own portfolio against a provided rubric, identify their weakest dimension, and write an improvement plan with specific next steps.",
+        "real_world_usage": "Hiring managers at Go shops evaluate candidates on four axes: code quality, system design, collaboration, and delivery. This curriculum maps each module to one of those axes so learners build a balanced skill profile.",
+        "step_by_step_execution": [
+          "Complete a project from the curriculum with all milestones.",
+          "Review your project against the job-readiness rubric: is the code clean, tested, documented, and deployable?",
+          "Write a README that explains the architecture, tradeoffs, and how to run the project.",
+          "Practice explaining the project out loud as if in an interview.",
+          "Iterate: improve the weakest area and repeat the self-review until all rubric criteria are met."
+        ],
+        "under_the_hood": "The Go engineering hiring rubric at most companies evaluates candidates on a 1-4 scale across coding, design, communication, and testing. The curriculum's proof system (exercises, projects, checkpoints, assessments) maps to this rubric so every completed module produces measurable progress on the hiring scale.",
+        "why_it_exists": "Without a clear definition of job-ready, learners stay in tutorial purgatory indefinitely — never feeling ready enough to apply. A concrete rubric makes readiness measurable and the path to it clear."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": false,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": false,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 00.08 — What job-ready means",
+            "reason": "How to use the roadmap requires understanding of What job-ready means.",
+            "required": true,
+            "target_id": "core-00-08"
+          },
+          {
+            "label": "Module 00.07 — How to ask good debugging questions",
+            "reason": "How to use the roadmap extends directly from How to ask good debugging questions.",
+            "required": true,
+            "target_id": "core-00-07"
+          }
+        ],
+        "preview_only": [],
+        "reinforced_in": [
+          {
+            "label": "Project — Shell Git Lab",
+            "reason": "Locates foundational modules and projects on disk using the curriculum graph roadmap.",
+            "required": false,
+            "target_id": "project-shell-git-lab"
+          },
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "Verifies prerequisites and module tooling requirements before beginning core language modules.",
+            "required": false,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 00.01 — How to use this repository",
+            "reason": "The curriculum roadmap graph dictates the sequence of repository modules and prerequisite paths.",
+            "required": false,
+            "target_id": "core-00-01"
+          },
+          {
+            "label": "Module 00.02 — What zero magic means",
+            "reason": "Roadmap ordering ensures foundational systems and concurrency concepts are taught before distributed architectures.",
+            "required": false,
+            "target_id": "core-00-02"
+          },
+          {
+            "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
+            "reason": "Tracking progress through the roadmap aligns daily lesson completion with long-term capstone delivery.",
+            "required": false,
+            "target_id": "core-00-03"
+          }
+        ]
+      },
+      "difficulty": "orientation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/lessons/09-how-to-use-the-roadmap/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "core-00-09",
+      "learning_objective": "Track prerequisite dependencies, module milestones, and learning paths across the curriculum roadmap graph.",
+      "module_id": "module-00",
+      "next_item_ids": [
+        "core-00-10"
+      ],
+      "order": 9,
+      "phase": "orientation",
+      "prerequisites": [
+        "core-00-08"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-00",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
+        "mastery_checks": [
+          "Can navigate the curriculum dependency graph and explain topological prerequisite ordering.",
+          "Can identify milestone modules and their corresponding portfolio capstones.",
+          "Can plan a realistic personal progression trajectory based on module cognitive load and pacing."
+        ],
+        "practice_task": "The learner must trace their path from core-00-01 through the next 10 modules, listing each module's prerequisites and portfolio output, and explain why the order is structured that way.",
+        "project_id": null
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "how-to-use-the-roadmap",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "orientation",
+      "tags": [
+        "orientation",
+        "concept"
+      ],
+      "title": "How to use the roadmap",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Treating the roadmap as a checklist to complete linearly without revisiting earlier modules.",
+          "Hopping between modules based on interest rather than prerequisite order.",
+          "Ignoring portfolio milestones and focusing only on theory modules."
+        ],
+        "execution_timeline": [
+          "Open the curriculum roadmap (path.core.json) and find your current module.",
+          "Check the modules prerequisites to ensure you have completed them.",
+          "Identify the modules learning goal, portfolio output, and estimated time."
+        ],
+        "failure_modes": [
+          {
+            "cause": "The learner skipped foundational modules that teach prerequisites like functions, types, and testing.",
+            "fix": "Return to module 01 and follow the prescribed order. The roadmap is designed to build skills incrementally.",
+            "scenario": "A learner starts module 08 (HTTP APIs) without completing modules 01-07 and gets overwhelmed."
+          },
+          {
+            "cause": "The learner skipped modules flagged with portfolio_output: true.",
+            "fix": "Identify all portfolio_output modules in the roadmap and complete at least three projects before applying for jobs.",
+            "scenario": "A learner completes every module but has no portfolio projects to show employers."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must identify the next three modules they should study given their current module ID.",
+          "Learner must explain the difference between required and elective modules using the roadmap.",
+          "Learner must locate the portfolio_output flag in the JSON and list all portfolio-producing modules."
+        ],
+        "how_go_uses_it": "Go's module system (go.mod, semantic import versioning) uses a dependency graph similar to this curriculum's prerequisite chain. Each module declares what it needs (require) and what it provides (export), and the build fails if dependencies are missing.",
+        "mental_model": "The roadmap is a dependency graph: each module lists its prerequisites (dependencies) and its outputs (portfolio artifacts). Completing a module is like resolving a dependency — once it is done, downstream modules can use it.",
+        "performance_implications": [
+          "Following the prerequisite order reduces concept-switching overhead and prevents relearning the same fundamentals.",
+          "The curriculum takes approximately 400-600 hours total; pacing yourself at 15-20 hours per week yields completion in 6-9 months.",
+          "Skipping modules to save time costs 3x more time later in debugging and re-learning."
+        ],
+        "problem_solved": "Learners face decision paralysis with a large curriculum: which module next? Is this module required? What do I need to know first? The roadmap codifies the answers.",
+        "proof_of_understanding": "The learner must trace their path from core-00-01 through the next 10 modules, listing each module's prerequisites and portfolio output, and explain why the order is structured that way.",
+        "real_world_usage": "Engineering teams use roadmap documents (RFCs, project proposals, quarterly OKRs) to communicate what will be built, in what order, and what each phase depends on. Reading and navigating the curriculum roadmap is practice for reading engineering roadmaps at work.",
+        "step_by_step_execution": [
+          "Open curriculum/path.core.json and locate the modules array.",
+          "Identify your current module by its id and note its order number.",
+          "Check the next_item_ids to see which module comes next.",
+          "Verify you have completed all listed prerequisites before moving forward.",
+          "If the module has portfolio_output: true, plan to allocate extra time for the project artifact."
+        ],
+        "under_the_hood": "The curriculum roadmap is structured as a directed acyclic graph (DAG) where modules are nodes and prerequisites are edges. The topological ordering ensures that every module's prerequisites appear earlier in the sequence. The entry_item_ids and terminal_item_ids define the start and end points within each module.",
+        "why_it_exists": "Without a roadmap, learners jump between topics, miss prerequisites, and never finish. The roadmap provides a flight plan that turns a mountain of content into a sequenced, achievable journey."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "content_contract": {
+        "common_mistakes_required": true,
+        "machine_view_required": false,
+        "portfolio_artifact_required": false,
+        "production_notes_required": false,
+        "readme_required": true,
+        "review_questions_required": true,
+        "runnable_required": false,
+        "tests_required": false,
+        "visual_model_required": true
+      },
+      "crossrefs": {
+        "builds_on": [
+          {
+            "label": "Module 00.09 — How to use the roadmap",
+            "reason": "How to build a portfolio from this curriculum requires understanding of How to use the roadmap.",
+            "required": true,
+            "target_id": "core-00-09"
+          },
+          {
+            "label": "Module 00.08 — What job-ready means",
+            "reason": "How to build a portfolio from this curriculum extends directly from What job-ready means.",
+            "required": true,
+            "target_id": "core-00-08"
+          }
+        ],
+        "preview_only": [
+          {
+            "label": "Module 01.01 — What is a program?",
+            "reason": "Preview of What is a program? from Computers, Terminal, Git, and the Web.",
+            "required": false,
+            "target_id": "core-01-01"
+          },
+          {
+            "label": "Module 16.01 — Portfolio strategy",
+            "reason": "Establishes portfolio curation expectations during orientation, connecting forward to the final portfolio packaging and interview defense in Module 16.",
+            "required": false,
+            "target_id": "core-16-01"
+          }
+        ],
+        "reinforced_in": [
+          {
+            "label": "Project — Shell Git Lab",
+            "reason": "Sets up repository tracking and documentation habits required for portfolio artifacts.",
+            "required": false,
+            "target_id": "project-shell-git-lab"
+          },
+          {
+            "label": "Project — Tooling Failure Lab",
+            "reason": "Documents debugging rationales as evidence of systematic problem-solving competence.",
+            "required": false,
+            "target_id": "project-tooling-failure-lab"
+          }
+        ],
+        "related": [
+          {
+            "label": "Module 00.01 — How to use this repository",
+            "reason": "Portfolio repositories mirror the production-grade directory layout and documentation standards established in this repository.",
+            "required": false,
+            "target_id": "core-00-01"
+          },
+          {
+            "label": "Module 00.02 — What zero magic means",
+            "reason": "Zero magic is demonstrated in portfolios through clear architecture diagrams, benchmark evidence, and operational runbooks.",
+            "required": false,
+            "target_id": "core-00-02"
+          },
+          {
+            "label": "Module 00.03 — How lessons, exercises, projects, and checkpoints work",
+            "reason": "Curriculum projects provide the raw material that is polished, tested, and packaged into public portfolio showcases.",
+            "required": false,
+            "target_id": "core-00-03"
+          }
+        ]
+      },
+      "difficulty": "orientation",
+      "documentation_mode": "tutorial",
+      "estimated_minutes": 45,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/lessons/10-how-to-build-a-portfolio-from-this-curriculum/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "core-00-10",
+      "learning_objective": "Curate, package, and document engineering projects into a professional portfolio demonstrating production-grade software craftsmanship.",
+      "module_id": "module-00",
+      "next_item_ids": [
+        "core-01-01"
+      ],
+      "order": 10,
+      "phase": "orientation",
+      "prerequisites": [
+        "core-00-09"
+      ],
+      "proof": {
+        "assessment_id": "assessment-module-00",
+        "expected_artifact": "Completed practice-task artifacts (navigation notes, checklists, case-file templates, roadmap and portfolio plans) and a short written explanation.",
+        "mastery_checks": [
+          "Can package a completed backend project with architecture diagrams, reproducible benchmarks, and operational runbooks.",
+          "Can document system tradeoffs, failure modes, and performance profiles in a professional repository README.",
+          "Can deliver a structured technical walkthrough demonstrating code craftsmanship and domain knowledge."
+        ],
+        "practice_task": "The learner must take a completed curriculum project, write a professional README and architecture diagram, and present the project in a recorded 3-minute walkthrough that explains design decisions and tradeoffs.",
+        "project_id": null
+      },
+      "readme_contract": {
+        "contract_id": "lesson.v3",
+        "documentation_mode": "tutorial",
+        "required": true
+      },
+      "slug": "how-to-build-a-portfolio-from-this-curriculum",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "orientation",
+      "tags": [
+        "orientation",
+        "concept"
+      ],
+      "title": "How to build a portfolio from this curriculum",
+      "type": "lesson",
+      "verification": {
+        "expected_output": "Learner can demonstrate the concept and explain it.",
+        "manual_steps": [
+          "Read the README.",
+          "Complete the practice task.",
+          "Answer the review questions."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      },
+      "zero_magic": {
+        "beginner_mistakes": [
+          "Waiting until the end of the curriculum to start building a portfolio.",
+          "Treating portfolio projects as homework submissions rather than professional showcases.",
+          "Including every exercise instead of curating the best 3-5 projects."
+        ],
+        "execution_timeline": [
+          "Identify which modules in the curriculum have portfolio_output set to true.",
+          "Complete the first portfolio module and polish the project to portfolio quality.",
+          "Add the project to your GitHub profile with a README and architecture diagram."
+        ],
+        "failure_modes": [
+          {
+            "cause": "Quantity was prioritized over quality; no project was brought to portfolio-readiness.",
+            "fix": "Pick the best project, finish it completely, write documentation, and remove or archive unfinished projects.",
+            "scenario": "A learner has 10 half-finished projects in their GitHub but no polished, documented, deployable project."
+          },
+          {
+            "cause": "The project was treated as a coding exercise, not as a professional portfolio artifact.",
+            "fix": "Write a README that includes: project description, architecture decisions, setup instructions, test commands, and lessons learned.",
+            "scenario": "A learner's project README just says 'my project' with no explanation of architecture, tradeoffs, or how to run it."
+          }
+        ],
+        "hidden_magic_checks": [
+          "Learner must evaluate three GitHub profiles and identify which has the most effective portfolio presentation.",
+          "Learner must describe what makes a project portfolio-worthy vs exercise-quality.",
+          "Learner must explain how their portfolio demonstrates each of the four hiring axes: code quality, design, communication, delivery."
+        ],
+        "how_go_uses_it": "Go's emphasis on documentation (go doc, README conventions, example functions) and simplicity (clean project layout, standard build commands) provides a template for what a professional Go portfolio should look like: clean, documented, and immediately runnable.",
+        "mental_model": "Your portfolio is your engineering resume written in code. Each project is a case study demonstrating that you can design, implement, test, document, and deliver a working system.",
+        "performance_implications": [
+          "A portfolio with 3 excellent projects gets 10x more interview callbacks than one with 15 mediocre projects.",
+          "Spending 8 hours polishing a project (README, test coverage, CI badge) increases its impact more than 8 hours of new features.",
+          "Interviewers spend 2-3 minutes per portfolio project; the README and architecture diagram must communicate value in that window."
+        ],
+        "problem_solved": "Learners build dozens of projects during study but present none effectively to employers. This lesson teaches curation, presentation, and the skill of packaging work for consumption.",
+        "proof_of_understanding": "The learner must take a completed curriculum project, write a professional README and architecture diagram, and present the project in a recorded 3-minute walkthrough that explains design decisions and tradeoffs.",
+        "real_world_usage": "Engineers at top companies are evaluated on their ability to communicate technical work. Architecture decision records (ADRs), project READMEs, and design docs are the professional equivalents of a curated portfolio. This skill is equally valuable internally for promotions.",
+        "step_by_step_execution": [
+          "Complete a curriculum project with portfolio_output: true.",
+          "Write a README with: project description, architecture decisions, setup, test commands, and lessons learned.",
+          "Create an architecture diagram showing components, data flow, and key interfaces.",
+          "Push the project to GitHub with a clean commit history.",
+          "Practice a 3-minute walkthrough of the project focusing on design choices, tradeoffs, and what you would improve."
+        ],
+        "under_the_hood": "A portfolio project differs from an exercise in three ways: it is complete (handles edge cases), documented (README, comments, architecture), and presentable (clean code, tested, deployable). The curriculum flags portfolio_output modules to ensure learners build these artifacts alongside skill development.",
+        "why_it_exists": "Employers do not hire based on what you have studied; they hire based on what you have built and can explain. A portfolio is the bridge between learning and being hired."
+      },
+      "zero_magic_status": "golden"
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "project",
+      "estimated_minutes": 120,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/projects/course-setup-verification/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "project-course-setup",
+      "learning_objective": "Verify and document the complete local Go engineering workstation: directory structure, Go 1.27+ toolchain, IDE plugins, and automated curriculum validation test execution.",
+      "module_id": "module-00",
+      "next_item_ids": [],
+      "order": 99,
+      "phase": "go-core",
+      "prerequisites": [],
+      "readme_contract": {
+        "contract_id": "project.v3",
+        "documentation_mode": "project",
+        "required": true
+      },
+      "slug": "course-setup-verification",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "project",
+      "tags": [
+        "go-core",
+        "project"
+      ],
+      "title": "Course Setup Verification",
+      "type": "project",
+      "verification": {
+        "expected_output": "Working implementation with passing tests.",
+        "manual_steps": [
+          "Build the project and run the verification commands from the project README until they pass.",
+          "Complete every task described in the project README.",
+          "Self-assess against the project rubric and capture the required proof."
+        ],
+        "mode": "mixed",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "assessment",
+      "estimated_minutes": 60,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/assessments/checkpoint/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "assessment-module-00-checkpoint",
+      "learning_objective": "Demonstrate independent comprehension of repository navigation, zero-magic engineering contracts, assessment rubrics, and the Go execution toolchain.",
+      "module_id": "module-00",
+      "next_item_ids": [],
+      "order": 100,
+      "phase": "go-core",
+      "prerequisites": [],
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "slug": "checkpoint",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "assessment",
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "title": "Module 00 Checkpoint — Orientation",
+      "type": "assessment",
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    },
+    {
+      "crossrefs": {
+        "builds_on": [],
+        "preview_only": [],
+        "reinforced_in": [],
+        "related": []
+      },
+      "difficulty": "core",
+      "documentation_mode": "assessment",
+      "estimated_minutes": 60,
+      "files": {
+        "assets_dir": "",
+        "diagram_paths": [],
+        "main_path": "",
+        "readme_path": "modules/00-orientation/assessments/course-setup/README.md",
+        "solution_path": "",
+        "starter_path": "",
+        "test_path": ""
+      },
+      "id": "assessment-orientation-course-setup",
+      "learning_objective": "Verify end-to-end local workstation readiness by compiling Go source code, executing curriculum test suites, and passing all automated quality gates.",
+      "module_id": "module-00",
+      "next_item_ids": [],
+      "order": 100,
+      "phase": "go-core",
+      "prerequisites": [],
+      "readme_contract": {
+        "contract_id": "assessment.v3",
+        "documentation_mode": "assessment",
+        "required": true
+      },
+      "slug": "course-setup",
+      "source_legacy_ids": [],
+      "status": "ready",
+      "subtype": "assessment",
+      "tags": [
+        "go-core",
+        "assessment"
+      ],
+      "title": "Course Setup Verification Assessment",
+      "type": "assessment",
+      "verification": {
+        "expected_output": "Completed assessment with evidence.",
+        "manual_steps": [
+          "Complete every question and required evidence in the assessment README.",
+          "Self-grade your work against the rubric.",
+          "Submit the artifacts described in the assessment for review."
+        ],
+        "mode": "manual",
+        "race_command": "",
+        "run_command": "",
+        "test_command": ""
+      }
+    }
+  ],
+  "last_updated": "2026-10-23",
+  "module_id": "module-00",
+  "projects": [
+    {
+      "assessment_id": "assessment-project-course-setup",
+      "deliverables": [
+        "Configured terminal and Git identity",
+        "Verified text editor and local development workspace",
+        "Environment documentation file (setup.txt)"
+      ],
+      "difficulty": "foundation",
+      "documentation_mode": "tutorial",
+      "id": "project-course-setup",
+      "module_id": "module-00",
+      "placement_anchor_item_id": "core-00-10",
+      "prerequisite_item_ids": [
+        "core-00-10"
+      ],
+      "prerequisites": [
+        "core-00-10"
+      ],
+      "readme_status": "reviewed",
+      "reinforcement_targets": [
+        "zero-magic learning",
+        "repository navigation",
+        "local toolchain execution"
+      ],
+      "required_concepts": [
+        "zero-magic learning",
+        "repository navigation",
+        "local toolchain execution"
+      ],
+      "rubric": [
+        {
+          "criterion": "Correctness",
+          "description": "Terminal environment and Git committer identity configured correctly.",
+          "weight": 35
+        },
+        {
+          "criterion": "Environment quality",
+          "description": "Text editor and dedicated local workspace directory properly established.",
+          "weight": 25
+        },
+        {
+          "criterion": "Proof",
+          "description": "Output from git version, committer config, and workspace creation demonstrate a working setup.",
+          "weight": 25
+        },
+        {
+          "criterion": "Explanation",
+          "description": "Clear documentation of environment choices and personal workspace location.",
+          "weight": 15
+        }
+      ],
+      "schema_version": "3.1.0",
+      "slug": "course-setup-verification",
+      "source_legacy_ids": [],
+      "stage": "foundations",
+      "status": "ready",
+      "summary": "Verify your complete course environment: terminal shell, Git configuration, editor setup, and workspace initialization.",
+      "tags": [
+        "orientation",
+        "setup"
+      ],
+      "tasks": [
+        {
+          "instruction": "Verify your terminal shell, check working directory, and confirm basic shell command execution.",
+          "title": "Verify terminal shell"
+        },
+        {
+          "instruction": "Confirm Git is installed and configure committer name and email.",
+          "title": "Configure Git identity"
+        },
+        {
+          "instruction": "Establish your dedicated local workspace directory for course projects and record setup.txt.",
+          "title": "Establish workspace and record setup"
+        }
+      ],
+      "title": "Course Setup Verification",
+      "type": "mini-project",
+      "verification": "Manual review: ensure Git version, configured identity, editor confirmation, and workspace directory are present."
+    }
+  ],
+  "schema_version": "3.1.0",
+  "status": "stable"
+}

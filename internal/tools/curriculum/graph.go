@@ -25,10 +25,14 @@ func validateGraph() {
 	}
 
 	// Also register project IDs as valid targets
-	var projects ProjectsBundle
-	readJSON("projects.json", &projects)
-	for _, p := range projects.Projects {
-		itemMap[p.ID] = nil // exists but not an Item
+	for _, mf := range moduleManifestPaths() {
+		var mm struct {
+			Projects []Project `json:"projects"`
+		}
+		readJSON(mf, &mm)
+		for _, p := range mm.Projects {
+			itemMap[p.ID] = nil // exists but not an Item
+		}
 	}
 
 	moduleMap := make(map[string]*Module)

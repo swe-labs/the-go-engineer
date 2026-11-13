@@ -174,7 +174,18 @@ func validateProjectScripts() {
 			Verification any    `json:"verification"`
 		} `json:"projects"`
 	}
-	readJSON("projects.json", &rawProjects)
+	for _, mf := range moduleManifestPaths() {
+		var mm struct {
+			Projects []struct {
+				ID           string `json:"id"`
+				ModuleID     string `json:"module_id"`
+				Slug         string `json:"slug"`
+				Verification any    `json:"verification"`
+			} `json:"projects"`
+		}
+		readJSON(mf, &mm)
+		rawProjects.Projects = append(rawProjects.Projects, mm.Projects...)
+	}
 
 	core := loadCoreBundle()
 

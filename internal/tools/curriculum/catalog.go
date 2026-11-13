@@ -51,10 +51,18 @@ func generateCatalog() (string, error) {
 	electives := loadElectiveBundle()
 
 	var projBundle catalogProjectsBundle
-	readJSON("projects.json", &projBundle)
+	for _, mf := range moduleManifestPaths() {
+		var mm catalogProjectsBundle
+		readJSON(mf, &mm)
+		projBundle.Projects = append(projBundle.Projects, mm.Projects...)
+	}
 
 	var assessBundle catalogAssessmentsBundle
-	readJSON("assessments.json", &assessBundle)
+	for _, mf := range moduleManifestPaths() {
+		var mm catalogAssessmentsBundle
+		readJSON(mf, &mm)
+		assessBundle.Assessments = append(assessBundle.Assessments, mm.Assessments...)
+	}
 
 	var crossrefs CrossrefBundle
 	readJSON("crossrefs.json", &crossrefs)
@@ -266,9 +274,10 @@ func generateCatalog() (string, error) {
 	for _, it := range coreItems {
 		if it.Type == "project" {
 			pType := projectTypeMap[it.ID]
-			if pType == "mini-project" {
+			switch pType {
+			case "mini-project":
 				miniProjects = append(miniProjects, it)
-			} else if pType == "portfolio-project" {
+			case "portfolio-project":
 				portfolioProjects = append(portfolioProjects, it)
 			}
 			if pType == "flagship" || strings.Contains(it.ID, "opslane") {

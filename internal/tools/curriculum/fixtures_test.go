@@ -104,7 +104,11 @@ func writeCurriculumFixture(t *testing.T) string {
       "contains_foundational_hard_concepts": false,
       "pacing": "steady"
     }
-  ],
+  ]
+}
+`,
+		"modules/00-alpha/manifest.json": fixtureHeader("module_manifest") + `,
+  "module_id": "module-00",
   "items": [
     {
       "content_contract": {
@@ -222,15 +226,7 @@ func writeCurriculumFixture(t *testing.T) string {
         "mode": "manual"
       }
     }
-  ]
-}
-`,
-		"path.electives.json": fixtureHeader("elective_path") + `,
-  "modules": [],
-  "items": []
-}
-`,
-		"projects.json": fixtureHeader("projects") + `,
+  ],
   "projects": [
     {
       "id": "project-alpha",
@@ -248,10 +244,7 @@ func writeCurriculumFixture(t *testing.T) string {
       },
       "assessment_id": "assessment-module-00"
     }
-  ]
-}
-`,
-		"assessments.json": fixtureHeader("assessments") + `,
+  ],
   "assessments": [
     {
       "id": "assessment-module-00",
@@ -270,6 +263,18 @@ func writeCurriculumFixture(t *testing.T) string {
       "retake_policy": "Retake after revision."
     }
   ]
+}
+`,
+		"modules/01-beta/manifest.json": fixtureHeader("module_manifest") + `,
+  "module_id": "module-01",
+  "items": [],
+  "projects": [],
+  "assessments": []
+}
+`,
+		"path.electives.json": fixtureHeader("elective_path") + `,
+  "modules": [],
+  "items": []
 }
 `,
 		"crossrefs.json": fixtureHeader("crossrefs") + `,
@@ -579,6 +584,7 @@ func installFixture(t *testing.T, dir string) {
 	prevRegistry := registryCache
 	prevCoreBundle := coreBundleCache
 	prevElectiveBundle := electiveBundleCache
+	prevManifestPaths := manifestPathsCache
 	prevStrict := strictMode
 	prevAdvisory := advisoryMode
 	prevReport := reportPath
@@ -592,6 +598,7 @@ func installFixture(t *testing.T, dir string) {
 	registryCache = nil
 	coreBundleCache = nil
 	electiveBundleCache = nil
+	manifestPathsCache = nil
 	strictMode = false
 	advisoryMode = false
 	reportPath = ""
@@ -606,6 +613,7 @@ func installFixture(t *testing.T, dir string) {
 		registryCache = prevRegistry
 		coreBundleCache = prevCoreBundle
 		electiveBundleCache = prevElectiveBundle
+		manifestPathsCache = prevManifestPaths
 		strictMode = prevStrict
 		advisoryMode = prevAdvisory
 		reportPath = prevReport
@@ -686,7 +694,7 @@ func assertValidatorFails(t *testing.T, run func(), mutate func(*testing.T, stri
 // fixture is a test failure rather than an untested branch.
 var failureMutations = map[string]func(*testing.T, string){
 	"validate-schema": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "path.core.json", `"title": "Alpha lesson",`, `"title": "",`)
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"title": "Alpha lesson",`, `"title": "",`)
 	},
 	"validate-graph": func(t *testing.T, dir string) {
 		replaceFixture(t, dir, "crossrefs.json", `"references": []`,
@@ -696,24 +704,26 @@ var failureMutations = map[string]func(*testing.T, string){
 		replaceFixture(t, dir, "modules/00-alpha/lessons/01-alpha/README.md", "## NEXT UP", "## Next steps")
 	},
 	"validate-prerequisite-closure": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "path.core.json", `      "phase": "foundation",
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `      "phase": "foundation",
       "prerequisites": [],
       "proof": {`, `      "phase": "foundation",
       "prerequisites": ["core-99-99"],
       "proof": {`)
 	},
 	"validate-project-binding": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "projects.json", `"module_id": "module-00",`, `"module_id": "module-99",`)
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"id": "project-alpha",
+      "module_id": "module-00",`, `"id": "project-alpha",
+      "module_id": "module-99",`)
 	},
 	"validate-no-placeholder-zm": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "path.core.json", `"problem_solved": "The fixture concept removes ambiguity.",`,
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"problem_solved": "The fixture concept removes ambiguity.",`,
 			`"problem_solved": "This lesson explains what problem it solves.",`)
 	},
 	"validate-assessment-completeness": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "assessments.json", `"passing_score": 70,`, `"passing_score": 0,`)
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"passing_score": 70,`, `"passing_score": 0,`)
 	},
 	"validate-unique-tags": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "path.core.json", `"tags": ["alpha", "concept"],`, `"tags": ["alpha", "alpha"],`)
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"tags": ["alpha", "concept"],`, `"tags": ["alpha", "alpha"],`)
 	},
 	"validate-crossrefs": func(t *testing.T, dir string) {
 		replaceFixture(t, dir, "crossrefs.json", `"references": []`,
@@ -729,12 +739,12 @@ var failureMutations = map[string]func(*testing.T, string){
 		replaceFixture(t, dir, "failures.json", `"document_type": "operational_failure_taxonomy"`, `"document_type": "other"`)
 	},
 	"validate-failure-engineering": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "path.core.json", `      "learning_objective": "Explain the fixture concept.",
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `      "learning_objective": "Explain the fixture concept.",
       "module_id": "module-00",`, `      "learning_objective": "Explain the fixture concept.",
       "module_id": "module-08",`)
 	},
 	"validate-zero-magic": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "path.core.json", `"zero_magic_status": "reviewed"`, `"zero_magic_status": "golden"`)
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"zero_magic_status": "reviewed"`, `"zero_magic_status": "golden"`)
 	},
 	"validate-physical-artifacts": func(t *testing.T, dir string) {
 		removeFixture(t, dir, "modules/00-alpha/lessons/01-alpha/README.md")
@@ -756,7 +766,7 @@ var failureMutations = map[string]func(*testing.T, string){
 		replaceFixture(t, dir, "modules/00-alpha/README.md", "## Start here", "## Wrap up")
 	},
 	"validate-project-scripts": func(t *testing.T, dir string) {
-		replaceFixture(t, dir, "projects.json", `"run_command": "make build"`, `"run_command": "bash verify.sh"`)
+		replaceFixture(t, dir, "modules/00-alpha/manifest.json", `"run_command": "make build"`, `"run_command": "bash verify.sh"`)
 	},
 	"validate-no-emojis": func(t *testing.T, dir string) {
 		appendFixture(t, dir, "README.md", "\nRocket: \U0001F680\n")

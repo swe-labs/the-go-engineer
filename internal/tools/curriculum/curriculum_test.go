@@ -99,10 +99,8 @@ func TestRegistryResolvesEveryItem(t *testing.T) {
 		t.Fatal("registry has no contracts")
 	}
 
-	var core CoreBundle
-	var electives ElectiveBundle
-	readJSON("path.core.json", &core)
-	readJSON("path.electives.json", &electives)
+	core := loadCoreBundle()
+	electives := loadElectiveBundle()
 
 	items := append(append([]Item{}, core.Items...), electives.Items...)
 	if len(items) == 0 {

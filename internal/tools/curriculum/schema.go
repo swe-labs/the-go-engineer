@@ -66,14 +66,11 @@ func validateSchema() {
 		"workspace.json",
 		"path.core.json",
 		"path.electives.json",
-		"projects.json",
-		"assessments.json",
-		"crossrefs.json",
 		"concepts.json",
 		"failures.json",
 		"readme.contracts.json",
 	}
-	for _, f := range files {
+	for _, f := range append(files, moduleManifestPaths()...) {
 		fullPath := fmt.Sprintf("%s/%s", curriculumDir, f)
 		data, err := os.ReadFile(fullPath)
 		if err != nil {
@@ -178,7 +175,11 @@ func validateSchema() {
 	core := loadCoreBundle()
 	electives := loadElectiveBundle()
 	var projects ProjectsBundle
-	readJSON("projects.json", &projects)
+	for _, mf := range moduleManifestPaths() {
+		var mm ProjectsBundle
+		readJSON(mf, &mm)
+		projects.Projects = append(projects.Projects, mm.Projects...)
+	}
 	var crossrefs CrossrefBundle
 	readJSON("crossrefs.json", &crossrefs)
 
@@ -460,8 +461,13 @@ func validateSchema() {
 
 	// 6. Check canonical key ordering in core JSON using byte-level tokenization (alphabetical order)
 	// Read raw file bytes for deterministic token-level key extraction
-	rawBytes, err := os.ReadFile(filepath.Join(curriculumDir, "path.core.json"))
-	if err == nil {
+	for _, mf := range moduleManifestPaths() {
+		rawBytes, err := os.ReadFile(filepath.Join(curriculumDir, mf))
+		if err != nil {
+			errorf("cannot read %s for key ordering check: %v", mf, err)
+			ok = false
+			continue
+		}
 		// Find items array, extract keys for each item object in file order
 		itemKeys := extractItemKeysInOrder(rawBytes)
 		for _, ik := range itemKeys {
@@ -473,9 +479,6 @@ func validateSchema() {
 				}
 			}
 		}
-	} else {
-		errorf("cannot read path.core.json for key ordering check: %v", err)
-		ok = false
 	}
 
 	// 7. Check no duplicate item IDs across core and electives
@@ -515,7 +518,11 @@ func validateSchema() {
 		Title string `json:"title"`
 	}
 	var assessments AssessmentsBundle
-	readJSON("assessments.json", &assessments)
+	for _, mf := range moduleManifestPaths() {
+		var mm AssessmentsBundle
+		readJSON(mf, &mm)
+		assessments.Assessments = append(assessments.Assessments, mm.Assessments...)
+	}
 	if len(assessments.Assessments) != exp.Inventory.Assessments {
 		errorf("assessments.json: expected %d assessments, got %d", exp.Inventory.Assessments, len(assessments.Assessments))
 		ok = false
@@ -528,7 +535,7 @@ func validateSchema() {
 	for _, item := range allItems {
 		if item.Proof != nil && item.Proof.AssessmentID != "" {
 			if !assessIDs[item.Proof.AssessmentID] {
-				errorf("%s: proof.assessment_id '%s' not found in assessments.json", item.ID, item.Proof.AssessmentID)
+				errorf("%s: proof.assessment_id '%s' not found in module manifests", item.ID, item.Proof.AssessmentID)
 				ok = false
 			}
 		}
