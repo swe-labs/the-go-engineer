@@ -62733,7 +62733,7 @@
           "Can identify common mistakes.",
           "Can apply the concept in a small working program."
         ],
-        "practice_task": "The learner must create a Dockerfile with multi-stage build, a docker-compose.",
+        "practice_task": "The learner must implement container orchestration health probes with independent /health/live and /health/ready endpoints, bounded by a 50ms context deadline across concurrent dependency checks.",
         "project_id": "project-opslane",
         "rubric_ids": [
           "rubric-module-17"
@@ -62773,54 +62773,54 @@
       },
       "zero_magic": {
         "beginner_mistakes": [
-          "Building the binary manually on the production server instead of using CI/CD.",
-          "Tagging Docker images with :latest instead of versioned tags.",
-          "Deploying without health checks or rollback capability."
+          "Checking downstream databases in liveness probes, causing restart loops during dependency outages.",
+          "Executing readiness dependency checks sequentially without a deadline timeout.",
+          "Failing to return HTTP 503 degraded status when a critical dependency check fails."
         ],
         "execution_timeline": [
-          "Code is pushed to the repository (GitHub).",
-          "CI pipeline runs tests, linting, and builds the binary.",
-          "Docker image is built with version tag and pushed to registry.",
-          "CD pipeline deploys the new image to the staging environment.",
-          "Smoke tests run against staging.",
-          "Deployment is promoted to production with a rolling update."
+          "Cloud orchestrator initiates HTTP GET /health/live probe every 10 seconds.",
+          "Liveness handler immediately returns HTTP 200 without checking external dependencies.",
+          "Orchestrator initiates HTTP GET /health/ready probe every 5 seconds before routing traffic.",
+          "Readiness handler allocates a 50ms timeout context and executes component checks concurrently via sync.WaitGroup.",
+          "Each component evaluates health and records status and latency into a preallocated results slice.",
+          "Readiness handler aggregates results: returns HTTP 200 UP if all pass, or HTTP 503 DEGRADED if any fail."
         ],
         "failure_modes": [
           {
-            "cause": "Migrations were not applied as part of the deployment pipeline.",
-            "fix": "Run database migrations before (or as part of) the application rollout.",
-            "scenario": "A deployment fails because the production database schema doesn't match the new code."
+            "cause": "A dependency checker blocks indefinitely on a dead network socket.",
+            "fix": "Select on ctx.Done() and abort check execution when the 50ms context deadline expires.",
+            "scenario": "A hung dependency halts readiness evaluations, causing probe timeouts and container unreadiness."
           },
           {
-            "cause": "The deployment replaced all instances at once (blue/green without verification).",
-            "fix": "Use rolling updates or canary deployments with health check gates.",
-            "scenario": "A broken deployment affects all users because there is no canary or rolling update."
+            "cause": "Liveness probe inspects downstream database connectivity.",
+            "fix": "Isolate external dependency checks to /health/ready; keep /health/live strictly local to process health.",
+            "scenario": "A temporary database network blip causes orchestrators to terminate and restart all service containers simultaneously."
           }
         ],
         "hidden_magic_checks": [
-          "Learner must explain the difference between blue/green and rolling deployments.",
-          "Learner must identify why health checks are essential for zero-downtime deployments.",
-          "Learner must design a CI/CD pipeline with build, test, deploy stages."
+          "Learner must explain the architectural difference between liveness and readiness probe contracts.",
+          "Learner must explain why readiness checks require strict context deadline enforcement.",
+          "Learner must demonstrate concurrent component checks without data races on shared slices."
         ],
-        "how_go_uses_it": "Go binaries are statically compiled, producing a single binary with no runtime dependencies. This makes Docker images small (~5-20MB) and deployment simple. Opslane uses GitHub Actions for CI/CD and Docker multi-stage builds for minimal images.",
-        "mental_model": "The deployment pipeline is the application's delivery conveyor belt \u00e2\u20ac\u201d it takes raw code from a repository and transforms it into a running, tested, observable production service through a series of automated stages.",
+        "how_go_uses_it": "Go's net/http server provides lightweight handler mounting for health endpoints. With context.WithTimeout and sync.WaitGroup, Go executes concurrent dependency health evaluations with strict latency guarantees, returning status before the orchestrator's probe timeout.",
+        "mental_model": "Health probes are the orchestrator's eyes: liveness checks if the Go runtime is healthy enough to not be killed, while readiness checks if external dependencies allow serving traffic right now.",
         "performance_implications": [
-          "Go multi-stage Docker build: ~30-60s (full rebuild) or ~5s (cached).",
-          "Zero-downtime rolling deployment: ~2-5 minutes for a 3-replica service.",
-          "Container startup time with health check: ~1-3 seconds."
+          "Liveness probe response latency: <1ms (in-process status check).",
+          "Readiness probe deadline bound: 50ms hard cutoff across all dependencies.",
+          "Concurrent probe evaluation overhead: preallocated result slices eliminate lock contention."
         ],
-        "problem_solved": "how the application is built, containerized, and deployed to production environments. Opslane's deployment pipeline delivers code from repository to production safely, repeatably, and with zero downtime.",
-        "proof_of_understanding": "The learner must create a Dockerfile with multi-stage build, a docker-compose.yml for local deployment, and describe the CI/CD pipeline stages with health check and rollback strategy.",
-        "real_world_usage": "Docker and GitHub Actions (or GitLab CI) are the industry standard for Go service deployment. Kubernetes orchestrates containerized Go services at scale \u00e2\u20ac\u201d used by Google, Netflix, Shopify, and thousands of companies.",
+        "problem_solved": "how container orchestration contracts determine instance health and readiness. Opslane's health probe architecture isolates liveness checks from dependency readiness, bounding evaluation latency to prevent cascading orchestrator restart storms.",
+        "proof_of_understanding": "The learner must implement container orchestration health probes with independent /health/live and /health/ready endpoints, bounded by a 50ms context deadline across concurrent dependency checks, and verify degraded HTTP 503 signaling.",
+        "real_world_usage": "Kubernetes kubelet, AWS ECS health checks, and Consul service discovery query HTTP health probe endpoints to make automated routing, rescheduling, and container restart decisions.",
         "step_by_step_execution": [
-          "Create a multi-stage Dockerfile: build stage (golang:1.x) and runtime stage (distroless or alpine).",
-          "Add health check endpoint (/healthz) that verifies database and dependency connectivity.",
-          "Create docker-compose.yml for local development with the application and its dependencies.",
-          "Configure GitHub Actions workflow: test -> build -> push to registry -> deploy.",
-          "Implement rolling update with health check gates for zero-downtime deployment."
+          "Define ComponentHealth and ReadinessReport schemas with status and latency tracking.",
+          "Implement HealthChecker interface across all service dependencies (database, cache, worker pool).",
+          "Mount non-blocking /health/live returning instantaneous HTTP 200.",
+          "Mount /health/ready with context.WithTimeout(50ms) executing dependency checks in parallel via sync.WaitGroup.",
+          "Emit HTTP 200 UP if all components are healthy, or HTTP 503 DEGRADED with error details."
         ],
-        "under_the_hood": "Under the hood, Docker multi-stage build copies only the compiled binary to the final image. Health checks are HTTP endpoints returning 200 OK \u00e2\u20ac\u201d Kubernetes uses them via livenessProbe and readinessProbe. Rolling updates replace pods one at a time, waiting for readiness checks between each replacement.",
-        "why_it_exists": "Without a deployment pipeline, every release is a manual, error-prone process of SSH-ing into servers, pulling code, building binaries, and restarting services \u00e2\u20ac\u201d with no rollback plan and no audit trail."
+        "under_the_hood": "Under the hood, /health/live returns immediate HTTP 200. /health/ready fans out concurrent goroutines bounded by a 50ms context timeout, gathering ComponentHealth structs into a preallocated slice to prevent append race conditions, returning 200 OK or 503 Service Unavailable based on aggregated health.",
+        "why_it_exists": "Without distinct liveness and readiness contracts with strict latency bounds, services risk cascading failure loops where transient dependency slowdowns cause orchestrators to kill and restart healthy containers."
       },
       "zero_magic_status": "golden"
     },
