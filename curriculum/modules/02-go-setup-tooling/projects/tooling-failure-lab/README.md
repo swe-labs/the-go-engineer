@@ -45,7 +45,7 @@ This lab draws on the following concepts. If any are unfamiliar, review the corr
 
 ## Lab overview
 
-The `_starter/` directory contains a Go program with **4 deliberate failures**. Each failure is designed to be discovered by one of the Go tooling commands you learned in Module 02. Each failure is designed to be discovered by one of the Go tooling commands you learned in Module 02. Your job is to:
+The `_starter/` directory contains a Go program with **4 deliberate failures**. Each failure is designed to be discovered by one of the Go tooling commands you learned in Module 02. Your job is to:
 
 1. Run each tool and observe what it reports.
 2. Identify which failure each tool uncovers.

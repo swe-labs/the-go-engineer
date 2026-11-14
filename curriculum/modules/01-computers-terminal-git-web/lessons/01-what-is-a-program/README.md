@@ -121,10 +121,15 @@ func main() {
 
 ## Debugging walkthrough
 
-**Scenario: A Go program compiles but does nothing when run.**
-- **Cause:** The program has no `main` function, or `main()` returns immediately without calling any logic.
-- **Diagnosis:** Check the file for `package main` and `func main()`. Add a `fmt.Println` call at the start of `main()`.
-- **Resolution:** Ensure the entry point exists and contains the intended logic.
+**Scenario: `go build` fails with `function main is undeclared in the main package`.**
+- **Cause:** The file declares `package main` but defines no `func main()` — the compiler has no entry point to emit.
+- **Diagnosis:** Search the file for `func main`. If missing (or the file lives in the wrong directory without a `main` package), the linker cannot produce an executable.
+- **Resolution:** Add a `func main()` containing the intended logic, or move the code into a library package if it is not meant to be an entry point.
+
+**Scenario: A Go program compiles but produces no output when run.**
+- **Cause:** `main()` returns immediately without calling any printing or processing logic (an empty body, or all work delegated to goroutines that never finish before exit).
+- **Diagnosis:** Add a `fmt.Println` call at the very start of `main()` and re-run. If it still prints nothing, the build is picking up a stale binary from a different directory.
+- **Resolution:** Ensure the entry point contains the intended logic, and always recompile after edits (`go build` or `go run .`).
 
 **Scenario: Editing source code but the old behavior persists.**
 - **Cause:** The old compiled binary was run instead of recompiling — the source change was never built.

@@ -118,15 +118,15 @@ func main() {
 	fmt.Println("=== Go Installation & Environment Diagnostics ===")
 
 	info := GetEnvironmentInfo()
-	fmt.Printf("Go Version:           %s\n", info.Version)
-	fmt.Printf("Target OS (GOOS):     %s\n", info.GOOS)
+	fmt.Printf("Go Version:         %s\n", info.Version)
+	fmt.Printf("Target OS (GOOS):   %s\n", info.GOOS)
 	fmt.Printf("Target Arch (GOARCH): %s\n", info.GOARCH)
-	fmt.Printf("Compiler:             %s\n", info.Compiler)
-	fmt.Printf("Logical CPUs:         %d\n", info.NumCPU)
+	fmt.Printf("Compiler:           %s\n", info.Compiler)
+	fmt.Printf("Logical CPUs:       %d\n", info.NumCPU)
 	if info.GOROOT != "" {
-		fmt.Printf("GOROOT Directory:     %s\n", info.GOROOT)
+		fmt.Printf("GOROOT Directory:   %s\n", info.GOROOT)
 	} else {
-		fmt.Printf("GOROOT Directory:     (standard embedded default)\n")
+		fmt.Printf("GOROOT Directory:   (standard embedded default)\n")
 	}
 
 	ok, issues := VerifyInstallation(info)
