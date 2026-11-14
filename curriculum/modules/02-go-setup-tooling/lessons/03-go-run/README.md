@@ -141,7 +141,7 @@ This program removes the magic from `go run` by interrogating its own active exe
    ```bash
    go test -v .
    ```
-3. Run `go build .` followed by executing the binary directly (`./03-go-run` on Linux/macOS, `.-go-run.exe` on Windows) — observe how `Is Temporary Build Dir` switches to `false`.
+3. Run `go build .` followed by executing the binary directly (`./03-go-run` on Linux/macOS, `.\03-go-run.exe` on Windows) — observe how `Is Temporary Build Dir` switches to `false`.
 
 ## Common mistakes
 
